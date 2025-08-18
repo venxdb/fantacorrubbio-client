@@ -1,43 +1,150 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
+    
+    <!-- ✅ META VIEWPORT CORRETTO PER RESPONSIVE -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes" />
+    
+    <!-- Meta tags per mobile e PWA -->
+    <meta name="theme-color" content="#2D5A87" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="FantaCorrubbio" />
+    
+    <!-- Descrizione e SEO -->
+    <meta name="description" content="FantaCorrubbio - La tua asta di fantacalcio" />
+    <meta name="keywords" content="fantacalcio, asta, calcio, fantasy" />
+    <meta name="author" content="FantaCorrubbio Team" />
+    
+    <!-- Prevenire zoom automatico su alcuni dispositivi -->
+    <meta name="format-detection" content="telephone=no" />
+    
+    <title>FantaCorrubbio</title>
+    
+    <!-- ✅ CSS RESET PULITO - NO FORZATURE DESKTOP -->
+    <style>
+      /* Reset CSS essenziale */
+      * {
+        box-sizing: border-box;
+      }
+      
+      html {
+        width: 100%;
+        height: 100%;
+        /* Responsive font scaling di base */
+        font-size: 16px;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+      }
+      
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+          'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        /* Il background sarà gestito da styled-components */
+        overflow-x: hidden; /* Previene scroll orizzontale indesiderato */
+      }
+      
+      #root {
+        width: 100%;
+        min-height: 100vh;
+        /* NON min-width! Lascia che si adatti al dispositivo */
+      }
+      
+      /* Previeni zoom su input mobile (iOS Safari fix) */
+      input, textarea, select {
+        font-size: 16px;
+      }
+      
+      /* Loading spinner opzionale mentre l'app si carica */
+      .loading-spinner {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 40px;
+        height: 40px;
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #2D5A87;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        z-index: 9999;
+      }
+      
+      @keyframes spin {
+        0% { transform: translate(-50%, -50%) rotate(0deg); }
+        100% { transform: translate(-50%, -50%) rotate(360deg); }
+      }
+      
+      /* Nascondi spinner quando React è caricato */
+      #root:not(:empty) + .loading-spinner {
+        display: none;
+      }
+    </style>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <!-- Messaggio per browser senza JavaScript -->
+    <noscript>
+      <div style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #0F1419;
+        color: #FFFFFF;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding: 20px;
+        box-sizing: border-box;
+      ">
+        <h1 style="color: #2D5A87; margin-bottom: 20px;">FantaCorrubbio</h1>
+        <p style="font-size: 18px; margin-bottom: 10px;">
+          È necessario abilitare JavaScript per utilizzare FantaCorrubbio.
+        </p>
+        <p style="color: #B0BEC5; font-size: 14px;">
+          Per favore abilita JavaScript nel tuo browser e ricarica la pagina.
+        </p>
+      </div>
+    </noscript>
+    
+    <!-- Container principale dell'app React -->
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+    
+    <!-- Loading spinner opzionale (rimosso automaticamente quando React si carica) -->
+    <div class="loading-spinner"></div>
+    
+    <!-- Script per debug viewport in development (rimuovi in produzione) -->
+    <script>
+      // Debug viewport solo in development
+      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        window.addEventListener('load', function() {
+          console.log('🔍 Viewport Debug:', {
+            innerWidth: window.innerWidth,
+            innerHeight: window.innerHeight,
+            screenWidth: screen.width,
+            screenHeight: screen.height,
+            devicePixelRatio: window.devicePixelRatio,
+            userAgent: navigator.userAgent.includes('Mobile') ? 'Mobile' : 'Desktop'
+          });
+        });
+        
+        window.addEventListener('resize', function() {
+          console.log('📱 Resize:', window.innerWidth + 'x' + window.innerHeight);
+        });
+      }
+    </script>
   </body>
 </html>
