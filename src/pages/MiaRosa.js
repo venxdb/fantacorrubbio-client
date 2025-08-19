@@ -12,18 +12,19 @@ const RosaContainer = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   
-  /* 🎯 TABLET: Padding zero e fit nella viewport */
-  @media (min-width: 481px) and (max-width: 1023px) {
-    padding: 0;
-    margin: 0;
-    max-width: 100%;
-    height: 100vh;
-    overflow-y: auto;
-    font-size: 0.7rem; /* Font base più piccolo */
-  }
-  
+  /* Mobile first - max-width viene per primo */
   @media (max-width: 480px) {
     padding: ${props => props.theme.spacing.sm} 0;
+  }
+  
+  /* 🎯 TABLET: Deve venire DOPO mobile e PRIMA desktop */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    height: 100vh !important;
+    overflow-y: auto !important;
+    font-size: 0.7rem !important;
   }
 `;
 
@@ -31,13 +32,14 @@ const Header = styled.div`
   text-align: center;
   margin-bottom: ${props => props.theme.spacing.xl};
   
-  /* 🎯 TABLET: Header completamente nascosto per risparmiare spazio */
-  @media (min-width: 481px) and (max-width: 1023px) {
-    display: none;
-  }
-  
+  /* Mobile */
   @media (max-width: 480px) {
     margin-bottom: ${props => props.theme.spacing.md};
+  }
+  
+  /* 🎯 TABLET: Header completamente nascosto */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    display: none !important;
   }
 `;
 
@@ -54,17 +56,18 @@ const Title = styled.h1`
   justify-content: center;
   gap: ${props => props.theme.spacing.md};
   
-  /* 🎯 TABLET: Titolo molto più piccolo */
-  @media (min-width: 481px) and (max-width: 1023px) {
-    font-size: 1.4rem;
-    gap: ${props => props.theme.spacing.xs};
-    margin-bottom: 0;
-  }
-  
+  /* Mobile */
   @media (max-width: 480px) {
     font-size: 1.6rem;
     gap: ${props => props.theme.spacing.xs};
     flex-direction: column;
+  }
+  
+  /* 🎯 TABLET: Titolo molto più piccolo (se visibile) */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    font-size: 1.4rem !important;
+    gap: ${props => props.theme.spacing.xs} !important;
+    margin-bottom: 0 !important;
   }
 `;
 
@@ -74,24 +77,24 @@ const StatsGrid = styled.div`
   gap: ${props => props.theme.spacing.lg};
   margin-bottom: ${props => props.theme.spacing.xl};
   
-  /* Desktop: 4 colonne */
-  @media (min-width: 1024px) {
-    grid-template-columns: repeat(4, 1fr);
-  }
-  
-  /* 🎯 TABLET: Ancora più compatto */
-  @media (min-width: 481px) and (max-width: 1023px) {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2px;
-    margin-bottom: 4px;
-    padding: 2px;
-  }
-  
   /* Mobile: 2 colonne compatte */
   @media (max-width: 480px) {
     grid-template-columns: repeat(2, 1fr);
     gap: ${props => props.theme.spacing.sm};
     margin-bottom: ${props => props.theme.spacing.md};
+  }
+  
+  /* 🎯 TABLET: 4 colonne ultra compatte */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 2px !important;
+    margin-bottom: 4px !important;
+    padding: 2px !important;
+  }
+  
+  /* Desktop: 4 colonne - DEVE venire per ultimo */
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(4, 1fr);
   }
 `;
 
@@ -102,18 +105,19 @@ const StatCard = styled(motion.div)`
   padding: ${props => props.theme.spacing.lg};
   text-align: center;
   
-  /* 🎯 TABLET: Mini card */
-  @media (min-width: 481px) and (max-width: 1023px) {
-    padding: 2px;
-    border-radius: 3px;
-    min-height: 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  
+  /* Mobile */
   @media (max-width: 480px) {
     padding: ${props => props.theme.spacing.sm};
+  }
+  
+  /* 🎯 TABLET: Mini card */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    padding: 2px !important;
+    border-radius: 3px !important;
+    min-height: 30px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
   }
 `;
 
@@ -123,16 +127,17 @@ const StatValue = styled.div`
   color: ${props => props.color || props.theme.colors.text};
   margin-bottom: ${props => props.theme.spacing.xs};
   
-  /* 🎯 TABLET: Font micro */
-  @media (min-width: 481px) and (max-width: 1023px) {
-    font-size: 0.8rem;
-    font-weight: 600;
-    margin-bottom: 0;
-    line-height: 1;
-  }
-  
+  /* Mobile */
   @media (max-width: 480px) {
     font-size: 1.5rem;
+  }
+  
+  /* 🎯 TABLET: Font micro */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    font-size: 0.8rem !important;
+    font-weight: 600 !important;
+    margin-bottom: 0 !important;
+    line-height: 1 !important;
   }
 `;
 
@@ -141,28 +146,30 @@ const StatLabel = styled.div`
   font-size: 0.9rem;
   font-weight: 500;
   
-  /* 🎯 TABLET: Font micro */
-  @media (min-width: 481px) and (max-width: 1023px) {
-    font-size: 0.4rem;
-    line-height: 1;
-    font-weight: 400;
-  }
-  
+  /* Mobile */
   @media (max-width: 480px) {
     font-size: 0.8rem;
+  }
+  
+  /* 🎯 TABLET: Font micro */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    font-size: 0.4rem !important;
+    line-height: 1 !important;
+    font-weight: 400 !important;
   }
 `;
 
 const RoleSection = styled.div`
   margin-bottom: ${props => props.theme.spacing.xl};
   
-  /* 🎯 TABLET: Margini quasi zero */
-  @media (min-width: 481px) and (max-width: 1023px) {
-    margin-bottom: 2px;
-  }
-  
+  /* Mobile */
   @media (max-width: 480px) {
     margin-bottom: ${props => props.theme.spacing.md};
+  }
+  
+  /* 🎯 TABLET: Margini quasi zero */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    margin-bottom: 2px !important;
   }
 `;
 
@@ -173,22 +180,24 @@ const RoleHeader = styled.div`
   margin-bottom: ${props => props.theme.spacing.lg};
   gap: ${props => props.theme.spacing.md};
   
-  /* 🎯 TABLET: Margine quasi zero */
-  @media (min-width: 481px) and (max-width: 1023px) {
-    margin-bottom: 1px;
-    gap: 2px;
-    padding: 1px 2px;
-  }
-  
-  @media (max-width: 768px) {
-    margin-bottom: ${props => props.theme.spacing.md};
-  }
-  
+  /* Mobile */
   @media (max-width: 480px) {
     flex-direction: column;
     align-items: flex-start;
     gap: ${props => props.theme.spacing.sm};
     margin-bottom: ${props => props.theme.spacing.sm};
+  }
+  
+  /* 🎯 TABLET: Margine quasi zero */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    margin-bottom: 1px !important;
+    gap: 2px !important;
+    padding: 1px 2px !important;
+  }
+  
+  /* Tablet/Desktop intermedio */
+  @media (max-width: 768px) {
+    margin-bottom: ${props => props.theme.spacing.md};
   }
 `;
 
@@ -197,19 +206,21 @@ const RoleTitle = styled.h2`
   font-size: 1.5rem;
   font-weight: 700;
   
-  /* 🎯 TABLET: Font micro */
-  @media (min-width: 481px) and (max-width: 1023px) {
-    font-size: 0.6rem;
-    font-weight: 500;
-    margin: 0;
-  }
-  
-  @media (max-width: 768px) {
-    font-size: 1.3rem;
-  }
-  
+  /* Mobile */
   @media (max-width: 480px) {
     font-size: 1.1rem;
+  }
+  
+  /* 🎯 TABLET: Font micro */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    font-size: 0.6rem !important;
+    font-weight: 500 !important;
+    margin: 0 !important;
+  }
+  
+  /* Tablet/Desktop intermedio */
+  @media (max-width: 768px) {
+    font-size: 1.3rem;
   }
 `;
 
@@ -222,19 +233,20 @@ const RoleStats = styled.div`
   font-weight: 600;
   white-space: nowrap;
   
-  /* 🎯 TABLET: Mini badge */
-  @media (min-width: 481px) and (max-width: 1023px) {
-    padding: 1px 3px;
-    border-radius: 4px;
-    font-size: 0.45rem;
-    font-weight: 400;
-  }
-  
+  /* Mobile */
   @media (max-width: 480px) {
     font-size: 0.8rem;
     padding: ${props => props.theme.spacing.xs} ${props => props.theme.spacing.sm};
     border-radius: 16px;
     align-self: flex-end;
+  }
+  
+  /* 🎯 TABLET: Mini badge */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    padding: 1px 3px !important;
+    border-radius: 4px !important;
+    font-size: 0.45rem !important;
+    font-weight: 400 !important;
   }
 `;
 
@@ -242,21 +254,21 @@ const PlayersGrid = styled.div`
   display: grid;
   gap: ${props => props.theme.spacing.lg};
   
-  /* Desktop: 3 colonne */
-  @media (min-width: 1024px) {
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  }
-  
-  /* 🎯 TABLET: 6 colonne micro per massimizzare spazio */
-  @media (min-width: 481px) and (max-width: 1023px) {
-    grid-template-columns: repeat(6, 1fr);
-    gap: 1px;
-  }
-  
   /* Mobile: 1 colonna */
   @media (max-width: 480px) {
     grid-template-columns: 1fr;
     gap: ${props => props.theme.spacing.sm};
+  }
+  
+  /* 🎯 TABLET: 6 colonne micro per massimizzare spazio */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    grid-template-columns: repeat(6, 1fr) !important;
+    gap: 1px !important;
+  }
+  
+  /* Desktop: 3 colonne - DEVE venire per ultimo */
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   }
 `;
 
@@ -272,19 +284,7 @@ const PlayerCard = styled(motion.div)`
     box-shadow: ${props => props.theme.shadows.large};
   }
   
-  /* 🎯 TABLET: Card micro */
-  @media (min-width: 481px) and (max-width: 1023px) {
-    padding: 1px;
-    border-radius: 2px;
-    min-height: 40px;
-    font-size: 0.4rem;
-    
-    &:hover {
-      transform: none;
-      box-shadow: none;
-    }
-  }
-  
+  /* Mobile */
   @media (max-width: 480px) {
     padding: ${props => props.theme.spacing.sm};
     
@@ -297,6 +297,19 @@ const PlayerCard = styled(motion.div)`
       background: ${props => props.theme.colors.surfaceHover};
     }
   }
+  
+  /* 🎯 TABLET: Card micro */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    padding: 1px !important;
+    border-radius: 2px !important;
+    min-height: 40px !important;
+    font-size: 0.4rem !important;
+    
+    &:hover {
+      transform: none !important;
+      box-shadow: none !important;
+    }
+  }
 `;
 
 const PlayerHeader = styled.div`
@@ -306,18 +319,19 @@ const PlayerHeader = styled.div`
   margin-bottom: ${props => props.theme.spacing.md};
   gap: ${props => props.theme.spacing.sm};
   
-  /* 🎯 TABLET: Layout ultra compatto */
-  @media (min-width: 481px) and (max-width: 1023px) {
-    flex-direction: column;
-    margin-bottom: 0;
-    gap: 0;
-    align-items: center;
-    text-align: center;
-  }
-  
+  /* Mobile */
   @media (max-width: 480px) {
     margin-bottom: ${props => props.theme.spacing.sm};
     align-items: center;
+  }
+  
+  /* 🎯 TABLET: Layout ultra compatto */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    flex-direction: column !important;
+    margin-bottom: 0 !important;
+    gap: 0 !important;
+    align-items: center !important;
+    text-align: center !important;
   }
 `;
 
@@ -335,23 +349,25 @@ const PlayerName = styled.h3`
   text-overflow: ellipsis;
   white-space: nowrap;
   
-  /* 🎯 TABLET: Font micro */
-  @media (min-width: 481px) and (max-width: 1023px) {
-    font-size: 0.35rem;
-    font-weight: 400;
-    margin-bottom: 0;
-    line-height: 1;
-    white-space: normal;
-    word-break: break-word;
-  }
-  
-  @media (max-width: 768px) {
-    font-size: 1rem;
-  }
-  
+  /* Mobile */
   @media (max-width: 480px) {
     font-size: 0.95rem;
     margin-bottom: 2px;
+  }
+  
+  /* 🎯 TABLET: Font micro */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    font-size: 0.35rem !important;
+    font-weight: 400 !important;
+    margin-bottom: 0 !important;
+    line-height: 1 !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+  }
+  
+  /* Tablet/Desktop intermedio */
+  @media (max-width: 768px) {
+    font-size: 1rem;
   }
 `;
 
@@ -363,16 +379,17 @@ const PlayerTeam = styled.p`
   text-overflow: ellipsis;
   white-space: nowrap;
   
-  /* 🎯 TABLET: Font micro */
-  @media (min-width: 481px) and (max-width: 1023px) {
-    font-size: 0.3rem;
-    line-height: 1;
-    white-space: normal;
-    word-break: break-word;
-  }
-  
+  /* Mobile */
   @media (max-width: 480px) {
     font-size: 0.85rem;
+  }
+  
+  /* 🎯 TABLET: Font micro */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    font-size: 0.3rem !important;
+    line-height: 1 !important;
+    white-space: normal !important;
+    word-break: break-word !important;
   }
 `;
 
@@ -395,19 +412,20 @@ const PurchasePrice = styled.div`
   margin-bottom: ${props => props.theme.spacing.xs};
   white-space: nowrap;
   
-  /* 🎯 TABLET: Mini badge */
-  @media (min-width: 481px) and (max-width: 1023px) {
-    padding: 0 2px;
-    border-radius: 2px;
-    font-size: 0.3rem;
-    font-weight: 400;
-    margin-bottom: 0;
-  }
-  
+  /* Mobile */
   @media (max-width: 480px) {
     font-size: 0.8rem;
     padding: ${props => props.theme.spacing.xs} ${props => props.theme.spacing.sm};
     border-radius: 16px;
+  }
+  
+  /* 🎯 TABLET: Mini badge */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    padding: 0 2px !important;
+    border-radius: 2px !important;
+    font-size: 0.3rem !important;
+    font-weight: 400 !important;
+    margin-bottom: 0 !important;
   }
 `;
 
@@ -419,18 +437,17 @@ const PurchaseDate = styled.div`
   justify-content: flex-end;
   gap: ${props => props.theme.spacing.xs};
   
-  /* 🎯 TABLET: Nascosto per risparmiare spazio */
-  @media (min-width: 481px) and (max-width: 1023px) {
-    display: none;
-  }
-  
+  /* Mobile */
   @media (max-width: 480px) {
     font-size: 0.75rem;
     justify-content: center;
   }
+  
+  /* 🎯 TABLET: Nascosto per risparmiare spazio */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    display: none !important;
+  }
 `;
-
-
 
 const PlayerQuote = styled.div`
   display: flex;
@@ -440,14 +457,15 @@ const PlayerQuote = styled.div`
   padding-top: ${props => props.theme.spacing.md};
   border-top: 1px solid ${props => props.theme.colors.border};
   
-  /* 🎯 TABLET: Nascosto per risparmiare spazio */
-  @media (min-width: 481px) and (max-width: 1023px) {
-    display: none;
-  }
-  
+  /* Mobile */
   @media (max-width: 480px) {
     margin-top: ${props => props.theme.spacing.sm};
     padding-top: ${props => props.theme.spacing.sm};
+  }
+  
+  /* 🎯 TABLET: Nascosto per risparmiare spazio */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    display: none !important;
   }
 `;
 
@@ -455,13 +473,14 @@ const QuoteLabel = styled.span`
   color: ${props => props.theme.colors.textSecondary};
   font-size: 0.85rem;
   
-  /* 🎯 TABLET: Font ultra piccolo */
-  @media (min-width: 481px) and (max-width: 1023px) {
-    font-size: 0.5rem;
-  }
-  
+  /* Mobile */
   @media (max-width: 480px) {
     font-size: 0.8rem;
+  }
+  
+  /* 🎯 TABLET: Font ultra piccolo */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    font-size: 0.5rem !important;
   }
 `;
 
@@ -469,14 +488,15 @@ const QuoteValue = styled.span`
   color: ${props => props.theme.colors.text};
   font-weight: 600;
   
-  /* 🎯 TABLET: Font più piccolo */
-  @media (min-width: 481px) and (max-width: 1023px) {
-    font-size: 0.6rem;
-    font-weight: 500;
-  }
-  
+  /* Mobile */
   @media (max-width: 480px) {
     font-size: 0.9rem;
+  }
+  
+  /* 🎯 TABLET: Font più piccolo */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    font-size: 0.6rem !important;
+    font-weight: 500 !important;
   }
 `;
 
@@ -487,20 +507,22 @@ const EmptyState = styled.div`
   border-radius: ${props => props.theme.borderRadius};
   margin-bottom: ${props => props.theme.spacing.lg};
   
-  /* 🎯 TABLET: Ultra compatto */
-  @media (min-width: 481px) and (max-width: 1023px) {
-    padding: 4px;
-    margin-bottom: 2px;
-    border-radius: 2px;
-  }
-  
-  @media (max-width: 768px) {
-    padding: ${props => props.theme.spacing.lg};
-  }
-  
+  /* Mobile */
   @media (max-width: 480px) {
     padding: ${props => props.theme.spacing.md};
     margin-bottom: ${props => props.theme.spacing.md};
+  }
+  
+  /* 🎯 TABLET: Ultra compatto */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    padding: 4px !important;
+    margin-bottom: 2px !important;
+    border-radius: 2px !important;
+  }
+  
+  /* Tablet/Desktop intermedio */
+  @media (max-width: 768px) {
+    padding: ${props => props.theme.spacing.lg};
   }
 `;
 
@@ -514,23 +536,25 @@ const EmptyIcon = styled.div`
   justify-content: center;
   margin: 0 auto ${props => props.theme.spacing.lg};
   
-  /* 🎯 TABLET: Icona micro */
-  @media (min-width: 481px) and (max-width: 1023px) {
-    width: 20px;
-    height: 20px;
-    margin-bottom: 2px;
-  }
-  
-  @media (max-width: 768px) {
-    width: 70px;
-    height: 70px;
-    margin-bottom: ${props => props.theme.spacing.md};
-  }
-  
+  /* Mobile */
   @media (max-width: 480px) {
     width: 60px;
     height: 60px;
     margin-bottom: ${props => props.theme.spacing.sm};
+  }
+  
+  /* 🎯 TABLET: Icona micro */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    width: 20px !important;
+    height: 20px !important;
+    margin-bottom: 2px !important;
+  }
+  
+  /* Tablet/Desktop intermedio */
+  @media (max-width: 768px) {
+    width: 70px;
+    height: 70px;
+    margin-bottom: ${props => props.theme.spacing.md};
   }
 `;
 
@@ -540,15 +564,16 @@ const EmptyTitle = styled.h3`
   font-weight: 600;
   margin-bottom: ${props => props.theme.spacing.sm};
   
-  /* 🎯 TABLET: Font micro */
-  @media (min-width: 481px) and (max-width: 1023px) {
-    font-size: 0.5rem;
-    margin-bottom: 1px;
-    font-weight: 400;
-  }
-  
+  /* Mobile */
   @media (max-width: 480px) {
     font-size: 1.1rem;
+  }
+  
+  /* 🎯 TABLET: Font micro */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    font-size: 0.5rem !important;
+    margin-bottom: 1px !important;
+    font-weight: 400 !important;
   }
 `;
 
@@ -559,15 +584,16 @@ const EmptyText = styled.p`
   max-width: 400px;
   margin: 0 auto;
   
-  /* 🎯 TABLET: Font micro */
-  @media (min-width: 481px) and (max-width: 1023px) {
-    font-size: 0.4rem;
-    line-height: 1.2;
-    max-width: 200px;
-  }
-  
+  /* Mobile */
   @media (max-width: 480px) {
     font-size: 0.9rem;
+  }
+  
+  /* 🎯 TABLET: Font micro */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    font-size: 0.4rem !important;
+    line-height: 1.2 !important;
+    max-width: 200px !important;
   }
 `;
 
@@ -580,14 +606,15 @@ const LoadingContainer = styled.div`
   align-items: center;
   gap: ${props => props.theme.spacing.md};
   
-  /* 🎯 TABLET: Padding ridotto */
-  @media (min-width: 481px) and (max-width: 1023px) {
-    padding: ${props => props.theme.spacing.md};
-    gap: ${props => props.theme.spacing.sm};
-  }
-  
+  /* Mobile */
   @media (max-width: 480px) {
     padding: ${props => props.theme.spacing.lg};
+  }
+  
+  /* 🎯 TABLET: Padding ridotto */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    padding: ${props => props.theme.spacing.md} !important;
+    gap: ${props => props.theme.spacing.sm} !important;
   }
 `;
 
