@@ -17,11 +17,34 @@ const REQUISITI_ROSA = {
 
 const RoseContainer = styled.div`
   padding: ${props => props.theme.spacing.lg} 0;
+  
+  /* Mobile */
+  @media (max-width: 480px) {
+    padding: ${props => props.theme.spacing.sm} 0;
+  }
+  
+  /* 🎯 TABLET: Container ottimizzato 481px-1200px */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    padding: 8px !important;
+    height: 100vh !important;
+    overflow-y: auto !important;
+    font-size: 0.85rem !important;
+  }
 `;
 
 const Header = styled.div`
   text-align: center;
   margin-bottom: ${props => props.theme.spacing.xl};
+  
+  /* Mobile */
+  @media (max-width: 480px) {
+    margin-bottom: ${props => props.theme.spacing.md};
+  }
+  
+  /* 🎯 TABLET: Header compatto */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    margin-bottom: 12px !important;
+  }
 `;
 
 const Title = styled.h1`
@@ -36,11 +59,37 @@ const Title = styled.h1`
   align-items: center;
   justify-content: center;
   gap: ${props => props.theme.spacing.md};
+  
+  /* Mobile */
+  @media (max-width: 480px) {
+    font-size: 1.5rem;
+    flex-direction: column;
+    gap: ${props => props.theme.spacing.xs};
+  }
+  
+  /* 🎯 TABLET: Titolo compatto */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    font-size: 1.6rem !important;
+    font-weight: 700 !important;
+    margin-bottom: 6px !important;
+    gap: 8px !important;
+  }
 `;
 
 const Subtitle = styled.p`
   color: ${props => props.theme.colors.textSecondary};
   font-size: 1.1rem;
+  
+  /* Mobile */
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+  }
+  
+  /* 🎯 TABLET: Subtitle compatto */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    font-size: 0.85rem !important;
+    margin-bottom: 8px !important;
+  }
 `;
 
 const ContentContainer = styled.div`
@@ -49,6 +98,20 @@ const ContentContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: ${props => props.theme.spacing.lg};
+  
+  /* Mobile */
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    gap: ${props => props.theme.spacing.sm};
+  }
+  
+  /* 🎯 TABLET: 3 colonne compatte */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 8px !important;
+    max-width: 100% !important;
+    padding: 0 4px !important;
+  }
   
   @media (max-width: 1000px) {
     grid-template-columns: 1fr;
@@ -62,6 +125,18 @@ const UserCard = styled.div`
   border-radius: ${props => props.theme.borderRadius};
   padding: ${props => props.theme.spacing.md};
   height: fit-content;
+  
+  /* Mobile */
+  @media (max-width: 480px) {
+    padding: ${props => props.theme.spacing.sm};
+  }
+  
+  /* 🎯 TABLET: Card compatta */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    padding: 8px !important;
+    border-radius: 6px !important;
+    font-size: 0.75rem !important;
+  }
 `;
 
 const UserHeader = styled.div`
@@ -71,6 +146,22 @@ const UserHeader = styled.div`
   margin-bottom: ${props => props.theme.spacing.sm};
   padding-bottom: ${props => props.theme.spacing.sm};
   border-bottom: 1px solid ${props => props.theme.colors.border};
+  
+  /* Mobile */
+  @media (max-width: 480px) {
+    flex-direction: column;
+    gap: ${props => props.theme.spacing.xs};
+    align-items: flex-start;
+  }
+  
+  /* 🎯 TABLET: Header compatto */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    margin-bottom: 6px !important;
+    padding-bottom: 6px !important;
+    flex-direction: column !important;
+    gap: 4px !important;
+    align-items: center !important;
+  }
 `;
 
 const UserName = styled.h3`
@@ -80,12 +171,39 @@ const UserName = styled.h3`
   display: flex;
   align-items: center;
   gap: ${props => props.theme.spacing.sm};
+  
+  /* Mobile */
+  @media (max-width: 480px) {
+    font-size: 1rem;
+    gap: ${props => props.theme.spacing.xs};
+  }
+  
+  /* 🎯 TABLET: Nome compatto */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    font-size: 0.8rem !important;
+    font-weight: 600 !important;
+    gap: 4px !important;
+    margin: 0 !important;
+  }
 `;
 
 const UserStats = styled.div`
   display: flex;
   gap: ${props => props.theme.spacing.md};
   text-align: center;
+  
+  /* Mobile */
+  @media (max-width: 480px) {
+    gap: ${props => props.theme.spacing.sm};
+    width: 100%;
+    justify-content: space-around;
+  }
+  
+  /* 🎯 TABLET: Stats compatte */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    gap: 8px !important;
+    justify-content: center !important;
+  }
 `;
 
 const StatItem = styled.div`
@@ -95,19 +213,50 @@ const StatItem = styled.div`
   gap: 2px;
 `;
 
-const StatLabel = styled.span`
-  color: ${props => props.theme.colors.textSecondary};
-  font-size: 0.75rem;
-`;
-
 const StatValue = styled.span`
   color: ${props => props.theme.colors.text};
   font-weight: 600;
   font-size: 1rem;
+  
+  /* Mobile */
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+  }
+  
+  /* 🎯 TABLET: Value compatto */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    font-size: 0.7rem !important;
+    font-weight: 500 !important;
+  }
+`;
+
+const StatLabel = styled.span`
+  color: ${props => props.theme.colors.textSecondary};
+  font-size: 0.75rem;
+  
+  /* Mobile */
+  @media (max-width: 480px) {
+    font-size: 0.7rem;
+  }
+  
+  /* 🎯 TABLET: Label compatta */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    font-size: 0.6rem !important;
+  }
 `;
 
 const RoleSection = styled.div`
   margin-bottom: ${props => props.theme.spacing.md};
+  
+  /* Mobile */
+  @media (max-width: 480px) {
+    margin-bottom: ${props => props.theme.spacing.sm};
+  }
+  
+  /* 🎯 TABLET: Sezione compatta */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    margin-bottom: 6px !important;
+  }
 `;
 
 const RoleHeader = styled.div`
@@ -124,6 +273,19 @@ const RoleTitle = styled.h4`
   display: flex;
   align-items: center;
   gap: ${props => props.theme.spacing.xs};
+  
+  /* Mobile */
+  @media (max-width: 480px) {
+    font-size: 0.85rem;
+  }
+  
+  /* 🎯 TABLET: Titolo ruolo compatto */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    font-size: 0.65rem !important;
+    font-weight: 500 !important;
+    gap: 2px !important;
+    margin: 0 !important;
+  }
 `;
 
 const RoleCounter = styled.span`
@@ -140,6 +302,19 @@ const PlayersContainer = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
   gap: ${props => props.theme.spacing.xs};
   margin-bottom: ${props => props.theme.spacing.sm};
+  
+  /* Mobile */
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+  
+  /* 🎯 TABLET: Una colonna compatta */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    grid-template-columns: 1fr !important;
+    gap: 2px !important;
+    margin-bottom: 4px !important;
+  }
 `;
 
 const PlayerChip = styled.div`
@@ -153,6 +328,19 @@ const PlayerChip = styled.div`
   min-height: 40px;
   width: 100%;
   box-sizing: border-box;
+  
+  /* Mobile */
+  @media (max-width: 480px) {
+    min-height: 36px;
+    padding: 6px;
+  }
+  
+  /* 🎯 TABLET: Chip compatto */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    min-height: 24px !important;
+    padding: 2px 4px !important;
+    border-radius: 4px !important;
+  }
 `;
 
 const PlayerName = styled.span`
@@ -164,6 +352,18 @@ const PlayerName = styled.span`
   text-overflow: ellipsis;
   white-space: nowrap;
   margin-right: ${props => props.theme.spacing.xs};
+  
+  /* Mobile */
+  @media (max-width: 480px) {
+    font-size: 0.75rem;
+  }
+  
+  /* 🎯 TABLET: Nome compatto */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    font-size: 0.6rem !important;
+    font-weight: 400 !important;
+    margin-right: 2px !important;
+  }
 `;
 
 const PlayerPrice = styled.span`
@@ -171,6 +371,17 @@ const PlayerPrice = styled.span`
   font-weight: 600;
   font-size: 0.75rem;
   flex-shrink: 0;
+  
+  /* Mobile */
+  @media (max-width: 480px) {
+    font-size: 0.7rem;
+  }
+  
+  /* 🎯 TABLET: Prezzo compatto */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    font-size: 0.55rem !important;
+    font-weight: 500 !important;
+  }
 `;
 
 const EmptySlot = styled.div`
@@ -187,8 +398,21 @@ const EmptySlot = styled.div`
   justify-content: center;
   width: 100%;
   box-sizing: border-box;
+  
+  /* Mobile */
+  @media (max-width: 480px) {
+    min-height: 36px;
+    font-size: 0.65rem;
+  }
+  
+  /* 🎯 TABLET: Slot vuoto compatto */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    min-height: 24px !important;
+    font-size: 0.5rem !important;
+    padding: 2px !important;
+    border-radius: 4px !important;
+  }
 `;
-
 const LoadingContainer = styled.div`
   text-align: center;
   padding: ${props => props.theme.spacing.xl};
@@ -207,6 +431,19 @@ const FilterContainer = styled.div`
   gap: ${props => props.theme.spacing.sm};
   margin-bottom: ${props => props.theme.spacing.xl};
   flex-wrap: wrap;
+  
+  /* Mobile */
+  @media (max-width: 480px) {
+    gap: ${props => props.theme.spacing.xs};
+    margin-bottom: ${props => props.theme.spacing.md};
+  }
+  
+  /* 🎯 TABLET: Filtri compatti */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    gap: 4px !important;
+    margin-bottom: 8px !important;
+    padding: 0 4px !important;
+  }
 `;
 
 const FilterButton = styled.button`
@@ -225,6 +462,27 @@ const FilterButton = styled.button`
   &:hover {
     transform: translateY(-1px);
     box-shadow: ${props => props.theme.shadows.medium};
+  }
+  
+  /* Mobile */
+  @media (max-width: 480px) {
+    padding: ${props => props.theme.spacing.xs} ${props => props.theme.spacing.sm};
+    font-size: 0.8rem;
+    gap: 4px;
+  }
+  
+  /* 🎯 TABLET: Button filtro compatto */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    padding: 4px 8px !important;
+    font-size: 0.65rem !important;
+    font-weight: 500 !important;
+    gap: 2px !important;
+    border-radius: 6px !important;
+    
+    &:hover {
+      transform: none !important;
+      box-shadow: none !important;
+    }
   }
 `;
 
