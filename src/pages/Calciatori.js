@@ -9,12 +9,21 @@ import API_URL from '../config/api';
 const CalciatoriContainer = styled.div`
   padding: ${props => props.theme.spacing.lg} 0;
   
-  @media (max-width: 768px) {
-    padding: ${props => props.theme.spacing.md} 0;
-  }
-  
+  /* Mobile */
   @media (max-width: 480px) {
     padding: ${props => props.theme.spacing.sm} 0;
+  }
+  
+  /* 🎯 TABLET: Ottimizzazione spazio 481px-1200px */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    padding: 8px !important;
+    height: 100vh !important;
+    overflow-y: auto !important;
+    font-size: 0.85rem !important;
+  }
+  
+  @media (max-width: 768px) {
+    padding: ${props => props.theme.spacing.md} 0;
   }
 `;
 
@@ -26,15 +35,23 @@ const Header = styled.div`
   gap: ${props => props.theme.spacing.lg};
   flex-wrap: wrap;
   
+  /* Mobile */
+  @media (max-width: 480px) {
+    gap: ${props => props.theme.spacing.sm};
+    margin-bottom: ${props => props.theme.spacing.md};
+  }
+  
+  /* 🎯 TABLET: Header compatto */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    margin-bottom: 8px !important;
+    gap: 8px !important;
+    padding: 4px !important;
+  }
+  
   @media (max-width: 768px) {
     flex-direction: column;
     gap: ${props => props.theme.spacing.md};
     margin-bottom: ${props => props.theme.spacing.lg};
-  }
-  
-  @media (max-width: 480px) {
-    gap: ${props => props.theme.spacing.sm};
-    margin-bottom: ${props => props.theme.spacing.md};
   }
 `;
 
@@ -47,16 +64,24 @@ const Title = styled.h1`
   gap: ${props => props.theme.spacing.sm};
   margin: 0;
   
+  /* Mobile */
+  @media (max-width: 480px) {
+    font-size: 1.5rem;
+    gap: ${props => props.theme.spacing.xs};
+  }
+  
+  /* 🎯 TABLET: Titolo più piccolo */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    font-size: 1.2rem !important;
+    font-weight: 600 !important;
+    gap: 4px !important;
+  }
+  
   @media (max-width: 768px) {
     font-size: 1.8rem;
     text-align: center;
     width: 100%;
     justify-content: center;
-  }
-  
-  @media (max-width: 480px) {
-    font-size: 1.5rem;
-    gap: ${props => props.theme.spacing.xs};
   }
 `;
 
@@ -67,15 +92,23 @@ const SearchContainer = styled.div`
   max-width: 600px;
   min-width: 300px;
   
+  /* Mobile */
+  @media (max-width: 480px) {
+    flex-direction: column;
+    gap: ${props => props.theme.spacing.sm};
+  }
+  
+  /* 🎯 TABLET: Search compatto */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    gap: 6px !important;
+    max-width: 400px !important;
+    min-width: 200px !important;
+  }
+  
   @media (max-width: 768px) {
     width: 100%;
     max-width: none;
     min-width: auto;
-  }
-  
-  @media (max-width: 480px) {
-    flex-direction: column;
-    gap: ${props => props.theme.spacing.sm};
   }
 `;
 
@@ -98,9 +131,17 @@ const SearchInput = styled.input`
     color: ${props => props.theme.colors.textSecondary};
   }
   
+  /* Mobile */
   @media (max-width: 480px) {
     padding: ${props => props.theme.spacing.sm};
-    font-size: 1rem; /* Maggiore per mobile */
+    font-size: 1rem;
+  }
+  
+  /* 🎯 TABLET: Input compatto */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    padding: 6px 8px !important;
+    font-size: 0.8rem !important;
+    border-radius: 6px !important;
   }
 `;
 
@@ -116,18 +157,28 @@ const FilterButton = styled.button`
   gap: ${props => props.theme.spacing.sm};
   transition: all 0.2s ease;
   white-space: nowrap;
-  min-height: 44px; /* Touch-friendly */
+  min-height: 44px;
 
   &:hover {
     background: ${props => props.theme.colors.surfaceHover};
     border-color: ${props => props.theme.colors.primary};
   }
   
+  /* Mobile */
   @media (max-width: 480px) {
     padding: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.md};
     width: 100%;
     justify-content: center;
     min-height: 48px;
+  }
+  
+  /* 🎯 TABLET: Button compatto */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    padding: 6px 8px !important;
+    min-height: 32px !important;
+    font-size: 0.75rem !important;
+    border-radius: 6px !important;
+    gap: 4px !important;
   }
 `;
 
@@ -137,16 +188,24 @@ const FiltersRow = styled.div`
   margin-bottom: ${props => props.theme.spacing.lg};
   flex-wrap: wrap;
   
-  @media (max-width: 768px) {
-    gap: ${props => props.theme.spacing.sm};
-    margin-bottom: ${props => props.theme.spacing.md};
-  }
-  
+  /* Mobile */
   @media (max-width: 480px) {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: ${props => props.theme.spacing.xs};
     margin-bottom: ${props => props.theme.spacing.sm};
+  }
+  
+  /* 🎯 TABLET: Filtri compatti */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    gap: 4px !important;
+    margin-bottom: 8px !important;
+    flex-wrap: wrap !important;
+  }
+  
+  @media (max-width: 768px) {
+    gap: ${props => props.theme.spacing.sm};
+    margin-bottom: ${props => props.theme.spacing.md};
   }
 `;
 
@@ -167,6 +226,7 @@ const FilterChip = styled.button`
     background: ${props => props.$active ? props.theme.colors.primary : props.theme.colors.surfaceHover};
   }
   
+  /* Mobile */
   @media (max-width: 480px) {
     font-size: 0.8rem;
     padding: ${props => props.theme.spacing.xs} ${props => props.theme.spacing.sm};
@@ -177,6 +237,15 @@ const FilterChip = styled.button`
     justify-content: center;
     text-align: center;
   }
+  
+  /* 🎯 TABLET: Chip compatti */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    padding: 3px 8px !important;
+    font-size: 0.7rem !important;
+    border-radius: 12px !important;
+    min-height: 28px !important;
+    font-weight: 500 !important;
+  }
 `;
 
 const PlayersGrid = styled.div`
@@ -185,16 +254,24 @@ const PlayersGrid = styled.div`
   gap: ${props => props.theme.spacing.lg};
   margin-bottom: ${props => props.theme.spacing.lg};
   
-  @media (max-width: 768px) {
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: ${props => props.theme.spacing.md};
-    margin-bottom: ${props => props.theme.spacing.md};
-  }
-  
+  /* Mobile */
   @media (max-width: 480px) {
     grid-template-columns: 1fr;
     gap: ${props => props.theme.spacing.sm};
     margin-bottom: ${props => props.theme.spacing.sm};
+  }
+  
+  /* 🎯 TABLET: 4 colonne compatte */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 6px !important;
+    margin-bottom: 8px !important;
+  }
+  
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: ${props => props.theme.spacing.md};
+    margin-bottom: ${props => props.theme.spacing.md};
   }
 `;
 
@@ -212,24 +289,37 @@ const PlayerCard = styled(motion.div)`
     border-color: ${props => props.theme.colors.primary};
   }
   
-  @media (max-width: 768px) {
-    padding: ${props => props.theme.spacing.md};
-    
-    &:hover {
-      transform: translateY(-1px); /* Meno pronunciato su tablet */
-    }
-  }
-  
+  /* Mobile */
   @media (max-width: 480px) {
     padding: ${props => props.theme.spacing.sm};
     
     &:hover {
-      transform: none; /* Rimuovi hover su mobile */
+      transform: none;
     }
     
     &:active {
       transform: scale(0.98);
       background: ${props => props.theme.colors.surfaceHover};
+    }
+  }
+  
+  /* 🎯 TABLET: Card compatte ma eleganti */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    padding: 8px !important;
+    border-radius: 6px !important;
+    min-height: 100px !important;
+    
+    &:hover {
+      transform: none !important;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    padding: ${props => props.theme.spacing.md};
+    
+    &:hover {
+      transform: translateY(-1px);
     }
   }
 `;
@@ -240,15 +330,25 @@ const PlayerHeader = styled.div`
   align-items: flex-start;
   margin-bottom: ${props => props.theme.spacing.md};
   
+  /* Mobile */
   @media (max-width: 480px) {
     margin-bottom: ${props => props.theme.spacing.sm};
     align-items: center;
+  }
+  
+  /* 🎯 TABLET: Header compatto */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    margin-bottom: 4px !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 2px !important;
+    text-align: center !important;
   }
 `;
 
 const PlayerInfo = styled.div`
   flex: 1;
-  min-width: 0; /* Permette il text-overflow */
+  min-width: 0;
 `;
 
 const PlayerName = styled.h3`
@@ -260,13 +360,24 @@ const PlayerName = styled.h3`
   text-overflow: ellipsis;
   white-space: nowrap;
   
-  @media (max-width: 768px) {
-    font-size: 1rem;
-  }
-  
+  /* Mobile */
   @media (max-width: 480px) {
     font-size: 0.95rem;
     margin-bottom: 2px;
+  }
+  
+  /* 🎯 TABLET: Nome leggibile */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
+    margin-bottom: 1px !important;
+    line-height: 1.2 !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+  }
+  
+  @media (max-width: 768px) {
+    font-size: 1rem;
   }
 `;
 
@@ -278,8 +389,17 @@ const PlayerTeam = styled.p`
   text-overflow: ellipsis;
   white-space: nowrap;
   
+  /* Mobile */
   @media (max-width: 480px) {
     font-size: 0.85rem;
+  }
+  
+  /* 🎯 TABLET: Squadra leggibile */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    font-size: 0.6rem !important;
+    line-height: 1.2 !important;
+    white-space: normal !important;
+    word-break: break-word !important;
   }
 `;
 
@@ -294,10 +414,21 @@ const PlayerQuote = styled.div`
   flex-shrink: 0;
   margin-left: ${props => props.theme.spacing.sm};
   
+  /* Mobile */
   @media (max-width: 480px) {
     font-size: 0.8rem;
     padding: ${props => props.theme.spacing.xs} ${props => props.theme.spacing.sm};
     border-radius: 16px;
+  }
+  
+  /* 🎯 TABLET: Quotazione compatta */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    padding: 2px 6px !important;
+    border-radius: 8px !important;
+    font-size: 0.65rem !important;
+    font-weight: 600 !important;
+    margin-left: 0 !important;
+    margin-top: 2px !important;
   }
 `;
 
@@ -329,11 +460,21 @@ const PlayerRole = styled.div`
   font-weight: 600;
   margin-bottom: ${props => props.theme.spacing.md};
   
+  /* Mobile */
   @media (max-width: 480px) {
     font-size: 0.75rem;
     padding: 4px ${props => props.theme.spacing.xs};
     border-radius: 10px;
     margin-bottom: ${props => props.theme.spacing.sm};
+  }
+  
+  /* 🎯 TABLET: Ruolo compatto */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    font-size: 0.6rem !important;
+    padding: 2px 4px !important;
+    border-radius: 6px !important;
+    margin-bottom: 4px !important;
+    font-weight: 500 !important;
   }
 `;
 
@@ -345,9 +486,17 @@ const PlayerStatus = styled.div`
   font-size: 0.85rem;
   font-weight: 500;
   
+  /* Mobile */
   @media (max-width: 480px) {
     font-size: 0.8rem;
     gap: ${props => props.theme.spacing.xs};
+  }
+  
+  /* 🎯 TABLET: Status compatto */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    font-size: 0.6rem !important;
+    gap: 3px !important;
+    justify-content: center !important;
   }
 `;
 
@@ -358,9 +507,16 @@ const StatusDot = styled.div`
   background: ${props => props.$disponibile ? props.theme.colors.success : props.theme.colors.error};
   flex-shrink: 0;
   
+  /* Mobile */
   @media (max-width: 480px) {
     width: 6px;
     height: 6px;
+  }
+  
+  /* 🎯 TABLET: Dot più piccolo */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    width: 4px !important;
+    height: 4px !important;
   }
 `;
 
@@ -369,8 +525,17 @@ const StatusText = styled.span`
   text-overflow: ellipsis;
   white-space: nowrap;
   
+  /* Mobile */
   @media (max-width: 480px) {
     font-size: 0.8rem;
+  }
+  
+  /* 🎯 TABLET: Testo limitato */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    font-size: 0.6rem !important;
+    white-space: normal !important;
+    text-align: center !important;
+    word-break: break-word !important;
   }
 `;
 
@@ -383,8 +548,15 @@ const LoadingContainer = styled.div`
   color: ${props => props.theme.colors.textSecondary};
   gap: ${props => props.theme.spacing.md};
   
+  /* Mobile */
   @media (max-width: 480px) {
     padding: ${props => props.theme.spacing.lg};
+  }
+  
+  /* 🎯 TABLET: Loading compatto */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    padding: 16px !important;
+    gap: 8px !important;
   }
 `;
 
@@ -395,13 +567,20 @@ const EmptyState = styled.div`
   background: ${props => props.theme.colors.surface};
   border-radius: ${props => props.theme.borderRadius};
   
+  /* Mobile */
   @media (max-width: 480px) {
     padding: ${props => props.theme.spacing.lg};
     font-size: 0.9rem;
   }
+  
+  /* 🎯 TABLET: Empty state compatto */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    padding: 16px !important;
+    font-size: 0.8rem !important;
+    border-radius: 6px !important;
+  }
 `;
 
-// Nuovo componente per contatore filtri attivi
 const ActiveFiltersCount = styled.div`
   display: none;
   
@@ -544,7 +723,7 @@ const Calciatori = () => {
               key={player.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.02 }} // Animazione più veloce per mobile
+              transition={{ delay: index * 0.02 }}
             >
               <PlayerHeader>
                 <PlayerInfo>
