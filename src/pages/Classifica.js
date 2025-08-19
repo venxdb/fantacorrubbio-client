@@ -26,21 +26,20 @@ const Container = styled.div`
   background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #0f172a 100%);
   padding: 1rem;
   
-  /* Mobile */
   @media (max-width: 480px) {
     padding: 0.5rem;
     min-height: 100vh;
   }
   
-  /* 🎯 TABLET: Container ottimizzato 481px-1200px */
+  @media (min-width: 768px) {
+    padding: 1.5rem;
+  }
+  
+  /* 🎯 TABLET: Container ottimizzato - ALLA FINE */
   @media (min-width: 481px) and (max-width: 1200px) {
     padding: 8px !important;
     height: 100vh !important;
     overflow-y: auto !important;
-  }
-  
-  @media (min-width: 768px) {
-    padding: 1.5rem;
   }
 `;
 
@@ -95,6 +94,15 @@ const EmptyText = styled.p`
 const Header = styled.div`
   text-align: center;
   margin-bottom: 1.5rem;
+  
+  @media (max-width: 480px) {
+    margin-bottom: 0.75rem;
+  }
+  
+  /* 🎯 TABLET: Header compatto - ALLA FINE */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    margin-bottom: 1rem !important;
+  }
 `;
 
 const Title = styled(motion.h1)`
@@ -108,23 +116,22 @@ const Title = styled(motion.h1)`
   gap: 0.75rem;
   flex-wrap: wrap;
   
-  /* Mobile */
   @media (max-width: 480px) {
     font-size: 1.5rem;
     margin-bottom: 0.5rem;
     gap: 0.5rem;
   }
   
-  /* 🎯 TABLET: Titolo compatto */
+  @media (min-width: 768px) {
+    font-size: 3rem;
+  }
+  
+  /* 🎯 TABLET: Titolo compatto - ALLA FINE */
   @media (min-width: 481px) and (max-width: 1200px) {
     font-size: 1.8rem !important;
     font-weight: 700 !important;
     margin-bottom: 0.5rem !important;
     gap: 0.5rem !important;
-  }
-  
-  @media (min-width: 768px) {
-    font-size: 3rem;
   }
 `;
 
@@ -133,6 +140,17 @@ const TitleIcon = styled(Target)`
   height: 2.5rem;
   color: #facc15;
   flex-shrink: 0;
+  
+  @media (max-width: 480px) {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  
+  /* 🎯 TABLET: Icona compatta - ALLA FINE */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    width: 1.8rem !important;
+    height: 1.8rem !important;
+  }
 `;
 
 const Subtitle = styled(motion.p)`
@@ -142,8 +160,21 @@ const Subtitle = styled(motion.p)`
   margin: 0 auto;
   padding: 0 1rem;
   
+  @media (max-width: 480px) {
+    font-size: 0.8rem;
+    padding: 0 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
   @media (min-width: 768px) {
     font-size: 1.25rem;
+  }
+  
+  /* 🎯 TABLET: Subtitle compatto - ALLA FINE */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    font-size: 0.9rem !important;
+    padding: 0 0.5rem !important;
+    margin-bottom: 0.5rem !important;
   }
 `;
 
@@ -151,6 +182,11 @@ const CardsGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   gap: 1rem;
+  
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
   
   @media (min-width: 640px) {
     grid-template-columns: repeat(2, 1fr);
@@ -163,6 +199,12 @@ const CardsGrid = styled.div`
   @media (min-width: 1280px) {
     grid-template-columns: repeat(4, 1fr);
     gap: 1.5rem;
+  }
+  
+  /* 🎯 TABLET: 4 colonne come richiesto - ALLA FINE */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 6px !important;
   }
 `;
 
@@ -183,6 +225,14 @@ const Card = styled(motion.div)`
     ${props => !props.$isTopThree ? `
       box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.5), 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     ` : ''}
+  }
+  
+  /* 🎯 TABLET: Card senza hover - ALLA FINE */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    &:hover {
+      transform: none !important;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+    }
   }
 `;
 
@@ -210,8 +260,17 @@ const CardContent = styled.div`
   padding: 0.75rem;
   color: white;
   
+  @media (max-width: 480px) {
+    padding: 0.4rem;
+  }
+  
   @media (min-width: 768px) {
     padding: 1rem;
+  }
+  
+  /* 🎯 TABLET: Content compatto - ALLA FINE */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    padding: 0.4rem !important;
   }
 `;
 
@@ -229,6 +288,23 @@ const PositionBadge = styled.div`
   justify-content: center;
   font-weight: bold;
   font-size: 1.125rem;
+  
+  @media (max-width: 480px) {
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: 0.7rem;
+    top: -0.3rem;
+    right: -0.1rem;
+  }
+  
+  /* 🎯 TABLET: Badge compatto - ALLA FINE */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    width: 1.8rem !important;
+    height: 1.8rem !important;
+    font-size: 0.8rem !important;
+    top: -0.3rem !important;
+    right: -0.1rem !important;
+  }
 `;
 
 const UserHeader = styled.div`
@@ -236,6 +312,17 @@ const UserHeader = styled.div`
   align-items: center;
   gap: 0.5rem;
   margin-bottom: 0.75rem;
+  
+  @media (max-width: 480px) {
+    gap: 0.25rem;
+    margin-bottom: 0.4rem;
+  }
+  
+  /* 🎯 TABLET: Header utente compatto - ALLA FINE */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    gap: 0.3rem !important;
+    margin-bottom: 0.4rem !important;
+  }
 `;
 
 const UserTitle = styled.div`
@@ -250,8 +337,20 @@ const UserName = styled.h3`
   text-overflow: ellipsis;
   white-space: nowrap;
   
+  @media (max-width: 480px) {
+    font-size: 0.7rem;
+    line-height: 1.2;
+  }
+  
   @media (min-width: 768px) {
     font-size: 1.25rem;
+  }
+  
+  /* 🎯 TABLET: Nome compatto - ALLA FINE */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
+    line-height: 1.2 !important;
   }
 `;
 
@@ -259,12 +358,32 @@ const AdminCrown = styled.span`
   color: #fcd34d;
   margin-left: 0.5rem;
   font-size: 0.875rem;
+  
+  @media (max-width: 480px) {
+    font-size: 0.6rem;
+    margin-left: 0.25rem;
+  }
+  
+  /* 🎯 TABLET: Crown compatta - ALLA FINE */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    font-size: 0.65rem !important;
+    margin-left: 0.25rem !important;
+  }
 `;
 
 const PositionLabel = styled.p`
   font-size: 0.875rem;
   opacity: 0.8;
   margin: 0;
+  
+  @media (max-width: 480px) {
+    font-size: 0.6rem;
+  }
+  
+  /* 🎯 TABLET: Label compatta - ALLA FINE */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    font-size: 0.6rem !important;
+  }
 `;
 
 const CreditsSection = styled.div`
@@ -274,6 +393,19 @@ const CreditsSection = styled.div`
   padding: 0.75rem;
   margin-bottom: 0.75rem;
   text-align: center;
+  
+  @media (max-width: 480px) {
+    padding: 0.4rem;
+    margin-bottom: 0.4rem;
+    border-radius: 0.3rem;
+  }
+  
+  /* 🎯 TABLET: Credits compatto - ALLA FINE */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    padding: 0.4rem !important;
+    margin-bottom: 0.4rem !important;
+    border-radius: 0.3rem !important;
+  }
 `;
 
 const CreditsHeader = styled.div`
@@ -282,29 +414,80 @@ const CreditsHeader = styled.div`
   justify-content: center;
   gap: 0.5rem;
   margin-bottom: 0.5rem;
+  
+  @media (max-width: 480px) {
+    gap: 0.25rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  /* 🎯 TABLET: Header credits compatto - ALLA FINE */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    gap: 0.3rem !important;
+    margin-bottom: 0.3rem !important;
+  }
+`;
+
+const CreditsLabel = styled.span`
+  font-size: 0.875rem;
+  opacity: 0.8;
+  
+  @media (max-width: 480px) {
+    font-size: 0.6rem;
+  }
+  
+  /* 🎯 TABLET: Label compatta - ALLA FINE */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    font-size: 0.65rem !important;
+  }
 `;
 
 const CreditsIcon = styled(Coins)`
   width: 1.25rem;
   height: 1.25rem;
   color: #fcd34d;
-`;
-
-const CreditsLabel = styled.span`
-  font-size: 0.875rem;
-  opacity: 0.8;
+  
+  @media (max-width: 480px) {
+    width: 0.8rem;
+    height: 0.8rem;
+  }
+  
+  /* 🎯 TABLET: Icona compatta - ALLA FINE */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    width: 0.9rem !important;
+    height: 0.9rem !important;
+  }
 `;
 
 const CreditsValue = styled.div`
   font-size: 1.5rem;
   font-weight: bold;
   color: #fcd34d;
+  
+  @media (max-width: 480px) {
+    font-size: 1rem;
+    font-weight: 700;
+  }
+  
+  /* 🎯 TABLET: Value compatto - ALLA FINE */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    font-size: 1.1rem !important;
+    font-weight: 700 !important;
+  }
 `;
 
 const RosaSection = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  
+  @media (max-width: 480px) {
+    gap: 0.25rem;
+  }
+  
+  /* 🎯 TABLET: Rosa section compatta - ALLA FINE */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    gap: 0.3rem !important;
+  }
 `;
 
 const RosaHeader = styled.div`
@@ -328,6 +511,15 @@ const RolesGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 0.375rem;
+  
+  @media (max-width: 480px) {
+    gap: 0.2rem;
+  }
+  
+  /* 🎯 TABLET: Grid compatta - ALLA FINE */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    gap: 0.2rem !important;
+  }
 `;
 
 const RoleCard = styled.div`
@@ -335,6 +527,17 @@ const RoleCard = styled.div`
   backdrop-filter: blur(8px);
   border-radius: 0.375rem;
   padding: 0.375rem;
+  
+  @media (max-width: 480px) {
+    padding: 0.2rem;
+    border-radius: 0.2rem;
+  }
+  
+  /* 🎯 TABLET: Role card compatta - ALLA FINE */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    padding: 0.25rem !important;
+    border-radius: 0.2rem !important;
+  }
 `;
 
 const RoleHeader = styled.div`
@@ -342,6 +545,15 @@ const RoleHeader = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 0.25rem;
+  
+  @media (max-width: 480px) {
+    margin-bottom: 0.1rem;
+  }
+  
+  /* 🎯 TABLET: Header ruolo compatto - ALLA FINE */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    margin-bottom: 0.15rem !important;
+  }
 `;
 
 const RoleLabel = styled.span`
@@ -350,10 +562,31 @@ const RoleLabel = styled.span`
   display: flex;
   align-items: center;
   gap: 0.25rem;
+  
+  @media (max-width: 480px) {
+    font-size: 0.5rem;
+    gap: 0.1rem;
+  }
+  
+  /* 🎯 TABLET: Label ruolo compatta - ALLA FINE */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    font-size: 0.55rem !important;
+    gap: 0.1rem !important;
+    font-weight: 400 !important;
+  }
 `;
 
 const RoleCount = styled.span`
   font-size: 0.75rem;
+  
+  @media (max-width: 480px) {
+    font-size: 0.5rem;
+  }
+  
+  /* 🎯 TABLET: Count compatto - ALLA FINE */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    font-size: 0.55rem !important;
+  }
 `;
 
 const ProgressBar = styled.div`
@@ -362,6 +595,15 @@ const ProgressBar = styled.div`
   border-radius: 9999px;
   height: 0.375rem;
   overflow: hidden;
+  
+  @media (max-width: 480px) {
+    height: 0.2rem;
+  }
+  
+  /* 🎯 TABLET: Progress bar compatta - ALLA FINE */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    height: 0.25rem !important;
+  }
 `;
 
 const ProgressFill = styled.div`
@@ -438,10 +680,13 @@ const Classifica = () => {
   };
 
   const getPositionIcon = (position) => {
+    const iconSize = window.innerWidth <= 480 ? 12 : 
+                    window.innerWidth <= 1200 ? 14 : 20;
+    
     switch(position) {
-      case 1: return <Crown size={20} />;
-      case 2: return <Trophy size={20} />;
-      case 3: return <Medal size={20} />;
+      case 1: return <Crown size={iconSize} />;
+      case 2: return <Trophy size={iconSize} />;
+      case 3: return <Medal size={iconSize} />;
       default: return null;
     }
   };
