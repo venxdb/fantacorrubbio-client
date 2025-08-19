@@ -45,7 +45,6 @@ const WelcomeSection = styled(motion.div)`
   }
 `;
 
-// 🆕 Titolo responsive con scaling fluido
 const WelcomeTitle = styled.h1`
   font-size: 2.5rem;
   font-weight: 800;
@@ -61,24 +60,24 @@ const WelcomeTitle = styled.h1`
     font-size: 3rem;
   }
   
-  /* 🆕 Tablet: ridotto */
-  @media (max-width: ${props => props.theme.breakpoints.tablet}) {
-    font-size: 2.2rem;
+  /* 🎯 TABLET: Titolo proporzionato */
+  @media (min-width: 600px) and (max-width: ${props => props.theme.breakpoints.large}) {
+    font-size: 2rem;
+    line-height: 1.1;
   }
   
-  /* 🆕 Mobile: molto più piccolo */
-  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
-    font-size: 1.8rem;
+  /* 🆕 Mobile: più piccolo */
+  @media (max-width: 600px) {
+    font-size: 1.6rem;
     margin-bottom: ${props => props.theme.spacing.xs};
   }
   
   /* 🆕 Mobile molto piccolo */
   @media (max-width: 360px) {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
   }
 `;
 
-// 🆕 Sottotitolo responsive
 const WelcomeSubtitle = styled.p`
   font-size: 1.2rem;
   color: ${props => props.theme.colors.textSecondary};
@@ -88,53 +87,47 @@ const WelcomeSubtitle = styled.p`
   margin-left: auto;
   margin-right: auto;
   
-  /* 🆕 Tablet: font ridotto */
-  @media (max-width: ${props => props.theme.breakpoints.tablet}) {
-    font-size: 1.1rem;
+  /* 🎯 TABLET: Sottotitolo proporzionato */
+  @media (min-width: 600px) and (max-width: ${props => props.theme.breakpoints.large}) {
+    font-size: 1rem;
     max-width: 500px;
+    line-height: 1.4;
   }
   
   /* 🆕 Mobile: molto più piccolo */
-  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
-    font-size: 1rem;
+  @media (max-width: 600px) {
+    font-size: 0.9rem;
     margin-bottom: ${props => props.theme.spacing.md};
     padding: 0 ${props => props.theme.spacing.sm};
   }
 `;
 
-// 🆕 Grid responsive intelligente
 const QuickActionsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: ${props => props.theme.spacing.lg};
   margin-bottom: ${props => props.theme.spacing.xl};
   
-  /* 🆕 Large desktop: 4 colonne */
+  /* 🆕 Large desktop: 4 colonne spaziose */
   @media (min-width: ${props => props.theme.breakpoints.large}) {
     grid-template-columns: repeat(4, 1fr);
     gap: ${props => props.theme.spacing.xl};
   }
   
-  /* 🆕 Desktop: 2 colonne */
-  @media (min-width: ${props => props.theme.breakpoints.desktop}) and (max-width: ${props => props.theme.breakpoints.large}) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  /* 🆕 Tablet: 2 colonne con gap ridotto */
-  @media (max-width: ${props => props.theme.breakpoints.tablet}) {
-    grid-template-columns: repeat(2, 1fr);
-    gap: ${props => props.theme.spacing.md};
-    margin-bottom: ${props => props.theme.spacing.lg};
+  /* 🎯 TABLET ELEGANTE: 4 colonne compatte sulla stessa riga */
+  @media (min-width: 600px) and (max-width: ${props => props.theme.breakpoints.large}) {
+    grid-template-columns: repeat(4, 1fr);
+    gap: ${props => props.theme.spacing.sm}; /* Gap ridotto per essere più compatti */
+    max-width: 100%;
   }
   
   /* 🆕 Mobile: 1 colonna */
-  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
+  @media (max-width: 600px) {
     grid-template-columns: 1fr;
     gap: ${props => props.theme.spacing.sm};
   }
 `;
 
-// 🆕 Action Card completamente responsive
 const ActionCard = styled(motion.div)`
   background: ${props => props.theme.colors.surface};
   border: 1px solid ${props => props.theme.colors.border};
@@ -164,35 +157,35 @@ const ActionCard = styled(motion.div)`
     background: ${props => props.gradient || props.theme.colors.gradient};
   }
   
-  /* 🆕 Tablet: padding ridotto */
-  @media (max-width: ${props => props.theme.breakpoints.tablet}) {
-    padding: ${props => props.theme.spacing.md};
-    min-height: 180px;
+  /* 🎯 TABLET ELEGANTE: Layout compatto ma proporzionato */
+  @media (min-width: 600px) and (max-width: ${props => props.theme.breakpoints.large}) {
+    padding: ${props => props.theme.spacing.md}; /* Padding ridotto */
+    min-height: 160px; /* Altezza ridotta ma elegante */
     
     &:hover {
-      transform: translateY(-1px); /* Hover meno pronunciato */
+      transform: translateY(-1px); /* Hover più sottile */
+      box-shadow: ${props => props.theme.shadows.medium};
     }
   }
   
   /* 🆕 Mobile: layout ottimizzato */
-  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
+  @media (max-width: 600px) {
     padding: ${props => props.theme.spacing.md};
-    min-height: 160px;
+    min-height: 140px;
     
-    /* Su mobile, rimuovi l'hover transform per performance */
     &:hover {
       transform: none;
       box-shadow: ${props => props.theme.shadows.medium};
     }
     
-    /* Area di tocco più grande */
     &:active {
       transform: scale(0.98);
     }
   }
 `;
 
-// 🆕 Icona responsive
+
+
 const ActionIcon = styled.div`
   width: 50px;
   height: 50px;
@@ -205,21 +198,31 @@ const ActionIcon = styled.div`
   box-shadow: ${props => props.theme.shadows.medium};
   flex-shrink: 0;
   
-  /* 🆕 Tablet: leggermente più piccola */
-  @media (max-width: ${props => props.theme.breakpoints.tablet}) {
-    width: 45px;
-    height: 45px;
+  /* 🎯 TABLET: Icona leggermente più piccola ma proporzionata */
+  @media (min-width: 600px) and (max-width: ${props => props.theme.breakpoints.large}) {
+    width: 42px;
+    height: 42px;
     margin-bottom: ${props => props.theme.spacing.sm};
+    
+    /* Icona più piccola dentro */
+    svg {
+      width: 20px;
+      height: 20px;
+    }
   }
   
-  /* 🆕 Mobile: più piccola */
-  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
-    width: 40px;
-    height: 40px;
+  /* 🆕 Mobile: ancora più piccola */
+  @media (max-width: 600px) {
+    width: 38px;
+    height: 38px;
+    margin-bottom: ${props => props.theme.spacing.sm};
+    
+    svg {
+      width: 18px;
+      height: 18px;
+    }
   }
 `;
-
-// 🆕 Titolo action responsive
 const ActionTitle = styled.h3`
   color: ${props => props.theme.colors.text};
   font-size: 1.1rem;
@@ -227,29 +230,39 @@ const ActionTitle = styled.h3`
   margin-bottom: ${props => props.theme.spacing.sm};
   line-height: 1.3;
   
+  /* 🎯 TABLET: Font leggermente ridotto */
+  @media (min-width: 600px) and (max-width: ${props => props.theme.breakpoints.large}) {
+    font-size: 0.95rem;
+    margin-bottom: ${props => props.theme.spacing.xs};
+    line-height: 1.2;
+  }
+  
   /* 🆕 Mobile: font più piccolo */
-  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
-    font-size: 1rem;
+  @media (max-width: 600px) {
+    font-size: 0.9rem;
     margin-bottom: ${props => props.theme.spacing.xs};
   }
 `;
-
-// 🆕 Descrizione action responsive
 const ActionDescription = styled.p`
   color: ${props => props.theme.colors.textSecondary};
   font-size: 0.9rem;
   line-height: 1.5;
   margin-bottom: ${props => props.theme.spacing.md};
-  flex: 1; /* Prende lo spazio rimanente */
+  flex: 1;
   
-  /* 🆕 Mobile: font più piccolo */
-  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
-    font-size: 0.85rem;
+  /* 🎯 TABLET: Testo più compatto */
+  @media (min-width: 600px) and (max-width: ${props => props.theme.breakpoints.large}) {
+    font-size: 0.8rem;
+    line-height: 1.4;
+    margin-bottom: ${props => props.theme.spacing.sm};
+  }
+  
+  /* 🆕 Mobile: ancora più piccolo */
+  @media (max-width: 600px) {
+    font-size: 0.75rem;
     margin-bottom: ${props => props.theme.spacing.sm};
   }
 `;
-
-// 🆕 Action button responsive
 const ActionButton = styled.div`
   display: flex;
   align-items: center;
@@ -258,22 +271,41 @@ const ActionButton = styled.div`
   font-weight: 600;
   font-size: 0.9rem;
   transition: gap 0.2s ease;
-  margin-top: auto; /* Si posiziona in fondo */
+  margin-top: auto;
 
   ${ActionCard}:hover & {
     gap: ${props => props.theme.spacing.md};
   }
   
-  /* 🆕 Mobile: font più piccolo */
-  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
-    font-size: 0.85rem;
+  /* 🎯 TABLET: Button più piccolo */
+  @media (min-width: 600px) and (max-width: ${props => props.theme.breakpoints.large}) {
+    font-size: 0.8rem;
     
-    /* Su mobile, gap fisso per performance */
+    svg {
+      width: 14px;
+      height: 14px;
+    }
+    
+    ${ActionCard}:hover & {
+      gap: ${props => props.theme.spacing.sm}; /* Gap hover ridotto */
+    }
+  }
+  
+  /* 🆕 Mobile: gap fisso per performance */
+  @media (max-width: 600px) {
+    font-size: 0.75rem;
+    
+    svg {
+      width: 12px;
+      height: 12px;
+    }
+    
     ${ActionCard}:hover & {
       gap: ${props => props.theme.spacing.sm};
     }
   }
 `;
+
 
 // 🆕 Stats grid responsive
 const StatsGrid = styled.div`
