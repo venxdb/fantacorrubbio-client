@@ -12,10 +12,10 @@ const RosaContainer = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   
-  /* 🎯 TABLET: Padding molto ridotto per evitare scroll */
+  /* 🎯 TABLET: Padding ancora più ridotto e altezza controllata */
   @media (min-width: 481px) and (max-width: 1023px) {
-    padding: ${props => props.theme.spacing.sm} 0;
-    max-height: 100vh;
+    padding: ${props => props.theme.spacing.xs} 0;
+    max-height: calc(100vh - 60px); /* Considera header fisso */
     overflow-y: auto;
   }
   
@@ -28,9 +28,9 @@ const Header = styled.div`
   text-align: center;
   margin-bottom: ${props => props.theme.spacing.xl};
   
-  /* 🎯 TABLET: Header molto compatto */
+  /* 🎯 TABLET: Header ultra compatto */
   @media (min-width: 481px) and (max-width: 1023px) {
-    margin-bottom: ${props => props.theme.spacing.sm};
+    margin-bottom: ${props => props.theme.spacing.xs};
   }
   
   @media (max-width: 480px) {
@@ -51,11 +51,11 @@ const Title = styled.h1`
   justify-content: center;
   gap: ${props => props.theme.spacing.md};
   
-  /* 🎯 TABLET: Titolo più compatto */
+  /* 🎯 TABLET: Titolo molto più piccolo */
   @media (min-width: 481px) and (max-width: 1023px) {
-    font-size: 1.8rem;
-    gap: ${props => props.theme.spacing.sm};
-    margin-bottom: ${props => props.theme.spacing.xs};
+    font-size: 1.4rem;
+    gap: ${props => props.theme.spacing.xs};
+    margin-bottom: 0;
   }
   
   @media (max-width: 480px) {
@@ -65,7 +65,7 @@ const Title = styled.h1`
   }
 `;
 
-// 🎯 Stats Grid completamente responsive
+// 🎯 Stats Grid ultra compatto per tablet
 const StatsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -77,11 +77,11 @@ const StatsGrid = styled.div`
     grid-template-columns: repeat(4, 1fr);
   }
   
-  /* 🎯 TABLET: 4 colonne compatte, altezza ridotta */
+  /* 🎯 TABLET: 4 colonne ultra compatte, gap mini */
   @media (min-width: 481px) and (max-width: 1023px) {
     grid-template-columns: repeat(4, 1fr);
-    gap: ${props => props.theme.spacing.xs};
-    margin-bottom: ${props => props.theme.spacing.sm};
+    gap: 4px;
+    margin-bottom: ${props => props.theme.spacing.xs};
   }
   
   /* Mobile: 2 colonne compatte */
@@ -99,9 +99,10 @@ const StatCard = styled(motion.div)`
   padding: ${props => props.theme.spacing.lg};
   text-align: center;
   
-  /* 🎯 TABLET: Padding molto ridotto */
+  /* 🎯 TABLET: Padding ultra ridotto */
   @media (min-width: 481px) and (max-width: 1023px) {
-    padding: ${props => props.theme.spacing.xs};
+    padding: 6px 4px;
+    border-radius: 6px;
   }
   
   @media (max-width: 480px) {
@@ -115,10 +116,11 @@ const StatValue = styled.div`
   color: ${props => props.color || props.theme.colors.text};
   margin-bottom: ${props => props.theme.spacing.xs};
   
-  /* 🎯 TABLET: Font più piccolo */
+  /* 🎯 TABLET: Font ancora più piccolo */
   @media (min-width: 481px) and (max-width: 1023px) {
-    font-size: 1.4rem;
-    margin-bottom: 2px;
+    font-size: 1.1rem;
+    margin-bottom: 1px;
+    line-height: 1.2;
   }
   
   @media (max-width: 480px) {
@@ -131,9 +133,10 @@ const StatLabel = styled.div`
   font-size: 0.9rem;
   font-weight: 500;
   
-  /* 🎯 TABLET: Font molto piccolo */
+  /* 🎯 TABLET: Font ultra piccolo */
   @media (min-width: 481px) and (max-width: 1023px) {
-    font-size: 0.7rem;
+    font-size: 0.6rem;
+    line-height: 1.1;
   }
   
   @media (max-width: 480px) {
@@ -144,9 +147,9 @@ const StatLabel = styled.div`
 const RoleSection = styled.div`
   margin-bottom: ${props => props.theme.spacing.xl};
   
-  /* 🎯 TABLET: Margini molto ridotti */
+  /* 🎯 TABLET: Margini ultra ridotti */
   @media (min-width: 481px) and (max-width: 1023px) {
-    margin-bottom: ${props => props.theme.spacing.sm};
+    margin-bottom: ${props => props.theme.spacing.xs};
   }
   
   @media (max-width: 480px) {
@@ -160,6 +163,12 @@ const RoleHeader = styled.div`
   justify-content: space-between;
   margin-bottom: ${props => props.theme.spacing.lg};
   gap: ${props => props.theme.spacing.md};
+  
+  /* 🎯 TABLET: Margine ultra ridotto */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    margin-bottom: 4px;
+    gap: ${props => props.theme.spacing.xs};
+  }
   
   @media (max-width: 768px) {
     margin-bottom: ${props => props.theme.spacing.md};
@@ -177,6 +186,12 @@ const RoleTitle = styled.h2`
   color: ${props => props.theme.colors.text};
   font-size: 1.5rem;
   font-weight: 700;
+  
+  /* 🎯 TABLET: Font più piccolo */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
   
   @media (max-width: 768px) {
     font-size: 1.3rem;
@@ -196,6 +211,14 @@ const RoleStats = styled.div`
   font-weight: 600;
   white-space: nowrap;
   
+  /* 🎯 TABLET: Dimensioni ultra ridotte */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    padding: 2px 6px;
+    border-radius: 8px;
+    font-size: 0.6rem;
+    font-weight: 500;
+  }
+  
   @media (max-width: 480px) {
     font-size: 0.8rem;
     padding: ${props => props.theme.spacing.xs} ${props => props.theme.spacing.sm};
@@ -204,7 +227,7 @@ const RoleStats = styled.div`
   }
 `;
 
-// 🎯 Players Grid completamente responsive
+// 🎯 Players Grid ultra compatto per tablet
 const PlayersGrid = styled.div`
   display: grid;
   gap: ${props => props.theme.spacing.lg};
@@ -214,10 +237,10 @@ const PlayersGrid = styled.div`
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   }
   
-  /* 🎯 TABLET: 3 colonne compatte per sfruttare tutto lo spazio */
+  /* 🎯 TABLET: 4 colonne ultra compatte per massimizzare spazio */
   @media (min-width: 481px) and (max-width: 1023px) {
-    grid-template-columns: repeat(3, 1fr);
-    gap: ${props => props.theme.spacing.xs};
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3px;
   }
   
   /* Mobile: 1 colonna */
@@ -239,12 +262,14 @@ const PlayerCard = styled(motion.div)`
     box-shadow: ${props => props.theme.shadows.large};
   }
   
-  /* 🎯 TABLET: Padding molto ridotto, altezza compatta */
+  /* 🎯 TABLET: Padding ultra ridotto, card molto compatta */
   @media (min-width: 481px) and (max-width: 1023px) {
-    padding: ${props => props.theme.spacing.xs};
+    padding: 4px;
+    border-radius: 4px;
     
     &:hover {
       transform: translateY(-1px);
+      box-shadow: ${props => props.theme.shadows.small};
     }
   }
   
@@ -269,6 +294,12 @@ const PlayerHeader = styled.div`
   margin-bottom: ${props => props.theme.spacing.md};
   gap: ${props => props.theme.spacing.sm};
   
+  /* 🎯 TABLET: Margine ultra ridotto */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    margin-bottom: 2px;
+    gap: 2px;
+  }
+  
   @media (max-width: 480px) {
     margin-bottom: ${props => props.theme.spacing.sm};
     align-items: center;
@@ -289,6 +320,14 @@ const PlayerName = styled.h3`
   text-overflow: ellipsis;
   white-space: nowrap;
   
+  /* 🎯 TABLET: Font ultra piccolo */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    font-size: 0.7rem;
+    font-weight: 500;
+    margin-bottom: 1px;
+    line-height: 1.1;
+  }
+  
   @media (max-width: 768px) {
     font-size: 1rem;
   }
@@ -306,6 +345,12 @@ const PlayerTeam = styled.p`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  
+  /* 🎯 TABLET: Font ultra piccolo */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    font-size: 0.6rem;
+    line-height: 1.1;
+  }
   
   @media (max-width: 480px) {
     font-size: 0.85rem;
@@ -331,6 +376,15 @@ const PurchasePrice = styled.div`
   margin-bottom: ${props => props.theme.spacing.xs};
   white-space: nowrap;
   
+  /* 🎯 TABLET: Ultra compatto */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    padding: 1px 4px;
+    border-radius: 8px;
+    font-size: 0.6rem;
+    font-weight: 500;
+    margin-bottom: 1px;
+  }
+  
   @media (max-width: 480px) {
     font-size: 0.8rem;
     padding: ${props => props.theme.spacing.xs} ${props => props.theme.spacing.sm};
@@ -346,6 +400,16 @@ const PurchaseDate = styled.div`
   justify-content: flex-end;
   gap: ${props => props.theme.spacing.xs};
   
+  /* 🎯 TABLET: Font ultra piccolo, nascondi icona */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    font-size: 0.5rem;
+    gap: 1px;
+    
+    svg {
+      display: none; /* Nascondi icona per risparmiare spazio */
+    }
+  }
+  
   @media (max-width: 480px) {
     font-size: 0.75rem;
     justify-content: center;
@@ -360,6 +424,12 @@ const PlayerQuote = styled.div`
   padding-top: ${props => props.theme.spacing.md};
   border-top: 1px solid ${props => props.theme.colors.border};
   
+  /* 🎯 TABLET: Margini e padding ultra ridotti */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    margin-top: 2px;
+    padding-top: 2px;
+  }
+  
   @media (max-width: 480px) {
     margin-top: ${props => props.theme.spacing.sm};
     padding-top: ${props => props.theme.spacing.sm};
@@ -370,6 +440,11 @@ const QuoteLabel = styled.span`
   color: ${props => props.theme.colors.textSecondary};
   font-size: 0.85rem;
   
+  /* 🎯 TABLET: Font ultra piccolo */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    font-size: 0.5rem;
+  }
+  
   @media (max-width: 480px) {
     font-size: 0.8rem;
   }
@@ -379,18 +454,30 @@ const QuoteValue = styled.span`
   color: ${props => props.theme.colors.text};
   font-weight: 600;
   
+  /* 🎯 TABLET: Font più piccolo */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    font-size: 0.6rem;
+    font-weight: 500;
+  }
+  
   @media (max-width: 480px) {
     font-size: 0.9rem;
   }
 `;
 
-// 🎯 Empty State responsive
+// 🎯 Empty State compatto
 const EmptyState = styled.div`
   text-align: center;
   padding: ${props => props.theme.spacing.xl};
   background: ${props => props.theme.colors.surface};
   border-radius: ${props => props.theme.borderRadius};
   margin-bottom: ${props => props.theme.spacing.lg};
+  
+  /* 🎯 TABLET: Padding molto ridotto */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    padding: ${props => props.theme.spacing.sm};
+    margin-bottom: ${props => props.theme.spacing.xs};
+  }
   
   @media (max-width: 768px) {
     padding: ${props => props.theme.spacing.lg};
@@ -412,6 +499,13 @@ const EmptyIcon = styled.div`
   justify-content: center;
   margin: 0 auto ${props => props.theme.spacing.lg};
   
+  /* 🎯 TABLET: Icona più piccola */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    width: 40px;
+    height: 40px;
+    margin-bottom: ${props => props.theme.spacing.xs};
+  }
+  
   @media (max-width: 768px) {
     width: 70px;
     height: 70px;
@@ -431,6 +525,12 @@ const EmptyTitle = styled.h3`
   font-weight: 600;
   margin-bottom: ${props => props.theme.spacing.sm};
   
+  /* 🎯 TABLET: Font più piccolo */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    font-size: 0.9rem;
+    margin-bottom: ${props => props.theme.spacing.xs};
+  }
+  
   @media (max-width: 480px) {
     font-size: 1.1rem;
   }
@@ -442,6 +542,12 @@ const EmptyText = styled.p`
   line-height: 1.5;
   max-width: 400px;
   margin: 0 auto;
+  
+  /* 🎯 TABLET: Font più piccolo */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    font-size: 0.7rem;
+    line-height: 1.3;
+  }
   
   @media (max-width: 480px) {
     font-size: 0.9rem;
@@ -457,12 +563,18 @@ const LoadingContainer = styled.div`
   align-items: center;
   gap: ${props => props.theme.spacing.md};
   
+  /* 🎯 TABLET: Padding ridotto */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    padding: ${props => props.theme.spacing.md};
+    gap: ${props => props.theme.spacing.sm};
+  }
+  
   @media (max-width: 480px) {
     padding: ${props => props.theme.spacing.lg};
   }
 `;
 
-// 🎯 Nuovo: Summary Card per mobile
+// 🎯 Summary Card per mobile (nascosta su tablet per risparmiare spazio)
 const SummaryCard = styled.div`
   display: none;
   
@@ -599,12 +711,12 @@ const MiaRosa = () => {
     <RosaContainer>
       <Header>
         <Title>
-          <Star size={32} />
+          <Star size={24} />
           La Mia Rosa
         </Title>
       </Header>
 
-      {/* Desktop/Tablet Stats */}
+      {/* Desktop/Tablet Stats - Ultra compatte per tablet */}
       <StatsGrid>
         <StatCard
           initial={{ opacity: 0, y: 20 }}
@@ -612,7 +724,7 @@ const MiaRosa = () => {
           transition={{ delay: 0.1 }}
         >
           <StatValue color="#4CAF50">{rosa.length}</StatValue>
-          <StatLabel>Calciatori Acquistati</StatLabel>
+          <StatLabel>Calciatori</StatLabel>
         </StatCard>
         
         <StatCard
@@ -621,7 +733,7 @@ const MiaRosa = () => {
           transition={{ delay: 0.2 }}
         >
           <StatValue color="#F44336">{user?.crediti_spesi || 0}</StatValue>
-          <StatLabel>Crediti Spesi</StatLabel>
+          <StatLabel>Spesi</StatLabel>
         </StatCard>
         
         <StatCard
@@ -630,7 +742,7 @@ const MiaRosa = () => {
           transition={{ delay: 0.3 }}
         >
           <StatValue color="#FFA726">{creditiDisponibili}</StatValue>
-          <StatLabel>Crediti Disponibili</StatLabel>
+          <StatLabel>Disponibili</StatLabel>
         </StatCard>
         
         <StatCard
@@ -639,7 +751,7 @@ const MiaRosa = () => {
           transition={{ delay: 0.4 }}
         >
           <StatValue color="#2196F3">{costoMedio}</StatValue>
-          <StatLabel>Costo Medio</StatLabel>
+          <StatLabel>Medio</StatLabel>
         </StatCard>
       </StatsGrid>
 
@@ -665,11 +777,11 @@ const MiaRosa = () => {
               <RoleHeader>
                 <RoleTitle>{roleInfo.title}</RoleTitle>
                 <RoleStats background={roleInfo.background} color={roleInfo.color}>
-                  {playersInRole.length} giocatori
+                  {playersInRole.length}
                 </RoleStats>
               </RoleHeader>
 
-              {/* Mobile Summary per ogni ruolo */}
+              {/* Mobile Summary per ogni ruolo - nascosta su tablet */}
               <SummaryCard>
                 <SummaryTitle>
                   <span>{roleInfo.title.split(' ')[0]}</span>
@@ -697,7 +809,7 @@ const MiaRosa = () => {
                     key={player.id}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.05 }} // Animazione più veloce
+                    transition={{ delay: index * 0.02 }} // Animazione più veloce
                   >
                     <PlayerHeader>
                       <PlayerInfo>
@@ -714,7 +826,7 @@ const MiaRosa = () => {
                     </PlayerHeader>
 
                     <PlayerQuote>
-                      <QuoteLabel>Quotazione attuale:</QuoteLabel>
+                      <QuoteLabel>Quotazione:</QuoteLabel>
                       <QuoteValue>{player.quotazione}</QuoteValue>
                     </PlayerQuote>
                   </PlayerCard>
