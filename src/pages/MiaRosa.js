@@ -12,11 +12,14 @@ const RosaContainer = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   
-  /* 🎯 TABLET: Padding ancora più ridotto e altezza controllata */
+  /* 🎯 TABLET: Padding zero e fit nella viewport */
   @media (min-width: 481px) and (max-width: 1023px) {
-    padding: ${props => props.theme.spacing.xs} 0;
-    max-height: calc(100vh - 60px); /* Considera header fisso */
+    padding: 0;
+    margin: 0;
+    max-width: 100%;
+    height: 100vh;
     overflow-y: auto;
+    font-size: 0.7rem; /* Font base più piccolo */
   }
   
   @media (max-width: 480px) {
@@ -28,9 +31,9 @@ const Header = styled.div`
   text-align: center;
   margin-bottom: ${props => props.theme.spacing.xl};
   
-  /* 🎯 TABLET: Header ultra compatto */
+  /* 🎯 TABLET: Header completamente nascosto per risparmiare spazio */
   @media (min-width: 481px) and (max-width: 1023px) {
-    margin-bottom: ${props => props.theme.spacing.xs};
+    display: none;
   }
   
   @media (max-width: 480px) {
@@ -65,7 +68,6 @@ const Title = styled.h1`
   }
 `;
 
-// 🎯 Stats Grid ultra compatto per tablet
 const StatsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -77,11 +79,12 @@ const StatsGrid = styled.div`
     grid-template-columns: repeat(4, 1fr);
   }
   
-  /* 🎯 TABLET: 4 colonne ultra compatte, gap mini */
+  /* 🎯 TABLET: Ancora più compatto */
   @media (min-width: 481px) and (max-width: 1023px) {
     grid-template-columns: repeat(4, 1fr);
-    gap: 4px;
-    margin-bottom: ${props => props.theme.spacing.xs};
+    gap: 2px;
+    margin-bottom: 4px;
+    padding: 2px;
   }
   
   /* Mobile: 2 colonne compatte */
@@ -99,10 +102,14 @@ const StatCard = styled(motion.div)`
   padding: ${props => props.theme.spacing.lg};
   text-align: center;
   
-  /* 🎯 TABLET: Padding ultra ridotto */
+  /* 🎯 TABLET: Mini card */
   @media (min-width: 481px) and (max-width: 1023px) {
-    padding: 6px 4px;
-    border-radius: 6px;
+    padding: 2px;
+    border-radius: 3px;
+    min-height: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
   
   @media (max-width: 480px) {
@@ -116,11 +123,12 @@ const StatValue = styled.div`
   color: ${props => props.color || props.theme.colors.text};
   margin-bottom: ${props => props.theme.spacing.xs};
   
-  /* 🎯 TABLET: Font ancora più piccolo */
+  /* 🎯 TABLET: Font micro */
   @media (min-width: 481px) and (max-width: 1023px) {
-    font-size: 1.1rem;
-    margin-bottom: 1px;
-    line-height: 1.2;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 0;
+    line-height: 1;
   }
   
   @media (max-width: 480px) {
@@ -133,10 +141,11 @@ const StatLabel = styled.div`
   font-size: 0.9rem;
   font-weight: 500;
   
-  /* 🎯 TABLET: Font ultra piccolo */
+  /* 🎯 TABLET: Font micro */
   @media (min-width: 481px) and (max-width: 1023px) {
-    font-size: 0.6rem;
-    line-height: 1.1;
+    font-size: 0.4rem;
+    line-height: 1;
+    font-weight: 400;
   }
   
   @media (max-width: 480px) {
@@ -147,9 +156,9 @@ const StatLabel = styled.div`
 const RoleSection = styled.div`
   margin-bottom: ${props => props.theme.spacing.xl};
   
-  /* 🎯 TABLET: Margini ultra ridotti */
+  /* 🎯 TABLET: Margini quasi zero */
   @media (min-width: 481px) and (max-width: 1023px) {
-    margin-bottom: ${props => props.theme.spacing.xs};
+    margin-bottom: 2px;
   }
   
   @media (max-width: 480px) {
@@ -164,10 +173,11 @@ const RoleHeader = styled.div`
   margin-bottom: ${props => props.theme.spacing.lg};
   gap: ${props => props.theme.spacing.md};
   
-  /* 🎯 TABLET: Margine ultra ridotto */
+  /* 🎯 TABLET: Margine quasi zero */
   @media (min-width: 481px) and (max-width: 1023px) {
-    margin-bottom: 4px;
-    gap: ${props => props.theme.spacing.xs};
+    margin-bottom: 1px;
+    gap: 2px;
+    padding: 1px 2px;
   }
   
   @media (max-width: 768px) {
@@ -187,10 +197,11 @@ const RoleTitle = styled.h2`
   font-size: 1.5rem;
   font-weight: 700;
   
-  /* 🎯 TABLET: Font più piccolo */
+  /* 🎯 TABLET: Font micro */
   @media (min-width: 481px) and (max-width: 1023px) {
-    font-size: 0.9rem;
-    font-weight: 600;
+    font-size: 0.6rem;
+    font-weight: 500;
+    margin: 0;
   }
   
   @media (max-width: 768px) {
@@ -211,12 +222,12 @@ const RoleStats = styled.div`
   font-weight: 600;
   white-space: nowrap;
   
-  /* 🎯 TABLET: Dimensioni ultra ridotte */
+  /* 🎯 TABLET: Mini badge */
   @media (min-width: 481px) and (max-width: 1023px) {
-    padding: 2px 6px;
-    border-radius: 8px;
-    font-size: 0.6rem;
-    font-weight: 500;
+    padding: 1px 3px;
+    border-radius: 4px;
+    font-size: 0.45rem;
+    font-weight: 400;
   }
   
   @media (max-width: 480px) {
@@ -227,7 +238,6 @@ const RoleStats = styled.div`
   }
 `;
 
-// 🎯 Players Grid ultra compatto per tablet
 const PlayersGrid = styled.div`
   display: grid;
   gap: ${props => props.theme.spacing.lg};
@@ -237,10 +247,10 @@ const PlayersGrid = styled.div`
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   }
   
-  /* 🎯 TABLET: 4 colonne ultra compatte per massimizzare spazio */
+  /* 🎯 TABLET: 6 colonne micro per massimizzare spazio */
   @media (min-width: 481px) and (max-width: 1023px) {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 3px;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1px;
   }
   
   /* Mobile: 1 colonna */
@@ -262,14 +272,16 @@ const PlayerCard = styled(motion.div)`
     box-shadow: ${props => props.theme.shadows.large};
   }
   
-  /* 🎯 TABLET: Padding ultra ridotto, card molto compatta */
+  /* 🎯 TABLET: Card micro */
   @media (min-width: 481px) and (max-width: 1023px) {
-    padding: 4px;
-    border-radius: 4px;
+    padding: 1px;
+    border-radius: 2px;
+    min-height: 40px;
+    font-size: 0.4rem;
     
     &:hover {
-      transform: translateY(-1px);
-      box-shadow: ${props => props.theme.shadows.small};
+      transform: none;
+      box-shadow: none;
     }
   }
   
@@ -294,10 +306,13 @@ const PlayerHeader = styled.div`
   margin-bottom: ${props => props.theme.spacing.md};
   gap: ${props => props.theme.spacing.sm};
   
-  /* 🎯 TABLET: Margine ultra ridotto */
+  /* 🎯 TABLET: Layout ultra compatto */
   @media (min-width: 481px) and (max-width: 1023px) {
-    margin-bottom: 2px;
-    gap: 2px;
+    flex-direction: column;
+    margin-bottom: 0;
+    gap: 0;
+    align-items: center;
+    text-align: center;
   }
   
   @media (max-width: 480px) {
@@ -320,12 +335,14 @@ const PlayerName = styled.h3`
   text-overflow: ellipsis;
   white-space: nowrap;
   
-  /* 🎯 TABLET: Font ultra piccolo */
+  /* 🎯 TABLET: Font micro */
   @media (min-width: 481px) and (max-width: 1023px) {
-    font-size: 0.7rem;
-    font-weight: 500;
-    margin-bottom: 1px;
-    line-height: 1.1;
+    font-size: 0.35rem;
+    font-weight: 400;
+    margin-bottom: 0;
+    line-height: 1;
+    white-space: normal;
+    word-break: break-word;
   }
   
   @media (max-width: 768px) {
@@ -346,10 +363,12 @@ const PlayerTeam = styled.p`
   text-overflow: ellipsis;
   white-space: nowrap;
   
-  /* 🎯 TABLET: Font ultra piccolo */
+  /* 🎯 TABLET: Font micro */
   @media (min-width: 481px) and (max-width: 1023px) {
-    font-size: 0.6rem;
-    line-height: 1.1;
+    font-size: 0.3rem;
+    line-height: 1;
+    white-space: normal;
+    word-break: break-word;
   }
   
   @media (max-width: 480px) {
@@ -376,13 +395,13 @@ const PurchasePrice = styled.div`
   margin-bottom: ${props => props.theme.spacing.xs};
   white-space: nowrap;
   
-  /* 🎯 TABLET: Ultra compatto */
+  /* 🎯 TABLET: Mini badge */
   @media (min-width: 481px) and (max-width: 1023px) {
-    padding: 1px 4px;
-    border-radius: 8px;
-    font-size: 0.6rem;
-    font-weight: 500;
-    margin-bottom: 1px;
+    padding: 0 2px;
+    border-radius: 2px;
+    font-size: 0.3rem;
+    font-weight: 400;
+    margin-bottom: 0;
   }
   
   @media (max-width: 480px) {
@@ -400,14 +419,9 @@ const PurchaseDate = styled.div`
   justify-content: flex-end;
   gap: ${props => props.theme.spacing.xs};
   
-  /* 🎯 TABLET: Font ultra piccolo, nascondi icona */
+  /* 🎯 TABLET: Nascosto per risparmiare spazio */
   @media (min-width: 481px) and (max-width: 1023px) {
-    font-size: 0.5rem;
-    gap: 1px;
-    
-    svg {
-      display: none; /* Nascondi icona per risparmiare spazio */
-    }
+    display: none;
   }
   
   @media (max-width: 480px) {
@@ -415,6 +429,8 @@ const PurchaseDate = styled.div`
     justify-content: center;
   }
 `;
+
+
 
 const PlayerQuote = styled.div`
   display: flex;
@@ -424,10 +440,9 @@ const PlayerQuote = styled.div`
   padding-top: ${props => props.theme.spacing.md};
   border-top: 1px solid ${props => props.theme.colors.border};
   
-  /* 🎯 TABLET: Margini e padding ultra ridotti */
+  /* 🎯 TABLET: Nascosto per risparmiare spazio */
   @media (min-width: 481px) and (max-width: 1023px) {
-    margin-top: 2px;
-    padding-top: 2px;
+    display: none;
   }
   
   @media (max-width: 480px) {
@@ -465,7 +480,6 @@ const QuoteValue = styled.span`
   }
 `;
 
-// 🎯 Empty State compatto
 const EmptyState = styled.div`
   text-align: center;
   padding: ${props => props.theme.spacing.xl};
@@ -473,10 +487,11 @@ const EmptyState = styled.div`
   border-radius: ${props => props.theme.borderRadius};
   margin-bottom: ${props => props.theme.spacing.lg};
   
-  /* 🎯 TABLET: Padding molto ridotto */
+  /* 🎯 TABLET: Ultra compatto */
   @media (min-width: 481px) and (max-width: 1023px) {
-    padding: ${props => props.theme.spacing.sm};
-    margin-bottom: ${props => props.theme.spacing.xs};
+    padding: 4px;
+    margin-bottom: 2px;
+    border-radius: 2px;
   }
   
   @media (max-width: 768px) {
@@ -499,11 +514,11 @@ const EmptyIcon = styled.div`
   justify-content: center;
   margin: 0 auto ${props => props.theme.spacing.lg};
   
-  /* 🎯 TABLET: Icona più piccola */
+  /* 🎯 TABLET: Icona micro */
   @media (min-width: 481px) and (max-width: 1023px) {
-    width: 40px;
-    height: 40px;
-    margin-bottom: ${props => props.theme.spacing.xs};
+    width: 20px;
+    height: 20px;
+    margin-bottom: 2px;
   }
   
   @media (max-width: 768px) {
@@ -525,10 +540,11 @@ const EmptyTitle = styled.h3`
   font-weight: 600;
   margin-bottom: ${props => props.theme.spacing.sm};
   
-  /* 🎯 TABLET: Font più piccolo */
+  /* 🎯 TABLET: Font micro */
   @media (min-width: 481px) and (max-width: 1023px) {
-    font-size: 0.9rem;
-    margin-bottom: ${props => props.theme.spacing.xs};
+    font-size: 0.5rem;
+    margin-bottom: 1px;
+    font-weight: 400;
   }
   
   @media (max-width: 480px) {
@@ -543,10 +559,11 @@ const EmptyText = styled.p`
   max-width: 400px;
   margin: 0 auto;
   
-  /* 🎯 TABLET: Font più piccolo */
+  /* 🎯 TABLET: Font micro */
   @media (min-width: 481px) and (max-width: 1023px) {
-    font-size: 0.7rem;
-    line-height: 1.3;
+    font-size: 0.4rem;
+    line-height: 1.2;
+    max-width: 200px;
   }
   
   @media (max-width: 480px) {
