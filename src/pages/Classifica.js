@@ -26,6 +26,19 @@ const Container = styled.div`
   background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #0f172a 100%);
   padding: 1rem;
   
+  /* Mobile */
+  @media (max-width: 480px) {
+    padding: 0.5rem;
+    min-height: 100vh;
+  }
+  
+  /* 🎯 TABLET: Container ottimizzato 481px-1200px */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    padding: 8px !important;
+    height: 100vh !important;
+    overflow-y: auto !important;
+  }
+  
   @media (min-width: 768px) {
     padding: 1.5rem;
   }
@@ -94,6 +107,21 @@ const Title = styled(motion.h1)`
   justify-content: center;
   gap: 0.75rem;
   flex-wrap: wrap;
+  
+  /* Mobile */
+  @media (max-width: 480px) {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    gap: 0.5rem;
+  }
+  
+  /* 🎯 TABLET: Titolo compatto */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    font-size: 1.8rem !important;
+    font-weight: 700 !important;
+    margin-bottom: 0.5rem !important;
+    gap: 0.5rem !important;
+  }
   
   @media (min-width: 768px) {
     font-size: 3rem;
