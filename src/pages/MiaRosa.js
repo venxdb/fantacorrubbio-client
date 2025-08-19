@@ -12,8 +12,11 @@ const RosaContainer = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   
-  @media (max-width: 768px) {
-    padding: ${props => props.theme.spacing.md} 0;
+  /* 🎯 TABLET: Padding molto ridotto per evitare scroll */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    padding: ${props => props.theme.spacing.sm} 0;
+    max-height: 100vh;
+    overflow-y: auto;
   }
   
   @media (max-width: 480px) {
@@ -25,8 +28,9 @@ const Header = styled.div`
   text-align: center;
   margin-bottom: ${props => props.theme.spacing.xl};
   
-  @media (max-width: 768px) {
-    margin-bottom: ${props => props.theme.spacing.lg};
+  /* 🎯 TABLET: Header molto compatto */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    margin-bottom: ${props => props.theme.spacing.sm};
   }
   
   @media (max-width: 480px) {
@@ -47,9 +51,11 @@ const Title = styled.h1`
   justify-content: center;
   gap: ${props => props.theme.spacing.md};
   
-  @media (max-width: 768px) {
-    font-size: 2rem;
+  /* 🎯 TABLET: Titolo più compatto */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    font-size: 1.8rem;
     gap: ${props => props.theme.spacing.sm};
+    margin-bottom: ${props => props.theme.spacing.xs};
   }
   
   @media (max-width: 480px) {
@@ -71,11 +77,11 @@ const StatsGrid = styled.div`
     grid-template-columns: repeat(4, 1fr);
   }
   
-  /* Tablet: 2 colonne eleganti */
+  /* 🎯 TABLET: 4 colonne compatte, altezza ridotta */
   @media (min-width: 481px) and (max-width: 1023px) {
-    grid-template-columns: repeat(2, 1fr);
-    gap: ${props => props.theme.spacing.md};
-    margin-bottom: ${props => props.theme.spacing.lg};
+    grid-template-columns: repeat(4, 1fr);
+    gap: ${props => props.theme.spacing.xs};
+    margin-bottom: ${props => props.theme.spacing.sm};
   }
   
   /* Mobile: 2 colonne compatte */
@@ -93,8 +99,9 @@ const StatCard = styled(motion.div)`
   padding: ${props => props.theme.spacing.lg};
   text-align: center;
   
-  @media (max-width: 768px) {
-    padding: ${props => props.theme.spacing.md};
+  /* 🎯 TABLET: Padding molto ridotto */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    padding: ${props => props.theme.spacing.xs};
   }
   
   @media (max-width: 480px) {
@@ -108,8 +115,10 @@ const StatValue = styled.div`
   color: ${props => props.color || props.theme.colors.text};
   margin-bottom: ${props => props.theme.spacing.xs};
   
-  @media (max-width: 768px) {
-    font-size: 1.8rem;
+  /* 🎯 TABLET: Font più piccolo */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    font-size: 1.4rem;
+    margin-bottom: 2px;
   }
   
   @media (max-width: 480px) {
@@ -122,6 +131,11 @@ const StatLabel = styled.div`
   font-size: 0.9rem;
   font-weight: 500;
   
+  /* 🎯 TABLET: Font molto piccolo */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    font-size: 0.7rem;
+  }
+  
   @media (max-width: 480px) {
     font-size: 0.8rem;
   }
@@ -130,8 +144,9 @@ const StatLabel = styled.div`
 const RoleSection = styled.div`
   margin-bottom: ${props => props.theme.spacing.xl};
   
-  @media (max-width: 768px) {
-    margin-bottom: ${props => props.theme.spacing.lg};
+  /* 🎯 TABLET: Margini molto ridotti */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    margin-bottom: ${props => props.theme.spacing.sm};
   }
   
   @media (max-width: 480px) {
@@ -199,10 +214,10 @@ const PlayersGrid = styled.div`
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   }
   
-  /* Tablet: 2 colonne */
+  /* 🎯 TABLET: 3 colonne compatte per sfruttare tutto lo spazio */
   @media (min-width: 481px) and (max-width: 1023px) {
-    grid-template-columns: repeat(2, 1fr);
-    gap: ${props => props.theme.spacing.md};
+    grid-template-columns: repeat(3, 1fr);
+    gap: ${props => props.theme.spacing.xs};
   }
   
   /* Mobile: 1 colonna */
@@ -224,8 +239,9 @@ const PlayerCard = styled(motion.div)`
     box-shadow: ${props => props.theme.shadows.large};
   }
   
-  @media (max-width: 768px) {
-    padding: ${props => props.theme.spacing.md};
+  /* 🎯 TABLET: Padding molto ridotto, altezza compatta */
+  @media (min-width: 481px) and (max-width: 1023px) {
+    padding: ${props => props.theme.spacing.xs};
     
     &:hover {
       transform: translateY(-1px);
