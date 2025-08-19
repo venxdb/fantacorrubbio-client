@@ -17,8 +17,8 @@ const RosaContainer = styled.div`
     padding: ${props => props.theme.spacing.sm} 0;
   }
   
-  /* 🎯 TABLET: Deve venire DOPO mobile e PRIMA desktop */
-  @media (min-width: 481px) and (max-width: 1023px) {
+  /* 🎯 TABLET: Range allargato 481px-1200px */
+  @media (min-width: 481px) and (max-width: 1200px) {
     padding: 0 !important;
     margin: 0 !important;
     max-width: 100% !important;
@@ -38,7 +38,7 @@ const Header = styled.div`
   }
   
   /* 🎯 TABLET: Header completamente nascosto */
-  @media (min-width: 481px) and (max-width: 1023px) {
+  @media (min-width: 481px) and (max-width: 1200px) {
     display: none !important;
   }
 `;
@@ -63,8 +63,8 @@ const Title = styled.h1`
     flex-direction: column;
   }
   
-  /* 🎯 TABLET: Titolo molto più piccolo (se visibile) */
-  @media (min-width: 481px) and (max-width: 1023px) {
+  /* 🎯 TABLET: Titolo molto più piccolo */
+  @media (min-width: 481px) and (max-width: 1200px) {
     font-size: 1.4rem !important;
     gap: ${props => props.theme.spacing.xs} !important;
     margin-bottom: 0 !important;
@@ -85,15 +85,15 @@ const StatsGrid = styled.div`
   }
   
   /* 🎯 TABLET: 4 colonne ultra compatte */
-  @media (min-width: 481px) and (max-width: 1023px) {
+  @media (min-width: 481px) and (max-width: 1200px) {
     grid-template-columns: repeat(4, 1fr) !important;
     gap: 2px !important;
     margin-bottom: 4px !important;
     padding: 2px !important;
   }
   
-  /* Desktop: 4 colonne - DEVE venire per ultimo */
-  @media (min-width: 1024px) {
+  /* Desktop: 4 colonne - per schermi molto grandi */
+  @media (min-width: 1201px) {
     grid-template-columns: repeat(4, 1fr);
   }
 `;
@@ -111,7 +111,7 @@ const StatCard = styled(motion.div)`
   }
   
   /* 🎯 TABLET: Mini card */
-  @media (min-width: 481px) and (max-width: 1023px) {
+  @media (min-width: 481px) and (max-width: 1200px) {
     padding: 2px !important;
     border-radius: 3px !important;
     min-height: 30px !important;
@@ -133,7 +133,7 @@ const StatValue = styled.div`
   }
   
   /* 🎯 TABLET: Font micro */
-  @media (min-width: 481px) and (max-width: 1023px) {
+  @media (min-width: 481px) and (max-width: 1200px) {
     font-size: 0.8rem !important;
     font-weight: 600 !important;
     margin-bottom: 0 !important;
@@ -152,7 +152,7 @@ const StatLabel = styled.div`
   }
   
   /* 🎯 TABLET: Font micro */
-  @media (min-width: 481px) and (max-width: 1023px) {
+  @media (min-width: 481px) and (max-width: 1200px) {
     font-size: 0.4rem !important;
     line-height: 1 !important;
     font-weight: 400 !important;
@@ -168,7 +168,7 @@ const RoleSection = styled.div`
   }
   
   /* 🎯 TABLET: Margini quasi zero */
-  @media (min-width: 481px) and (max-width: 1023px) {
+  @media (min-width: 481px) and (max-width: 1200px) {
     margin-bottom: 2px !important;
   }
 `;
@@ -189,7 +189,7 @@ const RoleHeader = styled.div`
   }
   
   /* 🎯 TABLET: Margine quasi zero */
-  @media (min-width: 481px) and (max-width: 1023px) {
+  @media (min-width: 481px) and (max-width: 1200px) {
     margin-bottom: 1px !important;
     gap: 2px !important;
     padding: 1px 2px !important;
@@ -212,7 +212,7 @@ const RoleTitle = styled.h2`
   }
   
   /* 🎯 TABLET: Font micro */
-  @media (min-width: 481px) and (max-width: 1023px) {
+  @media (min-width: 481px) and (max-width: 1200px) {
     font-size: 0.6rem !important;
     font-weight: 500 !important;
     margin: 0 !important;
@@ -242,7 +242,7 @@ const RoleStats = styled.div`
   }
   
   /* 🎯 TABLET: Mini badge */
-  @media (min-width: 481px) and (max-width: 1023px) {
+  @media (min-width: 481px) and (max-width: 1200px) {
     padding: 1px 3px !important;
     border-radius: 4px !important;
     font-size: 0.45rem !important;
@@ -261,13 +261,13 @@ const PlayersGrid = styled.div`
   }
   
   /* 🎯 TABLET: 6 colonne micro per massimizzare spazio */
-  @media (min-width: 481px) and (max-width: 1023px) {
+  @media (min-width: 481px) and (max-width: 1200px) {
     grid-template-columns: repeat(6, 1fr) !important;
     gap: 1px !important;
   }
   
-  /* Desktop: 3 colonne - DEVE venire per ultimo */
-  @media (min-width: 1024px) {
+  /* Desktop: 3 colonne - per schermi molto grandi */
+  @media (min-width: 1201px) {
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   }
 `;
@@ -299,7 +299,7 @@ const PlayerCard = styled(motion.div)`
   }
   
   /* 🎯 TABLET: Card micro */
-  @media (min-width: 481px) and (max-width: 1023px) {
+  @media (min-width: 481px) and (max-width: 1200px) {
     padding: 1px !important;
     border-radius: 2px !important;
     min-height: 40px !important;
@@ -326,7 +326,7 @@ const PlayerHeader = styled.div`
   }
   
   /* 🎯 TABLET: Layout ultra compatto */
-  @media (min-width: 481px) and (max-width: 1023px) {
+  @media (min-width: 481px) and (max-width: 1200px) {
     flex-direction: column !important;
     margin-bottom: 0 !important;
     gap: 0 !important;
@@ -356,7 +356,7 @@ const PlayerName = styled.h3`
   }
   
   /* 🎯 TABLET: Font micro */
-  @media (min-width: 481px) and (max-width: 1023px) {
+  @media (min-width: 481px) and (max-width: 1200px) {
     font-size: 0.35rem !important;
     font-weight: 400 !important;
     margin-bottom: 0 !important;
@@ -385,7 +385,7 @@ const PlayerTeam = styled.p`
   }
   
   /* 🎯 TABLET: Font micro */
-  @media (min-width: 481px) and (max-width: 1023px) {
+  @media (min-width: 481px) and (max-width: 1200px) {
     font-size: 0.3rem !important;
     line-height: 1 !important;
     white-space: normal !important;
@@ -420,7 +420,7 @@ const PurchasePrice = styled.div`
   }
   
   /* 🎯 TABLET: Mini badge */
-  @media (min-width: 481px) and (max-width: 1023px) {
+  @media (min-width: 481px) and (max-width: 1200px) {
     padding: 0 2px !important;
     border-radius: 2px !important;
     font-size: 0.3rem !important;
@@ -444,7 +444,7 @@ const PurchaseDate = styled.div`
   }
   
   /* 🎯 TABLET: Nascosto per risparmiare spazio */
-  @media (min-width: 481px) and (max-width: 1023px) {
+  @media (min-width: 481px) and (max-width: 1200px) {
     display: none !important;
   }
 `;
@@ -464,7 +464,7 @@ const PlayerQuote = styled.div`
   }
   
   /* 🎯 TABLET: Nascosto per risparmiare spazio */
-  @media (min-width: 481px) and (max-width: 1023px) {
+  @media (min-width: 481px) and (max-width: 1200px) {
     display: none !important;
   }
 `;
@@ -479,7 +479,7 @@ const QuoteLabel = styled.span`
   }
   
   /* 🎯 TABLET: Font ultra piccolo */
-  @media (min-width: 481px) and (max-width: 1023px) {
+  @media (min-width: 481px) and (max-width: 1200px) {
     font-size: 0.5rem !important;
   }
 `;
@@ -494,7 +494,7 @@ const QuoteValue = styled.span`
   }
   
   /* 🎯 TABLET: Font più piccolo */
-  @media (min-width: 481px) and (max-width: 1023px) {
+  @media (min-width: 481px) and (max-width: 1200px) {
     font-size: 0.6rem !important;
     font-weight: 500 !important;
   }
@@ -514,7 +514,7 @@ const EmptyState = styled.div`
   }
   
   /* 🎯 TABLET: Ultra compatto */
-  @media (min-width: 481px) and (max-width: 1023px) {
+  @media (min-width: 481px) and (max-width: 1200px) {
     padding: 4px !important;
     margin-bottom: 2px !important;
     border-radius: 2px !important;
@@ -544,7 +544,7 @@ const EmptyIcon = styled.div`
   }
   
   /* 🎯 TABLET: Icona micro */
-  @media (min-width: 481px) and (max-width: 1023px) {
+  @media (min-width: 481px) and (max-width: 1200px) {
     width: 20px !important;
     height: 20px !important;
     margin-bottom: 2px !important;
@@ -570,7 +570,7 @@ const EmptyTitle = styled.h3`
   }
   
   /* 🎯 TABLET: Font micro */
-  @media (min-width: 481px) and (max-width: 1023px) {
+  @media (min-width: 481px) and (max-width: 1200px) {
     font-size: 0.5rem !important;
     margin-bottom: 1px !important;
     font-weight: 400 !important;
@@ -590,7 +590,7 @@ const EmptyText = styled.p`
   }
   
   /* 🎯 TABLET: Font micro */
-  @media (min-width: 481px) and (max-width: 1023px) {
+  @media (min-width: 481px) and (max-width: 1200px) {
     font-size: 0.4rem !important;
     line-height: 1.2 !important;
     max-width: 200px !important;
@@ -612,7 +612,7 @@ const LoadingContainer = styled.div`
   }
   
   /* 🎯 TABLET: Padding ridotto */
-  @media (min-width: 481px) and (max-width: 1023px) {
+  @media (min-width: 481px) and (max-width: 1200px) {
     padding: ${props => props.theme.spacing.md} !important;
     gap: ${props => props.theme.spacing.sm} !important;
   }
