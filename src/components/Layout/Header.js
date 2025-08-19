@@ -285,16 +285,21 @@ const UserDropdown = styled(motion.div)`
   
 
   @media (max-width: 480px) {
-    right: -${props => props.theme.spacing.sm};
-    min-width: 160px;
+
+    right: 0;
+    left: auto;
+    min-width: 200px;
+    max-width: 90vw; /* Massimo 90% della larghezza viewport */
     margin-top: ${props => props.theme.spacing.xs};
+    
+ 
+    transform: translateX(0);
+    box-sizing: border-box;
   }
   
- 
-  @media (max-width: 400px) {
-    right: -${props => props.theme.spacing.md};
-    left: ${props => props.theme.spacing.md};
-    min-width: auto;
+  @media (max-width: 360px) {
+    min-width: 180px;
+    right: -${props => props.theme.spacing.xs}; /* Piccolo offset per centrare meglio */
   }
 `;
 
