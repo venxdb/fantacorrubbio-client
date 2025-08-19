@@ -13,6 +13,15 @@ const AstaContainer = styled.div`
   max-width: 1000px;
   margin: 0 auto;
   
+  /* 🎯 TABLET: Container ottimizzato 481px-1200px */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    padding: 8px !important;
+    max-width: 100% !important;
+    height: 100vh !important;
+    overflow-y: auto !important;
+    font-size: 0.85rem !important;
+  }
+  
   @media (max-width: 768px) {
     padding: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.xs};
   }
@@ -50,6 +59,14 @@ const Title = styled.h1`
     flex-direction: column;
     gap: ${props => props.theme.spacing.xs};
   }
+
+/* 🎯 TABLET: Titolo compatto */
+@media (min-width: 481px) and (max-width: 1200px) {
+  font-size: 1.4rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 6px !important;
+  gap: 6px !important;
+}
 `;
 
 const StatusBadge = styled.div`
@@ -69,6 +86,16 @@ const StatusBadge = styled.div`
     padding: ${props => props.theme.spacing.xs} ${props => props.theme.spacing.md};
     gap: ${props => props.theme.spacing.xs};
   }
+  
+  /* Aggiungi dopo la media query 768px esistente: */
+/* 🎯 TABLET: Badge compatto */
+@media (min-width: 481px) and (max-width: 1200px) {
+  font-size: 0.75rem !important;
+  padding: 4px 12px !important;
+  gap: 4px !important;
+  margin-bottom: 8px !important;S
+  border-radius: 16px !important;
+}
 `;
 
 const LiveDot = styled.div`
@@ -87,6 +114,12 @@ const LiveDot = styled.div`
     width: 6px;
     height: 6px;
   }
+    /* Aggiungi dopo la media query 768px esistente: */
+/* 🎯 TABLET: Dot più piccolo */
+@media (min-width: 481px) and (max-width: 1200px) {
+  width: 6px !important;
+  height: 6px !important;
+}
 `;
 
 const AuctionCard = styled.div`
@@ -129,6 +162,14 @@ const PlayerName = styled.h2`
     font-size: 1.1rem;
     line-height: 1.3;
   }
+    /* Aggiungi dopo la media query 480px esistente: */
+/* 🎯 TABLET: Nome player compatto */
+@media (min-width: 481px) and (max-width: 1200px) {
+  font-size: 1.2rem !important;
+  font-weight: 600 !important;
+  margin-bottom: 6px !important;
+  line-height: 1.3 !important;
+}
 `;
 
 const PlayerDetails = styled.div`
@@ -206,6 +247,13 @@ const TimeDisplay = styled.div`
   @media (max-width: 480px) {
     font-size: 1.8rem;
   }
+    /* Aggiungi dopo la media query 480px esistente: */
+/* 🎯 TABLET: Display tempo compatto */
+@media (min-width: 481px) and (max-width: 1200px) {
+  font-size: 1.8rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 4px !important;
+}
 `;
 
 const TimerLabel = styled.div`
@@ -407,6 +455,15 @@ const BidInput = styled.input`
   @media (max-width: 480px) {
     font-size: 0.85rem;
   }
+
+  /* Aggiungi dopo la media query 480px esistente: */
+/* 🎯 TABLET: Input compatto */
+@media (min-width: 481px) and (max-width: 1200px) {
+  padding: 8px 40px 8px 8px !important;
+  font-size: 0.8rem !important;
+  border-radius: 6px !important;
+  font-weight: 500 !important;
+}
 `;
 
 const ToggleVisibilityButton = styled(motion.button)`
@@ -464,6 +521,15 @@ const BidButton = styled(motion.button)`
     width: 100%;
     min-width: auto;
   }
+    /* Aggiungi dopo la media query 480px esistente: */
+/* 🎯 TABLET: Button bid compatto */
+@media (min-width: 481px) and (max-width: 1200px) {
+  padding: 8px 16px !important;
+  font-size: 0.8rem !important;
+  min-width: 80px !important;
+  gap: 4px !important;
+  border-radius: 6px !important;
+}
 `;
 
 const BidsList = styled.div`
