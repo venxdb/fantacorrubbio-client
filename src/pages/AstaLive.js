@@ -31,6 +31,11 @@ const Header = styled.div`
   text-align: center;
   margin-bottom: ${props => props.theme.spacing.lg};
   
+  /* 🎯 TABLET: Header compatto */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    margin-bottom: 12px !important;
+  }
+  
   @media (max-width: 768px) {
     margin-bottom: ${props => props.theme.spacing.md};
   }
@@ -129,6 +134,13 @@ const AuctionCard = styled.div`
   padding: ${props => props.theme.spacing.lg};
   margin-bottom: ${props => props.theme.spacing.lg};
   
+  /* 🎯 TABLET: Card compatta */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    padding: 12px !important;
+    margin-bottom: 12px !important;
+    border-radius: 8px !important;
+  }
+  
   @media (max-width: 768px) {
     padding: ${props => props.theme.spacing.md};
     margin-bottom: ${props => props.theme.spacing.md};
@@ -142,6 +154,11 @@ const AuctionCard = styled.div`
 const PlayerSection = styled.div`
   text-align: center;
   margin-bottom: ${props => props.theme.spacing.lg};
+  
+  /* 🎯 TABLET: Sezione player compatta */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    margin-bottom: 12px !important;
+  }
   
   @media (max-width: 768px) {
     margin-bottom: ${props => props.theme.spacing.md};
@@ -229,6 +246,11 @@ const TimerSection = styled.div`
   text-align: center;
   margin-bottom: ${props => props.theme.spacing.lg};
   
+  /* 🎯 TABLET: Timer compatto */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    margin-bottom: 12px !important;
+  }
+  
   @media (max-width: 768px) {
     margin-bottom: ${props => props.theme.spacing.md};
   }
@@ -267,6 +289,11 @@ const TimerLabel = styled.div`
 
 const BidSection = styled.div`
   margin-bottom: ${props => props.theme.spacing.lg};
+  
+  /* 🎯 TABLET: Sezione bid compatta */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    margin-bottom: 12px !important;
+  }
   
   @media (max-width: 768px) {
     margin-bottom: ${props => props.theme.spacing.md};
@@ -614,6 +641,12 @@ const NoAuctionState = styled.div`
   background: ${props => props.theme.colors.surface};
   border-radius: ${props => props.theme.borderRadius};
   
+  /* 🎯 TABLET: No auction compatto */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    padding: 16px !important;
+    border-radius: 8px !important;
+  }
+  
   @media (max-width: 768px) {
     padding: ${props => props.theme.spacing.md};
   }
@@ -629,6 +662,13 @@ const NoAuctionIcon = styled.div`
   justify-content: center;
   margin: 0 auto ${props => props.theme.spacing.md};
   
+  /* 🎯 TABLET: Icona compatta */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    width: 40px !important;
+    height: 40px !important;
+    margin-bottom: 8px !important;
+  }
+  
   @media (max-width: 768px) {
     width: 50px;
     height: 50px;
@@ -641,6 +681,13 @@ const NoAuctionTitle = styled.h3`
   font-weight: 600;
   margin-bottom: ${props => props.theme.spacing.sm};
   
+  /* 🎯 TABLET: Titolo compatto */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    font-size: 1.1rem !important;
+    font-weight: 600 !important;
+    margin-bottom: 6px !important;
+  }
+  
   @media (max-width: 768px) {
     font-size: 1.3rem;
   }
@@ -650,6 +697,12 @@ const NoAuctionText = styled.p`
   color: ${props => props.theme.colors.textSecondary};
   font-size: 1rem;
   line-height: 1.6;
+  
+  /* 🎯 TABLET: Testo compatto */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    font-size: 0.8rem !important;
+    line-height: 1.4 !important;
+  }
   
   @media (max-width: 768px) {
     font-size: 0.9rem;
