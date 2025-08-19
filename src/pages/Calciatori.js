@@ -41,11 +41,13 @@ const Header = styled.div`
     margin-bottom: ${props => props.theme.spacing.md};
   }
   
-  /* 🎯 TABLET: Header compatto */
+  /* 🎯 TABLET: Header layout desktop-like */
   @media (min-width: 481px) and (max-width: 1200px) {
     margin-bottom: 8px !important;
     gap: 8px !important;
     padding: 4px !important;
+    flex-direction: row !important;
+    align-items: center !important;
   }
   
   @media (max-width: 768px) {
@@ -70,11 +72,14 @@ const Title = styled.h1`
     gap: ${props => props.theme.spacing.xs};
   }
   
-  /* 🎯 TABLET: Titolo più piccolo */
+  /* 🎯 TABLET: Titolo allineato a sinistra */
   @media (min-width: 481px) and (max-width: 1200px) {
     font-size: 1.2rem !important;
     font-weight: 600 !important;
     gap: 4px !important;
+    text-align: left !important;
+    width: auto !important;
+    justify-content: flex-start !important;
   }
   
   @media (max-width: 768px) {
@@ -98,11 +103,12 @@ const SearchContainer = styled.div`
     gap: ${props => props.theme.spacing.sm};
   }
   
-  /* 🎯 TABLET: Search compatto */
+  /* 🎯 TABLET: Search mantiene layout orizzontale */
   @media (min-width: 481px) and (max-width: 1200px) {
     gap: 6px !important;
     max-width: 400px !important;
     min-width: 200px !important;
+    flex-direction: row !important;
   }
   
   @media (max-width: 768px) {
@@ -336,19 +342,24 @@ const PlayerHeader = styled.div`
     align-items: center;
   }
   
-  /* 🎯 TABLET: Header compatto */
+  /* 🎯 TABLET: Header layout orizzontale come desktop */
   @media (min-width: 481px) and (max-width: 1200px) {
     margin-bottom: 4px !important;
-    flex-direction: column !important;
+    flex-direction: row !important;
     align-items: center !important;
     gap: 2px !important;
-    text-align: center !important;
+    text-align: left !important;
   }
 `;
 
 const PlayerInfo = styled.div`
   flex: 1;
   min-width: 0;
+  
+  /* 🎯 TABLET: Info allineate a sinistra */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    text-align: left !important;
+  }
 `;
 
 const PlayerName = styled.h3`
@@ -366,14 +377,15 @@ const PlayerName = styled.h3`
     margin-bottom: 2px;
   }
   
-  /* 🎯 TABLET: Nome leggibile */
+  /* 🎯 TABLET: Nome allineato a sinistra */
   @media (min-width: 481px) and (max-width: 1200px) {
     font-size: 0.75rem !important;
     font-weight: 600 !important;
     margin-bottom: 1px !important;
     line-height: 1.2 !important;
-    white-space: normal !important;
-    word-break: break-word !important;
+    white-space: nowrap !important;
+    text-overflow: ellipsis !important;
+    text-align: left !important;
   }
   
   @media (max-width: 768px) {
@@ -394,12 +406,13 @@ const PlayerTeam = styled.p`
     font-size: 0.85rem;
   }
   
-  /* 🎯 TABLET: Squadra leggibile */
+  /* 🎯 TABLET: Squadra allineata a sinistra */
   @media (min-width: 481px) and (max-width: 1200px) {
     font-size: 0.6rem !important;
     line-height: 1.2 !important;
-    white-space: normal !important;
-    word-break: break-word !important;
+    white-space: nowrap !important;
+    text-overflow: ellipsis !important;
+    text-align: left !important;
   }
 `;
 
@@ -421,14 +434,15 @@ const PlayerQuote = styled.div`
     border-radius: 16px;
   }
   
-  /* 🎯 TABLET: Quotazione compatta */
+  /* 🎯 TABLET: Quotazione in alto a destra */
   @media (min-width: 481px) and (max-width: 1200px) {
     padding: 2px 6px !important;
     border-radius: 8px !important;
     font-size: 0.65rem !important;
     font-weight: 600 !important;
-    margin-left: 0 !important;
-    margin-top: 2px !important;
+    margin-left: auto !important;
+    margin-top: 0 !important;
+    flex-shrink: 0 !important;
   }
 `;
 
@@ -468,13 +482,14 @@ const PlayerRole = styled.div`
     margin-bottom: ${props => props.theme.spacing.sm};
   }
   
-  /* 🎯 TABLET: Ruolo compatto */
+  /* 🎯 TABLET: Ruolo allineato a sinistra */
   @media (min-width: 481px) and (max-width: 1200px) {
     font-size: 0.6rem !important;
     padding: 2px 4px !important;
     border-radius: 6px !important;
     margin-bottom: 4px !important;
     font-weight: 500 !important;
+    align-self: flex-start !important;
   }
 `;
 
@@ -492,11 +507,11 @@ const PlayerStatus = styled.div`
     gap: ${props => props.theme.spacing.xs};
   }
   
-  /* 🎯 TABLET: Status compatto */
+  /* 🎯 TABLET: Status allineato a sinistra */
   @media (min-width: 481px) and (max-width: 1200px) {
     font-size: 0.6rem !important;
     gap: 3px !important;
-    justify-content: center !important;
+    justify-content: flex-start !important;
   }
 `;
 
@@ -530,12 +545,13 @@ const StatusText = styled.span`
     font-size: 0.8rem;
   }
   
-  /* 🎯 TABLET: Testo limitato */
+  /* 🎯 TABLET: Testo status allineato a sinistra */
   @media (min-width: 481px) and (max-width: 1200px) {
     font-size: 0.6rem !important;
-    white-space: normal !important;
-    text-align: center !important;
-    word-break: break-word !important;
+    white-space: nowrap !important;
+    text-align: left !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
   }
 `;
 
