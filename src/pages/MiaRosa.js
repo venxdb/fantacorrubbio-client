@@ -17,14 +17,14 @@ const RosaContainer = styled.div`
     padding: ${props => props.theme.spacing.sm} 0;
   }
   
-  /* 🎯 TABLET: Range allargato 481px-1200px */
+  /* 🎯 TABLET: Range allargato 481px-1200px - ELEGANTE */
   @media (min-width: 481px) and (max-width: 1200px) {
-    padding: 0 !important;
+    padding: 8px !important;
     margin: 0 !important;
     max-width: 100% !important;
     height: 100vh !important;
     overflow-y: auto !important;
-    font-size: 0.7rem !important;
+    font-size: 0.85rem !important;
   }
 `;
 
@@ -84,12 +84,12 @@ const StatsGrid = styled.div`
     margin-bottom: ${props => props.theme.spacing.md};
   }
   
-  /* 🎯 TABLET: 4 colonne ultra compatte */
+  /* 🎯 TABLET: 4 colonne compatte ma leggibili */
   @media (min-width: 481px) and (max-width: 1200px) {
     grid-template-columns: repeat(4, 1fr) !important;
-    gap: 2px !important;
-    margin-bottom: 4px !important;
-    padding: 2px !important;
+    gap: 6px !important;
+    margin-bottom: 12px !important;
+    padding: 8px !important;
   }
   
   /* Desktop: 4 colonne - per schermi molto grandi */
@@ -110,11 +110,11 @@ const StatCard = styled(motion.div)`
     padding: ${props => props.theme.spacing.sm};
   }
   
-  /* 🎯 TABLET: Mini card */
+  /* 🎯 TABLET: Card compatte ma eleganti */
   @media (min-width: 481px) and (max-width: 1200px) {
-    padding: 2px !important;
-    border-radius: 3px !important;
-    min-height: 30px !important;
+    padding: 8px !important;
+    border-radius: 6px !important;
+    min-height: 60px !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: center !important;
@@ -132,12 +132,12 @@ const StatValue = styled.div`
     font-size: 1.5rem;
   }
   
-  /* 🎯 TABLET: Font micro */
+  /* 🎯 TABLET: Font leggibile */
   @media (min-width: 481px) and (max-width: 1200px) {
-    font-size: 0.8rem !important;
+    font-size: 1.1rem !important;
     font-weight: 600 !important;
-    margin-bottom: 0 !important;
-    line-height: 1 !important;
+    margin-bottom: 2px !important;
+    line-height: 1.2 !important;
   }
 `;
 
@@ -151,10 +151,10 @@ const StatLabel = styled.div`
     font-size: 0.8rem;
   }
   
-  /* 🎯 TABLET: Font micro */
+  /* 🎯 TABLET: Label leggibile */
   @media (min-width: 481px) and (max-width: 1200px) {
-    font-size: 0.4rem !important;
-    line-height: 1 !important;
+    font-size: 0.7rem !important;
+    line-height: 1.2 !important;
     font-weight: 400 !important;
   }
 `;
@@ -167,9 +167,9 @@ const RoleSection = styled.div`
     margin-bottom: ${props => props.theme.spacing.md};
   }
   
-  /* 🎯 TABLET: Margini quasi zero */
+  /* 🎯 TABLET: Margini ottimizzati */
   @media (min-width: 481px) and (max-width: 1200px) {
-    margin-bottom: 2px !important;
+    margin-bottom: 8px !important;
   }
 `;
 
@@ -188,11 +188,11 @@ const RoleHeader = styled.div`
     margin-bottom: ${props => props.theme.spacing.sm};
   }
   
-  /* 🎯 TABLET: Margine quasi zero */
+  /* 🎯 TABLET: Header ben spaziato */
   @media (min-width: 481px) and (max-width: 1200px) {
-    margin-bottom: 1px !important;
-    gap: 2px !important;
-    padding: 1px 2px !important;
+    margin-bottom: 6px !important;
+    gap: 8px !important;
+    padding: 4px 8px !important;
   }
   
   /* Tablet/Desktop intermedio */
@@ -211,10 +211,10 @@ const RoleTitle = styled.h2`
     font-size: 1.1rem;
   }
   
-  /* 🎯 TABLET: Font micro */
+  /* 🎯 TABLET: Titoli leggibili */
   @media (min-width: 481px) and (max-width: 1200px) {
-    font-size: 0.6rem !important;
-    font-weight: 500 !important;
+    font-size: 0.95rem !important;
+    font-weight: 600 !important;
     margin: 0 !important;
   }
   
@@ -241,12 +241,12 @@ const RoleStats = styled.div`
     align-self: flex-end;
   }
   
-  /* 🎯 TABLET: Mini badge */
+  /* 🎯 TABLET: Badge più elegante */
   @media (min-width: 481px) and (max-width: 1200px) {
-    padding: 1px 3px !important;
-    border-radius: 4px !important;
-    font-size: 0.45rem !important;
-    font-weight: 400 !important;
+    padding: 2px 6px !important;
+    border-radius: 8px !important;
+    font-size: 0.7rem !important;
+    font-weight: 500 !important;
   }
 `;
 
@@ -260,10 +260,10 @@ const PlayersGrid = styled.div`
     gap: ${props => props.theme.spacing.sm};
   }
   
-  /* 🎯 TABLET: 6 colonne micro per massimizzare spazio */
+  /* 🎯 TABLET: 4 colonne ottimizzate per leggibilità */
   @media (min-width: 481px) and (max-width: 1200px) {
-    grid-template-columns: repeat(6, 1fr) !important;
-    gap: 1px !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 8px !important;
   }
   
   /* Desktop: 3 colonne - per schermi molto grandi */
@@ -298,16 +298,16 @@ const PlayerCard = styled(motion.div)`
     }
   }
   
-  /* 🎯 TABLET: Card micro */
+  /* 🎯 TABLET: Card giocatori eleganti */
   @media (min-width: 481px) and (max-width: 1200px) {
-    padding: 1px !important;
-    border-radius: 2px !important;
-    min-height: 40px !important;
-    font-size: 0.4rem !important;
+    padding: 8px !important;
+    border-radius: 6px !important;
+    min-height: 80px !important;
+    font-size: 0.75rem !important;
     
     &:hover {
       transform: none !important;
-      box-shadow: none !important;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
     }
   }
 `;
@@ -325,11 +325,11 @@ const PlayerHeader = styled.div`
     align-items: center;
   }
   
-  /* 🎯 TABLET: Layout ultra compatto */
+  /* 🎯 TABLET: Layout compatto ma leggibile */
   @media (min-width: 481px) and (max-width: 1200px) {
     flex-direction: column !important;
-    margin-bottom: 0 !important;
-    gap: 0 !important;
+    margin-bottom: 4px !important;
+    gap: 2px !important;
     align-items: center !important;
     text-align: center !important;
   }
@@ -355,12 +355,12 @@ const PlayerName = styled.h3`
     margin-bottom: 2px;
   }
   
-  /* 🎯 TABLET: Font micro */
+  /* 🎯 TABLET: Nomi leggibili */
   @media (min-width: 481px) and (max-width: 1200px) {
-    font-size: 0.35rem !important;
-    font-weight: 400 !important;
-    margin-bottom: 0 !important;
-    line-height: 1 !important;
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
+    margin-bottom: 2px !important;
+    line-height: 1.2 !important;
     white-space: normal !important;
     word-break: break-word !important;
   }
@@ -384,10 +384,10 @@ const PlayerTeam = styled.p`
     font-size: 0.85rem;
   }
   
-  /* 🎯 TABLET: Font micro */
+  /* 🎯 TABLET: Squadre leggibili */
   @media (min-width: 481px) and (max-width: 1200px) {
-    font-size: 0.3rem !important;
-    line-height: 1 !important;
+    font-size: 0.6rem !important;
+    line-height: 1.2 !important;
     white-space: normal !important;
     word-break: break-word !important;
   }
@@ -419,13 +419,13 @@ const PurchasePrice = styled.div`
     border-radius: 16px;
   }
   
-  /* 🎯 TABLET: Mini badge */
+  /* 🎯 TABLET: Prezzo leggibile */
   @media (min-width: 481px) and (max-width: 1200px) {
-    padding: 0 2px !important;
-    border-radius: 2px !important;
-    font-size: 0.3rem !important;
-    font-weight: 400 !important;
-    margin-bottom: 0 !important;
+    padding: 2px 6px !important;
+    border-radius: 8px !important;
+    font-size: 0.65rem !important;
+    font-weight: 600 !important;
+    margin-bottom: 2px !important;
   }
 `;
 
@@ -513,11 +513,11 @@ const EmptyState = styled.div`
     margin-bottom: ${props => props.theme.spacing.md};
   }
   
-  /* 🎯 TABLET: Ultra compatto */
+  /* 🎯 TABLET: Empty state elegante */
   @media (min-width: 481px) and (max-width: 1200px) {
-    padding: 4px !important;
-    margin-bottom: 2px !important;
-    border-radius: 2px !important;
+    padding: 16px !important;
+    margin-bottom: 8px !important;
+    border-radius: 8px !important;
   }
   
   /* Tablet/Desktop intermedio */
@@ -543,11 +543,11 @@ const EmptyIcon = styled.div`
     margin-bottom: ${props => props.theme.spacing.sm};
   }
   
-  /* 🎯 TABLET: Icona micro */
+  /* 🎯 TABLET: Icona proporzionata */
   @media (min-width: 481px) and (max-width: 1200px) {
-    width: 20px !important;
-    height: 20px !important;
-    margin-bottom: 2px !important;
+    width: 40px !important;
+    height: 40px !important;
+    margin-bottom: 8px !important;
   }
   
   /* Tablet/Desktop intermedio */
@@ -569,11 +569,11 @@ const EmptyTitle = styled.h3`
     font-size: 1.1rem;
   }
   
-  /* 🎯 TABLET: Font micro */
+  /* 🎯 TABLET: Titolo leggibile */
   @media (min-width: 481px) and (max-width: 1200px) {
-    font-size: 0.5rem !important;
-    margin-bottom: 1px !important;
-    font-weight: 400 !important;
+    font-size: 0.9rem !important;
+    margin-bottom: 4px !important;
+    font-weight: 600 !important;
   }
 `;
 
@@ -589,11 +589,11 @@ const EmptyText = styled.p`
     font-size: 0.9rem;
   }
   
-  /* 🎯 TABLET: Font micro */
+  /* 🎯 TABLET: Testo leggibile */
   @media (min-width: 481px) and (max-width: 1200px) {
-    font-size: 0.4rem !important;
-    line-height: 1.2 !important;
-    max-width: 200px !important;
+    font-size: 0.7rem !important;
+    line-height: 1.3 !important;
+    max-width: 300px !important;
   }
 `;
 
@@ -611,10 +611,10 @@ const LoadingContainer = styled.div`
     padding: ${props => props.theme.spacing.lg};
   }
   
-  /* 🎯 TABLET: Padding ridotto */
+  /* 🎯 TABLET: Loading elegante */
   @media (min-width: 481px) and (max-width: 1200px) {
-    padding: ${props => props.theme.spacing.md} !important;
-    gap: ${props => props.theme.spacing.sm} !important;
+    padding: 16px !important;
+    gap: 8px !important;
   }
 `;
 
