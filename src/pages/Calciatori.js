@@ -713,7 +713,7 @@ const Calciatori = () => {
       'Bologna': '🔴🔵',
       'Cagliari': '🔴🔵',
       'Como': '🔵⚪',
-      'Cremonese': '🩶🔴', // Grigio più chiaro e rosso
+      'Cremonese': '⚪🔴', // Grigio più chiaro e rosso
       'Fiorentina': '🟣⚪',
       'Genoa': '🔴🔵',
       'Inter': '🔵⚫',
@@ -841,23 +841,24 @@ const Calciatori = () => {
 
         {/* Dropdown per squadre con overlay */}
         <SquadraDropdownContainer>
-          <SquadraDropdown
-            value={selectedTeam}
-            onChange={(e) => {
-              setSelectedTeam(e.target.value);
-              setIsDropdownOpen(false);
-            }}
-            onFocus={() => setIsDropdownOpen(true)}
-            onBlur={() => setTimeout(() => setIsDropdownOpen(false), 150)}
-          >
-            <option value="">Tutte le squadre</option>
-            {squadre.map(squadra => (
-              <option key={squadra.nome} value={squadra.nome}>
-                {squadra.logo} {squadra.nome}
-              </option>
-            ))}
-          </SquadraDropdown>
-        </SquadraDropdownContainer>
+  <SquadraDropdown
+    value={selectedTeam}
+    onChange={(e) => {
+      setSelectedTeam(e.target.value);
+      setIsDropdownOpen(false);
+    }}
+    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+    onFocus={() => setIsDropdownOpen(true)}
+    onBlur={() => setTimeout(() => setIsDropdownOpen(false), 150)}
+  >
+    <option value="">Tutte le squadre</option>
+    {squadre.map(squadra => (
+      <option key={squadra.nome} value={squadra.nome}>
+        {squadra.logo} {squadra.nome}
+      </option>
+    ))}
+  </SquadraDropdown>
+</SquadraDropdownContainer>
 
         {roles.map(role => (
           <FilterChip
