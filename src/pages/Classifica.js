@@ -188,21 +188,25 @@ const CardsGrid = styled.div`
     gap: 0.5rem;
   }
   
- 
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
   
-   /* 🎯 TABLET: 4 colonne come richiesto - ALLA FINE */
-  @media (min-width: 481px) and (max-width: 1200px) {
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  /* 🎯 TABLET: 4 colonne */
+  @media (min-width: 481px) and (max-width: 1279px) {
     grid-template-columns: repeat(4, 1fr) !important;
     gap: 6px !important;
   }
   
-  
+  /* 🎯 DESKTOP: 8 colonne */
   @media (min-width: 1280px) {
     grid-template-columns: repeat(8, 1fr);
-    gap: 1.5rem;
+    gap: 0.75rem;
   }
-  
- 
 `;
 
 const Card = styled(motion.div)`
