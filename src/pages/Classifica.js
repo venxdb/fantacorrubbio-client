@@ -188,9 +188,7 @@ const CardsGrid = styled.div`
     gap: 0.5rem;
   }
   
-  @media (min-width: 640px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
+ 
   
    /* 🎯 TABLET: 4 colonne come richiesto - ALLA FINE */
   @media (min-width: 481px) and (max-width: 1200px) {
