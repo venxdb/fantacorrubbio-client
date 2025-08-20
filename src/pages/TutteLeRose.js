@@ -126,13 +126,14 @@ const ContentContainer = styled.div`
     gap: ${props => props.theme.spacing.sm};
   }
   
-  /* Tablet: 3 colonne compatte */
-  @media (min-width: 481px) and (max-width: 1200px) {
-    grid-template-columns: repeat(3, 1fr) !important;
-    gap: 8px !important;
-    max-width: 100% !important;
-    padding: 0 4px !important;
-  }
+ /* Tablet: 4 colonne compatte */
+@media (min-width: 481px) and (max-width: 1200px) {
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 8px !important;
+  max-width: 100% !important;
+  padding: 0 4px !important;
+  align-items: start !important;
+}
   
 /* Desktop: 4 colonne su 2 righe */
 @media (min-width: 1201px) {
