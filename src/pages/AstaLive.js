@@ -1199,7 +1199,7 @@ useEffect(() => {
     if (!isProcessingExpiration) {
       fetchCurrentAuction();
     }
-  }, 8000);
+  }, 3000);
   
   return () => clearInterval(interval);
 }, [fetchCurrentAuction, isProcessingExpiration,]);
