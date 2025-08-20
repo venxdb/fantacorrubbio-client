@@ -228,7 +228,7 @@ const Card = styled(motion.div)`
     }
   }
     @media (min-width: 1280px) {
-  max-width: 180px; // Limita larghezza massima
+  max-width: none; 
 }
 `;
 
