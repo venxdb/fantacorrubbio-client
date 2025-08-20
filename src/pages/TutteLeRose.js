@@ -134,18 +134,14 @@ const ContentContainer = styled.div`
     padding: 0 4px !important;
   }
   
-  /* Desktop: 4 colonne su 2 righe */
-  @media (min-width: 1201px) {
-    grid-template-columns: repeat(4, 1fr) !important;
-    gap: 12px !important;
-    max-width: 100% !important;
-    padding: 0 8px !important;
-  }
-  
-  @media (max-width: 1000px) {
-    grid-template-columns: 1fr;
-    max-width: 600px;
-  }
+/* Desktop: 4 colonne su 2 righe */
+@media (min-width: 1201px) {
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 12px !important;
+  max-width: 100% !important;
+  padding: 0 8px !important;
+  align-items: start !important; /* Aggiungi questa riga */
+}
 `;
 
 const UserCard = styled.div`
@@ -166,15 +162,29 @@ const UserCard = styled.div`
     border-radius: 6px !important;
     font-size: 0.75rem !important;
   }
-    /* Desktop: Card compatta per 4 colonne */
+  
+/* Desktop: Card compatta per 4 colonne */
 @media (min-width: 1201px) {
   padding: 12px !important;
   border-radius: 8px !important;
   font-size: 0.8rem !important;
-  min-height: 500px;
-  max-height: 700px;
-  overflow-y: auto;
+  height: fit-content !important;
+  overflow-y: visible;
 }
+`;
+
+const DynamicUserCard = styled(UserCard)`
+  /* Desktop: Altezza dinamica basata sui filtri */
+  @media (min-width: 1201px) {
+    height: ${props => {
+      const numRuoli = props.$filtriAttivi || 4;
+      const baseHeight = 120; // Header + stats
+      const roleHeight = 60; // Circa per ogni ruolo
+      return `${baseHeight + (numRuoli * roleHeight)}px`;
+    }} !important;
+    max-height: none !important;
+    min-height: auto !important;
+  }
 `;
 
 const UserHeader = styled.div`
@@ -736,7 +746,7 @@ const resetFiltri = () => {
     const roleStats = getRoleStats(rosa);
 
     return (
-      <UserCard key={utente.id}>
+  <DynamicUserCard key={utente.id} $filtriAttivi={filtriRuoli.length}>
         <UserHeader>
           <UserName>
             <User size={20} />
@@ -830,7 +840,7 @@ const resetFiltri = () => {
         })}
 
        
-      </UserCard>
+      </DynamicUserCard>
     );
   };
 
