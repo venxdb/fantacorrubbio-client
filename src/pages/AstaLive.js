@@ -708,7 +708,92 @@ const NoAuctionText = styled.p`
     font-size: 0.9rem;
   }
 `;
+const CreditsRanking = styled.div`
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: ${props => props.theme.colors.surface};
+  border: 1px solid ${props => props.theme.colors.border};
+  border-radius: 8px;
+  padding: 12px;
+  min-width: 180px;
+  max-height: 70vh;
+  overflow-y: auto;
+  z-index: 1000;
+  box-shadow: ${props => props.theme.shadows.medium};
+  
+  @media (max-width: 768px) {
+    position: relative;
+    top: auto;
+    left: auto;
+    margin-bottom: 16px;
+    max-height: none;
+    overflow-y: visible;
+  }
+  
+  @media (min-width: 481px) and (max-width: 1200px) {
+    padding: 8px;
+    min-width: 150px;
+    font-size: 0.8rem;
+  }
+`;
 
+const RankingTitle = styled.h4`
+  color: ${props => props.theme.colors.text};
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  text-align: center;
+  border-bottom: 1px solid ${props => props.theme.colors.border};
+  padding-bottom: 4px;
+  
+  @media (min-width: 481px) and (max-width: 1200px) {
+    font-size: 0.8rem;
+    margin-bottom: 6px;
+  }
+`;
+
+const RankingItem = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+  border-bottom: 1px solid ${props => props.theme.colors.border};
+  
+  &:last-child {
+    border-bottom: none;
+  }
+  
+  @media (min-width: 481px) and (max-width: 1200px) {
+    padding: 3px 0;
+  }
+`;
+
+const RankingUser = styled.span`
+  color: ${props => props.$isCurrentUser ? props.theme.colors.secondary : props.theme.colors.text};
+  font-weight: ${props => props.$isCurrentUser ? '600' : '400'};
+  font-size: 0.8rem;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-right: 8px;
+  
+  @media (min-width: 481px) and (max-width: 1200px) {
+    font-size: 0.7rem;
+  }
+`;
+
+const RankingCredits = styled.span`
+  color: ${props => props.$isCurrentUser ? props.theme.colors.secondary : props.theme.colors.textSecondary};
+  font-weight: 600;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+  
+  @media (min-width: 481px) and (max-width: 1200px) {
+    font-size: 0.7rem;
+  }
+`;
 const CenteredMessage = styled.div`
   text-align: center;
   color: #B0BEC5;
@@ -767,6 +852,7 @@ const AstaLive = () => {
   const [rosaInfo, setRosaInfo] = useState(null);
   const [validationInfo, setValidationInfo] = useState(null);
   const [isProcessingExpiration, setIsProcessingExpiration] = useState(false);
+  const [utentiCrediti, setUtentiCrediti] = useState([]);
 
   const fetchAuctionDetails = async (auctionId) => {
     try {
@@ -796,6 +882,25 @@ const fetchValidationInfo = async (auctionId) => {
     setValidationInfo(validationResponse.data);
   } catch (error) {
     console.error('Errore caricamento info validazione:', error);
+  }
+};
+
+const fetchUtentiCrediti = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/api/utenti/crediti`);
+    const utenti = response.data.utenti || [];
+    
+    // Ordina per crediti rimanenti (decrescente)
+    const utentiOrdinati = utenti
+      .map(utente => ({
+        ...utente,
+        crediti_rimanenti: utente.crediti_totali - utente.crediti_spesi
+      }))
+      .sort((a, b) => b.crediti_rimanenti - a.crediti_rimanenti);
+    
+    setUtentiCrediti(utentiOrdinati);
+  } catch (error) {
+    console.error('Errore caricamento crediti utenti:', error);
   }
 };
 
@@ -830,17 +935,19 @@ const fetchCurrentAuction = useCallback(async () => {
       
       // Solo se asta ancora valida
       setCurrentAuction(prevAuction => {
-        if (!prevAuction || prevAuction.id !== newAuction.id) {
-          setIsProcessingExpiration(false);
-          fetchAuctionDetails(newAuction.id);
-          fetchValidationInfo(newAuction.id);
-          return newAuction;
-        } else {
-          fetchAuctionDetails(newAuction.id);
-          fetchValidationInfo(newAuction.id);
-          return prevAuction;
-        }
-      });
+  if (!prevAuction || prevAuction.id !== newAuction.id) {
+    setIsProcessingExpiration(false);
+    fetchAuctionDetails(newAuction.id);
+    fetchValidationInfo(newAuction.id);
+    fetchUtentiCrediti(); // Aggiungi questa riga
+    return newAuction;
+  } else {
+    fetchAuctionDetails(newAuction.id);
+    fetchValidationInfo(newAuction.id);
+    fetchUtentiCrediti(); // Aggiungi questa riga
+    return prevAuction;
+  }
+});
       
     } else {
       // Nessuna asta attiva
@@ -1108,6 +1215,21 @@ const submitBid = async (e) => {
 
   return (
     <AstaContainer>
+    {currentAuction && utentiCrediti.length > 0 && (
+      <CreditsRanking>
+        <RankingTitle>💰 Crediti Rimanenti</RankingTitle>
+        {utentiCrediti.map((utente, index) => (
+          <RankingItem key={utente.id}>
+            <RankingUser $isCurrentUser={utente.id === user?.id}>
+              {utente.username}
+            </RankingUser>
+            <RankingCredits $isCurrentUser={utente.id === user?.id}>
+              {utente.crediti_rimanenti}
+            </RankingCredits>
+          </RankingItem>
+        ))}
+      </CreditsRanking>
+    )}
       <Header>
         <Title>
           <Gavel size={32} />
