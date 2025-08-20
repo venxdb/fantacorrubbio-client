@@ -622,13 +622,39 @@ const SquadraDropdown = styled.select`
   font-size: 0.85rem;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
   min-height: 36px;
   outline: none;
+  position: relative;
+  z-index: 1000;
 
   &:hover, &:focus {
     background: ${props => props.theme.colors.surfaceHover};
     border-color: ${props => props.theme.colors.primary};
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  &:focus {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+  }
+
+  /* Effetto elegante per le opzioni */
+  option {
+    background: ${props => props.theme.colors.surface};
+    color: ${props => props.theme.colors.text};
+    padding: 8px 12px;
+    border: none;
+    font-size: 0.85rem;
+
+    &:hover {
+      background: ${props => props.theme.colors.primary};
+      color: white;
+    }
+
+    &:checked {
+      background: ${props => props.theme.colors.primary};
+      color: white;
+    }
   }
 
   /* Mobile */
@@ -649,6 +675,27 @@ const SquadraDropdown = styled.select`
   }
 `;
 
+/* Overlay per oscurare lo sfondo quando il dropdown è aperto */
+const DropdownOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(2px);
+  z-index: 999;
+  opacity: ${props => props.$isOpen ? 1 : 0};
+  visibility: ${props => props.$isOpen ? 'visible' : 'hidden'};
+  transition: all 0.3s ease;
+  pointer-events: ${props => props.$isOpen ? 'auto' : 'none'};
+`;
+
+const SquadraDropdownContainer = styled.div`
+  position: relative;
+  display: inline-block;
+`;
+
 const Calciatori = () => {
   const [calciatori, setCalciatori] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -657,6 +704,7 @@ const Calciatori = () => {
   const [selectedTeam, setSelectedTeam] = useState('');
   const [disponibileFilter, setDisponibileFilter] = useState('');
   const [squadre, setSquadre] = useState([]);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const getSquadraLogo = (squadra) => {
     const loghi = {
@@ -665,7 +713,7 @@ const Calciatori = () => {
       'Bologna': '🔴🔵',
       'Cagliari': '🔴🔵',
       'Como': '🔵⚪',
-      'Cremonese': '🔴⚫',
+      'Cremonese': '🩶🔴', // Grigio più chiaro e rosso
       'Fiorentina': '🟣⚪',
       'Genoa': '🔴🔵',
       'Inter': '🔵⚫',
@@ -744,6 +792,12 @@ const Calciatori = () => {
 
   return (
     <CalciatoriContainer>
+      {/* Overlay per oscurare lo sfondo */}
+      <DropdownOverlay 
+        $isOpen={isDropdownOpen} 
+        onClick={() => setIsDropdownOpen(false)}
+      />
+      
       <Header>
         <Title>
           <Users size={28} />
@@ -785,18 +839,25 @@ const Calciatori = () => {
           Acquistati
         </FilterChip>
 
-        {/* Dropdown per squadre */}
-        <SquadraDropdown
-          value={selectedTeam}
-          onChange={(e) => setSelectedTeam(e.target.value)}
-        >
-          <option value="">Tutte le squadre</option>
-          {squadre.map(squadra => (
-            <option key={squadra.nome} value={squadra.nome}>
-              {squadra.logo} {squadra.nome}
-            </option>
-          ))}
-        </SquadraDropdown>
+        {/* Dropdown per squadre con overlay */}
+        <SquadraDropdownContainer>
+          <SquadraDropdown
+            value={selectedTeam}
+            onChange={(e) => {
+              setSelectedTeam(e.target.value);
+              setIsDropdownOpen(false);
+            }}
+            onFocus={() => setIsDropdownOpen(true)}
+            onBlur={() => setTimeout(() => setIsDropdownOpen(false), 150)}
+          >
+            <option value="">Tutte le squadre</option>
+            {squadre.map(squadra => (
+              <option key={squadra.nome} value={squadra.nome}>
+                {squadra.logo} {squadra.nome}
+              </option>
+            ))}
+          </SquadraDropdown>
+        </SquadraDropdownContainer>
 
         {roles.map(role => (
           <FilterChip
