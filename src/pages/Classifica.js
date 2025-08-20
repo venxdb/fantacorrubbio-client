@@ -710,7 +710,7 @@ const Classifica = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            🏆 <span style={{ color: '#facc15', fontWeight: 600 }}>Ebrei:</span> Poveracci, sembrate il Milan!
+            🏆 <span style={{ color: '#facc15', fontWeight: 600 }}> Poveracci, sembrate il Milan!</span>
           </Subtitle>
         </Header>
 
