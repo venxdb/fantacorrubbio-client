@@ -847,8 +847,7 @@ const Calciatori = () => {
       setSelectedTeam(e.target.value);
       setIsDropdownOpen(false);
     }}
-    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-    onFocus={() => setIsDropdownOpen(true)}
+    onMouseDown={() => setIsDropdownOpen(true)}
     onBlur={() => setTimeout(() => setIsDropdownOpen(false), 150)}
   >
     <option value="">Tutte le squadre</option>
