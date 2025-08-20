@@ -180,25 +180,11 @@ const Subtitle = styled(motion.p)`
 
 const CardsGrid = styled.div`
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-  
-  @media (max-width: 480px) {
-    grid-template-columns: 1fr;
-    gap: 0.5rem;
-  }
-  
-  /* 🎯 TABLET: 4 colonne */
-  @media (min-width: 481px) and (max-width: 1279px) {
-    grid-template-columns: repeat(4, 1fr) !important;
-    gap: 6px !important;
-  }
-  
-  /* 🎯 DESKTOP: 8 colonne */
-  @media (min-width: 1280px) {
-    grid-template-columns: repeat(8, 1fr) !important;
-    gap: 0.75rem !important;
-  }
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  justify-items: center;
+  margin-top: 20px;
+  padding: 20px;
 `;
 
 const Card = styled.div`
@@ -216,17 +202,6 @@ const Card = styled.div`
   &:hover {
     transform: translateY(-5px);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  }
-
-  /* Mobile */
-  @media (max-width: 640px) {
-    max-width: 100%;
-  }
-
-  /* Desktop */
-  @media (min-width: 1280px) {
-    width: 100%;         /* si adatta alla colonna */
-    max-width: 220px;    /* limite fluido, non troppo largo */
   }
 `;
 
