@@ -1533,7 +1533,7 @@ const submitBid = async (e) => {
           <BidsList>
             {bids.length === 0 ? (
               <div style={{ textAlign: 'center', color: '#B0BEC5', padding: '2rem' }}>
-                Nessuna offerta ancora. Puoi iniziare con 1 credito! 💰
+                Nessuna offerta ancora. Ti vuoi sbrigare Dorco Pio 💰
               </div>
             ) : (
               <>
