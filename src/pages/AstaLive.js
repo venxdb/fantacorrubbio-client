@@ -794,16 +794,12 @@ const MiniCreditsRanking = styled.div`
   border-radius: 6px;
   padding: 8px;
   min-width: 120px;
-  max-height: 200px;
-  overflow-y: auto;
   font-size: 0.7rem;
   box-shadow: ${props => props.theme.shadows.small};
   
   @media (max-width: 768px) {
     position: relative;
     margin-bottom: 12px;
-    max-height: none;
-    overflow-y: visible;
   }
   
   @media (min-width: 481px) and (max-width: 1200px) {
