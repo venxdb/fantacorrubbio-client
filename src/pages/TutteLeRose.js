@@ -626,7 +626,10 @@ const FilterButton = styled.button`
 const TutteLeRose = () => {
   const [utenti, setUtenti] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [filtriRuoli, setFiltriRuoli] = useState(['P', 'D', 'C', 'A']);
+  const [filtriRuoli, setFiltriRuoli] = useState(() => {
+  const saved = localStorage.getItem('filtriRuoliRose');
+  return saved ? JSON.parse(saved) : ['P', 'D', 'C', 'A'];
+});
 
 
   useEffect(() => {
@@ -680,17 +683,21 @@ const TutteLeRose = () => {
       setLoading(false);
     }
   };
-  const toggleFiltroRuolo = (ruolo) => {
+const toggleFiltroRuolo = (ruolo) => {
   setFiltriRuoli(prev => {
-    if (prev.includes(ruolo)) {
-      return prev.filter(r => r !== ruolo);
-    } else {
-      return [...prev, ruolo];
-    }
+    const newFiltri = prev.includes(ruolo) 
+      ? prev.filter(r => r !== ruolo)
+      : [...prev, ruolo];
+    
+    // Salva nel localStorage
+    localStorage.setItem('filtriRuoliRose', JSON.stringify(newFiltri));
+    return newFiltri;
   });
 };
 const resetFiltri = () => {
-  setFiltriRuoli(['P', 'D', 'C', 'A']);
+  const allRoles = ['P', 'D', 'C', 'A'];
+  setFiltriRuoli(allRoles);
+  localStorage.setItem('filtriRuoliRose', JSON.stringify(allRoles));
 };
 
   // Funzione per raggruppare giocatori per ruolo
