@@ -98,7 +98,7 @@ const StatusBadge = styled.div`
   font-size: 0.75rem !important;
   padding: 4px 12px !important;
   gap: 4px !important;
-  margin-bottom: 8px !important;S
+  margin-bottom: 8px !important;
   border-radius: 16px !important;
 }
 `;
