@@ -173,19 +173,7 @@ const UserCard = styled.div`
 }
 `;
 
-const DynamicUserCard = styled(UserCard)`
-  /* Desktop: Altezza dinamica basata sui filtri */
-  @media (min-width: 1201px) {
-    height: ${props => {
-      const numRuoli = props.$filtriAttivi || 4;
-      const baseHeight = 120; // Header + stats
-      const roleHeight = 60; // Circa per ogni ruolo
-      return `${baseHeight + (numRuoli * roleHeight)}px`;
-    }} !important;
-    max-height: none !important;
-    min-height: auto !important;
-  }
-`;
+
 
 const UserHeader = styled.div`
   display: flex;
@@ -746,7 +734,7 @@ const resetFiltri = () => {
     const roleStats = getRoleStats(rosa);
 
     return (
-  <DynamicUserCard key={utente.id} $filtriAttivi={filtriRuoli.length}>
+  <UserCard key={utente.id}>
         <UserHeader>
           <UserName>
             <User size={20} />
@@ -840,7 +828,7 @@ const resetFiltri = () => {
         })}
 
        
-      </DynamicUserCard>
+      </UserCard>
     );
   };
 
