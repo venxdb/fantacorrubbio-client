@@ -30,6 +30,11 @@ const RoseContainer = styled.div`
     overflow-y: auto !important;
     font-size: 0.85rem !important;
   }
+    /* Desktop: Layout compatto per 4x2 */
+@media (min-width: 1201px) {
+  padding: 16px 8px !important;
+  font-size: 0.8rem !important;
+}
 `;
 
 const Header = styled.div`
@@ -45,6 +50,10 @@ const Header = styled.div`
   @media (min-width: 481px) and (max-width: 1200px) {
     margin-bottom: 12px !important;
   }
+    /* Desktop: Header compatto */
+@media (min-width: 1201px) {
+  margin-bottom: 20px !important;
+}
 `;
 
 const Title = styled.h1`
@@ -74,6 +83,13 @@ const Title = styled.h1`
     margin-bottom: 6px !important;
     gap: 8px !important;
   }
+    /* Desktop: Titolo ridotto */
+@media (min-width: 1201px) {
+  font-size: 2rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 10px !important;
+  gap: 12px !important;
+}
 `;
 
 const Subtitle = styled.p`
@@ -90,6 +106,11 @@ const Subtitle = styled.p`
     font-size: 0.85rem !important;
     margin-bottom: 8px !important;
   }
+    /* Desktop: Subtitle compatto */
+@media (min-width: 1201px) {
+  font-size: 1rem !important;
+  margin-bottom: 10px !important;
+}
 `;
 
 const ContentContainer = styled.div`
@@ -105,12 +126,20 @@ const ContentContainer = styled.div`
     gap: ${props => props.theme.spacing.sm};
   }
   
-  /* 🎯 TABLET: 3 colonne compatte */
+  /* Tablet: 3 colonne compatte */
   @media (min-width: 481px) and (max-width: 1200px) {
     grid-template-columns: repeat(3, 1fr) !important;
     gap: 8px !important;
     max-width: 100% !important;
     padding: 0 4px !important;
+  }
+  
+  /* Desktop: 4 colonne su 2 righe */
+  @media (min-width: 1201px) {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 12px !important;
+    max-width: 100% !important;
+    padding: 0 8px !important;
   }
   
   @media (max-width: 1000px) {
@@ -137,6 +166,15 @@ const UserCard = styled.div`
     border-radius: 6px !important;
     font-size: 0.75rem !important;
   }
+    /* Desktop: Card compatta per 4 colonne */
+@media (min-width: 1201px) {
+  padding: 12px !important;
+  border-radius: 8px !important;
+  font-size: 0.8rem !important;
+  min-height: 500px;
+  max-height: 700px;
+  overflow-y: auto;
+}
 `;
 
 const UserHeader = styled.div`
@@ -162,6 +200,14 @@ const UserHeader = styled.div`
     gap: 4px !important;
     align-items: center !important;
   }
+    /* Desktop: Header compatto */
+@media (min-width: 1201px) {
+  flex-direction: column !important;
+  gap: 6px !important;
+  margin-bottom: 8px !important;
+  padding-bottom: 6px !important;
+  align-items: center !important;
+}
 `;
 
 const UserName = styled.h3`
@@ -185,6 +231,14 @@ const UserName = styled.h3`
     gap: 4px !important;
     margin: 0 !important;
   }
+    /* Desktop: Nome compatto */
+@media (min-width: 1201px) {
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+  gap: 4px !important;
+  margin: 0 !important;
+  text-align: center !important;
+}
 `;
 
 const UserStats = styled.div`
@@ -204,6 +258,11 @@ const UserStats = styled.div`
     gap: 8px !important;
     justify-content: center !important;
   }
+    /* Desktop: Stats compatte */
+@media (min-width: 1201px) {
+  gap: 8px !important;
+  justify-content: center !important;
+}
 `;
 
 const StatItem = styled.div`
@@ -228,6 +287,11 @@ const StatValue = styled.span`
     font-size: 0.7rem !important;
     font-weight: 500 !important;
   }
+    /* Desktop: Value compatto */
+@media (min-width: 1201px) {
+  font-size: 0.8rem !important;
+  font-weight: 500 !important;
+}
 `;
 
 const StatLabel = styled.span`
@@ -243,6 +307,10 @@ const StatLabel = styled.span`
   @media (min-width: 481px) and (max-width: 1200px) {
     font-size: 0.6rem !important;
   }
+    /* Desktop: Label compatta */
+@media (min-width: 1201px) {
+  font-size: 0.7rem !important;
+}
 `;
 
 const RoleSection = styled.div`
@@ -257,6 +325,10 @@ const RoleSection = styled.div`
   @media (min-width: 481px) and (max-width: 1200px) {
     margin-bottom: 6px !important;
   }
+    /* Desktop: Sezione compatta */
+@media (min-width: 1201px) {
+  margin-bottom: 8px !important;
+}
 `;
 
 const RoleHeader = styled.div`
@@ -286,6 +358,13 @@ const RoleTitle = styled.h4`
     gap: 2px !important;
     margin: 0 !important;
   }
+    /* Desktop: Titolo ruolo compatto */
+@media (min-width: 1201px) {
+  font-size: 0.75rem !important;
+  font-weight: 500 !important;
+  gap: 3px !important;
+  margin: 0 !important;
+}
 `;
 
 const RoleCounter = styled.span`
@@ -295,6 +374,12 @@ const RoleCounter = styled.span`
   border-radius: 12px;
   font-size: 0.7rem;
   font-weight: 600;
+  /* Desktop: Counter compatto */
+@media (min-width: 1201px) {
+  font-size: 0.65rem !important;
+  padding: 2px 6px !important;
+  border-radius: 10px !important;
+}
 `;
 
 const PlayersContainer = styled.div`
@@ -315,6 +400,12 @@ const PlayersContainer = styled.div`
     gap: 2px !important;
     margin-bottom: 4px !important;
   }
+    /* Desktop: Container compatto */
+@media (min-width: 1201px) {
+  grid-template-columns: 1fr !important;
+  gap: 3px !important;
+  margin-bottom: 6px !important;
+}
 `;
 
 const PlayerChip = styled.div`
@@ -341,6 +432,12 @@ const PlayerChip = styled.div`
     padding: 2px 4px !important;
     border-radius: 4px !important;
   }
+    /* Desktop: Chip compatto */
+@media (min-width: 1201px) {
+  min-height: 28px !important;
+  padding: 4px 6px !important;
+  border-radius: 6px !important;
+}
 `;
 
 const PlayerName = styled.span`
@@ -364,6 +461,12 @@ const PlayerName = styled.span`
     font-weight: 400 !important;
     margin-right: 2px !important;
   }
+    /* Desktop: Nome compatto */
+@media (min-width: 1201px) {
+  font-size: 0.7rem !important;
+  font-weight: 400 !important;
+  margin-right: 4px !important;
+}
 `;
 
 const PlayerPrice = styled.span`
@@ -382,6 +485,11 @@ const PlayerPrice = styled.span`
     font-size: 0.55rem !important;
     font-weight: 500 !important;
   }
+    /* Desktop: Prezzo compatto */
+@media (min-width: 1201px) {
+  font-size: 0.65rem !important;
+  font-weight: 500 !important;
+}
 `;
 
 const EmptySlot = styled.div`
@@ -412,6 +520,13 @@ const EmptySlot = styled.div`
     padding: 2px !important;
     border-radius: 4px !important;
   }
+    /* Desktop: Slot vuoto compatto */
+@media (min-width: 1201px) {
+  min-height: 28px !important;
+  font-size: 0.6rem !important;
+  padding: 4px !important;
+  border-radius: 6px !important;
+}
 `;
 const LoadingContainer = styled.div`
   text-align: center;
@@ -444,6 +559,12 @@ const FilterContainer = styled.div`
     margin-bottom: 8px !important;
     padding: 0 4px !important;
   }
+    /* Desktop: Filtri compatti */
+@media (min-width: 1201px) {
+  gap: 6px !important;
+  margin-bottom: 16px !important;
+  padding: 0 8px !important;
+}
 `;
 
 const FilterButton = styled.button`
@@ -484,6 +605,19 @@ const FilterButton = styled.button`
       box-shadow: none !important;
     }
   }
+    /* Desktop: Button filtro compatto */
+@media (min-width: 1201px) {
+  padding: 6px 12px !important;
+  font-size: 0.8rem !important;
+  font-weight: 500 !important;
+  gap: 4px !important;
+  border-radius: 8px !important;
+  
+  &:hover {
+    transform: translateY(-1px) !important;
+    box-shadow: ${props => props.theme.shadows.medium} !important;
+  }
+}
 `;
 
 
@@ -714,7 +848,7 @@ const resetFiltri = () => {
     <RoseContainer>
       <Header>
         <Title>
-          <Trophy size={32} />
+          <Trophy size={28} />
           Tutte le Rose
         </Title>
         <Subtitle>
