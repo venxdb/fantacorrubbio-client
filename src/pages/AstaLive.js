@@ -805,7 +805,7 @@ const MiniCreditsRanking = styled.div`
   border-radius: 6px;
   padding: 8px;
   min-width: 120px;
-  font-size: 0.7rem;
+  font-size: 0.9rem;
   box-shadow: ${props => props.theme.shadows.small};
   
   @media (max-width: 768px) {
