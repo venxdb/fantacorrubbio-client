@@ -154,6 +154,7 @@ const AuctionCard = styled.div`
 const PlayerSection = styled.div`
   text-align: center;
   margin-bottom: ${props => props.theme.spacing.lg};
+  position: relative;
   
   /* 🎯 TABLET: Sezione player compatta */
   @media (min-width: 481px) and (max-width: 1200px) {
@@ -783,6 +784,87 @@ const RankingCredits = styled.span`
     font-size: 0.7rem;
   }
 `;
+
+const MiniCreditsRanking = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: ${props => props.theme.colors.surface};
+  border: 1px solid ${props => props.theme.colors.border};
+  border-radius: 6px;
+  padding: 8px;
+  min-width: 120px;
+  max-height: 200px;
+  overflow-y: auto;
+  font-size: 0.7rem;
+  box-shadow: ${props => props.theme.shadows.small};
+  
+  @media (max-width: 768px) {
+    position: relative;
+    margin-bottom: 12px;
+    max-height: none;
+    overflow-y: visible;
+  }
+  
+  @media (min-width: 481px) and (max-width: 1200px) {
+    padding: 6px;
+    min-width: 100px;
+    font-size: 0.6rem;
+  }
+`;
+
+const MiniRankingTitle = styled.h4`
+  color: ${props => props.theme.colors.text};
+  font-size: 0.7rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  text-align: center;
+  border-bottom: 1px solid ${props => props.theme.colors.border};
+  padding-bottom: 2px;
+  
+  @media (min-width: 481px) and (max-width: 1200px) {
+    font-size: 0.6rem;
+    margin-bottom: 4px;
+  }
+`;
+
+const MiniRankingItem = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px 0;
+  border-bottom: 1px solid ${props => props.theme.colors.border};
+  
+  &:last-child {
+    border-bottom: none;
+  }
+`;
+
+const MiniRankingUser = styled.span`
+  color: ${props => props.$isCurrentUser ? props.theme.colors.secondary : props.theme.colors.text};
+  font-weight: ${props => props.$isCurrentUser ? '600' : '400'};
+  font-size: 0.65rem;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-right: 4px;
+  
+  @media (min-width: 481px) and (max-width: 1200px) {
+    font-size: 0.55rem;
+  }
+`;
+
+const MiniRankingCredits = styled.span`
+  color: ${props => props.$isCurrentUser ? props.theme.colors.secondary : props.theme.colors.textSecondary};
+  font-weight: 600;
+  font-size: 0.65rem;
+  flex-shrink: 0;
+  
+  @media (min-width: 481px) and (max-width: 1200px) {
+    font-size: 0.55rem;
+  }
+`;
 const CenteredMessage = styled.div`
   text-align: center;
   color: #B0BEC5;
@@ -1218,60 +1300,60 @@ const submitBid = async (e) => {
   const winningBid = bids.length > 0 ? bids[0] : null;
 
   return (
-    <AstaContainer>
-   
-      <Header>
-        <Title>
-          <Gavel size={32} />
-          Asta Live
-        </Title>
-        <StatusBadge $active={isActive}>
-          <LiveDot $active={isActive} />
-          {isActive ? 'ASTA IN CORSO' : 'ASTA TERMINATA'}
-        </StatusBadge>
-      </Header>
-       {currentAuction && utentiCrediti.length > 0 && (
-      <CreditsRanking>
-        <RankingTitle>💰 Crediti Rimanenti</RankingTitle>
-        {utentiCrediti.map((utente, index) => (
-          <RankingItem key={utente.id}>
-            <RankingUser $isCurrentUser={utente.id === user?.id}>
-              {utente.username}
-            </RankingUser>
-            <RankingCredits $isCurrentUser={utente.id === user?.id}>
-              {utente.crediti_rimanenti}
-            </RankingCredits>
-          </RankingItem>
-        ))}
-      </CreditsRanking>
-    )}
+   <AstaContainer>
+  <Header>
+    <Title>
+      <Gavel size={32} />
+      Asta Live
+    </Title>
+    <StatusBadge $active={isActive}>
+      <LiveDot $active={isActive} />
+      {isActive ? 'ASTA IN CORSO' : 'ASTA TERMINATA'}
+    </StatusBadge>
+  </Header>
 
-      <AuctionCard>
-        <PlayerSection>
-          <PlayerName>{currentAuction.calciatore_nome}</PlayerName>
-          
-          <PlayerDetails>
-            <PlayerDetail>
-              <DetailLabel>Squadra</DetailLabel>
-              <DetailValue>{currentAuction.squadra}</DetailValue>
-            </PlayerDetail>
-            <PlayerDetail>
-              <DetailLabel>Ruolo</DetailLabel>
-              <DetailValue>{currentAuction.ruolo}</DetailValue>
-            </PlayerDetail>
-            <PlayerDetail>
-              <DetailLabel>Quotazione</DetailLabel>
-              <DetailValue>{currentAuction.quotazione}</DetailValue>
-            </PlayerDetail>
-          </PlayerDetails>
-        </PlayerSection>
+  <AuctionCard>
+    <PlayerSection>
+      {currentAuction && utentiCrediti.length > 0 && (
+        <MiniCreditsRanking>
+          <MiniRankingTitle>💰 Crediti</MiniRankingTitle>
+          {utentiCrediti.slice(0, 8).map((utente) => (
+            <MiniRankingItem key={utente.id}>
+              <MiniRankingUser $isCurrentUser={utente.id === user?.id}>
+                {utente.username}
+              </MiniRankingUser>
+              <MiniRankingCredits $isCurrentUser={utente.id === user?.id}>
+                {utente.crediti_rimanenti}
+              </MiniRankingCredits>
+            </MiniRankingItem>
+          ))}
+        </MiniCreditsRanking>
+      )}
+      
+      <PlayerName>{currentAuction.calciatore_nome}</PlayerName>
+      
+      <PlayerDetails>
+        <PlayerDetail>
+          <DetailLabel>Squadra</DetailLabel>
+          <DetailValue>{currentAuction.squadra}</DetailValue>
+        </PlayerDetail>
+        <PlayerDetail>
+          <DetailLabel>Ruolo</DetailLabel>
+          <DetailValue>{currentAuction.ruolo}</DetailValue>
+        </PlayerDetail>
+        <PlayerDetail>
+          <DetailLabel>Quotazione</DetailLabel>
+          <DetailValue>{currentAuction.quotazione}</DetailValue>
+        </PlayerDetail>
+      </PlayerDetails>
+    </PlayerSection>
 
-        <TimerSection>
-          <TimeDisplay>{formatTime(timeLeft)}</TimeDisplay>
-          <TimerLabel>
-            {timeLeft > 0 ? 'Tempo Rimanente' : 'Asta Terminata'}
-          </TimerLabel>
-        </TimerSection>
+    <TimerSection>
+      <TimeDisplay>{formatTime(timeLeft)}</TimeDisplay>
+      <TimerLabel>
+        {timeLeft > 0 ? 'Tempo Rimanente' : 'Asta Terminata'}
+      </TimerLabel>
+    </TimerSection>
 
         <BidSection>
           <BidHeader>
