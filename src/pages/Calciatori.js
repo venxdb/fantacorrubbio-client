@@ -256,7 +256,7 @@ const FilterChip = styled.button`
 
 const PlayersGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: ${props => props.theme.spacing.lg};
   margin-bottom: ${props => props.theme.spacing.lg};
   
