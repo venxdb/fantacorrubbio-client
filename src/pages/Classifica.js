@@ -201,36 +201,35 @@ const CardsGrid = styled.div`
   }
 `;
 
-const Card = styled(motion.div)`
-  position: relative;
-  overflow: hidden;
-  border-radius: 1rem;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  transform: translateY(0);
-  transition: all 0.3s ease;
-  
-  ${props => props.$isTopThree ? `
-    box-shadow: 0 0 0 4px rgba(250, 204, 21, 0.3), 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  ` : ''}
-  
+const Card = styled.div`
+  background: #2d2d2d;
+  border-radius: 12px;
+  padding: 16px;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   &:hover {
-    transform: translateY(-5px) scale(1.02);
-    ${props => !props.$isTopThree ? `
-      box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.5), 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-    ` : ''}
+    transform: translateY(-5px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   }
-  
-  /* 🎯 TABLET: Card senza hover - ALLA FINE */
-  @media (min-width: 481px) and (max-width: 1200px) {
-    &:hover {
-      transform: none !important;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
-    }
+
+  /* Mobile */
+  @media (max-width: 640px) {
+    max-width: 100%;
   }
-    @media (min-width: 1280px) {
-  max-width: none; 
-}
+
+  /* Desktop */
+  @media (min-width: 1280px) {
+    width: 100%;         /* si adatta alla colonna */
+    max-width: 220px;    /* limite fluido, non troppo largo */
+  }
 `;
+
 
 const CardBackground = styled.div`
   position: absolute;
