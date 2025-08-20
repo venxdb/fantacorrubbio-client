@@ -1022,10 +1022,10 @@ const fetchUtentiCrediti = async () => {
     const response = await axios.get(`${API_URL}/api/utenti/rose/all`);
     const utenti = response.data.rose || [];
     
-    console.log('🎯 Dati ricevuti da /api/utenti/rose/all:', utenti);
+    
     
     if (utenti.length === 0) {
-      console.log('⚠️ Nessun utente trovato');
+     
       return;
     }
     
@@ -1043,7 +1043,6 @@ const fetchUtentiCrediti = async () => {
       }))
       .sort((a, b) => b.crediti_rimanenti - a.crediti_rimanenti);
     
-    console.log('🎯 Utenti crediti caricati:', utentiOrdinati);
     setUtentiCrediti(utentiOrdinati);
   } catch (error) {
     console.error('Errore caricamento crediti utenti:', error);
