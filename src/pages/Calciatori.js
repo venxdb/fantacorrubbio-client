@@ -613,6 +613,42 @@ const ActiveFiltersCount = styled.div`
   }
 `;
 
+const SquadraDropdown = styled.select`
+  padding: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.md};
+  background: ${props => props.theme.colors.surface};
+  border: 1px solid ${props => props.theme.colors.border};
+  border-radius: 20px;
+  color: ${props => props.theme.colors.text};
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 36px;
+  outline: none;
+
+  &:hover, &:focus {
+    background: ${props => props.theme.colors.surfaceHover};
+    border-color: ${props => props.theme.colors.primary};
+  }
+
+  /* Mobile */
+  @media (max-width: 480px) {
+    font-size: 0.8rem;
+    padding: ${props => props.theme.spacing.xs} ${props => props.theme.spacing.sm};
+    border-radius: 16px;
+    min-height: 40px;
+  }
+
+  /* 🎯 TABLET: Dropdown compatto */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    padding: 3px 8px !important;
+    font-size: 0.7rem !important;
+    border-radius: 12px !important;
+    min-height: 28px !important;
+    font-weight: 500 !important;
+  }
+`;
+
 const Calciatori = () => {
   const [calciatori, setCalciatori] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -620,6 +656,33 @@ const Calciatori = () => {
   const [selectedRole, setSelectedRole] = useState('');
   const [selectedTeam, setSelectedTeam] = useState('');
   const [disponibileFilter, setDisponibileFilter] = useState('');
+  const [squadre, setSquadre] = useState([]);
+
+  const getSquadraLogo = (squadra) => {
+    const loghi = {
+      'Milan': '🔴⚫',
+      'Atalanta': '🔵⚫',
+      'Bologna': '🔴🔵',
+      'Cagliari': '🔴🔵',
+      'Como': '🔵⚪',
+      'Cremonese': '🔴⚫',
+      'Fiorentina': '🟣⚪',
+      'Genoa': '🔴🔵',
+      'Inter': '🔵⚫',
+      'Juventus': '⚪⚫',
+      'Lazio': '🔵⚪',
+      'Lecce': '🟡🔴',
+      'Napoli': '🔵⚪',
+      'Parma': '🟡🔵',
+      'Pisa': '🔵⚫',
+      'Roma': '🟡🔴',
+      'Sassuolo': '🟢⚫',
+      'Torino': '🟤⚪',
+      'Udinese': '⚫⚪',
+      'Verona': '🟡🔵'
+    };
+    return loghi[squadra] || '⚽';
+  };
 
   const roles = [
     { key: 'P', label: 'Portieri', icon: '🥅' },
@@ -643,7 +706,18 @@ const Calciatori = () => {
       if (disponibileFilter) params.append('disponibile', disponibileFilter);
       
       const response = await axios.get(`${API_URL}/api/calciatori?${params.toString()}`);
-      setCalciatori(response.data.calciatori);
+      
+      // Ordina sempre per quotazione decrescente
+      const calciatoriOrdinati = response.data.calciatori.sort((a, b) => b.quotazione - a.quotazione);
+      setCalciatori(calciatoriOrdinati);
+      
+      // Estrai squadre uniche per il filtro (solo alla prima chiamata)
+      if (squadre.length === 0) {
+        const squadreUniche = [...new Set(response.data.calciatori.map(c => c.squadra))]
+          .sort()
+          .map(squadra => ({ nome: squadra, logo: getSquadraLogo(squadra) }));
+        setSquadre(squadreUniche);
+      }
     } catch (error) {
       console.error('Errore caricamento calciatori:', error);
       toast.error('Errore nel caricamento dei calciatori');
@@ -710,6 +784,19 @@ const Calciatori = () => {
         >
           Acquistati
         </FilterChip>
+
+        {/* Dropdown per squadre */}
+        <SquadraDropdown
+          value={selectedTeam}
+          onChange={(e) => setSelectedTeam(e.target.value)}
+        >
+          <option value="">Tutte le squadre</option>
+          {squadre.map(squadra => (
+            <option key={squadra.nome} value={squadra.nome}>
+              {squadra.logo} {squadra.nome}
+            </option>
+          ))}
+        </SquadraDropdown>
 
         {roles.map(role => (
           <FilterChip
