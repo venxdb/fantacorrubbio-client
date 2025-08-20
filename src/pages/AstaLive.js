@@ -887,20 +887,35 @@ const fetchValidationInfo = async (auctionId) => {
 
 const fetchUtentiCrediti = async () => {
   try {
-    const response = await axios.get(`${API_URL}/api/utenti/crediti`);
-    const utenti = response.data.utenti || [];
+    const response = await axios.get(`${API_URL}/api/utenti/rose/all`);
+    const utenti = response.data.rose || [];
     
-    // Ordina per crediti rimanenti (decrescente)
+    console.log('🎯 Dati ricevuti da /api/utenti/rose/all:', utenti);
+    
+    if (utenti.length === 0) {
+      console.log('⚠️ Nessun utente trovato');
+      return;
+    }
+    
+    // I dati arrivano già con crediti_totali, crediti_spesi, crediti_disponibili
+    // Ordina per crediti disponibili (decrescente)
     const utentiOrdinati = utenti
+      .filter(utente => utente.username) // Filtra utenti validi
       .map(utente => ({
-        ...utente,
-        crediti_rimanenti: utente.crediti_totali - utente.crediti_spesi
+        id: utente.id,
+        username: utente.username,
+        is_admin: utente.is_admin,
+        crediti_totali: utente.crediti_totali,
+        crediti_spesi: utente.crediti_spesi,
+        crediti_rimanenti: utente.crediti_disponibili // Usa il campo che già viene calcolato dal backend
       }))
       .sort((a, b) => b.crediti_rimanenti - a.crediti_rimanenti);
     
+    console.log('🎯 Utenti crediti caricati:', utentiOrdinati);
     setUtentiCrediti(utentiOrdinati);
   } catch (error) {
     console.error('Errore caricamento crediti utenti:', error);
+    console.error('Dettagli errore:', error.response?.data);
   }
 };
 
