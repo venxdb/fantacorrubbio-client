@@ -192,20 +192,19 @@ const CardsGrid = styled.div`
     grid-template-columns: repeat(2, 1fr);
   }
   
-  @media (min-width: 1024px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  
-  @media (min-width: 1280px) {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
-  }
-  
-  /* 🎯 TABLET: 4 colonne come richiesto - ALLA FINE */
+   /* 🎯 TABLET: 4 colonne come richiesto - ALLA FINE */
   @media (min-width: 481px) and (max-width: 1200px) {
     grid-template-columns: repeat(4, 1fr) !important;
     gap: 6px !important;
   }
+  
+  
+  @media (min-width: 1280px) {
+    grid-template-columns: repeat(8, 1fr);
+    gap: 1.5rem;
+  }
+  
+ 
 `;
 
 const Card = styled(motion.div)`
@@ -234,6 +233,9 @@ const Card = styled(motion.div)`
       box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
     }
   }
+    @media (min-width: 1280px) {
+  max-width: 180px; // Limita larghezza massima
+}
 `;
 
 const CardBackground = styled.div`
@@ -272,6 +274,9 @@ const CardContent = styled.div`
   @media (min-width: 481px) and (max-width: 1200px) {
     padding: 0.4rem !important;
   }
+    @media (min-width: 1280px) {
+  padding: 0.5rem; 
+}
 `;
 
 const PositionBadge = styled.div`
@@ -342,9 +347,7 @@ const UserName = styled.h3`
     line-height: 1.2;
   }
   
-  @media (min-width: 768px) {
-    font-size: 1.25rem;
-  }
+  
   
   /* 🎯 TABLET: Nome compatto - ALLA FINE */
   @media (min-width: 481px) and (max-width: 1200px) {
@@ -352,6 +355,9 @@ const UserName = styled.h3`
     font-weight: 600 !important;
     line-height: 1.2 !important;
   }
+    @media (min-width: 1280px) {
+  font-size: 0.9rem; 
+}
 `;
 
 const AdminCrown = styled.span`
@@ -406,6 +412,10 @@ const CreditsSection = styled.div`
     margin-bottom: 0.4rem !important;
     border-radius: 0.3rem !important;
   }
+    @media (min-width: 1280px) {
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+}
 `;
 
 const CreditsHeader = styled.div`
@@ -456,6 +466,10 @@ const CreditsIcon = styled(Coins)`
     width: 0.9rem !important;
     height: 0.9rem !important;
   }
+    @media (min-width: 1280px) {
+  width: 1rem;
+  height: 1rem;
+}
 `;
 
 const CreditsValue = styled.div`
@@ -473,6 +487,9 @@ const CreditsValue = styled.div`
     font-size: 1.1rem !important;
     font-weight: 700 !important;
   }
+    @media (min-width: 1280px) {
+  font-size: 1.2rem; 
+}
 `;
 
 const RosaSection = styled.div`
@@ -520,6 +537,9 @@ const RolesGrid = styled.div`
   @media (min-width: 481px) and (max-width: 1200px) {
     gap: 0.2rem !important;
   }
+    @media (min-width: 1280px) {
+  gap: 0.25rem;
+}
 `;
 
 const RoleCard = styled.div`
