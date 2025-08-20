@@ -330,10 +330,30 @@ const BidTitle = styled.h3`
   color: ${props => props.theme.colors.text};
   font-size: 1.3rem;
   font-weight: 600;
+  margin: 0 0 16px 0;
+  padding-bottom: 8px;
+  border-bottom: 2px solid ${props => props.theme.colors.border};
   
   @media (max-width: 768px) {
     font-size: 1.1rem;
     text-align: center;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+  }
+  
+  /* 🎯 TABLET: Titolo compatto */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    font-size: 1rem !important;
+    margin-bottom: 8px !important;
+    padding-bottom: 4px !important;
+  }
+  
+  /* 🎯 DESKTOP: Più elegante */
+  @media (min-width: 1201px) {
+    font-size: 1.4rem !important;
+    margin-bottom: 20px !important;
+    padding-bottom: 10px !important;
+    border-bottom: 2px solid ${props => props.theme.colors.primary} !important;
   }
 `;
 
@@ -820,7 +840,13 @@ const MiniCreditsRanking = styled.div`
     font-size: 0.6rem;
   }
   
-  /* 🎯 DESKTOP: Mantiene 0.9rem (già impostato sopra) */
+  /* 🎯 DESKTOP: Font molto più grande */
+  @media (min-width: 1201px) {
+    font-size: 1rem !important;
+    min-width: 160px !important;
+    padding: 12px !important;
+    border-radius: 8px !important;
+  }
 `;
 
 const MiniRankingTitle = styled.h4`
@@ -836,6 +862,14 @@ const MiniRankingTitle = styled.h4`
     font-size: 0.6rem;
     margin-bottom: 4px;
   }
+  
+  /* 🎯 DESKTOP: Titolo più grande */
+  @media (min-width: 1201px) {
+    font-size: 0.9rem !important;
+    margin-bottom: 8px !important;
+    padding-bottom: 4px !important;
+    font-weight: 700 !important;
+  }
 `;
 
 const MiniRankingItem = styled.div`
@@ -847,6 +881,11 @@ const MiniRankingItem = styled.div`
   
   &:last-child {
     border-bottom: none;
+  }
+  
+  /* 🎯 DESKTOP: Padding più grande */
+  @media (min-width: 1201px) {
+    padding: 4px 0 !important;
   }
 `;
 
@@ -863,6 +902,12 @@ const MiniRankingUser = styled.span`
   @media (min-width: 481px) and (max-width: 1200px) {
     font-size: 0.55rem;
   }
+  
+  /* 🎯 DESKTOP: Font più grande */
+  @media (min-width: 1201px) {
+    font-size: 0.85rem !important;
+    margin-right: 8px !important;
+  }
 `;
 
 const MiniRankingCredits = styled.span`
@@ -873,6 +918,12 @@ const MiniRankingCredits = styled.span`
   
   @media (min-width: 481px) and (max-width: 1200px) {
     font-size: 0.55rem;
+  }
+  
+  /* 🎯 DESKTOP: Font più grande */
+  @media (min-width: 1201px) {
+    font-size: 0.85rem !important;
+    font-weight: 700 !important;
   }
 `;
 const CenteredMessage = styled.div`
