@@ -709,31 +709,20 @@ const NoAuctionText = styled.p`
   }
 `;
 const CreditsRanking = styled.div`
-  position: fixed;
-  top: 20px;
-  left: 20px;
   background: ${props => props.theme.colors.surface};
   border: 1px solid ${props => props.theme.colors.border};
   border-radius: 8px;
   padding: 12px;
-  min-width: 180px;
-  max-height: 70vh;
-  overflow-y: auto;
-  z-index: 1000;
-  box-shadow: ${props => props.theme.shadows.medium};
+  margin-bottom: 16px;
   
   @media (max-width: 768px) {
-    position: relative;
-    top: auto;
-    left: auto;
-    margin-bottom: 16px;
-    max-height: none;
-    overflow-y: visible;
+    padding: 8px;
+    margin-bottom: 12px;
   }
   
   @media (min-width: 481px) and (max-width: 1200px) {
     padding: 8px;
-    min-width: 150px;
+    margin-bottom: 8px;
     font-size: 0.8rem;
   }
 `;
@@ -1230,7 +1219,18 @@ const submitBid = async (e) => {
 
   return (
     <AstaContainer>
-    {currentAuction && utentiCrediti.length > 0 && (
+   
+      <Header>
+        <Title>
+          <Gavel size={32} />
+          Asta Live
+        </Title>
+        <StatusBadge $active={isActive}>
+          <LiveDot $active={isActive} />
+          {isActive ? 'ASTA IN CORSO' : 'ASTA TERMINATA'}
+        </StatusBadge>
+      </Header>
+       {currentAuction && utentiCrediti.length > 0 && (
       <CreditsRanking>
         <RankingTitle>💰 Crediti Rimanenti</RankingTitle>
         {utentiCrediti.map((utente, index) => (
@@ -1245,16 +1245,6 @@ const submitBid = async (e) => {
         ))}
       </CreditsRanking>
     )}
-      <Header>
-        <Title>
-          <Gavel size={32} />
-          Asta Live
-        </Title>
-        <StatusBadge $active={isActive}>
-          <LiveDot $active={isActive} />
-          {isActive ? 'ASTA IN CORSO' : 'ASTA TERMINATA'}
-        </StatusBadge>
-      </Header>
 
       <AuctionCard>
         <PlayerSection>
