@@ -808,20 +808,19 @@ const MiniCreditsRanking = styled.div`
   font-size: 0.9rem;
   box-shadow: ${props => props.theme.shadows.small};
   
+  /* 🎯 MOBILE: Nascondere completamente */
   @media (max-width: 768px) {
-    position: relative;
-    margin-bottom: 12px;
+    display: none !important;
   }
   
+  /* 🎯 TABLET: Più compatto */
   @media (min-width: 481px) and (max-width: 1200px) {
     padding: 6px;
     min-width: 100px;
     font-size: 0.6rem;
   }
-     /* 🎯 MOBILE: Nascondere completamente */
-  @media (max-width: 768px) {
-    display: none !important;
-  }
+  
+  /* 🎯 DESKTOP: Mantiene 0.9rem (già impostato sopra) */
 `;
 
 const MiniRankingTitle = styled.h4`
