@@ -134,11 +134,22 @@ const AuctionCard = styled.div`
   padding: ${props => props.theme.spacing.lg};
   margin-bottom: ${props => props.theme.spacing.lg};
   
-  /* 🎯 TABLET: Card compatta */
+  /* 🎯 TABLET: Card compatta con altezza ridotta */
   @media (min-width: 481px) and (max-width: 1200px) {
+    padding: 8px !important;
+    margin-bottom: 8px !important;
+    border-radius: 6px !important;
+    max-height: 70vh !important;
+    overflow: hidden !important;
+  }
+  
+  /* 🎯 DESKTOP: Card compatta con altezza ridotta */
+  @media (min-width: 1201px) {
     padding: 12px !important;
     margin-bottom: 12px !important;
     border-radius: 8px !important;
+    max-height: 75vh !important;
+    overflow: hidden !important;
   }
   
   @media (max-width: 768px) {
@@ -806,6 +817,10 @@ const MiniCreditsRanking = styled.div`
     padding: 6px;
     min-width: 100px;
     font-size: 0.6rem;
+  }
+     /* 🎯 MOBILE: Nascondere completamente */
+  @media (max-width: 768px) {
+    display: none !important;
   }
 `;
 
