@@ -180,11 +180,18 @@ const Subtitle = styled(motion.p)`
 
 const CardsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 20px;
   justify-items: center;
   margin-top: 20px;
   padding: 20px;
+
+  /* default: fluido */
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+
+  /* desktop XL: forzati 8 */
+  @media (min-width: 1280px) {
+    grid-template-columns: repeat(8, 1fr);
+  }
 `;
 
 const Card = styled.div`
