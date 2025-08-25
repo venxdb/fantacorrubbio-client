@@ -1349,7 +1349,7 @@ const submitBid = async (e) => {
           </NoAuctionIcon>
           <NoAuctionTitle>Nessuna Asta in Corso</NoAuctionTitle>
           <NoAuctionText>
-            Al momento non ci sono aste attive. Calmati! <br>"C'è un luogo e un momento per ogni cosa, ma non ora!"</br>
+            Al momento non ci sono aste attive. Calmati!"C'è un luogo e un momento per ogni cosa, ma non ora!"
           </NoAuctionText>
         </NoAuctionState>
       </AstaContainer>
