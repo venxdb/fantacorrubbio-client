@@ -806,7 +806,7 @@ const MiaRosa = () => {
           </EmptyIcon>
           <EmptyTitle>Rosa Vuota</EmptyTitle>
           <EmptyText>
-            Non hai ancora acquistato nessun calciatore. Partecipa alle aste per iniziare a costruire la tua rosa!
+            Non hai ancora acquistato nessun calciatore. Sbrigati miseriaccia!
           </EmptyText>
         </EmptyState>
       ) : (
