@@ -791,7 +791,7 @@ const getRolePercentages = (rosa = [], creditiTotali = 350) => {
   Object.keys(roleCredits).forEach(ruolo => {
     const creditiSpesi = roleCredits[ruolo].creditiSpesi;
     roleCredits[ruolo].percentuale = creditiTotali > 0 
-      ? Math.round((creditiSpesi / creditiTotali) * 100) / 10
+      ? Math.round((creditiSpesi / creditiTotali) * 1000) / 10
       : 0;
   });
 
