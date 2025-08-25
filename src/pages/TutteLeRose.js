@@ -930,7 +930,7 @@ const getRolePercentages = (rosa = [], creditiTotali = 350) => {
           Tutte le Rose
         </Title>
         <Subtitle>
-          Esplora le rose di tutti gli allenatori e i loro progressi
+          Esplora le rose degli altri visto che non sai farti i cazzi tuoi! Ah puoi filtrare per ruolo se vuoi.
         </Subtitle>
       </Header>
         <FilterContainer>
