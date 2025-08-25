@@ -380,6 +380,37 @@ const RoleCounter = styled.span`
   border-radius: 10px !important;
 }
 `;
+// Aggiungi questo componente styled dopo RoleCounter
+const RolePercentage = styled.span`
+  background: ${props => props.theme.colors.primary};
+  color: white;
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-size: 0.65rem;
+  font-weight: 500;
+  margin-left: 4px;
+  opacity: 0.8;
+  
+  /* Mobile */
+  @media (max-width: 480px) {
+    font-size: 0.6rem;
+    padding: 1px 4px;
+  }
+  
+  /* Tablet */
+  @media (min-width: 481px) and (max-width: 1200px) {
+    font-size: 0.55rem !important;
+    padding: 1px 4px !important;
+    margin-left: 2px !important;
+  }
+  
+  /* Desktop */
+  @media (min-width: 1201px) {
+    font-size: 0.6rem !important;
+    padding: 2px 5px !important;
+    margin-left: 3px !important;
+  }
+`;
 
 const PlayersContainer = styled.div`
   display: grid;
@@ -733,6 +764,39 @@ const resetFiltri = () => {
     return stats;
   };
 
+  // Aggiungi questa funzione helper dopo getRoleStats
+const getRolePercentages = (rosa = [], creditiTotali = 350) => {
+  const roleCredits = {};
+  
+  // Inizializza tutti i ruoli
+  Object.keys(REQUISITI_ROSA).forEach(ruolo => {
+    roleCredits[ruolo] = {
+      creditiSpesi: 0,
+      percentuale: 0
+    };
+  });
+
+  // Calcola crediti spesi per ruolo
+  if (Array.isArray(rosa)) {
+    rosa.forEach(giocatore => {
+      const ruolo = giocatore?.ruolo;
+      const prezzo = giocatore?.prezzo_acquisto || 0;
+      if (ruolo && roleCredits[ruolo]) {
+        roleCredits[ruolo].creditiSpesi += prezzo;
+      }
+    });
+  }
+
+  // Calcola percentuali
+  Object.keys(roleCredits).forEach(ruolo => {
+    const creditiSpesi = roleCredits[ruolo].creditiSpesi;
+    roleCredits[ruolo].percentuale = creditiTotali > 0 
+      ? Math.round((creditiSpesi / creditiTotali) * 100) 
+      : 0;
+  });
+
+  return roleCredits;
+};
   const renderUserRosa = (utente) => {
     // Controlli di sicurezza per evitare errori
     const rosa = utente?.rosa || [];
@@ -740,6 +804,8 @@ const resetFiltri = () => {
     const creditiSpesi = rosa.reduce((sum, p) => sum + (p?.prezzo_acquisto || 0), 0);
     const creditiRimanenti = creditiTotali - creditiSpesi;
     const roleStats = getRoleStats(rosa);
+    const rolePercentages = getRolePercentages(rosa, utente?.crediti_totali || 350); // AGGIUNGI QUESTA RIGA
+
 
     return (
   <UserCard key={utente.id}>
@@ -770,6 +836,7 @@ const resetFiltri = () => {
 
         {Object.entries(REQUISITI_ROSA).filter(([ruolo]) => filtriRuoli.includes(ruolo)).map(([ruolo, config]) => {
           const stats = roleStats[ruolo];
+          const percentages = rolePercentages[ruolo];
           const postiLiberi = config.max - stats.count;
           
           // Crea un array unificato con giocatori e slot vuoti
@@ -795,15 +862,20 @@ const resetFiltri = () => {
           return (
             
             <RoleSection key={ruolo}>
-              <RoleHeader>
-                <RoleTitle>
-                  <span>{config.icon}</span>
-                  {config.nome}
-                </RoleTitle>
+            <RoleHeader>
+              <RoleTitle>
+                <span>{config.icon}</span>
+                {config.nome}
+              </RoleTitle>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
                 <RoleCounter $complete={stats.complete}>
                   {stats.count}/{config.max}
                 </RoleCounter>
-              </RoleHeader>
+                <RolePercentage>
+                  {percentages.percentuale}%
+                </RolePercentage>
+              </div>
+            </RoleHeader>
 
               <PlayersContainer>
                 {allSlots.map((slot) => {
