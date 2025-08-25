@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Play, Pause, RotateCw, Trophy, Users, Sparkles, Crown, Dice6 } from 'lucide-react';
 
-
 const Container = styled.div`
   min-height: calc(100vh - 140px);
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -23,34 +22,73 @@ const BackgroundDecorations = styled.div`
   right: 0;
   bottom: 0;
   pointer-events: none;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
-    top: -150px;
-    left: -150px;
-    animation: float 6s ease-in-out infinite;
-  }
-  
-  &::after {
-    content: '';
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.05);
-    bottom: -100px;
-    right: -100px;
-    animation: float 8s ease-in-out infinite reverse;
-  }
+  overflow: hidden;
   
   @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-20px); }
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(5deg); }
+  }
+  
+  @keyframes floatReverse {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(15px) rotate(-3deg); }
+  }
+`;
+
+const CircleDecoration = styled.div`
+  position: absolute;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.6;
+  
+  &.circle-1 {
+    width: 120px;
+    height: 120px;
+    top: 10%;
+    left: -60px;
+    animation: float 8s ease-in-out infinite;
+  }
+  
+  &.circle-2 {
+    width: 80px;
+    height: 80px;
+    top: 60%;
+    left: -40px;
+    animation: floatReverse 6s ease-in-out infinite;
+  }
+  
+  &.circle-3 {
+    width: 100px;
+    height: 100px;
+    top: 30%;
+    right: -50px;
+    animation: float 10s ease-in-out infinite;
+  }
+  
+  &.circle-4 {
+    width: 60px;
+    height: 60px;
+    top: 70%;
+    right: -30px;
+    animation: floatReverse 7s ease-in-out infinite;
+  }
+  
+  &.circle-5 {
+    width: 90px;
+    height: 90px;
+    bottom: 20%;
+    right: -45px;
+    animation: float 9s ease-in-out infinite;
+  }
+  
+  &.circle-6 {
+    width: 70px;
+    height: 70px;
+    bottom: 10%;
+    left: -35px;
+    animation: floatReverse 8s ease-in-out infinite;
   }
 `;
 
@@ -94,6 +132,41 @@ const PlayerSelectionArea = styled.div`
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(102, 126, 234, 0.2);
   border: 1px solid rgba(102, 126, 234, 0.3);
   margin-bottom: 0.5rem;
+`;
+
+const ImageUploadSection = styled.div`
+  margin-bottom: 1rem;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 1rem;
+`;
+
+const ImageUpload = styled.input`
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+  width: 100%;
+  max-width: 300px;
+  
+  &::file-selector-button {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 4px;
+    padding: 0.3rem 0.6rem;
+    color: white;
+    margin-right: 0.5rem;
+    cursor: pointer;
+  }
+`;
+
+const ImageUploadLabel = styled.div`
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 0.5rem;
 `;
 
 const PlayerInputs = styled.div`
@@ -256,6 +329,7 @@ const RandomPlayerWheel = () => {
   const [winner, setWinner] = useState(null);
   const [showResult, setShowResult] = useState(false);
   const [sparkles, setSparkles] = useState([]);
+  const [imageUrl, setImageUrl] = useState('');
   const wheelRef = useRef(null);
 
   const colors = ['#667eea', '#764ba2'];
@@ -273,25 +347,30 @@ const RandomPlayerWheel = () => {
     setSparkles(newSparkles);
   };
 
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const url = URL.createObjectURL(file);
+      setImageUrl(url);
+    }
+  };
+
   const spinWheel = () => {
     if (isSpinning || !player1.trim() || !player2.trim()) return;
 
     setIsSpinning(true);
     createSparkles();
 
-   
     const baseRotation = 360 * (4 + Math.random() * 6);
     const finalAngle = Math.random() * 360;
     const totalRotation = rotation + baseRotation + finalAngle;
 
     setRotation(totalRotation);
 
-   
     const normalizedAngle = (totalRotation % 360);
     const winnerIndex = normalizedAngle > 180 ? 0 : 1;
     const winnerName = winnerIndex === 0 ? player1 : player2;
 
-    
     setTimeout(() => {
       setWinner(winnerName);
       setShowResult(true);
@@ -310,7 +389,36 @@ const RandomPlayerWheel = () => {
 
   return (
     <Container>
-      <BackgroundDecorations />
+      <BackgroundDecorations>
+        {imageUrl && (
+          <>
+            <CircleDecoration 
+              className="circle-1" 
+              style={{ backgroundImage: `url(${imageUrl})` }} 
+            />
+            <CircleDecoration 
+              className="circle-2" 
+              style={{ backgroundImage: `url(${imageUrl})` }} 
+            />
+            <CircleDecoration 
+              className="circle-3" 
+              style={{ backgroundImage: `url(${imageUrl})` }} 
+            />
+            <CircleDecoration 
+              className="circle-4" 
+              style={{ backgroundImage: `url(${imageUrl})` }} 
+            />
+            <CircleDecoration 
+              className="circle-5" 
+              style={{ backgroundImage: `url(${imageUrl})` }} 
+            />
+            <CircleDecoration 
+              className="circle-6" 
+              style={{ backgroundImage: `url(${imageUrl})` }} 
+            />
+          </>
+        )}
+      </BackgroundDecorations>
       
       {/* Sparkles Animation */}
       <AnimatePresence>
@@ -359,6 +467,17 @@ const RandomPlayerWheel = () => {
 
       <MainContent>
         <PlayerSelectionArea>
+          <ImageUploadSection>
+            <ImageUpload
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload}
+            />
+            <ImageUploadLabel>
+              📸 Carica un'immagine per le decorazioni circolari
+            </ImageUploadLabel>
+          </ImageUploadSection>
+          
           <PlayerInputs>
             <PlayerInput
               type="text"
@@ -492,7 +611,7 @@ const RandomPlayerWheel = () => {
                 }}
               >
                 Reset Ruota
-              </motion.button>
+              </button>
             )}
           </ControlArea>
         </WheelContainer>
