@@ -382,7 +382,12 @@ const BidStats = styled.div`
     font-size: 0.8rem;
     text-align: center;
   }
-  
+  @media (min-width: 481px) and (max-width: 1200px) {
+  flex-direction: column !important;
+  gap: 4px !important;
+  font-size: 0.7rem !important;
+  align-items: flex-start !important;
+}
   @media (max-width: 480px) {
     font-size: 0.75rem;
   }
@@ -462,9 +467,10 @@ const BidForm = styled.form`
   @media (max-width: 768px) {
     gap: ${props => props.theme.spacing.sm};
   }
-    @media (min-width: 481px) and (max-width: 1200px) {
-  align-items: center !important;
-  justify-content: space-between !important;
+@media (min-width: 481px) and (max-width: 1200px) {
+  align-items: flex-start !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
 }
   
   @media (max-width: 480px) {
@@ -479,9 +485,9 @@ const BidInputContainer = styled.div`
   display: flex;
   align-items: center;
 
-  @media (min-width: 481px) and (max-width: 1200px) {
-  flex: 0 0 120px !important;
-  max-width: 120px !important;
+@media (min-width: 481px) and (max-width: 1200px) {
+  flex: 0 0 140px !important;
+  max-width: 140px !important;
 }
 `;
 
@@ -589,14 +595,11 @@ const BidButton = styled(motion.button)`
     width: 100%;
     min-width: auto;
   }
-    /* Aggiungi dopo la media query 480px esistente: */
+    
 /* 🎯 TABLET: Button bid compatto */
 @media (min-width: 481px) and (max-width: 1200px) {
-  padding: 6px 12px !important;
-  font-size: 0.75rem !important;
-  min-width: 80px !important;
-  gap: 4px !important;
-  border-radius: 6px !important;
+  flex: 0 0 auto !important;
+  margin-left: 8px !important;
 }
 `;
 
