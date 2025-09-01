@@ -16,9 +16,8 @@ const AstaContainer = styled.div`
   /* 🎯 TABLET: Container ottimizzato 481px-1200px */
   @media (min-width: 481px) and (max-width: 1200px) {
     padding: ${props => props.theme.spacing.lg} ${props => props.theme.spacing.md};
-    padding-bottom: ${props => props.theme.spacing.xl};
+    padding-bottom: 120px; /* IMPORTANTE: Spazio per il footer */
     max-width: 700px !important;
-    min-height: auto !important;
     font-size: 0.85rem !important;
   }
   
@@ -139,8 +138,7 @@ const AuctionCard = styled.div`
     padding: ${props => props.theme.spacing.xl};
     margin-bottom: 3rem !important;
     border-radius: 6px !important;
-    max-height: 65vh !important;
-    overflow: hidden !important;
+    
   }
   
   /* 🎯 DESKTOP: Card compatta con altezza ridotta */
