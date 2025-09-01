@@ -319,10 +319,19 @@ const BidHeader = styled.div`
   margin-bottom: ${props => props.theme.spacing.md};
   gap: ${props => props.theme.spacing.sm};
   
+  @media (min-width: 481px) and (max-width: 1200px) {
+  margin-bottom: ${props => props.theme.spacing.lg};
+  gap: ${props => props.theme.spacing.md};
+  justify-content: flex-end;
+  align-items: center;
+}
+
+
   @media (max-width: 768px) {
     flex-direction: column;
     align-items: stretch;
     gap: ${props => props.theme.spacing.sm};
+    
   }
 `;
 
