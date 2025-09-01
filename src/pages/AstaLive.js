@@ -17,7 +17,7 @@ const AstaContainer = styled.div`
   @media (min-width: 481px) and (max-width: 1200px) {
     padding: ${props => props.theme.spacing.lg} ${props => props.theme.spacing.md};
     max-width: 700px !important;
-    height: 100vh !important;
+    height: 120vh !important;
     overflow-y: auto !important;
     font-size: 0.85rem !important;
   }
@@ -603,7 +603,7 @@ const BidButton = styled(motion.button)`
   flex: 0 0 auto !important;
   margin-left: 8px !important;
   padding: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.lg};
-  min-width: 140px !important;
+  min-width: 120px !important;
   font-size: 1rem !important;
 }
   
