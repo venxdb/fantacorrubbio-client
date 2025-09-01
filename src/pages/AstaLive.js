@@ -16,6 +16,7 @@ const AstaContainer = styled.div`
   /* 🎯 TABLET: Container ottimizzato 481px-1200px */
   @media (min-width: 481px) and (max-width: 1200px) {
     padding: ${props => props.theme.spacing.lg} ${props => props.theme.spacing.md};
+    padding-bottom: ${props => props.theme.spacing.xl};
     max-width: 700px !important;
     height: 120vh !important;
     overflow-y: auto !important;
