@@ -18,8 +18,7 @@ const AstaContainer = styled.div`
     padding: ${props => props.theme.spacing.lg} ${props => props.theme.spacing.md};
     padding-bottom: ${props => props.theme.spacing.xl};
     max-width: 700px !important;
-    height: 120vh !important;
-    overflow-y: auto !important;
+    min-height: auto !important;
     font-size: 0.85rem !important;
   }
   
