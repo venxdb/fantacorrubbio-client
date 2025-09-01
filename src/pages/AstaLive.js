@@ -346,6 +346,7 @@ const BidTitle = styled.h3`
     font-size: 0.9rem !important;
     margin-bottom: 6px !important;
     padding-bottom: 2px !important;
+    display: none !important;
   }
   
   /* 🎯 DESKTOP: Più elegante */
