@@ -15,8 +15,8 @@ const AstaContainer = styled.div`
   
   /* 🎯 TABLET: Container ottimizzato 481px-1200px */
   @media (min-width: 481px) and (max-width: 1200px) {
-    padding: 4px !important;
-    max-width: 100% !important;
+    padding: ${props => props.theme.spacing.lg} ${props => props.theme.spacing.md};
+    max-width: 700px !important;
     height: 100vh !important;
     overflow-y: auto !important;
     font-size: 0.85rem !important;
@@ -136,8 +136,8 @@ const AuctionCard = styled.div`
   
   /* 🎯 TABLET: Card compatta con altezza ridotta */
   @media (min-width: 481px) and (max-width: 1200px) {
-    padding: 6px !important;
-    margin-bottom: 6px !important;
+    padding: ${props => props.theme.spacing.xl};
+    margin-bottom: ${props => props.theme.spacing.xl};
     border-radius: 6px !important;
     max-height: 65vh !important;
     overflow: hidden !important;
@@ -470,7 +470,10 @@ const BidForm = styled.form`
 @media (min-width: 481px) and (max-width: 1200px) {
   align-items: flex-start !important;
   flex-wrap: wrap !important;
-  gap: 8px !important;
+  gap: ${props => props.theme.spacing.lg};
+  margin-bottom: ${props => props.theme.spacing.lg};
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
   
   @media (max-width: 480px) {
@@ -585,22 +588,22 @@ const BidButton = styled(motion.button)`
     cursor: not-allowed;
   }
   
-  @media (max-width: 768px) {
-    font-size: 0.9rem;
-    min-width: 100px;
-    padding: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.lg};
-  }
+  
+  @media (min-width: 481px) and (max-width: 1200px) {
+  flex: 0 0 auto !important;
+  margin-left: 8px !important;
+  padding: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.lg};
+  min-width: 140px !important;
+  font-size: 1rem !important;
+}
   
   @media (max-width: 480px) {
     width: 100%;
     min-width: auto;
   }
     
-/* 🎯 TABLET: Button bid compatto */
-@media (min-width: 481px) and (max-width: 1200px) {
-  flex: 0 0 auto !important;
-  margin-left: 8px !important;
-}
+
+
 `;
 
 const BidsList = styled.div`
