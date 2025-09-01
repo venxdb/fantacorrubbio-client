@@ -138,7 +138,7 @@ const AuctionCard = styled.div`
   /* 🎯 TABLET: Card compatta con altezza ridotta */
   @media (min-width: 481px) and (max-width: 1200px) {
     padding: ${props => props.theme.spacing.xl};
-    margin-bottom: ${props => props.theme.spacing.xl};
+    margin-bottom: 3rem !important;
     border-radius: 6px !important;
     max-height: 65vh !important;
     overflow: hidden !important;
