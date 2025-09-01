@@ -462,6 +462,10 @@ const BidForm = styled.form`
   @media (max-width: 768px) {
     gap: ${props => props.theme.spacing.sm};
   }
+    @media (min-width: 481px) and (max-width: 1200px) {
+  align-items: center !important;
+  justify-content: space-between !important;
+}
   
   @media (max-width: 480px) {
     flex-direction: column;
@@ -474,6 +478,11 @@ const BidInputContainer = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
+
+  @media (min-width: 481px) and (max-width: 1200px) {
+  flex: 0 0 120px !important;
+  max-width: 120px !important;
+}
 `;
 
 const BidInput = styled.input`
