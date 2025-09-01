@@ -15,7 +15,7 @@ const AstaContainer = styled.div`
   
   /* 🎯 TABLET: Container ottimizzato 481px-1200px */
   @media (min-width: 481px) and (max-width: 1200px) {
-    padding: 8px !important;
+    padding: 4px !important;
     max-width: 100% !important;
     height: 100vh !important;
     overflow-y: auto !important;
@@ -33,7 +33,7 @@ const Header = styled.div`
   
   /* 🎯 TABLET: Header compatto */
   @media (min-width: 481px) and (max-width: 1200px) {
-    margin-bottom: 12px !important;
+    margin-bottom: 8px !important;
   }
   
   @media (max-width: 768px) {
@@ -67,9 +67,9 @@ const Title = styled.h1`
 
 /* 🎯 TABLET: Titolo compatto */
 @media (min-width: 481px) and (max-width: 1200px) {
-  font-size: 1.4rem !important;
+  font-size: 1.2rem !important;
   font-weight: 700 !important;
-  margin-bottom: 6px !important;
+  margin-bottom: 4px !important;
   gap: 6px !important;
 }
 `;
@@ -136,10 +136,10 @@ const AuctionCard = styled.div`
   
   /* 🎯 TABLET: Card compatta con altezza ridotta */
   @media (min-width: 481px) and (max-width: 1200px) {
-    padding: 8px !important;
-    margin-bottom: 8px !important;
+    padding: 6px !important;
+    margin-bottom: 6px !important;
     border-radius: 6px !important;
-    max-height: 70vh !important;
+    max-height: 65vh !important;
     overflow: hidden !important;
   }
   
@@ -169,7 +169,7 @@ const PlayerSection = styled.div`
   
   /* 🎯 TABLET: Sezione player compatta */
   @media (min-width: 481px) and (max-width: 1200px) {
-    margin-bottom: 12px !important;
+    margin-bottom: 8px !important;
   }
   
   @media (max-width: 768px) {
@@ -194,9 +194,9 @@ const PlayerName = styled.h2`
     /* Aggiungi dopo la media query 480px esistente: */
 /* 🎯 TABLET: Nome player compatto */
 @media (min-width: 481px) and (max-width: 1200px) {
-  font-size: 1.2rem !important;
+  font-size: 1.1rem !important;
   font-weight: 600 !important;
-  margin-bottom: 6px !important;
+  margin-bottom: 4px !important;
   line-height: 1.3 !important;
 }
 `;
@@ -260,7 +260,7 @@ const TimerSection = styled.div`
   
   /* 🎯 TABLET: Timer compatto */
   @media (min-width: 481px) and (max-width: 1200px) {
-    margin-bottom: 12px !important;
+    margin-bottom: 8px !important;
   }
   
   @media (max-width: 768px) {
@@ -284,9 +284,9 @@ const TimeDisplay = styled.div`
     /* Aggiungi dopo la media query 480px esistente: */
 /* 🎯 TABLET: Display tempo compatto */
 @media (min-width: 481px) and (max-width: 1200px) {
-  font-size: 1.8rem !important;
+  font-size: 1.6rem !important;
   font-weight: 700 !important;
-  margin-bottom: 4px !important;
+  margin-bottom: 2px !important;
 }
 `;
 
@@ -304,7 +304,7 @@ const BidSection = styled.div`
   
   /* 🎯 TABLET: Sezione bid compatta */
   @media (min-width: 481px) and (max-width: 1200px) {
-    margin-bottom: 12px !important;
+    margin-bottom: 8px !important;
   }
   
   @media (max-width: 768px) {
@@ -343,9 +343,9 @@ const BidTitle = styled.h3`
   
   /* 🎯 TABLET: Titolo compatto */
   @media (min-width: 481px) and (max-width: 1200px) {
-    font-size: 1rem !important;
-    margin-bottom: 8px !important;
-    padding-bottom: 4px !important;
+    font-size: 0.9rem !important;
+    margin-bottom: 6px !important;
+    padding-bottom: 2px !important;
   }
   
   /* 🎯 DESKTOP: Più elegante */
@@ -518,8 +518,8 @@ const BidInput = styled.input`
   /* Aggiungi dopo la media query 480px esistente: */
 /* 🎯 TABLET: Input compatto */
 @media (min-width: 481px) and (max-width: 1200px) {
-  padding: 8px 40px 8px 8px !important;
-  font-size: 0.8rem !important;
+  padding: 6px 35px 6px 6px !important;
+  font-size: 0.75rem !important;
   border-radius: 6px !important;
   font-weight: 500 !important;
 }
@@ -583,8 +583,8 @@ const BidButton = styled(motion.button)`
     /* Aggiungi dopo la media query 480px esistente: */
 /* 🎯 TABLET: Button bid compatto */
 @media (min-width: 481px) and (max-width: 1200px) {
-  padding: 8px 16px !important;
-  font-size: 0.8rem !important;
+  padding: 6px 12px !important;
+  font-size: 0.75rem !important;
   min-width: 80px !important;
   gap: 4px !important;
   border-radius: 6px !important;
