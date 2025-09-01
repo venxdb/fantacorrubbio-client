@@ -146,8 +146,7 @@ const AuctionCard = styled.div`
     padding: 12px !important;
     margin-bottom: 12px !important;
     border-radius: 8px !important;
-    max-height: 75vh !important;
-    overflow: hidden !important;
+  
   }
   
   @media (max-width: 768px) {
