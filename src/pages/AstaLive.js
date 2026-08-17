@@ -8,6 +8,8 @@ import toast from 'react-hot-toast';
 import { useAuth } from '../contexts/AuthContext';
 import API_URL from '../config/api';
 
+const ROLE_COLORS = { P: '#F59E0B', D: '#22C55E', C: '#3B82F6', A: '#EF4444' };
+
 const AstaContainer = styled.div`
   padding: ${props => props.theme.spacing.md} 0;
   max-width: 1000px;
@@ -148,12 +150,11 @@ const AuctionCard = styled.div`
     
   }
   
-  /* 🎯 DESKTOP: Card compatta con altezza ridotta */
+  /* 🎯 DESKTOP: Card con un po' di respiro, ma senza rischiare lo scroll */
   @media (min-width: 1201px) {
-    padding: 12px !important;
-    margin-bottom: 12px !important;
-    border-radius: 8px !important;
-  
+    padding: ${props => props.theme.spacing.md} !important;
+    margin-bottom: ${props => props.theme.spacing.md} !important;
+    border-radius: ${props => props.theme.radius.md} !important;
   }
   
   @media (max-width: 768px) {
@@ -211,23 +212,27 @@ const PlayerSection = styled.div`
 
 const PlayerName = styled.h2`
   font-size: 1.6rem;
-  font-weight: 700;
-  color: ${props => props.theme.colors.text};
+  font-weight: 800;
+  background: ${props => props.theme.colors.gradient};
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin-bottom: ${props => props.theme.spacing.sm};
-  
+  letter-spacing: -0.01em;
+
   @media (max-width: 768px) {
-    font-size: 1.3rem;
+    font-size: 1.6rem;
   }
-  
+
   @media (max-width: 480px) {
-    font-size: 1.1rem;
+    font-size: 1.4rem;
     line-height: 1.3;
   }
     /* Aggiungi dopo la media query 480px esistente: */
 /* 🎯 TABLET: Nome player compatto */
 @media (min-width: 481px) and (max-width: 1200px) {
-  font-size: 1.1rem !important;
-  font-weight: 600 !important;
+  font-size: 1.5rem !important;
+  font-weight: 800 !important;
   margin-bottom: 4px !important;
   line-height: 1.3 !important;
 }
@@ -351,6 +356,7 @@ const BidSection = styled.div`
 
 const BidHeader = styled.div`
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: ${props => props.theme.spacing.md};
@@ -1388,7 +1394,13 @@ const submitBid = async (e, overrideAmount) => {
         </PlayerDetail>
         <PlayerDetail>
           <DetailLabel>Ruolo</DetailLabel>
-          <DetailValue>{currentAuction.ruolo}</DetailValue>
+          <DetailValue style={{
+            color: ROLE_COLORS[currentAuction.ruolo] || undefined,
+            background: `${ROLE_COLORS[currentAuction.ruolo] || '#94A3B8'}22`,
+            padding: '2px 10px',
+            borderRadius: '999px',
+            display: 'inline-block'
+          }}>{currentAuction.ruolo}</DetailValue>
         </PlayerDetail>
         <PlayerDetail>
           <DetailLabel>Quotazione</DetailLabel>
@@ -1409,9 +1421,9 @@ const submitBid = async (e, overrideAmount) => {
         <BidSection>
           <BidHeader>
             <BidTitle>Offerte</BidTitle>
-            <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+            <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'flex-end' }}>
               <BidStats>
-                <span><Users size={16} /> {bids.length} offerte</span>
+                <span><Users size={16} /> {bids.length}/{utentiCrediti.length || 8} partecipanti</span>
                 <span><Coins size={16} /> 
                 {rosaInfo ? 
                   `Usabili: ${rosaInfo.riepilogo.crediti_usabili} (${rosaInfo.riepilogo.crediti_riservati} riservati)` :
