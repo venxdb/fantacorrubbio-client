@@ -53,6 +53,7 @@ const Title = styled.h1`
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  margin-top: -0.75rem;
   margin-bottom: ${props => props.theme.spacing.sm};
   display: flex;
   align-items: center;
