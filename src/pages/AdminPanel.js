@@ -1896,16 +1896,17 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
         </SectionGrid>
 
         {/* Aste Attive */}
-        <div style={{ marginTop: '2rem' }}>
-          <h3 style={{ marginBottom: '1rem', color: '#FFFFFF' }}>
+        <div style={{ marginTop: '1rem' }}>
+          <h3 style={{ marginBottom: '0.5rem', color: '#FFFFFF', fontSize: '1.05rem' }}>
             Aste Attive ({activeAuctions.length})
           </h3>
-          
+
           {activeAuctions.length === 0 ? (
-            <div style={{ 
-              textAlign: 'center', 
-              color: '#94A3B8', 
-              padding: '2rem',
+            <div style={{
+              textAlign: 'center',
+              color: '#94A3B8',
+              padding: '1rem',
+              fontSize: '0.85rem',
               background: '#1A1A1A',
               borderRadius: '8px'
             }}>
@@ -1956,16 +1957,17 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
         </div>
 
         {/* Aste Chiuse Recenti */}
-        <div style={{ marginTop: '2rem' }}>
-          <h3 style={{ marginBottom: '1rem', color: '#FFFFFF', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        <div style={{ marginTop: '1rem' }}>
+          <h3 style={{ marginBottom: '0.5rem', color: '#FFFFFF', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1.05rem' }}>
             📋 Ultime Aste Chiuse (Ultime 5)
           </h3>
-          
+
           {aste.filter(a => a.stato === 'chiusa').slice(0, 5).length === 0 ? (
-            <div style={{ 
-              textAlign: 'center', 
-              color: '#94A3B8', 
-              padding: '2rem',
+            <div style={{
+              textAlign: 'center',
+              color: '#94A3B8',
+              padding: '1rem',
+              fontSize: '0.85rem',
               background: '#1A1A1A',
               borderRadius: '8px'
             }}>
@@ -2018,9 +2020,10 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
 
                   <div style={{
                     background: auction.numero_offerte > 0 ? 'rgba(245, 158, 11, 0.1)' : 'rgba(148, 163, 184, 0.1)',
-                    padding: '1rem',
+                    padding: '0.6rem',
                     borderRadius: '8px',
-                    marginBottom: '1rem',
+                    marginBottom: '0.5rem',
+                    fontSize: '0.85rem',
                     textAlign: 'center'
                   }}>
                     {auction.numero_offerte > 0 ? (
