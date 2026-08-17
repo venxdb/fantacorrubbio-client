@@ -10,10 +10,10 @@ const RegisterContainer = styled.div`
   min-height: 100vh;
   width: 100%;
   background: ${props => props.theme.colors.background};
-  background-image: 
-    radial-gradient(circle at 20% 80%, rgba(45, 90, 135, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(255, 167, 38, 0.1) 0%, transparent 50%),
-    linear-gradient(135deg, ${props => props.theme.colors.background} 0%, #1a2332 100%);
+  background-image:
+    radial-gradient(circle at 20% 80%, rgba(5, 150, 105, 0.12) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(251, 191, 36, 0.1) 0%, transparent 50%),
+    linear-gradient(135deg, ${props => props.theme.colors.background} 0%, ${props => props.theme.colors.surface} 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -25,7 +25,7 @@ const RegisterContainer = styled.div`
 const RegisterCard = styled(motion.div)`
   background: ${props => props.theme.colors.surface};
   border: 1px solid ${props => props.theme.colors.border};
-  border-radius: 20px;
+  border-radius: ${props => props.theme.radius.lg};
   padding: ${props => props.theme.spacing.xl};
   width: 100%;
   max-width: 450px !important; /* FORZA la larghezza massima */
@@ -117,7 +117,7 @@ const Input = styled.input`
   &:focus {
     outline: none;
     border-color: ${props => props.theme.colors.primary};
-    box-shadow: 0 0 0 3px rgba(45, 90, 135, 0.1);
+    box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15);
   }
 
   &::placeholder {
@@ -143,8 +143,8 @@ const PasswordToggle = styled.button`
 
 const ErrorMessage = styled(motion.div)`
   color: ${props => props.theme.colors.error};
-  background: rgba(244, 67, 54, 0.1);
-  border: 1px solid rgba(244, 67, 54, 0.2);
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
   border-radius: ${props => props.theme.borderRadius};
   padding: ${props => props.theme.spacing.md};
   font-size: 0.85rem;
@@ -180,8 +180,8 @@ const RegisterButton = styled(motion.button)`
 `;
 
 const WelcomeMessage = styled.div`
-  background: rgba(76, 175, 80, 0.1);
-  border: 1px solid rgba(76, 175, 80, 0.2);
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.2);
   border-radius: ${props => props.theme.borderRadius};
   padding: ${props => props.theme.spacing.md};
   text-align: center;
@@ -204,7 +204,7 @@ const CreditsBadge = styled.span`
   background: ${props => props.theme.colors.secondary};
   color: white;
   padding: 4px 8px;
-  border-radius: 16px;
+  border-radius: ${props => props.theme.radius.pill};
   font-weight: 600;
   font-size: 0.8rem;
 `;
@@ -374,7 +374,7 @@ const Register = () => {
               />
             </InputContainer>
             {validationErrors.username && (
-              <ValidationHint style={{ color: '#F44336' }}>
+              <ValidationHint style={{ color: '#EF4444' }}>
                 {validationErrors.username}
               </ValidationHint>
             )}
@@ -396,7 +396,7 @@ const Register = () => {
               />
             </InputContainer>
             {validationErrors.email && (
-              <ValidationHint style={{ color: '#F44336' }}>
+              <ValidationHint style={{ color: '#EF4444' }}>
                 {validationErrors.email}
               </ValidationHint>
             )}
@@ -424,7 +424,7 @@ const Register = () => {
               </PasswordToggle>
             </InputContainer>
             {validationErrors.password && (
-              <ValidationHint style={{ color: '#F44336' }}>
+              <ValidationHint style={{ color: '#EF4444' }}>
                 {validationErrors.password}
               </ValidationHint>
             )}
@@ -453,7 +453,7 @@ const Register = () => {
               </PasswordToggle>
             </InputContainer>
             {validationErrors.confirmPassword && (
-              <ValidationHint style={{ color: '#F44336' }}>
+              <ValidationHint style={{ color: '#EF4444' }}>
                 {validationErrors.confirmPassword}
               </ValidationHint>
             )}

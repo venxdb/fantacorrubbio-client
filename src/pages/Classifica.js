@@ -3,6 +3,7 @@ import styled, { keyframes } from 'styled-components';
 import { motion } from 'framer-motion';
 import { Trophy, Medal, Award, Crown, Target, Users, Coins } from 'lucide-react';
 import API_URL from '../config/api';
+import { getUserColor, darkenColor } from '../utils/userColors';
 
 // Keyframes per animazioni
 const spin = keyframes`
@@ -22,14 +23,11 @@ const shine = keyframes`
 
 // Styled Components
 const Container = styled.div`
-  min-height: 100vh;
-  background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #0f172a 100%);
   padding: 1rem;
-  
+
   /* Mobile */
   @media (max-width: 480px) {
     padding: 0.5rem;
-    min-height: 100vh;
   }
   
   /* 🎯 TABLET: Container ottimizzato 481px-1200px */
@@ -57,7 +55,7 @@ const LoadingContainer = styled.div`
 const Spinner = styled.div`
   width: 2rem;
   height: 2rem;
-  border: 4px solid #facc15;
+  border: 4px solid ${props => props.theme.colors.podium.gold};
   border-top-color: transparent;
   border-radius: 50%;
   animation: ${spin} 1s linear infinite;
@@ -77,7 +75,7 @@ const EmptyContainer = styled.div`
 const EmptyIcon = styled(Users)`
   width: 4rem;
   height: 4rem;
-  color: #9ca3af;
+  color: ${props => props.theme.colors.textSecondary};
   margin: 0 auto 1rem auto;
 `;
 
@@ -89,16 +87,16 @@ const EmptyTitle = styled.h2`
 `;
 
 const EmptyText = styled.p`
-  color: #9ca3af;
+  color: ${props => props.theme.colors.textSecondary};
 `;
 
 const Header = styled.div`
   text-align: center;
-  margin-bottom: 1.5rem;
-  
+  margin-bottom: 0.75rem;
+
   /* Mobile */
   @media (max-width: 480px) {
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
   }
   
   /* 🎯 TABLET: Header compatto */
@@ -108,10 +106,10 @@ const Header = styled.div`
 `;
 
 const Title = styled(motion.h1)`
-  font-size: 2.5rem;
+  font-size: 1.8rem;
   font-weight: bold;
   color: white;
-  margin-bottom: 1rem;
+  margin-bottom: 0.4rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -134,14 +132,14 @@ const Title = styled(motion.h1)`
   }
   
   @media (min-width: 768px) {
-    font-size: 3rem;
+    font-size: 2.2rem;
   }
 `;
 
 const TitleIcon = styled(Target)`
-  width: 2.5rem;
-  height: 2.5rem;
-  color: #facc15;
+  width: 1.8rem;
+  height: 1.8rem;
+  color: ${props => props.theme.colors.podium.gold};
   flex-shrink: 0;
   
   /* Mobile */
@@ -158,8 +156,8 @@ const TitleIcon = styled(Target)`
 `;
 
 const Subtitle = styled(motion.p)`
-  font-size: 1.125rem;
-  color: #d1d5db;
+  font-size: 0.95rem;
+  color: ${props => props.theme.colors.textSecondary};
   max-width: 32rem;
   margin: 0 auto;
   padding: 0 1rem;
@@ -179,7 +177,7 @@ const Subtitle = styled(motion.p)`
   }
   
   @media (min-width: 768px) {
-    font-size: 1.25rem;
+    font-size: 1rem;
   }
 `;
 
@@ -210,7 +208,7 @@ const CardsGrid = styled.div`
   
   @media (min-width: 1280px) {
     grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
+    gap: 1rem;
   }
 `;
 
@@ -223,13 +221,13 @@ const Card = styled(motion.div)`
   transition: all 0.3s ease;
   
   ${props => props.$isTopThree ? `
-    box-shadow: 0 0 0 4px rgba(250, 204, 21, 0.3), 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.3), 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   ` : ''}
-  
+
   &:hover {
     transform: translateY(-5px) scale(1.02);
     ${props => !props.$isTopThree ? `
-      box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.5), 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 0 0 2px rgba(5, 150, 105, 0.5), 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     ` : ''}
   }
 `;
@@ -238,11 +236,12 @@ const CardBackground = styled.div`
   position: absolute;
   inset: 0;
   background: ${props => {
+    const { podium } = props.theme.colors;
     switch(props.$position) {
-      case 1: return 'linear-gradient(135deg, #facc15 0%, #ca8a04 100%)';
-      case 2: return 'linear-gradient(135deg, #d1d5db 0%, #6b7280 100%)';
-      case 3: return 'linear-gradient(135deg, #fb923c 0%, #ea580c 100%)';
-      default: return 'linear-gradient(135deg, #3b82f6 0%, #7c3aed 100%)';
+      case 1: return `linear-gradient(135deg, ${podium.gold} 0%, ${podium.goldDark} 100%)`;
+      case 2: return `linear-gradient(135deg, ${podium.silver} 0%, ${podium.silverDark} 100%)`;
+      case 3: return `linear-gradient(135deg, ${podium.bronze} 0%, ${podium.bronzeDark} 100%)`;
+      default: return `linear-gradient(135deg, ${props.$userColor} 0%, ${props.$userColorDark} 100%)`;
     }
   }};
 `;
@@ -269,7 +268,7 @@ const CardContent = styled.div`
   }
   
   @media (min-width: 768px) {
-    padding: 1rem;
+    padding: 0.65rem;
   }
 `;
 
@@ -311,8 +310,8 @@ const UserHeader = styled.div`
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin-bottom: 0.75rem;
-  
+  margin-bottom: 0.4rem;
+
   /* Mobile */
   @media (max-width: 480px) {
     gap: 0.25rem;
@@ -356,7 +355,7 @@ const UserName = styled.h3`
   }
 `;
 const AdminCrown = styled.span`
-  color: #fcd34d;
+  color: ${props => props.theme.colors.podium.gold};
   margin-left: 0.5rem;
   font-size: 0.875rem;
 `;
@@ -381,8 +380,8 @@ const CreditsSection = styled.div`
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(8px);
   border-radius: 0.5rem;
-  padding: 0.75rem;
-  margin-bottom: 0.75rem;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
   text-align: center;
   
   /* Mobile */
@@ -404,7 +403,7 @@ const CreditsHeader = styled.div`
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
 `;
 
 const CreditsLabel = styled.span`
@@ -425,7 +424,7 @@ const CreditsLabel = styled.span`
 const CreditsIcon = styled(Coins)`
   width: 1.25rem;
   height: 1.25rem;
-  color: #fcd34d;
+  color: ${props => props.theme.colors.podium.gold};
   
   /* Mobile */
   @media (max-width: 480px) {
@@ -441,9 +440,9 @@ const CreditsIcon = styled(Coins)`
 `;
 
 const CreditsValue = styled.div`
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: bold;
-  color: #fcd34d;
+  color: ${props => props.theme.colors.podium.gold};
   
   /* Mobile */
   @media (max-width: 480px) {
@@ -468,7 +467,7 @@ const RosaHeader = styled.div`
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.3rem;
 `;
 
 const RosaIcon = styled(Users)`
@@ -589,11 +588,12 @@ const ProgressFill = styled.div`
   border-radius: 9999px;
   transition: all 0.3s ease;
   background: ${props => {
+    const { success, warning, error, podium } = props.theme.colors;
     const percentage = props.$current / props.$max;
-    if (percentage >= 1) return '#10b981';
-    if (percentage >= 0.7) return '#eab308';
-    if (percentage >= 0.4) return '#f97316';
-    return '#ef4444';
+    if (percentage >= 1) return success;
+    if (percentage >= 0.7) return warning;
+    if (percentage >= 0.4) return podium.bronze;
+    return error;
   }};
   width: ${props => Math.min((props.$current / props.$max) * 100, 100)}%;
 `;
@@ -615,7 +615,7 @@ const ShineEffect = styled.div`
 const Footer = styled.div`
   margin-top: 2rem;
   text-align: center;
-  color: #9ca3af;
+  color: ${props => props.theme.colors.textSecondary};
 `;
 
 const FooterText = styled(motion.p)`
@@ -710,7 +710,7 @@ const Classifica = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            🏆 <span style={{ color: '#facc15', fontWeight: 600 }}> Poveracci, sembrate il Milan!</span>
+            🏆 <span style={{ color: '#FBBF24', fontWeight: 600 }}> Poveracci, sembrate il Milan!</span>
           </Subtitle>
         </Header>
 
@@ -729,7 +729,11 @@ const Classifica = () => {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 whileHover={{ y: -5 }}
               >
-                <CardBackground $position={position} />
+                <CardBackground
+                  $position={position}
+                  $userColor={getUserColor(user.username)}
+                  $userColorDark={darkenColor(getUserColor(user.username))}
+                />
                 <CardOverlay />
                 
                 <CardContent>

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { 
-  Users, 
-  Gavel, 
-  Star, 
-  TrendingUp, 
+import {
+  Users,
+  Gavel,
+  History,
+  TrendingUp,
   Coins,
   Target,
   ArrowRight,
@@ -36,57 +36,75 @@ const HomeContainer = styled.div`
 
 // 🆕 Welcome section responsive migliorata
 const WelcomeSection = styled(motion.div)`
-  text-align: center;
+  text-align: left;
   margin-bottom: ${props => props.theme.spacing.xl};
-  
+  position: relative;
+  overflow: hidden;
+  padding: ${props => props.theme.spacing.xl} ${props => props.theme.spacing.xl};
+  border-radius: ${props => props.theme.radius.lg};
+  background:
+    radial-gradient(ellipse 500px 300px at 100% 0%, rgba(5, 150, 105, 0.25) 0%, transparent 70%),
+    linear-gradient(135deg, rgba(20, 27, 38, 0.9) 0%, rgba(10, 14, 20, 0.9) 100%);
+  border: 1px solid ${props => props.theme.colors.border};
+
+  &::after {
+    content: '🏆';
+    position: absolute;
+    right: -10px;
+    bottom: -30px;
+    font-size: 9rem;
+    opacity: 0.06;
+    line-height: 1;
+    pointer-events: none;
+  }
+
   /* 🆕 Mobile: margini ridotti */
   @media (max-width: ${props => props.theme.breakpoints.mobile}) {
     margin-bottom: ${props => props.theme.spacing.lg};
+    padding: ${props => props.theme.spacing.lg};
   }
 `;
 
 const WelcomeTitle = styled.h1`
-  font-size: 2.5rem;
+  font-size: 2.4rem;
   font-weight: 800;
-  background: ${props => props.theme.colors.gradient};
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  letter-spacing: -0.03em;
+  color: ${props => props.theme.colors.text};
   margin-bottom: ${props => props.theme.spacing.sm};
   line-height: 1.2;
-  
+  position: relative;
+
   /* 🆕 Large desktop: titolo più grande */
   @media (min-width: ${props => props.theme.breakpoints.large}) {
-    font-size: 3rem;
+    font-size: 2.6rem;
   }
-  
+
   /* 🎯 TABLET: Titolo proporzionato */
   @media (min-width: 600px) and (max-width: ${props => props.theme.breakpoints.large}) {
-    font-size: 2rem;
+    font-size: 1.8rem;
     line-height: 1.1;
   }
-  
+
   /* 🆕 Mobile: più piccolo */
   @media (max-width: 600px) {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     margin-bottom: ${props => props.theme.spacing.xs};
   }
-  
+
   /* 🆕 Mobile molto piccolo */
   @media (max-width: 360px) {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
   }
 `;
 
 const WelcomeSubtitle = styled.p`
-  font-size: 1.2rem;
+  font-size: 1.05rem;
   color: ${props => props.theme.colors.textSecondary};
-  margin-bottom: ${props => props.theme.spacing.lg};
+  margin-bottom: 0;
   line-height: 1.5;
   max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-  
+  position: relative;
+
   /* 🎯 TABLET: Sottotitolo proporzionato */
   @media (min-width: 600px) and (max-width: ${props => props.theme.breakpoints.large}) {
     font-size: 1rem;
@@ -129,55 +147,63 @@ const QuickActionsGrid = styled.div`
 `;
 
 const ActionCard = styled(motion.div)`
-  background: ${props => props.theme.colors.surface};
-  border: 1px solid ${props => props.theme.colors.border};
-  border-radius: ${props => props.theme.borderRadius};
+  background: ${props => props.gradient || props.theme.colors.gradient};
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: ${props => props.theme.radius.lg};
   padding: ${props => props.theme.spacing.lg};
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
   position: relative;
   overflow: hidden;
   min-height: 200px;
   display: flex;
   flex-direction: column;
+  isolation: isolate;
 
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: ${props => props.theme.shadows.large};
-    border-color: ${props => props.theme.colors.primary};
-  }
-
-  &::before {
+  &::after {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: ${props => props.gradient || props.theme.colors.gradient};
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    top: -70px;
+    right: -60px;
+    z-index: -1;
+    transition: transform 0.5s ease;
   }
-  
+
+  &:hover {
+    transform: translateY(-6px) scale(1.015);
+    box-shadow: ${props => props.theme.shadows.large};
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  &:hover::after {
+    transform: scale(1.3);
+  }
+
   /* 🎯 TABLET ELEGANTE: Layout compatto ma proporzionato */
   @media (min-width: 600px) and (max-width: ${props => props.theme.breakpoints.large}) {
     padding: ${props => props.theme.spacing.md}; /* Padding ridotto */
     min-height: 160px; /* Altezza ridotta ma elegante */
-    
+
     &:hover {
       transform: translateY(-1px); /* Hover più sottile */
       box-shadow: ${props => props.theme.shadows.medium};
     }
   }
-  
+
   /* 🆕 Mobile: layout ottimizzato */
   @media (max-width: 600px) {
     padding: ${props => props.theme.spacing.md};
     min-height: 140px;
-    
+
     &:hover {
       transform: none;
       box-shadow: ${props => props.theme.shadows.medium};
     }
-    
+
     &:active {
       transform: scale(0.98);
     }
@@ -189,34 +215,36 @@ const ActionCard = styled(motion.div)`
 const ActionIcon = styled.div`
   width: 50px;
   height: 50px;
-  background: ${props => props.background || props.theme.colors.primary};
+  background: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: ${props => props.theme.spacing.md};
-  box-shadow: ${props => props.theme.shadows.medium};
   flex-shrink: 0;
-  
+  color: white;
+
   /* 🎯 TABLET: Icona leggermente più piccola ma proporzionata */
   @media (min-width: 600px) and (max-width: ${props => props.theme.breakpoints.large}) {
     width: 42px;
     height: 42px;
     margin-bottom: ${props => props.theme.spacing.sm};
-    
+
     /* Icona più piccola dentro */
     svg {
       width: 20px;
       height: 20px;
     }
   }
-  
+
   /* 🆕 Mobile: ancora più piccola */
   @media (max-width: 600px) {
     width: 38px;
     height: 38px;
     margin-bottom: ${props => props.theme.spacing.sm};
-    
+
     svg {
       width: 18px;
       height: 18px;
@@ -224,19 +252,19 @@ const ActionIcon = styled.div`
   }
 `;
 const ActionTitle = styled.h3`
-  color: ${props => props.theme.colors.text};
-  font-size: 1.1rem;
-  font-weight: 600;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 700;
   margin-bottom: ${props => props.theme.spacing.sm};
   line-height: 1.3;
-  
+
   /* 🎯 TABLET: Font leggermente ridotto */
   @media (min-width: 600px) and (max-width: ${props => props.theme.breakpoints.large}) {
     font-size: 0.95rem;
     margin-bottom: ${props => props.theme.spacing.xs};
     line-height: 1.2;
   }
-  
+
   /* 🆕 Mobile: font più piccolo */
   @media (max-width: 600px) {
     font-size: 0.9rem;
@@ -244,19 +272,19 @@ const ActionTitle = styled.h3`
   }
 `;
 const ActionDescription = styled.p`
-  color: ${props => props.theme.colors.textSecondary};
+  color: rgba(255, 255, 255, 0.85);
   font-size: 0.9rem;
   line-height: 1.5;
   margin-bottom: ${props => props.theme.spacing.md};
   flex: 1;
-  
+
   /* 🎯 TABLET: Testo più compatto */
   @media (min-width: 600px) and (max-width: ${props => props.theme.breakpoints.large}) {
     font-size: 0.8rem;
     line-height: 1.4;
     margin-bottom: ${props => props.theme.spacing.sm};
   }
-  
+
   /* 🆕 Mobile: ancora più piccolo */
   @media (max-width: 600px) {
     font-size: 0.75rem;
@@ -267,8 +295,8 @@ const ActionButton = styled.div`
   display: flex;
   align-items: center;
   gap: ${props => props.theme.spacing.sm};
-  color: ${props => props.theme.colors.secondary};
-  font-weight: 600;
+  color: white;
+  font-weight: 700;
   font-size: 0.9rem;
   transition: gap 0.2s ease;
   margin-top: auto;
@@ -435,10 +463,10 @@ const LiveIndicator = styled.div`
   display: inline-flex;
   align-items: center;
   gap: ${props => props.theme.spacing.sm};
-  background: rgba(244, 67, 54, 0.1);
+  background: rgba(239, 68, 68, 0.1);
   color: ${props => props.theme.colors.error};
   padding: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.md};
-  border-radius: 20px;
+  border-radius: ${props => props.theme.radius.pill};
   font-weight: 600;
   font-size: 0.9rem;
   margin-bottom: ${props => props.theme.spacing.md};
@@ -567,28 +595,28 @@ const Home = () => {
       title: 'Esplora Calciatori',
       description: 'Esplora tutte le pippe arrivate in Serie A',
       icon: <Users size={24} color="white" />,
-      background: 'linear-gradient(135deg, #2D5A87 0%, #1A4066 100%)',
+      background: 'linear-gradient(135deg, #047857 0%, #10B981 100%)',
       action: () => navigate('/calciatori')
     },
     {
       title: 'Asta Live',
       description: 'Se vuoi qualcuno entra Porco Dio!',
       icon: <Gavel size={24} color="white" />,
-      background: 'linear-gradient(135deg, #FF6B35 0%, #F7931E 100%)',
+      background: 'linear-gradient(135deg, #FBBF24 0%, #D97706 100%)',
       action: () => navigate('/asta-live')
     },
     {
-      title: 'La Mia Rosa',
-      description: 'Guarda che merda che stai facendo con la tua rosa',
-      icon: <Star size={24} color="white" />,
-      background: 'linear-gradient(135deg, #4CAF50 0%, #45A049 100%)',
-      action: () => navigate('/mia-rosa')
+      title: 'Rosa Passata',
+      description: 'Rivivi gli errori della scorsa stagione',
+      icon: <History size={24} color="white" />,
+      background: 'linear-gradient(135deg, #22C55E 0%, #16A34A 100%)',
+      action: () => navigate('/rosa-passata')
     },
     {
       title: 'Crediti',
       description: 'Confronta i crediti rimasti con quelli degli altri ebrei',
       icon: <TrendingUp size={24} color="white" />,
-      background: 'linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%)',
+      background: 'linear-gradient(135deg, #6366F1 0%, #4F46E5 100%)',
       action: () => navigate('/classifica')
     }
   ];
@@ -646,7 +674,7 @@ const Home = () => {
             whileHover={{ scale: 1.02 }}
             gradient={action.background}
           >
-            <ActionIcon background={action.background}>
+            <ActionIcon>
               {action.icon}
             </ActionIcon>
             <ActionTitle>{action.title}</ActionTitle>

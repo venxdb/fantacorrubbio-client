@@ -16,44 +16,45 @@ import {
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import API_URL from '../config/api';
+import { getUserColor } from '../utils/userColors';
 
 const Container = styled.div`
   padding: ${props => props.theme.spacing.lg} 0;
   max-width: 1000px;
   margin: 0 auto;
-  min-height: 80vh;
+  overflow-x: hidden;
 `;
 
 const Header = styled.div`
   text-align: center;
-  margin-bottom: ${props => props.theme.spacing.xl};
+  margin-bottom: ${props => props.theme.spacing.md};
 `;
 
 const Title = styled.h1`
-  font-size: 2.5rem;
+  font-size: 1.8rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin-bottom: ${props => props.theme.spacing.sm};
+  margin-bottom: ${props => props.theme.spacing.xs};
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: ${props => props.theme.spacing.md};
+  gap: ${props => props.theme.spacing.sm};
 `;
 
 const Subtitle = styled.p`
   color: ${props => props.theme.colors.textSecondary};
-  font-size: 1.1rem;
-  margin-bottom: ${props => props.theme.spacing.lg};
+  font-size: 0.95rem;
+  margin-bottom: ${props => props.theme.spacing.sm};
 `;
 
 const SectionGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: ${props => props.theme.spacing.xl};
-  margin-bottom: ${props => props.theme.spacing.xl};
+  gap: ${props => props.theme.spacing.lg};
+  margin-bottom: ${props => props.theme.spacing.md};
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
@@ -64,16 +65,16 @@ const SectionGrid = styled.div`
 const Section = styled.div`
   background: ${props => props.theme.colors.surface};
   border: 1px solid ${props => props.theme.colors.border};
-  border-radius: ${props => props.theme.borderRadius};
-  padding: ${props => props.theme.spacing.xl};
+  border-radius: ${props => props.theme.radius.lg};
+  padding: ${props => props.theme.spacing.lg};
   text-align: center;
 `;
 
 const SectionTitle = styled.h2`
   color: ${props => props.theme.colors.text};
-  font-size: 1.5rem;
+  font-size: 1.15rem;
   font-weight: 700;
-  margin-bottom: ${props => props.theme.spacing.lg};
+  margin-bottom: ${props => props.theme.spacing.sm};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -82,18 +83,30 @@ const SectionTitle = styled.h2`
 
 const UsersGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: ${props => props.theme.spacing.md};
-  margin-bottom: ${props => props.theme.spacing.lg};
+  grid-template-columns: repeat(3, 1fr);
+  gap: ${props => props.theme.spacing.sm};
+  margin-bottom: ${props => props.theme.spacing.md};
+  max-height: 320px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-gutter: stable;
+
+  @media (min-width: 400px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  @media (min-width: 1200px) {
+    grid-template-columns: repeat(5, 1fr);
+  }
 `;
 
 const UserCard = styled(motion.div)`
   background: ${props => props.$isSelected ? 
-    'linear-gradient(135deg, #FFD700 0%, #FFA000 100%)' : 
+    'linear-gradient(135deg, #FBBF24 0%, #D97706 100%)' : 
     props.theme.colors.background};
-  border: 2px solid ${props => props.$isSelected ? '#FFD700' : props.theme.colors.border};
-  border-radius: ${props => props.theme.borderRadius};
-  padding: ${props => props.theme.spacing.md};
+  border: 2px solid ${props => props.$isSelected ? '#FBBF24' : props.theme.colors.border};
+  border-radius: ${props => props.theme.radius.sm};
+  padding: ${props => props.theme.spacing.sm};
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
@@ -102,11 +115,11 @@ const UserCard = styled(motion.div)`
   &:hover {
     transform: translateY(-2px);
     box-shadow: ${props => props.theme.shadows.medium};
-    border-color: ${props => props.$isSelected ? '#FFD700' : props.theme.colors.primary};
+    border-color: ${props => props.$isSelected ? '#FBBF24' : props.theme.colors.primary};
   }
 
   ${props => props.$isSelected && `
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
     
     &::before {
       content: '';
@@ -115,7 +128,7 @@ const UserCard = styled(motion.div)`
       left: -2px;
       right: -2px;
       bottom: -2px;
-      background: linear-gradient(45deg, #FFD700, #FFA000, #FFD700);
+      background: linear-gradient(45deg, #FBBF24, #D97706, #FBBF24);
       border-radius: ${props.theme.borderRadius};
       z-index: -1;
       animation: shimmer 2s infinite;
@@ -129,17 +142,17 @@ const UserCard = styled(motion.div)`
 `;
 
 const UserAvatar = styled.div`
-  width: 50px;
-  height: 50px;
-  background: ${props => props.$isSelected ? 'rgba(255, 255, 255, 0.9)' : props.theme.colors.primary};
-  color: ${props => props.$isSelected ? '#B8860B' : 'white'};
+  width: 36px;
+  height: 36px;
+  background: ${props => props.$isSelected ? 'rgba(255, 255, 255, 0.9)' : (props.$accent || props.theme.colors.primary)};
+  color: ${props => props.$isSelected ? '#92400E' : 'white'};
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  font-size: 1.2rem;
-  margin: 0 auto ${props => props.theme.spacing.sm};
+  font-size: 0.95rem;
+  margin: 0 auto ${props => props.theme.spacing.xs};
   position: relative;
 `;
 
@@ -147,10 +160,10 @@ const CrownIcon = styled(motion.div)`
   position: absolute;
   top: -8px;
   right: -8px;
-  background: #FFD700;
+  background: #FBBF24;
   border-radius: 50%;
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -158,9 +171,12 @@ const CrownIcon = styled(motion.div)`
 
 const UserName = styled.div`
   font-weight: 600;
-  color: ${props => props.$isSelected ? '#B8860B' : props.theme.colors.text};
-  font-size: 0.9rem;
+  color: ${props => props.$isSelected ? '#92400E' : props.theme.colors.text};
+  font-size: 0.7rem;
   text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 const DirectionSelector = styled.div`
@@ -172,9 +188,9 @@ const DirectionSelector = styled.div`
 
 const DirectionButton = styled(motion.button)`
   background: ${props => props.$isSelected ? 
-    'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' : 
+    'linear-gradient(135deg, #6366F1 0%, #4F46E5 100%)' : 
     props.theme.colors.background};
-  border: 2px solid ${props => props.$isSelected ? '#667eea' : props.theme.colors.border};
+  border: 2px solid ${props => props.$isSelected ? '#6366F1' : props.theme.colors.border};
   border-radius: ${props => props.theme.borderRadius};
   padding: ${props => props.theme.spacing.lg};
   cursor: pointer;
@@ -190,11 +206,11 @@ const DirectionButton = styled(motion.button)`
   &:hover {
     transform: translateY(-2px);
     box-shadow: ${props => props.theme.shadows.medium};
-    border-color: ${props => props.$isSelected ? '#667eea' : props.theme.colors.primary};
+    border-color: ${props => props.$isSelected ? '#6366F1' : props.theme.colors.primary};
   }
 
   ${props => props.$isSelected && `
-    box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
   `}
 `;
 
@@ -207,8 +223,8 @@ const ActionButtons = styled.div`
 
 const ActionButton = styled(motion.button)`
   background: ${props => {
-    if (props.$variant === 'random') return 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
-    if (props.$variant === 'confirm') return 'linear-gradient(135deg, #4CAF50 0%, #45a049 100%)';
+    if (props.$variant === 'random') return 'linear-gradient(135deg, #6366F1 0%, #4F46E5 100%)';
+    if (props.$variant === 'confirm') return 'linear-gradient(135deg, #22C55E 0%, #16A34A 100%)';
     return props.theme.colors.gradient;
   }};
   border: none;
@@ -238,13 +254,13 @@ const ActionButton = styled(motion.button)`
 `;
 
 const ResultCard = styled(motion.div)`
-  background: linear-gradient(135deg, #FFD700 0%, #FFA000 100%);
+  background: linear-gradient(135deg, #FBBF24 0%, #D97706 100%);
   color: white;
   border-radius: ${props => props.theme.borderRadius};
   padding: ${props => props.theme.spacing.xl};
   text-align: center;
   margin-top: ${props => props.theme.spacing.xl};
-  box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+  box-shadow: 0 0 30px rgba(251, 191, 36, 0.3);
 `;
 
 const ResultTitle = styled.h3`
@@ -329,7 +345,7 @@ const DealerSelection = () => {
       toast.success(`🎯 ${finalDealer.username} è il nuovo dealer!`, {
         duration: 4000,
         style: {
-          background: 'linear-gradient(135deg, #FFD700 0%, #FFA000 100%)',
+          background: 'linear-gradient(135deg, #FBBF24 0%, #D97706 100%)',
           color: 'white',
           fontWeight: '600'
         }
@@ -351,7 +367,7 @@ const DealerSelection = () => {
     toast.success(`✅ Configurazione salvata!`, {
       duration: 3000,
       style: {
-        background: 'linear-gradient(135deg, #4CAF50 0%, #45a049 100%)',
+        background: 'linear-gradient(135deg, #22C55E 0%, #16A34A 100%)',
         color: 'white',
         fontWeight: '600'
       }
@@ -368,7 +384,7 @@ const DealerSelection = () => {
     return (
       <Container>
         <LoadingState>
-          <Dice6 size={48} color="#B0BEC5" />
+          <Dice6 size={48} color="#94A3B8" />
           <p>Caricamento utenti...</p>
         </LoadingState>
       </Container>
@@ -379,7 +395,7 @@ const DealerSelection = () => {
     <Container>
       <Header>
         <Title>
-          <Dice6 size={32} />
+          <Dice6 size={24} />
           Selezione Dealer
         </Title>
         <Subtitle>
@@ -391,7 +407,7 @@ const DealerSelection = () => {
         {/* Selezione Dealer */}
         <Section>
           <SectionTitle>
-            <Crown size={24} />
+            <Crown size={18} />
             Scegli il Dealer
           </SectionTitle>
           
@@ -408,7 +424,10 @@ const DealerSelection = () => {
                 }}
                 transition={{ duration: 0.2 }}
               >
-                <UserAvatar $isSelected={selectedDealer?.id === user.id}>
+                <UserAvatar
+                  $isSelected={selectedDealer?.id === user.id}
+                  $accent={getUserColor(user.username)}
+                >
                   {user.username.charAt(0).toUpperCase()}
                   <AnimatePresence>
                     {selectedDealer?.id === user.id && (
@@ -434,7 +453,7 @@ const DealerSelection = () => {
         {/* Selezione Direzione */}
         <Section>
           <SectionTitle>
-            <RefreshCw size={24} />
+            <RefreshCw size={18} />
             Direzione di Gioco
           </SectionTitle>
           

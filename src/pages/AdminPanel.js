@@ -27,53 +27,53 @@ import { useAuth } from '../contexts/AuthContext';
 import API_URL from '../config/api';
 
 const AdminContainer = styled.div`
-  padding: ${props => props.theme.spacing.lg} 0;
+  padding: ${props => props.theme.spacing.sm} 0;
 `;
 
 const Header = styled.div`
   text-align: center;
-  margin-bottom: ${props => props.theme.spacing.xl};
+  margin-bottom: ${props => props.theme.spacing.sm};
 `;
 
 const Title = styled.h1`
-  font-size: 2.5rem;
+  font-size: 1.6rem;
   font-weight: 800;
   background: ${props => props.theme.colors.gradient};
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin-bottom: ${props => props.theme.spacing.sm};
+  margin-bottom: 2px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: ${props => props.theme.spacing.md};
+  gap: ${props => props.theme.spacing.sm};
 `;
 
 const Subtitle = styled.p`
   color: ${props => props.theme.colors.textSecondary};
-  font-size: 1.1rem;
+  font-size: 0.85rem;
 `;
 
 const TabsContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-bottom: ${props => props.theme.spacing.xl};
+  margin-bottom: ${props => props.theme.spacing.sm};
   border-bottom: 1px solid ${props => props.theme.colors.border};
 `;
 
 const Tab = styled.button`
   background: none;
   border: none;
-  padding: ${props => props.theme.spacing.md} ${props => props.theme.spacing.lg};
+  padding: ${props => props.theme.spacing.xs} ${props => props.theme.spacing.md};
   color: ${props => props.$active ? props.theme.colors.primary : props.theme.colors.textSecondary};
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 0.85rem;
   cursor: pointer;
   border-bottom: 2px solid ${props => props.$active ? props.theme.colors.primary : 'transparent'};
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
-  gap: ${props => props.theme.spacing.sm};
+  gap: ${props => props.theme.spacing.xs};
 
   &:hover {
     color: ${props => props.theme.colors.primary};
@@ -86,27 +86,27 @@ const TabContent = styled.div`
 
 const SectionGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: ${props => props.theme.spacing.xl};
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: ${props => props.theme.spacing.md};
 `;
 
 const Section = styled.div`
   background: ${props => props.theme.colors.surface};
   border: 1px solid ${props => props.theme.colors.border};
   border-radius: ${props => props.theme.borderRadius};
-  padding: ${props => props.theme.spacing.lg};
+  padding: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.md};
 `;
 
 const SectionHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: ${props => props.theme.spacing.lg};
+  margin-bottom: ${props => props.theme.spacing.sm};
 `;
 
 const SectionTitle = styled.h2`
   color: ${props => props.theme.colors.text};
-  font-size: 1.3rem;
+  font-size: 1.05rem;
   font-weight: 600;
   display: flex;
   align-items: center;
@@ -117,34 +117,34 @@ const SectionTitle = styled.h2`
 const UploadArea = styled.div`
   border: 2px dashed ${props => props.$isDragOver ? props.theme.colors.primary : props.theme.colors.border};
   border-radius: ${props => props.theme.borderRadius};
-  padding: 2rem;
+  padding: 1rem;
   text-align: center;
-  background: ${props => props.$isDragOver ? 'rgba(45, 90, 135, 0.1)' : props.theme.colors.background};
+  background: ${props => props.$isDragOver ? 'rgba(5, 150, 105, 0.12)' : props.theme.colors.background};
   transition: all 0.3s ease;
   cursor: pointer;
 
   &:hover {
     border-color: ${props => props.theme.colors.primary};
-    background: rgba(45, 90, 135, 0.05);
+    background: rgba(5, 150, 105, 0.06);
   }
 `;
 
 const UploadIcon = styled.div`
-  font-size: 3rem;
-  margin-bottom: 1rem;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
   color: ${props => props.theme.colors.textSecondary};
 `;
 
 const UploadText = styled.div`
   color: ${props => props.theme.colors.text};
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   font-weight: 600;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
 `;
 
 const UploadSubtext = styled.div`
   color: ${props => props.theme.colors.textSecondary};
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 `;
 
 const PreviewTable = styled.div`
@@ -152,7 +152,7 @@ const PreviewTable = styled.div`
   border: 1px solid ${props => props.theme.colors.border};
   border-radius: ${props => props.theme.borderRadius};
   overflow: hidden;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 `;
 
 const PreviewHeader = styled.div`
@@ -160,19 +160,19 @@ const PreviewHeader = styled.div`
   grid-template-columns: 80px 1fr 150px 80px 100px;
   background: ${props => props.theme.colors.primary};
   color: white;
-  padding: 1rem;
+  padding: 0.5rem;
   font-weight: bold;
-  font-size: 0.9rem;
-  gap: 1rem;
+  font-size: 0.8rem;
+  gap: 0.5rem;
 `;
 
 const PreviewRow = styled.div`
   display: grid;
   grid-template-columns: 80px 1fr 150px 80px 100px;
-  padding: 0.75rem 1rem;
+  padding: 0.4rem 0.5rem;
   border-bottom: 1px solid ${props => props.theme.colors.border};
-  gap: 1rem;
-  font-size: 0.9rem;
+  gap: 0.5rem;
+  font-size: 0.8rem;
 
   &:hover {
     background: ${props => props.theme.colors.surfaceHover};
@@ -182,16 +182,16 @@ const PreviewRow = styled.div`
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: ${props => props.theme.spacing.md};
+  gap: ${props => props.theme.spacing.sm};
 `;
 
 const Select = styled.select`
-  padding: ${props => props.theme.spacing.md};
+  padding: ${props => props.theme.spacing.sm};
   background: ${props => props.theme.colors.background};
   border: 1px solid ${props => props.theme.colors.border};
   border-radius: ${props => props.theme.borderRadius};
   color: ${props => props.theme.colors.text};
-  font-size: 0.95rem;
+  font-size: 0.85rem;
 
   &:focus {
     outline: none;
@@ -203,39 +203,40 @@ const AuctionCard = styled.div`
   background: ${props => props.theme.colors.background};
   border: 1px solid ${props => props.theme.colors.border};
   border-radius: ${props => props.theme.borderRadius};
-  padding: ${props => props.theme.spacing.lg};
-  margin-bottom: ${props => props.theme.spacing.md};
+  padding: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.md};
+  margin-bottom: ${props => props.theme.spacing.sm};
 `;
 
 const AuctionHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: ${props => props.theme.spacing.md};
+  margin-bottom: ${props => props.theme.spacing.sm};
 `;
 
 const AuctionTitle = styled.h3`
   color: ${props => props.theme.colors.text};
   font-weight: 600;
+  font-size: 0.9rem;
 `;
 
 const AuctionStatus = styled.span`
-  padding: ${props => props.theme.spacing.xs} ${props => props.theme.spacing.sm};
+  padding: 2px ${props => props.theme.spacing.sm};
   border-radius: 12px;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   font-weight: 600;
   background: ${props => {
     switch(props.status) {
-      case 'attiva': return 'rgba(244, 67, 54, 0.1)';
-      case 'chiusa': return 'rgba(76, 175, 80, 0.1)';
-      default: return 'rgba(158, 158, 158, 0.1)';
+      case 'attiva': return 'rgba(239, 68, 68, 0.1)';
+      case 'chiusa': return 'rgba(34, 197, 94, 0.1)';
+      default: return 'rgba(148, 163, 184, 0.1)';
     }
   }};
   color: ${props => {
     switch(props.status) {
-      case 'attiva': return '#F44336';
-      case 'chiusa': return '#4CAF50';
-      default: return '#9E9E9E';
+      case 'attiva': return '#EF4444';
+      case 'chiusa': return '#22C55E';
+      default: return '#94A3B8';
     }
   }};
 `;
@@ -243,24 +244,25 @@ const AuctionStatus = styled.span`
 const AuctionInfo = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: ${props => props.theme.spacing.md};
-  margin-bottom: ${props => props.theme.spacing.md};
+  gap: ${props => props.theme.spacing.sm};
+  margin-bottom: ${props => props.theme.spacing.sm};
 `;
 
 const InfoItem = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${props => props.theme.spacing.xs};
+  gap: 2px;
 `;
 
 const InfoLabel = styled.span`
   color: ${props => props.theme.colors.textSecondary};
-  font-size: 0.8rem;
+  font-size: 0.7rem;
 `;
 
 const InfoValue = styled.span`
   color: ${props => props.theme.colors.text};
   font-weight: 600;
+  font-size: 0.85rem;
 `;
 
 const AuctionActions = styled.div`
@@ -269,15 +271,15 @@ const AuctionActions = styled.div`
 `;
 
 const Button = styled(motion.button)`
-  background: ${props => props.variant === 'danger' ? props.theme.colors.error : 
+  background: ${props => props.variant === 'danger' ? props.theme.colors.error :
                       props.variant === 'success' ? props.theme.colors.success :
                       props.theme.colors.gradient};
   border: none;
   border-radius: ${props => props.theme.borderRadius};
-  padding: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.lg};
+  padding: ${props => props.theme.spacing.xs} ${props => props.theme.spacing.md};
   color: white;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -300,18 +302,18 @@ const ActionBar = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: ${props => props.theme.spacing.xl};
-  gap: ${props => props.theme.spacing.md};
+  margin-bottom: ${props => props.theme.spacing.sm};
+  gap: ${props => props.theme.spacing.sm};
 `;
 
 const SearchBox = styled.input`
   background: ${props => props.theme.colors.surface};
   border: 2px solid ${props => props.theme.colors.border};
   border-radius: ${props => props.theme.borderRadius};
-  padding: ${props => props.theme.spacing.md};
+  padding: ${props => props.theme.spacing.sm};
   color: ${props => props.theme.colors.text};
-  font-size: 1rem;
-  min-width: 300px;
+  font-size: 0.85rem;
+  min-width: 260px;
 
   &:focus {
     outline: none;
@@ -327,9 +329,10 @@ const AddButton = styled(motion.button)`
   background: ${props => props.theme.colors.gradient};
   border: none;
   border-radius: ${props => props.theme.borderRadius};
-  padding: ${props => props.theme.spacing.md} ${props => props.theme.spacing.lg};
+  padding: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.md};
   color: white;
   font-weight: 600;
+  font-size: 0.85rem;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -352,32 +355,33 @@ const TableHeader = styled.div`
   grid-template-columns: 50px 1fr 200px 100px 100px 80px 80px 150px;
   background: ${props => props.theme.colors.primary};
   color: white;
-  padding: ${props => props.theme.spacing.md};
+  padding: ${props => props.theme.spacing.sm};
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   gap: ${props => props.theme.spacing.sm};
 `;
 
 const TableRow = styled.div`
-  display: grid;  
+  display: grid;
   grid-template-columns: 50px 1fr 200px 100px 100px 80px 80px 150px;
-  padding: ${props => props.theme.spacing.md};
+  padding: ${props => props.theme.spacing.sm};
   border-bottom: 1px solid ${props => props.theme.colors.border};
   align-items: center;
   gap: ${props => props.theme.spacing.sm};
-  
+  font-size: 0.85rem;
+
   &:hover {
     background: ${props => props.theme.colors.surfaceHover};
   }
-  
+
   &:last-child {
     border-bottom: none;
   }
 `;
 
 const Avatar = styled.div`
-  width: 35px;
-  height: 35px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   background: ${props => props.theme.colors.primary};
   display: flex;
@@ -385,7 +389,7 @@ const Avatar = styled.div`
   justify-content: center;
   color: white;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 `;
 
 const Username = styled.div`
@@ -401,7 +405,7 @@ const AdminBadge = styled.span`
   color: white;
   padding: 2px 6px;
   border-radius: 10px;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   font-weight: 600;
 `;
 
@@ -409,6 +413,7 @@ const StatCell = styled.div`
   text-align: center;
   font-weight: 500;
   color: ${props => props.theme.colors.text};
+  font-size: 0.85rem;
 `;
 
 const ActionButtons = styled.div`
@@ -426,8 +431,8 @@ const ActionButton = styled(motion.button)`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 26px;
+  height: 26px;
 
   &:hover {
     transform: scale(1.1);
@@ -450,14 +455,14 @@ const Modal = styled(motion.div)`
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  padding: ${props => props.theme.spacing.lg};
+  padding: ${props => props.theme.spacing.md};
 `;
 
 const ModalContent = styled(motion.div)`
   background: ${props => props.theme.colors.surface};
   border-radius: ${props => props.theme.borderRadius};
-  padding: ${props => props.theme.spacing.xl};
-  max-width: 500px;
+  padding: ${props => props.theme.spacing.md};
+  max-width: 460px;
   width: 100%;
 `;
 
@@ -465,12 +470,12 @@ const ModalHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: ${props => props.theme.spacing.lg};
+  margin-bottom: ${props => props.theme.spacing.sm};
 `;
 
 const ModalTitle = styled.h2`
   color: ${props => props.theme.colors.text};
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 700;
 `;
 
@@ -479,21 +484,22 @@ const CloseButton = styled.button`
   border: none;
   color: ${props => props.theme.colors.textSecondary};
   cursor: pointer;
-  font-size: 1.5rem;
-  
+  font-size: 1.3rem;
+
   &:hover {
     color: ${props => props.theme.colors.text};
   }
 `;
 
 const FormGroup = styled.div`
-  margin-bottom: ${props => props.theme.spacing.md};
+  margin-bottom: ${props => props.theme.spacing.sm};
 `;
 
 const Label = styled.label`
   display: block;
   color: ${props => props.theme.colors.text};
   font-weight: 600;
+  font-size: 0.85rem;
   margin-bottom: ${props => props.theme.spacing.xs};
 `;
 
@@ -502,9 +508,9 @@ const Input = styled.input`
   background: ${props => props.theme.colors.background};
   border: 2px solid ${props => props.theme.colors.border};
   border-radius: ${props => props.theme.borderRadius};
-  padding: ${props => props.theme.spacing.md};
+  padding: ${props => props.theme.spacing.sm};
   color: ${props => props.theme.colors.text};
-  font-size: 1rem;
+  font-size: 0.9rem;
 
   &:focus {
     outline: none;
@@ -525,18 +531,19 @@ const Checkbox = styled.input`
 
 const ModalActions = styled.div`
   display: flex;
-  gap: ${props => props.theme.spacing.md};
+  gap: ${props => props.theme.spacing.sm};
   justify-content: flex-end;
-  margin-top: ${props => props.theme.spacing.lg};
+  margin-top: ${props => props.theme.spacing.sm};
 `;
 
 const ModalButton = styled(motion.button)`
   background: ${props => props.$primary ? props.theme.colors.gradient : 'transparent'};
   border: 2px solid ${props => props.$primary ? 'transparent' : props.theme.colors.border};
   border-radius: ${props => props.theme.borderRadius};
-  padding: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.lg};
+  padding: ${props => props.theme.spacing.xs} ${props => props.theme.spacing.md};
   color: ${props => props.$primary ? 'white' : props.theme.colors.text};
   font-weight: 600;
+  font-size: 0.85rem;
   cursor: pointer;
 
   &:hover {
@@ -546,7 +553,7 @@ const ModalButton = styled(motion.button)`
 
 const LoadingContainer = styled.div`
   text-align: center;
-  padding: ${props => props.theme.spacing.xl};
+  padding: ${props => props.theme.spacing.lg};
   color: ${props => props.theme.colors.textSecondary};
 `;
 
@@ -579,7 +586,7 @@ const AdminPanel = () => {
   });
   const [newAuction, setNewAuction] = useState({
     calciatore_id: '',
-    durata_minuti: 1
+    durata_minuti: parseFloat(localStorage.getItem('astaDurataMinuti')) || 1
   });
   const [manualAssignment, setManualAssignment] = useState({
     calciatore_id: '',
@@ -653,7 +660,7 @@ const processExcelFile = async (file) => {
       ), {
         duration: 5000,
         style: {
-          background: '#FFC107',
+          background: '#F59E0B',
           color: '#333'
         }
       });
@@ -688,11 +695,11 @@ const processExcelFile = async (file) => {
         <span style={{ fontSize: '20px' }}>📊</span>
         <strong>Conferma Aggiornamento Database</strong>
       </div>
-      <div style={{ fontSize: '14px', color: '#666' }}>
+      <div style={{ fontSize: '14px', color: '#94A3B8' }}>
         <strong>File:</strong> {uploadFile.name}<br/>
         <strong>Calciatori totali nel file:</strong> {totalDaProcessare}<br/>
         {uploadPreview.length < totalDaProcessare && (
-          <small style={{ color: '#999' }}>
+          <small style={{ color: '#64748B' }}>
             (Preview mostra solo i primi {uploadPreview.length} per performance)
           </small>
         )}
@@ -712,7 +719,8 @@ const processExcelFile = async (file) => {
           onClick={() => toast.dismiss(t.id)}
           style={{
             background: 'transparent',
-            border: '2px solid #ccc',
+            border: '2px solid #243044',
+            color: '#F8FAFC',
             borderRadius: '8px',
             padding: '8px 16px',
             cursor: 'pointer',
@@ -727,7 +735,7 @@ const processExcelFile = async (file) => {
             await executeUpload();
           }}
           style={{
-            background: '#2196F3',
+            background: '#3B82F6',
             border: 'none',
             borderRadius: '8px',
             color: 'white',
@@ -745,12 +753,12 @@ const processExcelFile = async (file) => {
     duration: Infinity,
     position: 'top-center',
     style: {
-      background: 'white',
-      color: '#333',
+      background: '#141B26',
+      color: '#F8FAFC',
       padding: '20px',
       borderRadius: '12px',
-      boxShadow: '0 10px 40px rgba(0,0,0,0.3)',
-      border: '1px solid #eee',
+      boxShadow: '0 14px 34px rgba(0,0,0,0.34)',
+      border: '1px solid #243044',
       maxWidth: '520px'
     }
   });
@@ -802,7 +810,7 @@ const processExcelFile = async (file) => {
       duration: 5000,
       position: 'top-center',
       style: {
-        background: '#4CAF50',
+        background: '#22C55E',
         color: 'white',
         padding: '16px',
         borderRadius: '12px',
@@ -869,7 +877,7 @@ const processExcelFile = async (file) => {
     return (
       <AdminContainer>
         <div style={{ textAlign: 'center', padding: '2rem' }}>
-          <AlertTriangle size={48} color="#F44336" />
+          <AlertTriangle size={48} color="#EF4444" />
           <h2>Accesso Negato</h2>
           <p>Non hai i permessi per accedere a questa sezione.</p>
         </div>
@@ -926,7 +934,7 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
     try {
       await axios.post(`${API_URL}/api/aste`, newAuction);
       toast.success('Asta creata con successo!');
-      setNewAuction({ calciatore_id: '', durata_minuti: 1 });
+      setNewAuction({ calciatore_id: '', durata_minuti: newAuction.durata_minuti });
       fetchAllData();
     } catch (error) {
       const message = error.response?.data?.error || 'Errore nella creazione dell\'asta';
@@ -938,10 +946,10 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
     toast((t) => (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <Gavel size={20} color="#F44336" />
+          <Gavel size={20} color="#EF4444" />
           <strong>Chiudere questa asta?</strong>
         </div>
-        <div style={{ fontSize: '14px', color: '#666' }}>
+        <div style={{ fontSize: '14px', color: '#94A3B8' }}>
           L'asta verrà chiusa immediatamente. Vuoi procedere?
         </div>
         <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
@@ -949,7 +957,8 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
             onClick={() => toast.dismiss(t.id)}
             style={{
               background: 'transparent',
-              border: '2px solid #ccc',
+              border: '2px solid #243044',
+            color: '#F8FAFC',
               borderRadius: '8px',
               padding: '8px 16px',
               cursor: 'pointer',
@@ -970,7 +979,7 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
                   duration: 3000,
                   position: 'top-center',
                   style: {
-                    background: '#4CAF50',
+                    background: '#22C55E',
                     color: 'white',
                     padding: '16px',
                     borderRadius: '12px',
@@ -994,7 +1003,7 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
                     duration: 2000,
                     position: 'top-center',
                     style: {
-                      background: '#2196F3',
+                      background: '#3B82F6',
                       color: 'white',
                       padding: '16px',
                       borderRadius: '12px',
@@ -1011,7 +1020,7 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
                     duration: 5000,
                     position: 'top-center',
                     style: {
-                      background: '#F44336',
+                      background: '#EF4444',
                       color: 'white',
                       padding: '16px',
                       borderRadius: '12px',
@@ -1023,7 +1032,7 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
               }
             }}
             style={{
-              background: '#F44336',
+              background: '#EF4444',
               border: 'none',
               borderRadius: '8px',
               color: 'white',
@@ -1041,12 +1050,12 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
       duration: Infinity,
       position: 'top-center',
       style: {
-        background: 'white',
-        color: '#333',
+        background: '#141B26',
+        color: '#F8FAFC',
         padding: '20px',
         borderRadius: '12px',
-        boxShadow: '0 10px 40px rgba(0,0,0,0.3)',
-        border: '1px solid #eee',
+        boxShadow: '0 14px 34px rgba(0,0,0,0.34)',
+        border: '1px solid #243044',
         maxWidth: '400px'
       }
     });
@@ -1059,17 +1068,18 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
         <span style={{ fontSize: '20px' }}>⚠️</span>
         <strong>ATTENZIONE: Eliminazione Totale</strong>
       </div>
-      <div style={{ fontSize: '14px', color: '#666' }}>
-        Stai per eliminare <strong>TUTTE le aste</strong> (attive e chiuse) dal database. 
-        Questa operazione è <strong>IRREVERSIBILE</strong> e cancellerà tutto lo storico. 
-        Sei assolutamente sicuro?
+      <div style={{ fontSize: '14px', color: '#94A3B8' }}>
+        Stai per eliminare <strong>TUTTE le aste</strong> (attive e chiuse), <strong>svuotare le rose</strong> di
+        tutti gli utenti e <strong>azzerare i crediti spesi</strong>. Questa operazione è <strong>IRREVERSIBILE</strong> ed
+        è un reset completo dell'asta. Sei assolutamente sicuro?
       </div>
       <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
         <button 
           onClick={() => toast.dismiss(t.id)}
           style={{
             background: 'transparent',
-            border: '2px solid #ccc',
+            border: '2px solid #243044',
+            color: '#F8FAFC',
             borderRadius: '8px',
             padding: '8px 16px',
             cursor: 'pointer',
@@ -1092,7 +1102,7 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
                 duration: 4000,
                 position: 'top-center',
                 style: {
-                  background: '#4CAF50',
+                  background: '#22C55E',
                   color: 'white',
                   padding: '16px',
                   borderRadius: '12px',
@@ -1113,7 +1123,7 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
             }
           }}
           style={{
-            background: '#F44336',
+            background: '#EF4444',
             border: 'none',
             borderRadius: '8px',
             color: 'white',
@@ -1131,12 +1141,12 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
     duration: Infinity,
     position: 'top-center',
     style: {
-      background: 'white',
-      color: '#333',
+      background: '#141B26',
+      color: '#F8FAFC',
       padding: '20px',
       borderRadius: '12px',
-      boxShadow: '0 10px 40px rgba(0,0,0,0.3)',
-      border: '2px solid #F44336',
+      boxShadow: '0 14px 34px rgba(0,0,0,0.34)',
+      border: '2px solid #EF4444',
       maxWidth: '500px'
     }
   });
@@ -1207,7 +1217,7 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
           <span style={{ fontSize: '20px' }}>⚠️</span>
           <strong>Conferma Liberazione</strong>
         </div>
-        <div style={{ fontSize: '14px', color: '#666' }}>
+        <div style={{ fontSize: '14px', color: '#94A3B8' }}>
           Vuoi davvero liberare <strong>{nome_calciatore}</strong>? Il calciatore tornerà disponibile per le aste.
         </div>
         <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
@@ -1215,7 +1225,8 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
             onClick={() => toast.dismiss(t.id)}
             style={{
               background: 'transparent',
-              border: '2px solid #ccc',
+              border: '2px solid #243044',
+            color: '#F8FAFC',
               borderRadius: '8px',
               padding: '8px 16px',
               cursor: 'pointer',
@@ -1240,7 +1251,7 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
               }
             }}
             style={{
-              background: '#F44336',
+              background: '#EF4444',
               border: 'none',
               borderRadius: '8px',
               color: 'white',
@@ -1258,12 +1269,12 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
       duration: Infinity,
       position: 'top-center',
       style: {
-        background: 'white',
-        color: '#333',
+        background: '#141B26',
+        color: '#F8FAFC',
         padding: '20px',
         borderRadius: '12px',
-        boxShadow: '0 10px 40px rgba(0,0,0,0.3)',
-        border: '1px solid #eee',
+        boxShadow: '0 14px 34px rgba(0,0,0,0.34)',
+        border: '1px solid #243044',
         maxWidth: '400px'
       }
     });
@@ -1343,7 +1354,7 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
           <span style={{ fontSize: '20px' }}>⚠️</span>
           <strong>Conferma Eliminazione</strong>
         </div>
-        <div style={{ fontSize: '14px', color: '#666' }}>
+        <div style={{ fontSize: '14px', color: '#94A3B8' }}>
           Sei sicuro di voler eliminare {user.username}? Questa azione non può essere annullata.
         </div>
         <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
@@ -1351,7 +1362,8 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
             onClick={() => toast.dismiss(t.id)}
             style={{
               background: 'transparent',
-              border: '2px solid #ccc',
+              border: '2px solid #243044',
+            color: '#F8FAFC',
               borderRadius: '8px',
               padding: '8px 16px',
               cursor: 'pointer',
@@ -1375,7 +1387,7 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
               }
             }}
             style={{
-              background: '#F44336',
+              background: '#EF4444',
               border: 'none',
               borderRadius: '8px',
               color: 'white',
@@ -1519,16 +1531,16 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
 
             {uploadFile && (
               <div style={{
-                background: 'rgba(33, 150, 243, 0.1)',
-                border: '1px solid rgba(33, 150, 243, 0.3)',
+                background: 'rgba(5, 150, 105, 0.1)',
+                border: '1px solid rgba(5, 150, 105, 0.3)',
                 borderRadius: '8px',
                 padding: '1rem',
                 marginBottom: '1rem'
               }}>
-                <div style={{ color: '#2196F3', fontWeight: 'bold' }}>
+                <div style={{ color: '#3B82F6', fontWeight: 'bold' }}>
                   📁 File selezionato: {uploadFile.name}
                 </div>
-                <div style={{ color: '#B0BEC5', fontSize: '0.9rem' }}>
+                <div style={{ color: '#94A3B8', fontSize: '0.9rem' }}>
                   Dimensione: {(uploadFile.size / 1024 / 1024).toFixed(2)} MB
                 </div>
               </div>
@@ -1537,7 +1549,7 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
             {uploadLoading && (
               <div style={{ 
                 textAlign: 'center', 
-                color: '#2196F3',
+                color: '#3B82F6',
                 padding: '2rem' 
               }}>
                 <div>⏳ Processamento file in corso...</div>
@@ -1553,7 +1565,7 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
               </SectionTitle>
             </SectionHeader>
 
-            <div style={{ color: '#B0BEC5', fontSize: '0.9rem', lineHeight: '1.6' }}>
+            <div style={{ color: '#94A3B8', fontSize: '0.9rem', lineHeight: '1.6' }}>
               <h4 style={{ color: '#FFFFFF', marginBottom: '1rem' }}>
                 Formato file richiesto:
               </h4>
@@ -1567,13 +1579,13 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
               </ul>
 
               <div style={{ 
-                background: 'rgba(255, 193, 7, 0.1)', 
-                border: '1px solid rgba(255, 193, 7, 0.3)',
+                background: 'rgba(245, 158, 11, 0.1)', 
+                border: '1px solid rgba(245, 158, 11, 0.3)',
                 borderRadius: '8px',
                 padding: '1rem',
                 marginTop: '1rem'
               }}>
-                <strong style={{ color: '#FFC107' }}>⚠️ Importante:</strong>
+                <strong style={{ color: '#F59E0B' }}>⚠️ Importante:</strong>
                 <br />
                 - L'upload aggiornerà tutti i calciatori esistenti
                 <br />
@@ -1601,7 +1613,7 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
               <div style={{ display: 'flex', gap: '1rem' }}>
                 <Button
                   onClick={() => setShowUploadPreview(false)}
-                  style={{ background: '#666' }}
+                  style={{ background: '#475569' }}
                 >
                   <X size={16} />
                   Annulla
@@ -1627,17 +1639,17 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
 
               {uploadPreview.map((player, index) => (
                 <PreviewRow key={index}>
-                  <div style={{ color: '#B0BEC5' }}>{player.id}</div>
+                  <div style={{ color: '#94A3B8' }}>{player.id}</div>
                   <div style={{ color: '#FFFFFF' }}>{player.nome}</div>
-                  <div style={{ color: '#B0BEC5' }}>{player.squadra}</div>
+                  <div style={{ color: '#94A3B8' }}>{player.squadra}</div>
                   <div style={{ 
-                    color: player.ruolo === 'P' ? '#4CAF50' : 
-                          player.ruolo === 'D' ? '#2196F3' :
-                          player.ruolo === 'C' ? '#FFC107' : '#F44336'
+                    color: player.ruolo === 'P' ? '#22C55E' : 
+                          player.ruolo === 'D' ? '#3B82F6' :
+                          player.ruolo === 'C' ? '#F59E0B' : '#EF4444'
                   }}>
                     {player.ruolo}
                   </div>
-                  <div style={{ color: '#FFA726', fontWeight: 'bold' }}>
+                  <div style={{ color: '#FBBF24', fontWeight: 'bold' }}>
                     {player.quotazione}
                   </div>
                 </PreviewRow>
@@ -1647,7 +1659,7 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
                 <div style={{
                   textAlign: 'center',
                   padding: '1rem',
-                  color: '#B0BEC5',
+                  color: '#94A3B8',
                   borderTop: '1px solid #333'
                 }}>
                   ... e altri {uploadPreview.length - 50} calciatori
@@ -1709,7 +1721,7 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
                 {user.crediti_totali}
               </StatCell>
               
-              <StatCell style={{ color: user.crediti_spesi > 0 ? '#F44336' : '#4CAF50' }}>
+              <StatCell style={{ color: user.crediti_spesi > 0 ? '#EF4444' : '#22C55E' }}>
                 {user.crediti_spesi || 0}
               </StatCell>
               
@@ -1719,9 +1731,9 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
               
               <StatCell>
                 {user.is_admin ? (
-                  <Shield size={16} color="#FFA726" />
+                  <Shield size={16} color="#FBBF24" />
                 ) : (
-                  <Users size={16} color="#B0BEC5" />
+                  <Users size={16} color="#94A3B8" />
                 )}
               </StatCell>
               
@@ -1799,13 +1811,17 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
                 <Label>Durata (minuti)</Label>
                 <Input
                   type="number"
-                  min="1"
+                  min="0.5"
                   max="10"
+                  step="0.5"
                   value={newAuction.durata_minuti}
-                  onChange={(e) => setNewAuction({
-                    ...newAuction,
-                    durata_minuti: parseInt(e.target.value)
-                  })}
+                  onChange={(e) => {
+                    const durata = parseFloat(e.target.value);
+                    setNewAuction({ ...newAuction, durata_minuti: durata });
+                    if (!isNaN(durata)) {
+                      localStorage.setItem('astaDurataMinuti', durata);
+                    }
+                  }}
                 />
               </FormGroup>
 
@@ -1824,34 +1840,40 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
               </SectionTitle>
             </SectionHeader>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem' }}>
-  <InfoItem>
-    <InfoLabel>Utenti Registrati</InfoLabel>
-    <InfoValue>{users.length}</InfoValue>
-  </InfoItem>
-  <InfoItem>
-    <InfoLabel>Aste Totali</InfoLabel>
-    <InfoValue>{aste.length}</InfoValue>
-  </InfoItem>
-  <InfoItem>
-    <InfoLabel>Aste Attive</InfoLabel>
-    <InfoValue>{activeAuctions.length}</InfoValue>
-  </InfoItem>
-  <InfoItem>
-    <InfoLabel>Calciatori Disponibili</InfoLabel>
-    <InfoValue>{calciatori.length}</InfoValue>
-  </InfoItem>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.5rem' }}>
+  {[
+    { label: 'Utenti Registrati', value: users.length, color: '#6366F1' },
+    { label: 'Aste Totali', value: aste.length, color: '#3B82F6' },
+    { label: 'Aste Attive', value: activeAuctions.length, color: '#F59E0B' },
+    { label: 'Calciatori Disponibili', value: calciatori.length, color: '#22C55E' }
+  ].map((stat) => (
+    <div
+      key={stat.label}
+      style={{
+        background: `${stat.color}14`,
+        border: `1px solid ${stat.color}40`,
+        borderRadius: '12px',
+        padding: '0.6rem',
+        position: 'relative',
+        overflow: 'hidden'
+      }}
+    >
+      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '3px', background: stat.color }} />
+      <div style={{ color: '#94A3B8', fontSize: '0.7rem' }}>{stat.label}</div>
+      <div style={{ color: stat.color, fontWeight: 800, fontSize: '1.3rem', marginTop: '0.15rem' }}>{stat.value}</div>
+    </div>
+  ))}
 </div>
 
 {/* Pulsante Elimina Tutte le Aste */}
 {aste.length > 0 && (
-  <div style={{ marginTop: '2rem', textAlign: 'center' }}>
+  <div style={{ marginTop: '1rem', textAlign: 'center' }}>
     <Button
       variant="danger"
       onClick={handleDeleteAllAuctions}
       whileHover={{ scale: 1.02 }}
-      style={{ 
-        background: '#F44336',
+      style={{
+        background: '#EF4444',
         display: 'flex',
         alignItems: 'center',
         gap: '0.5rem',
@@ -1861,13 +1883,13 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
       <Trash2 size={16} />
       Elimina Tutte le Aste ({aste.length})
     </Button>
-    <div style={{ 
-      color: '#F44336', 
-      fontSize: '0.8rem', 
-      marginTop: '0.5rem',
-      fontStyle: 'italic' 
+    <div style={{
+      color: '#EF4444',
+      fontSize: '0.75rem',
+      marginTop: '0.4rem',
+      fontStyle: 'italic'
     }}>
-      ⚠️ Operazione irreversibile - elimina tutto lo storico
+      ⚠️ Operazione irreversibile - elimina aste, rose e azzera i crediti
     </div>
   </div>
 )}
@@ -1883,7 +1905,7 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
           {activeAuctions.length === 0 ? (
             <div style={{ 
               textAlign: 'center', 
-              color: '#B0BEC5', 
+              color: '#94A3B8', 
               padding: '2rem',
               background: '#1A1A1A',
               borderRadius: '8px'
@@ -1943,7 +1965,7 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
           {aste.filter(a => a.stato === 'chiusa').slice(0, 5).length === 0 ? (
             <div style={{ 
               textAlign: 'center', 
-              color: '#B0BEC5', 
+              color: '#94A3B8', 
               padding: '2rem',
               background: '#1A1A1A',
               borderRadius: '8px'
@@ -1957,12 +1979,12 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
               .slice(0, 5)
               .map(auction => (
                 <AuctionCard key={auction.id} style={{ 
-                  border: auction.numero_offerte > 0 ? '1px solid #FFC107' : '1px solid #9E9E9E',
-                  background: auction.numero_offerte > 0 ? 'rgba(255, 193, 7, 0.05)' : 'rgba(158, 158, 158, 0.05)'
+                  border: auction.numero_offerte > 0 ? '1px solid #F59E0B' : '1px solid #94A3B8',
+                  background: auction.numero_offerte > 0 ? 'rgba(245, 158, 11, 0.06)' : 'rgba(148, 163, 184, 0.06)'
                 }}>
                   <AuctionHeader>
                     <AuctionTitle style={{ 
-                      color: auction.numero_offerte > 0 ? '#FFC107' : '#9E9E9E',
+                      color: auction.numero_offerte > 0 ? '#F59E0B' : '#94A3B8',
                       display: 'flex',
                       alignItems: 'center',
                       gap: '0.5rem'
@@ -1996,20 +2018,28 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
                   </AuctionInfo>
 
                   <div style={{
-                    background: auction.numero_offerte > 0 ? 'rgba(255, 193, 7, 0.1)' : 'rgba(158, 158, 158, 0.1)',
+                    background: auction.numero_offerte > 0 ? 'rgba(245, 158, 11, 0.1)' : 'rgba(148, 163, 184, 0.1)',
                     padding: '1rem',
                     borderRadius: '8px',
                     marginBottom: '1rem',
                     textAlign: 'center'
                   }}>
                     {auction.numero_offerte > 0 ? (
-                      <div style={{ color: '#FFC107' }}>
+                      <div style={{ color: '#F59E0B' }}>
                         🔒 <strong>Asta Completata</strong>
                         <br />
                         <small>Clicca "Vedi Risultati" per scoprire l'esito</small>
+                        {auction.vincitore_id && !auction.confermata && (
+                          <>
+                            <br />
+                            <small style={{ color: '#EF4444', fontWeight: 600 }}>
+                              ⏳ Acquisto da confermare
+                            </small>
+                          </>
+                        )}
                       </div>
                     ) : (
-                      <div style={{ color: '#9E9E9E' }}>
+                      <div style={{ color: '#94A3B8' }}>
                         📭 <strong>Nessuna Offerta</strong>
                         <br />
                         <small>Calciatore rimasto disponibile</small>
@@ -2024,7 +2054,7 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
                         window.location.href = `/risultati-asta/${auction.id}`;
                       }}
                       whileHover={{ scale: 1.02 }}
-                      style={{ background: '#2D5A87' }}
+                      style={{ background: '#3B82F6' }}
                     >
                       <Eye size={16} />
                       Vedi Risultati
@@ -2117,7 +2147,7 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
               </SectionTitle>
             </SectionHeader>
 
-            <div style={{ color: '#B0BEC5', fontSize: '0.9rem', lineHeight: '1.6' }}>
+            <div style={{ color: '#94A3B8', fontSize: '0.9rem', lineHeight: '1.6' }}>
               <h4 style={{ color: '#FFFFFF', marginBottom: '1rem' }}>Quando usare l'assegnazione manuale:</h4>
               
               <ul style={{ paddingLeft: '1.5rem', marginBottom: '1rem' }}>
@@ -2128,13 +2158,13 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
               </ul>
 
               <div style={{ 
-                background: 'rgba(255, 193, 7, 0.1)', 
-                border: '1px solid rgba(255, 193, 7, 0.3)',
+                background: 'rgba(245, 158, 11, 0.1)', 
+                border: '1px solid rgba(245, 158, 11, 0.3)',
                 borderRadius: '8px',
                 padding: '1rem',
                 marginTop: '1rem'
               }}>
-                <strong style={{ color: '#FFC107' }}>⚠️ Attenzione:</strong>
+                <strong style={{ color: '#F59E0B' }}>⚠️ Attenzione:</strong>
                 <br />
                 L'assegnazione manuale bypassa il sistema d'asta e assegna direttamente il giocatore all'utente specificato al prezzo indicato.
               </div>
@@ -2151,7 +2181,7 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
           {aste.filter(a => a.stato === 'chiusa' && a.numero_offerte > 0 && !a.vincitore_id).length === 0 ? (
             <div style={{ 
               textAlign: 'center', 
-              color: '#B0BEC5', 
+              color: '#94A3B8', 
               padding: '2rem',
               background: '#1A1A1A',
               borderRadius: '8px'
@@ -2162,14 +2192,14 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
             aste
               .filter(a => a.stato === 'chiusa' && a.numero_offerte > 0 && !a.vincitore_id)
               .map(auction => (
-                <AuctionCard key={auction.id} style={{ border: '2px solid #FFC107' }}>
+                <AuctionCard key={auction.id} style={{ border: '2px solid #F59E0B' }}>
                   <AuctionHeader>
-                    <AuctionTitle style={{ color: '#FFC107' }}>
+                    <AuctionTitle style={{ color: '#F59E0B' }}>
                       ⚠️ {auction.calciatore_nome}
                     </AuctionTitle>
                     <AuctionStatus status="problematica" style={{ 
-                      background: 'rgba(255, 193, 7, 0.1)',
-                      color: '#FFC107' 
+                      background: 'rgba(245, 158, 11, 0.1)',
+                      color: '#F59E0B' 
                     }}>
                       RICHIEDE INTERVENTO
                     </AuctionStatus>
@@ -2195,11 +2225,11 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
                   </AuctionInfo>
 
                   <div style={{ 
-                    background: 'rgba(255, 193, 7, 0.1)', 
+                    background: 'rgba(245, 158, 11, 0.1)', 
                     padding: '1rem', 
                     borderRadius: '8px',
                     marginTop: '1rem',
-                    color: '#FFC107',
+                    color: '#F59E0B',
                     fontSize: '0.9rem'
                   }}>
                     💡 Questa asta potrebbe avere offerte identiche o altre problematiche. 
@@ -2293,7 +2323,7 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
               </SectionTitle>
             </SectionHeader>
 
-            <div style={{ color: '#B0BEC5', fontSize: '0.9rem', lineHeight: '1.6' }}>
+            <div style={{ color: '#94A3B8', fontSize: '0.9rem', lineHeight: '1.6' }}>
               <h4 style={{ color: '#FFFFFF', marginBottom: '1rem' }}>Operazioni disponibili:</h4>
               
               <ul style={{ paddingLeft: '1.5rem', marginBottom: '1rem' }}>
@@ -2304,13 +2334,13 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
               </ul>
 
               <div style={{ 
-                background: 'rgba(33, 150, 243, 0.1)', 
-                border: '1px solid rgba(33, 150, 243, 0.3)',
+                background: 'rgba(5, 150, 105, 0.1)', 
+                border: '1px solid rgba(5, 150, 105, 0.3)',
                 borderRadius: '8px',
                 padding: '1rem',
                 marginTop: '1rem'
               }}>
-                <strong style={{ color: '#2196F3' }}>💡 Nota:</strong>
+                <strong style={{ color: '#3B82F6' }}>💡 Nota:</strong>
                 <br />
                 Il trasferimento aggiorna automaticamente i crediti spesi di entrambi gli utenti. 
                 Il vecchio proprietario recupera i crediti, il nuovo li spende.
@@ -2328,7 +2358,7 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
           {calciatoriAssegnati.length === 0 ? (
             <div style={{ 
               textAlign: 'center', 
-              color: '#B0BEC5', 
+              color: '#94A3B8', 
               padding: '2rem',
               background: '#1A1A1A',
               borderRadius: '8px'
@@ -2361,15 +2391,15 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
                       <h4 style={{ color: '#FFFFFF', margin: '0 0 0.25rem 0' }}>
                         {player.nome}
                       </h4>
-                      <div style={{ color: '#B0BEC5', fontSize: '0.9rem' }}>
+                      <div style={{ color: '#94A3B8', fontSize: '0.9rem' }}>
                         {player.squadra} • {player.ruolo} • Quot. {player.quotazione}
                       </div>
                     </div>
                     <div style={{ textAlign: 'right' }}>
-                      <div style={{ color: '#4CAF50', fontWeight: 'bold' }}>
+                      <div style={{ color: '#22C55E', fontWeight: 'bold' }}>
                         {player.proprietario}
                       </div>
-                      <div style={{ color: '#FFA726', fontSize: '0.9rem' }}>
+                      <div style={{ color: '#FBBF24', fontSize: '0.9rem' }}>
                         {player.prezzo_acquisto} crediti
                       </div>
                     </div>
@@ -2387,7 +2417,7 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
                         nuovo_prezzo: player.prezzo_acquisto?.toString() || ''
                       })}
                       style={{ 
-                        background: '#2196F3', 
+                        background: '#3B82F6', 
                         fontSize: '0.8rem', 
                         padding: '0.5rem 1rem',
                         flex: 1 

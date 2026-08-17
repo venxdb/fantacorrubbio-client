@@ -6,8 +6,9 @@ import { useAuth } from '../../contexts/AuthContext';
 import toast from 'react-hot-toast';
 
 const HeaderContainer = styled.header`
-  background: ${props => props.theme.colors.surface};
-  backdrop-filter: blur(10px);
+  background: rgba(20, 27, 38, 0.72);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
   border-bottom: 1px solid ${props => props.theme.colors.border};
   padding: 0 ${props => props.theme.spacing.lg};
   height: 70px;
@@ -325,7 +326,7 @@ const DropdownItem = styled.button`
   }
 
   &.danger:hover {
-    background: rgba(244, 67, 54, 0.1);
+    background: rgba(239, 68, 68, 0.1);
     color: ${props => props.theme.colors.error};
   }
   
@@ -392,27 +393,27 @@ const Header = ({ onToggleSidebar, sidebarOpen = false }) => {
           duration: 4000,
           position: 'top-center',
           style: {
-            background: '#2D5A87',
+            background: '#059669',
             color: 'white',
             padding: '16px',
-            borderRadius: '12px',
+            borderRadius: '14px',
             fontSize: '16px',
             fontWeight: '600',
-            boxShadow: '0 10px 40px rgba(45, 90, 135, 0.3)',
+            boxShadow: '0 10px 40px rgba(5, 150, 105, 0.3)',
           },
           iconTheme: {
-            primary: '#FFD700',
-            secondary: '#2D5A87',
+            primary: '#FBBF24',
+            secondary: '#059669',
           },
         });
-        
+
         setTimeout(() => {
           toast('📊 Qui potrai modificare i tuoi dati, vedere statistiche e gestire preferenze personali', {
             duration: 6000,
             position: 'top-center',
             style: {
-              background: '#37474F',
-              color: '#E0E0E0',
+              background: '#1C2534',
+              color: '#E2E8F0',
               padding: '12px 16px',
               borderRadius: '8px',
               fontSize: '14px',
@@ -428,27 +429,27 @@ const Header = ({ onToggleSidebar, sidebarOpen = false }) => {
           duration: 4000,
           position: 'top-center',
           style: {
-            background: '#2D5A87',
+            background: '#059669',
             color: 'white',
             padding: '16px',
-            borderRadius: '12px',
+            borderRadius: '14px',
             fontSize: '16px',
             fontWeight: '600',
-            boxShadow: '0 10px 40px rgba(45, 90, 135, 0.3)',
+            boxShadow: '0 10px 40px rgba(5, 150, 105, 0.3)',
           },
           iconTheme: {
-            primary: '#FFD700',
-            secondary: '#2D5A87',
+            primary: '#FBBF24',
+            secondary: '#059669',
           },
         });
-        
+
         setTimeout(() => {
           toast('🔧 Qui potrai cambiare password, gestire notifiche, tema scuro/chiaro e preferenze generali', {
             duration: 6000,
             position: 'top-center',
             style: {
-              background: '#37474F',
-              color: '#E0E0E0',
+              background: '#1C2534',
+              color: '#E2E8F0',
               padding: '12px 16px',
               borderRadius: '8px',
               fontSize: '14px',
@@ -514,6 +515,19 @@ const Header = ({ onToggleSidebar, sidebarOpen = false }) => {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           title="Notifiche"
+          onClick={() => toast('🖕 Bravo coglione, continua a cliccare bottoni a caso!', {
+            duration: 4000,
+            position: 'top-center',
+            style: {
+              background: '#059669',
+              color: 'white',
+              padding: '16px',
+              borderRadius: '14px',
+              fontSize: '16px',
+              fontWeight: '600',
+              boxShadow: '0 10px 40px rgba(5, 150, 105, 0.3)',
+            },
+          })}
         >
           <Bell size={20} />
           {notifications > 0 && <NotificationBadge />}
@@ -552,10 +566,10 @@ const Header = ({ onToggleSidebar, sidebarOpen = false }) => {
                   <Settings size={16} />
                   Impostazioni
                 </DropdownItem>
-                <hr style={{ 
-                  border: 'none', 
-                  borderTop: `1px solid #37474F`, 
-                  margin: '8px 0' 
+                <hr style={{
+                  border: 'none',
+                  borderTop: `1px solid #243044`,
+                  margin: '8px 0'
                 }} />
                 <DropdownItem onClick={handleLogout} className="danger">
                   <LogOut size={16} />

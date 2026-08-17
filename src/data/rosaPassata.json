@@ -1,0 +1,1050 @@
+{
+  "dre": {
+    "totaleCrediti": 350,
+    "totaleSpeso": 350,
+    "totaleGiocatori": 25,
+    "ruoli": {
+      "P": {
+        "giocatori": [
+          {
+            "nome": "Sommer",
+            "prezzo": 17
+          },
+          {
+            "nome": "Martinez Jo.",
+            "prezzo": 1
+          },
+          {
+            "nome": "Di Gennaro",
+            "prezzo": 1
+          }
+        ],
+        "spesa": 19,
+        "percentuale": 5.4
+      },
+      "D": {
+        "giocatori": [
+          {
+            "nome": "Cambiaso",
+            "prezzo": 9
+          },
+          {
+            "nome": "Estupinan",
+            "prezzo": 3
+          },
+          {
+            "nome": "Baschirotto",
+            "prezzo": 3
+          },
+          {
+            "nome": "Mancini",
+            "prezzo": 3
+          },
+          {
+            "nome": "Cuadrado",
+            "prezzo": 3
+          },
+          {
+            "nome": "Kalulu",
+            "prezzo": 3
+          },
+          {
+            "nome": "Spinazzola",
+            "prezzo": 2
+          },
+          {
+            "nome": "Acerbi",
+            "prezzo": 1
+          }
+        ],
+        "spesa": 27,
+        "percentuale": 7.7
+      },
+      "C": {
+        "giocatori": [
+          {
+            "nome": "Neres",
+            "prezzo": 15
+          },
+          {
+            "nome": "Atta",
+            "prezzo": 13
+          },
+          {
+            "nome": "Sucic P.",
+            "prezzo": 13
+          },
+          {
+            "nome": "Vlasic",
+            "prezzo": 13
+          },
+          {
+            "nome": "Modric",
+            "prezzo": 11
+          },
+          {
+            "nome": "Bailey",
+            "prezzo": 11
+          },
+          {
+            "nome": "Zaniolo",
+            "prezzo": 3
+          },
+          {
+            "nome": "Jashari",
+            "prezzo": 1
+          }
+        ],
+        "spesa": 80,
+        "percentuale": 22.9
+      },
+      "A": {
+        "giocatori": [
+          {
+            "nome": "Ferguson E.",
+            "prezzo": 87
+          },
+          {
+            "nome": "Hojlund",
+            "prezzo": 71
+          },
+          {
+            "nome": "Lucca",
+            "prezzo": 24
+          },
+          {
+            "nome": "Adams C.",
+            "prezzo": 21
+          },
+          {
+            "nome": "Camarda",
+            "prezzo": 16
+          },
+          {
+            "nome": "Sulemana K.",
+            "prezzo": 5
+          }
+        ],
+        "spesa": 224,
+        "percentuale": 64.0
+      }
+    }
+  },
+  "savo": {
+    "totaleCrediti": 350,
+    "totaleSpeso": 337,
+    "totaleGiocatori": 25,
+    "ruoli": {
+      "P": {
+        "giocatori": [
+          {
+            "nome": "Maignan",
+            "prezzo": 17
+          },
+          {
+            "nome": "Suzuki",
+            "prezzo": 3
+          },
+          {
+            "nome": "Gollini",
+            "prezzo": 2
+          }
+        ],
+        "spesa": 22,
+        "percentuale": 6.3
+      },
+      "D": {
+        "giocatori": [
+          {
+            "nome": "Dimarco",
+            "prezzo": 18
+          },
+          {
+            "nome": "Bastoni",
+            "prezzo": 10
+          },
+          {
+            "nome": "Zappacosta",
+            "prezzo": 4
+          },
+          {
+            "nome": "N'Dicka",
+            "prezzo": 3
+          },
+          {
+            "nome": "Valeri",
+            "prezzo": 2
+          },
+          {
+            "nome": "Kelly L.",
+            "prezzo": 1
+          },
+          {
+            "nome": "Ehizibue",
+            "prezzo": 1
+          },
+          {
+            "nome": "Holm",
+            "prezzo": 1
+          }
+        ],
+        "spesa": 40,
+        "percentuale": 11.4
+      },
+      "C": {
+        "giocatori": [
+          {
+            "nome": "Barella",
+            "prezzo": 23
+          },
+          {
+            "nome": "Casadei",
+            "prezzo": 5
+          },
+          {
+            "nome": "Oristanio",
+            "prezzo": 5
+          },
+          {
+            "nome": "Caqueret",
+            "prezzo": 2
+          },
+          {
+            "nome": "Gronbaek",
+            "prezzo": 2
+          },
+          {
+            "nome": "De Roon",
+            "prezzo": 2
+          },
+          {
+            "nome": "Belahyane",
+            "prezzo": 1
+          },
+          {
+            "nome": "Pellegrini Lo.",
+            "prezzo": 1
+          }
+        ],
+        "spesa": 41,
+        "percentuale": 11.7
+      },
+      "A": {
+        "giocatori": [
+          {
+            "nome": "David",
+            "prezzo": 80
+          },
+          {
+            "nome": "Gimenez",
+            "prezzo": 67
+          },
+          {
+            "nome": "Lukaku",
+            "prezzo": 50
+          },
+          {
+            "nome": "Dzeko",
+            "prezzo": 20
+          },
+          {
+            "nome": "Vardy",
+            "prezzo": 15
+          },
+          {
+            "nome": "Belotti",
+            "prezzo": 2
+          }
+        ],
+        "spesa": 234,
+        "percentuale": 66.9
+      }
+    }
+  },
+  "ste": {
+    "totaleCrediti": 350,
+    "totaleSpeso": 346,
+    "totaleGiocatori": 25,
+    "ruoli": {
+      "P": {
+        "giocatori": [
+          {
+            "nome": "Di Gregorio",
+            "prezzo": 16
+          },
+          {
+            "nome": "Perin",
+            "prezzo": 1
+          },
+          {
+            "nome": "Pinsoglio",
+            "prezzo": 1
+          }
+        ],
+        "spesa": 18,
+        "percentuale": 5.1
+      },
+      "D": {
+        "giocatori": [
+          {
+            "nome": "Gosens",
+            "prezzo": 12
+          },
+          {
+            "nome": "Bellanova",
+            "prezzo": 8
+          },
+          {
+            "nome": "Joao Mario",
+            "prezzo": 4
+          },
+          {
+            "nome": "Doig",
+            "prezzo": 3
+          },
+          {
+            "nome": "Gutierrez",
+            "prezzo": 3
+          },
+          {
+            "nome": "De Winter",
+            "prezzo": 2
+          },
+          {
+            "nome": "Miranda J.",
+            "prezzo": 2
+          },
+          {
+            "nome": "Hermoso",
+            "prezzo": 1
+          }
+        ],
+        "spesa": 35,
+        "percentuale": 10.0
+      },
+      "C": {
+        "giocatori": [
+          {
+            "nome": "Gudmundsson A.",
+            "prezzo": 33
+          },
+          {
+            "nome": "Conceicao",
+            "prezzo": 24
+          },
+          {
+            "nome": "Odgaard",
+            "prezzo": 16
+          },
+          {
+            "nome": "Isaksen",
+            "prezzo": 11
+          },
+          {
+            "nome": "Zalewski",
+            "prezzo": 3
+          },
+          {
+            "nome": "Locatelli",
+            "prezzo": 3
+          },
+          {
+            "nome": "Stanciu",
+            "prezzo": 2
+          },
+          {
+            "nome": "Ondrejka",
+            "prezzo": 1
+          }
+        ],
+        "spesa": 93,
+        "percentuale": 26.6
+      },
+      "A": {
+        "giocatori": [
+          {
+            "nome": "Martinez L.",
+            "prezzo": 102
+          },
+          {
+            "nome": "De Ketelaere",
+            "prezzo": 59
+          },
+          {
+            "nome": "Morata",
+            "prezzo": 26
+          },
+          {
+            "nome": "Dia",
+            "prezzo": 6
+          },
+          {
+            "nome": "Dovbyk",
+            "prezzo": 4
+          },
+          {
+            "nome": "Piccoli",
+            "prezzo": 3
+          }
+        ],
+        "spesa": 200,
+        "percentuale": 57.1
+      }
+    }
+  },
+  "venxdb": {
+    "totaleCrediti": 350,
+    "totaleSpeso": 350,
+    "totaleGiocatori": 25,
+    "ruoli": {
+      "P": {
+        "giocatori": [
+          {
+            "nome": "Meret",
+            "prezzo": 14
+          },
+          {
+            "nome": "Leali",
+            "prezzo": 2
+          },
+          {
+            "nome": "Falcone",
+            "prezzo": 1
+          }
+        ],
+        "spesa": 17,
+        "percentuale": 4.9
+      },
+      "D": {
+        "giocatori": [
+          {
+            "nome": "Di Lorenzo",
+            "prezzo": 10
+          },
+          {
+            "nome": "Pavlovic",
+            "prezzo": 4
+          },
+          {
+            "nome": "Rrahmani",
+            "prezzo": 3
+          },
+          {
+            "nome": "Gatti",
+            "prezzo": 2
+          },
+          {
+            "nome": "Martin",
+            "prezzo": 2
+          },
+          {
+            "nome": "Angori",
+            "prezzo": 1
+          },
+          {
+            "nome": "Romagnoli",
+            "prezzo": 1
+          },
+          {
+            "nome": "Carlos Augusto",
+            "prezzo": 1
+          }
+        ],
+        "spesa": 24,
+        "percentuale": 6.9
+      },
+      "C": {
+        "giocatori": [
+          {
+            "nome": "Zaccagni",
+            "prezzo": 39
+          },
+          {
+            "nome": "Politano",
+            "prezzo": 18
+          },
+          {
+            "nome": "Rowe",
+            "prezzo": 14
+          },
+          {
+            "nome": "Loftus-Cheek",
+            "prezzo": 13
+          },
+          {
+            "nome": "Carboni V.",
+            "prezzo": 4
+          },
+          {
+            "nome": "Vandeputte",
+            "prezzo": 3
+          },
+          {
+            "nome": "Samardzic",
+            "prezzo": 1
+          },
+          {
+            "nome": "Bernabè",
+            "prezzo": 1
+          }
+        ],
+        "spesa": 93,
+        "percentuale": 26.6
+      },
+      "A": {
+        "giocatori": [
+          {
+            "nome": "Kean",
+            "prezzo": 94
+          },
+          {
+            "nome": "Yildiz",
+            "prezzo": 88
+          },
+          {
+            "nome": "Pellegrino M.",
+            "prezzo": 19
+          },
+          {
+            "nome": "Pinamonti",
+            "prezzo": 11
+          },
+          {
+            "nome": "Stulic",
+            "prezzo": 3
+          },
+          {
+            "nome": "Zapata D.",
+            "prezzo": 1
+          }
+        ],
+        "spesa": 216,
+        "percentuale": 61.7
+      }
+    }
+  },
+  "edo": {
+    "totaleCrediti": 350,
+    "totaleSpeso": 350,
+    "totaleGiocatori": 25,
+    "ruoli": {
+      "P": {
+        "giocatori": [
+          {
+            "nome": "Svilar",
+            "prezzo": 13
+          },
+          {
+            "nome": "Israel",
+            "prezzo": 2
+          },
+          {
+            "nome": "Caprile",
+            "prezzo": 1
+          }
+        ],
+        "spesa": 16,
+        "percentuale": 4.6
+      },
+      "D": {
+        "giocatori": [
+          {
+            "nome": "Bremer",
+            "prezzo": 15
+          },
+          {
+            "nome": "Zortea",
+            "prezzo": 12
+          },
+          {
+            "nome": "Angelino",
+            "prezzo": 9
+          },
+          {
+            "nome": "Akanji",
+            "prezzo": 4
+          },
+          {
+            "nome": "Mina",
+            "prezzo": 2
+          },
+          {
+            "nome": "Luperto",
+            "prezzo": 2
+          },
+          {
+            "nome": "Beukema",
+            "prezzo": 2
+          },
+          {
+            "nome": "Bisseck",
+            "prezzo": 2
+          }
+        ],
+        "spesa": 48,
+        "percentuale": 13.7
+      },
+      "C": {
+        "giocatori": [
+          {
+            "nome": "De Bruyne",
+            "prezzo": 42
+          },
+          {
+            "nome": "Calhanoglu",
+            "prezzo": 29
+          },
+          {
+            "nome": "Rabiot",
+            "prezzo": 25
+          },
+          {
+            "nome": "Da Cunha",
+            "prezzo": 15
+          },
+          {
+            "nome": "Koopmeiners",
+            "prezzo": 6
+          },
+          {
+            "nome": "Stengs",
+            "prezzo": 4
+          },
+          {
+            "nome": "Pasalic",
+            "prezzo": 4
+          },
+          {
+            "nome": "Al-Musrati",
+            "prezzo": 2
+          }
+        ],
+        "spesa": 127,
+        "percentuale": 36.3
+      },
+      "A": {
+        "giocatori": [
+          {
+            "nome": "Thuram",
+            "prezzo": 120
+          },
+          {
+            "nome": "Vlahovic",
+            "prezzo": 35
+          },
+          {
+            "nome": "Immobile",
+            "prezzo": 1
+          },
+          {
+            "nome": "Lang",
+            "prezzo": 1
+          },
+          {
+            "nome": "Laurientè",
+            "prezzo": 1
+          },
+          {
+            "nome": "Davis K.",
+            "prezzo": 1
+          }
+        ],
+        "spesa": 159,
+        "percentuale": 45.4
+      }
+    }
+  },
+  "bottu": {
+    "totaleCrediti": 350,
+    "totaleSpeso": 350,
+    "totaleGiocatori": 25,
+    "ruoli": {
+      "P": {
+        "giocatori": [
+          {
+            "nome": "De Gea",
+            "prezzo": 11
+          },
+          {
+            "nome": "Provedel",
+            "prezzo": 9
+          },
+          {
+            "nome": "Mandas",
+            "prezzo": 2
+          }
+        ],
+        "spesa": 22,
+        "percentuale": 6.3
+      },
+      "D": {
+        "giocatori": [
+          {
+            "nome": "Dumfries",
+            "prezzo": 18
+          },
+          {
+            "nome": "Vojvoda",
+            "prezzo": 4
+          },
+          {
+            "nome": "Hien",
+            "prezzo": 3
+          },
+          {
+            "nome": "Gallo",
+            "prezzo": 2
+          },
+          {
+            "nome": "Comuzzo",
+            "prezzo": 2
+          },
+          {
+            "nome": "Kristensen T.",
+            "prezzo": 2
+          },
+          {
+            "nome": "Ramon",
+            "prezzo": 2
+          },
+          {
+            "nome": "Biraghi",
+            "prezzo": 1
+          }
+        ],
+        "spesa": 34,
+        "percentuale": 9.7
+      },
+      "C": {
+        "giocatori": [
+          {
+            "nome": "McTominay",
+            "prezzo": 39
+          },
+          {
+            "nome": "Saelemaekers",
+            "prezzo": 12
+          },
+          {
+            "nome": "Guendouzi",
+            "prezzo": 11
+          },
+          {
+            "nome": "Zhegrova",
+            "prezzo": 10
+          },
+          {
+            "nome": "Frattesi",
+            "prezzo": 3
+          },
+          {
+            "nome": "Baturina",
+            "prezzo": 3
+          },
+          {
+            "nome": "Frendrup",
+            "prezzo": 2
+          },
+          {
+            "nome": "Vazquez",
+            "prezzo": 1
+          }
+        ],
+        "spesa": 81,
+        "percentuale": 23.1
+      },
+      "A": {
+        "giocatori": [
+          {
+            "nome": "Castellanos",
+            "prezzo": 73
+          },
+          {
+            "nome": "Soulè",
+            "prezzo": 70
+          },
+          {
+            "nome": "Berardi",
+            "prezzo": 45
+          },
+          {
+            "nome": "Esposito Se.",
+            "prezzo": 9
+          },
+          {
+            "nome": "Simeone",
+            "prezzo": 8
+          },
+          {
+            "nome": "Colombo",
+            "prezzo": 8
+          }
+        ],
+        "spesa": 213,
+        "percentuale": 60.9
+      }
+    }
+  },
+  "zane": {
+    "totaleCrediti": 350,
+    "totaleSpeso": 350,
+    "totaleGiocatori": 25,
+    "ruoli": {
+      "P": {
+        "giocatori": [
+          {
+            "nome": "Carnesecchi",
+            "prezzo": 11
+          },
+          {
+            "nome": "Milinkovic-Savic V.",
+            "prezzo": 3
+          },
+          {
+            "nome": "Sportiello",
+            "prezzo": 1
+          }
+        ],
+        "spesa": 15,
+        "percentuale": 4.3
+      },
+      "D": {
+        "giocatori": [
+          {
+            "nome": "Wesley",
+            "prezzo": 17
+          },
+          {
+            "nome": "Dodò",
+            "prezzo": 7
+          },
+          {
+            "nome": "Gila",
+            "prezzo": 4
+          },
+          {
+            "nome": "Tomori",
+            "prezzo": 3
+          },
+          {
+            "nome": "Ostigard",
+            "prezzo": 2
+          },
+          {
+            "nome": "Zappa",
+            "prezzo": 2
+          },
+          {
+            "nome": "Bella-Kotchap",
+            "prezzo": 1
+          },
+          {
+            "nome": "Vasquez",
+            "prezzo": 1
+          }
+        ],
+        "spesa": 37,
+        "percentuale": 10.6
+      },
+      "C": {
+        "giocatori": [
+          {
+            "nome": "Pulisic",
+            "prezzo": 40
+          },
+          {
+            "nome": "Konè M.",
+            "prezzo": 18
+          },
+          {
+            "nome": "Ederson D.S.",
+            "prezzo": 15
+          },
+          {
+            "nome": "Zambo Anguissa",
+            "prezzo": 9
+          },
+          {
+            "nome": "Mandragora",
+            "prezzo": 6
+          },
+          {
+            "nome": "Dele-Bashiru",
+            "prezzo": 4
+          },
+          {
+            "nome": "Tramoni M.",
+            "prezzo": 1
+          },
+          {
+            "nome": "Freuler",
+            "prezzo": 1
+          }
+        ],
+        "spesa": 94,
+        "percentuale": 26.9
+      },
+      "A": {
+        "giocatori": [
+          {
+            "nome": "Leao",
+            "prezzo": 90
+          },
+          {
+            "nome": "Castro S.",
+            "prezzo": 44
+          },
+          {
+            "nome": "Scamacca",
+            "prezzo": 40
+          },
+          {
+            "nome": "Krstovic",
+            "prezzo": 28
+          },
+          {
+            "nome": "Ngonge",
+            "prezzo": 1
+          },
+          {
+            "nome": "Diao",
+            "prezzo": 1
+          }
+        ],
+        "spesa": 204,
+        "percentuale": 58.3
+      }
+    }
+  },
+  "lore": {
+    "totaleCrediti": 350,
+    "totaleSpeso": 350,
+    "totaleGiocatori": 25,
+    "ruoli": {
+      "P": {
+        "giocatori": [
+          {
+            "nome": "Butez",
+            "prezzo": 8
+          },
+          {
+            "nome": "Skorupski",
+            "prezzo": 6
+          },
+          {
+            "nome": "Montipò",
+            "prezzo": 2
+          }
+        ],
+        "spesa": 16,
+        "percentuale": 4.6
+      },
+      "D": {
+        "giocatori": [
+          {
+            "nome": "Tavares N.",
+            "prezzo": 8
+          },
+          {
+            "nome": "Buongiorno",
+            "prezzo": 6
+          },
+          {
+            "nome": "Solet",
+            "prezzo": 4
+          },
+          {
+            "nome": "Floriani Mussolini",
+            "prezzo": 3
+          },
+          {
+            "nome": "Valle",
+            "prezzo": 3
+          },
+          {
+            "nome": "Delprato",
+            "prezzo": 3
+          },
+          {
+            "nome": "Vitik",
+            "prezzo": 3
+          },
+          {
+            "nome": "Goglichidze",
+            "prezzo": 1
+          }
+        ],
+        "spesa": 31,
+        "percentuale": 8.9
+      },
+      "C": {
+        "giocatori": [
+          {
+            "nome": "Orsolini",
+            "prezzo": 38
+          },
+          {
+            "nome": "Paz N.",
+            "prezzo": 36
+          },
+          {
+            "nome": "Thuram K.",
+            "prezzo": 29
+          },
+          {
+            "nome": "Malinovskyi",
+            "prezzo": 3
+          },
+          {
+            "nome": "Tete Morente",
+            "prezzo": 3
+          },
+          {
+            "nome": "Mkhitaryan",
+            "prezzo": 3
+          },
+          {
+            "nome": "Collocolo",
+            "prezzo": 2
+          },
+          {
+            "nome": "Bernardeschi",
+            "prezzo": 1
+          }
+        ],
+        "spesa": 115,
+        "percentuale": 32.9
+      },
+      "A": {
+        "giocatori": [
+          {
+            "nome": "Dybala",
+            "prezzo": 61
+          },
+          {
+            "nome": "Openda",
+            "prezzo": 43
+          },
+          {
+            "nome": "Orban G.",
+            "prezzo": 28
+          },
+          {
+            "nome": "Douvikas",
+            "prezzo": 22
+          },
+          {
+            "nome": "Lookman",
+            "prezzo": 20
+          },
+          {
+            "nome": "Nkunku",
+            "prezzo": 14
+          }
+        ],
+        "spesa": 188,
+        "percentuale": 53.7
+      }
+    }
+  }
+}

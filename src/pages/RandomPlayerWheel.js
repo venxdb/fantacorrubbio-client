@@ -2,11 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Play, Pause, RotateCw, Trophy, Users, Sparkles, Crown, Dice6 } from 'lucide-react';
+import mascotteImg from '../assets/mascotte.png';
 
 
 const Container = styled.div`
   min-height: calc(100vh - 140px);
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);
   padding: 1rem;
   display: flex;
   flex-direction: column;
@@ -14,7 +15,50 @@ const Container = styled.div`
   justify-content: center;
   position: relative;
   overflow: hidden;
+  isolation: isolate;
 `;
+
+const FaceBackground = styled.div`
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+`;
+
+const FaceCircle = styled.div`
+  position: absolute;
+  border-radius: 50%;
+  background-image: url(${mascotteImg});
+  background-size: cover;
+  background-position: center;
+  opacity: ${props => props.$opacity};
+  width: ${props => props.$size}px;
+  height: ${props => props.$size}px;
+  top: ${props => props.$top}%;
+  left: ${props => props.$left}%;
+`;
+
+const FACE_CIRCLES = [
+  { size: 90, top: 4, left: 6, opacity: 0.4 },
+  { size: 140, top: 2, left: 22, opacity: 0.3 },
+  { size: 60, top: 12, left: 40, opacity: 0.36 },
+  { size: 110, top: 6, left: 62, opacity: 0.33 },
+  { size: 75, top: 3, left: 82, opacity: 0.42 },
+  { size: 130, top: 20, left: 88, opacity: 0.28 },
+  { size: 55, top: 30, left: 4, opacity: 0.36 },
+  { size: 95, top: 38, left: 16, opacity: 0.31 },
+  { size: 45, top: 46, left: 92, opacity: 0.4 },
+  { size: 160, top: 55, left: 2, opacity: 0.26 },
+  { size: 70, top: 62, left: 20, opacity: 0.36 },
+  { size: 100, top: 70, left: 84, opacity: 0.3 },
+  { size: 50, top: 78, left: 8, opacity: 0.4 },
+  { size: 120, top: 74, left: 62, opacity: 0.28 },
+  { size: 65, top: 88, left: 30, opacity: 0.36 },
+  { size: 85, top: 86, left: 48, opacity: 0.33 },
+  { size: 55, top: 90, left: 70, opacity: 0.36 },
+  { size: 105, top: 84, left: 90, opacity: 0.3 },
+];
 
 const BackgroundDecorations = styled.div`
   position: absolute;
@@ -87,12 +131,12 @@ const MainContent = styled.div`
 `;
 
 const PlayerSelectionArea = styled.div`
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(79, 70, 229, 0.15) 100%);
   backdrop-filter: blur(15px);
   border-radius: 16px;
   padding: 1rem;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(102, 126, 234, 0.2);
-  border: 1px solid rgba(102, 126, 234, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(99, 102, 241, 0.2);
+  border: 1px solid rgba(99, 102, 241, 0.3);
   margin-bottom: 0.5rem;
 `;
 
@@ -160,7 +204,7 @@ const Pointer = styled.div`
   height: 0;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  border-top: 20px solid #ff6b6b;
+  border-top: 20px solid #EF4444;
   z-index: 10;
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
 `;
@@ -173,7 +217,7 @@ const ControlArea = styled.div`
 `;
 
 const SpinButton = styled(motion.button)`
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);
   border: none;
   border-radius: 50px;
   padding: 1rem 2rem;
@@ -184,7 +228,7 @@ const SpinButton = styled(motion.button)`
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
   border: 2px solid rgba(255, 255, 255, 0.2);
   
   &:disabled {
@@ -207,7 +251,7 @@ const ResultModal = styled(motion.div)`
 `;
 
 const ResultContent = styled(motion.div)`
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);
   border-radius: 20px;
   padding: 3rem;
   text-align: center;
@@ -243,7 +287,7 @@ const CloseButton = styled.button`
 
 const SparkleAnimation = styled(motion.div)`
   position: absolute;
-  color: #ffd700;
+  color: #FBBF24;
   font-size: 2rem;
   pointer-events: none;
 `;
@@ -258,7 +302,7 @@ const RandomPlayerWheel = () => {
   const [sparkles, setSparkles] = useState([]);
   const wheelRef = useRef(null);
 
-  const colors = ['#667eea', '#764ba2'];
+  const colors = ['#6366F1', '#4F46E5'];
 
   const createSparkles = () => {
     const newSparkles = [];
@@ -310,6 +354,11 @@ const RandomPlayerWheel = () => {
 
   return (
     <Container>
+      <FaceBackground>
+        {FACE_CIRCLES.map((c, i) => (
+          <FaceCircle key={i} $size={c.size} $top={c.top} $left={c.left} $opacity={c.opacity} />
+        ))}
+      </FaceBackground>
       <BackgroundDecorations />
       
       {/* Sparkles Animation */}
@@ -445,7 +494,7 @@ const RandomPlayerWheel = () => {
                   cx="120"
                   cy="120"
                   r="8"
-                  fill="#667eea"
+                  fill="#6366F1"
                 />
               </motion.g>
             </WheelSVG>
@@ -523,7 +572,7 @@ const RandomPlayerWheel = () => {
                   delay: 0.2
                 }}
               >
-                <Crown size={60} color="#ffd700" />
+                <Crown size={60} color="#FBBF24" />
               </motion.div>
               
               <h1 style={{ fontSize: '1.5rem', margin: '1rem 0 0.5rem' }}>

@@ -6,6 +6,8 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import API_URL from '../config/api';
 
+const ROLE_COLORS = { P: '#F59E0B', D: '#22C55E', C: '#3B82F6', A: '#EF4444' };
+
 const CalciatoriContainer = styled.div`
   padding: ${props => props.theme.spacing.lg} 0;
   
@@ -130,7 +132,7 @@ const SearchInput = styled.input`
   &:focus {
     outline: none;
     border-color: ${props => props.theme.colors.primary};
-    box-shadow: 0 0 0 3px rgba(45, 90, 135, 0.1);
+    box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15);
   }
 
   &::placeholder {
@@ -219,7 +221,7 @@ const FilterChip = styled.button`
   padding: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.md};
   background: ${props => props.$active ? props.theme.colors.primary : props.theme.colors.surface};
   border: 1px solid ${props => props.$active ? props.theme.colors.primary : props.theme.colors.border};
-  border-radius: 20px;
+  border-radius: ${props => props.theme.radius.pill};
   color: ${props => props.$active ? 'white' : props.theme.colors.text};
   cursor: pointer;
   font-size: 0.85rem;
@@ -236,7 +238,7 @@ const FilterChip = styled.button`
   @media (max-width: 480px) {
     font-size: 0.8rem;
     padding: ${props => props.theme.spacing.xs} ${props => props.theme.spacing.sm};
-    border-radius: 16px;
+    border-radius: ${props => props.theme.radius.pill};
     min-height: 40px;
     display: flex;
     align-items: center;
@@ -284,17 +286,19 @@ const PlayersGrid = styled.div`
 const PlayerCard = styled(motion.div)`
   background: ${props => props.theme.colors.surface};
   border: 1px solid ${props => props.theme.colors.border};
+  border-left: 4px solid ${props => (props.$roleColor || props.theme.colors.primary)};
   border-radius: ${props => props.theme.borderRadius};
   padding: ${props => props.theme.spacing.lg};
   transition: all 0.3s ease;
   cursor: pointer;
 
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: ${props => props.theme.shadows.large};
-    border-color: ${props => props.theme.colors.primary};
+    transform: translateY(-4px);
+    box-shadow: ${props => props.theme.shadows.large}, 0 0 28px ${props => props.$roleColor || props.theme.colors.primary}26;
+    border-color: ${props => props.$roleColor || props.theme.colors.primary};
+    border-left-color: ${props => props.$roleColor || props.theme.colors.primary};
   }
-  
+
   /* Mobile */
   @media (max-width: 480px) {
     padding: ${props => props.theme.spacing.sm};
@@ -420,7 +424,7 @@ const PlayerQuote = styled.div`
   background: ${props => props.theme.colors.gradient};
   color: white;
   padding: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.md};
-  border-radius: 20px;
+  border-radius: ${props => props.theme.radius.pill};
   font-weight: 600;
   font-size: 0.9rem;
   white-space: nowrap;
@@ -431,7 +435,7 @@ const PlayerQuote = styled.div`
   @media (max-width: 480px) {
     font-size: 0.8rem;
     padding: ${props => props.theme.spacing.xs} ${props => props.theme.spacing.sm};
-    border-radius: 16px;
+    border-radius: ${props => props.theme.radius.pill};
   }
   
   /* 🎯 TABLET: Quotazione in alto a destra */
@@ -452,24 +456,16 @@ const PlayerRole = styled.div`
   gap: ${props => props.theme.spacing.xs};
   background: ${props => {
     switch(props.role) {
-      case 'P': return 'rgba(255, 193, 7, 0.1)';
-      case 'D': return 'rgba(76, 175, 80, 0.1)';
-      case 'C': return 'rgba(33, 150, 243, 0.1)';
-      case 'A': return 'rgba(244, 67, 54, 0.1)';
-      default: return 'rgba(158, 158, 158, 0.1)';
+      case 'P': return 'rgba(245, 158, 11, 0.12)';
+      case 'D': return 'rgba(34, 197, 94, 0.12)';
+      case 'C': return 'rgba(59, 130, 246, 0.12)';
+      case 'A': return 'rgba(239, 68, 68, 0.12)';
+      default: return 'rgba(148, 163, 184, 0.12)';
     }
   }};
-  color: ${props => {
-    switch(props.role) {
-      case 'P': return '#FF8F00';
-      case 'D': return '#4CAF50';
-      case 'C': return '#2196F3';
-      case 'A': return '#F44336';
-      default: return '#9E9E9E';
-    }
-  }};
+  color: ${props => props.theme.colors.roles[props.role] || props.theme.colors.roles.default};
   padding: ${props => props.theme.spacing.xs} ${props => props.theme.spacing.sm};
-  border-radius: 12px;
+  border-radius: ${props => props.theme.radius.sm};
   font-size: 0.8rem;
   font-weight: 600;
   margin-bottom: ${props => props.theme.spacing.md};
@@ -605,7 +601,7 @@ const ActiveFiltersCount = styled.div`
     background: ${props => props.theme.colors.primary};
     color: white;
     padding: ${props => props.theme.spacing.xs} ${props => props.theme.spacing.sm};
-    border-radius: 16px;
+    border-radius: ${props => props.theme.radius.pill};
     font-size: 0.8rem;
     font-weight: 600;
     text-align: center;
@@ -617,7 +613,7 @@ const SquadraDropdown = styled.select`
   padding: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.md};
   background: ${props => props.theme.colors.surface};
   border: 1px solid ${props => props.theme.colors.border};
-  border-radius: 20px;
+  border-radius: ${props => props.theme.radius.pill};
   color: ${props => props.theme.colors.text};
   font-size: 0.85rem;
   font-weight: 500;
@@ -661,7 +657,7 @@ const SquadraDropdown = styled.select`
   @media (max-width: 480px) {
     font-size: 0.8rem;
     padding: ${props => props.theme.spacing.xs} ${props => props.theme.spacing.sm};
-    border-radius: 16px;
+    border-radius: ${props => props.theme.radius.pill};
     min-height: 40px;
   }
 
@@ -872,12 +868,12 @@ const Calciatori = () => {
 
       {loading ? (
         <LoadingContainer>
-          <Users size={48} color="#B0BEC5" />
+          <Users size={48} color="#94A3B8" />
           <span>Caricamento calciatori...</span>
         </LoadingContainer>
       ) : calciatori.length === 0 ? (
         <EmptyState>
-          <Users size={48} color="#B0BEC5" style={{ marginBottom: '1rem' }} />
+          <Users size={48} color="#94A3B8" style={{ marginBottom: '1rem' }} />
           <div>Nessun calciatore trovato con i filtri selezionati</div>
         </EmptyState>
       ) : (
@@ -885,6 +881,7 @@ const Calciatori = () => {
           {calciatori.map((player, index) => (
             <PlayerCard
               key={player.id}
+              $roleColor={ROLE_COLORS[player.ruolo] || '#94A3B8'}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.02 }}

@@ -10,10 +10,10 @@ const LoginContainer = styled.div`
   min-height: 100vh;
   width: 100%;
   background: ${props => props.theme.colors.background};
-  background-image: 
-    radial-gradient(circle at 20% 80%, rgba(45, 90, 135, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(255, 167, 38, 0.1) 0%, transparent 50%),
-    linear-gradient(135deg, ${props => props.theme.colors.background} 0%, #1a2332 100%);
+  background-image:
+    radial-gradient(circle at 20% 80%, rgba(5, 150, 105, 0.12) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(251, 191, 36, 0.1) 0%, transparent 50%),
+    linear-gradient(135deg, ${props => props.theme.colors.background} 0%, ${props => props.theme.colors.surface} 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -25,7 +25,7 @@ const LoginContainer = styled.div`
 const LoginCard = styled(motion.div)`
   background: ${props => props.theme.colors.surface};
   border: 1px solid ${props => props.theme.colors.border};
-  border-radius: 20px;
+  border-radius: ${props => props.theme.radius.lg};
   padding: ${props => props.theme.spacing.xl};
   width: 100%;
   max-width: 400px !important; /* FORZA la larghezza massima */
@@ -117,7 +117,7 @@ const Input = styled.input`
   &:focus {
     outline: none;
     border-color: ${props => props.theme.colors.primary};
-    box-shadow: 0 0 0 3px rgba(45, 90, 135, 0.1);
+    box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15);
   }
 
   &::placeholder {
@@ -143,8 +143,8 @@ const PasswordToggle = styled.button`
 
 const ErrorMessage = styled(motion.div)`
   color: ${props => props.theme.colors.error};
-  background: rgba(244, 67, 54, 0.1);
-  border: 1px solid rgba(244, 67, 54, 0.2);
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
   border-radius: ${props => props.theme.borderRadius};
   padding: ${props => props.theme.spacing.md};
   font-size: 0.85rem;

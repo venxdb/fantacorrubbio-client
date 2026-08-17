@@ -12,15 +12,19 @@ const AstaContainer = styled.div`
   padding: ${props => props.theme.spacing.md} 0;
   max-width: 1000px;
   margin: 0 auto;
-  
+
+  @media (min-width: 1024px) {
+    max-width: 1180px;
+  }
+
   /* 🎯 TABLET: Container ottimizzato 481px-1200px */
-  @media (min-width: 481px) and (max-width: 1200px) {
+  @media (min-width: 481px) and (max-width: 1023px) {
     padding: ${props => props.theme.spacing.lg} ${props => props.theme.spacing.md};
     padding-bottom: 120px; /* IMPORTANTE: Spazio per il footer */
     max-width: 700px !important;
     font-size: 0.85rem !important;
   }
-  
+
   @media (max-width: 768px) {
     padding: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.xs};
   }
@@ -77,7 +81,7 @@ const StatusBadge = styled.div`
   display: inline-flex;
   align-items: center;
   gap: ${props => props.theme.spacing.sm};
-  background: ${props => props.$active ? 'rgba(244, 67, 54, 0.1)' : 'rgba(158, 158, 158, 0.1)'};
+  background: ${props => props.$active ? 'rgba(239, 68, 68, 0.1)' : 'rgba(148, 163, 184, 0.1)'};
   color: ${props => props.$active ? props.theme.colors.error : props.theme.colors.textSecondary};
   padding: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.lg};
   border-radius: 25px;
@@ -127,12 +131,15 @@ const LiveDot = styled.div`
 `;
 
 const AuctionCard = styled.div`
-  background: ${props => props.theme.colors.surface};
+  background:
+    radial-gradient(ellipse 500px 200px at 50% 0%, rgba(245, 158, 11, 0.1) 0%, transparent 70%),
+    ${props => props.theme.colors.surface};
   border: 1px solid ${props => props.theme.colors.border};
-  border-radius: ${props => props.theme.borderRadius};
+  border-top: 4px solid ${props => props.theme.colors.secondary};
+  border-radius: ${props => props.theme.radius.lg};
   padding: ${props => props.theme.spacing.lg};
   margin-bottom: ${props => props.theme.spacing.lg};
-  
+
   /* 🎯 TABLET: Card compatta con altezza ridotta */
   @media (min-width: 481px) and (max-width: 1200px) {
     padding: ${props => props.theme.spacing.xl};
@@ -156,6 +163,34 @@ const AuctionCard = styled.div`
   
   @media (max-width: 480px) {
     padding: ${props => props.theme.spacing.sm};
+  }
+`;
+
+const AuctionLayout = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${props => props.theme.spacing.lg};
+
+  @media (min-width: 1024px) {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: ${props => props.theme.spacing.xl};
+  }
+`;
+
+const AuctionLeftCol = styled.div`
+  @media (min-width: 1024px) {
+    flex: 0 0 320px;
+    border-right: 1px solid ${props => props.theme.colors.border};
+    padding-right: ${props => props.theme.spacing.lg};
+  }
+`;
+
+const AuctionRightCol = styled.div`
+  min-width: 0;
+
+  @media (min-width: 1024px) {
+    flex: 1;
   }
 `;
 
@@ -270,7 +305,12 @@ const TimeDisplay = styled.div`
   font-weight: 800;
   color: ${props => props.theme.colors.secondary};
   margin-bottom: ${props => props.theme.spacing.xs};
-  
+  display: inline-flex;
+  padding: 0.25rem 1.5rem;
+  border-radius: ${props => props.theme.radius.pill};
+  background: rgba(251, 191, 36, 0.1);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+
   @media (max-width: 768px) {
     font-size: 2rem;
   }
@@ -446,7 +486,7 @@ const AdminControls = styled.div`
 `;
 
 const AdminButton = styled.button`
-  background: ${props => props.$variant === 'danger' ? '#F44336' : props.$active ? '#FF9800' : '#2D5A87'};
+  background: ${props => props.$variant === 'danger' ? '#EF4444' : props.$active ? '#F59E0B' : '#3B82F6'};
   color: white;
   border: none;
   padding: 0.5rem 1rem;
@@ -646,7 +686,7 @@ const BidItem = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: ${props => props.theme.spacing.md};
-  background: ${props => props.$isWinning ? 'rgba(255, 167, 38, 0.1)' : props.theme.colors.background};
+  background: ${props => props.$isWinning ? 'rgba(251, 191, 36, 0.1)' : props.theme.colors.background};
   border: 1px solid ${props => props.$isWinning ? props.theme.colors.secondary : props.theme.colors.border};
   border-radius: ${props => props.theme.borderRadius};
   margin-bottom: ${props => props.theme.spacing.sm};
@@ -839,35 +879,48 @@ const RankingCredits = styled.span`
 `;
 
 const MiniCreditsRanking = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
   background: ${props => props.theme.colors.surface};
   border: 1px solid ${props => props.theme.colors.border};
-  border-radius: 6px;
-  padding: 8px;
-  min-width: 120px;
-  font-size: 0.9rem;
+  border-radius: ${props => props.theme.radius.md};
+  padding: 10px;
+  margin: 0 auto ${props => props.theme.spacing.md} auto;
+  max-width: 220px;
+  font-size: 0.85rem;
   box-shadow: ${props => props.theme.shadows.small};
-  
+
   /* 🎯 MOBILE: Nascondere completamente */
   @media (max-width: 768px) {
     display: none !important;
   }
-  
+
   /* 🎯 TABLET: Più compatto */
-  @media (min-width: 481px) and (max-width: 1200px) {
+  @media (min-width: 481px) and (max-width: 1023px) {
     padding: 6px;
-    min-width: 100px;
-    font-size: 0.6rem;
+    font-size: 0.7rem;
   }
-  
-  /* 🎯 DESKTOP: Font molto più grande */
-  @media (min-width: 1201px) {
-    font-size: 1rem !important;
-    min-width: 160px !important;
-    padding: 12px !important;
-    border-radius: 8px !important;
+`;
+
+const MiniRankingList = styled.div`
+  max-height: 140px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: ${props => props.theme.colors.border} transparent;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: ${props => props.theme.colors.border};
+    border-radius: 3px;
+  }
+
+  @media (min-width: 481px) and (max-width: 1023px) {
+    max-height: 100px;
   }
 `;
 
@@ -950,7 +1003,7 @@ const MiniRankingCredits = styled.span`
 `;
 const CenteredMessage = styled.div`
   text-align: center;
-  color: #B0BEC5;
+  color: #94A3B8;
   padding: 2rem;
   
   @media (max-width: 768px) {
@@ -960,7 +1013,7 @@ const CenteredMessage = styled.div`
 `;
 
 const AdminViewTitle = styled.h4`
-  color: #FFA726;
+  color: #FBBF24;
   margin-bottom: 1rem;
   text-align: center;
   
@@ -973,7 +1026,7 @@ const AdminViewTitle = styled.h4`
 const SecretMessage = styled.div`
   text-align: center;
   margin-bottom: 1rem;
-  color: #B0BEC5;
+  color: #94A3B8;
   
   @media (max-width: 768px) {
     font-size: 0.9rem;
@@ -983,7 +1036,7 @@ const SecretMessage = styled.div`
 
 const HiddenBidsCount = styled.div`
   text-align: center;
-  color: #B0BEC5;
+  color: #94A3B8;
   padding: 1rem;
   
   @media (max-width: 768px) {
@@ -1140,17 +1193,120 @@ const fetchCurrentAuction = useCallback(async () => {
         
 
 
-  const handleCloseAuction = () => {
+  const handleBluffClick = () => {
     if (!currentAuction) return;
+    document.activeElement?.blur();
 
     toast((t) => (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+      <div
+        tabIndex={-1}
+        ref={(el) => el?.focus()}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            toast.dismiss(t.id);
+            submitBid(null, 0);
+          } else if (e.key === 'Escape') {
+            toast.dismiss(t.id);
+          }
+        }}
+        style={{ display: 'flex', flexDirection: 'column', gap: '12px', outline: 'none' }}
+      >
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <Gavel size={20} color="#F44336" />
+          <span role="img" aria-label="bluff" style={{ fontSize: '20px' }}>🎭</span>
+          <strong>Bluff</strong>
+        </div>
+        <div style={{ fontSize: '14px', color: '#94A3B8' }}>
+          Confermi di voler offrire <strong>0 crediti</strong> per <strong>{currentAuction.calciatore_nome}</strong>?
+        </div>
+        <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
+          <button
+            onClick={() => toast.dismiss(t.id)}
+            style={{
+              background: 'transparent',
+              border: '2px solid #243044',
+              borderRadius: '8px',
+              padding: '8px 16px',
+              cursor: 'pointer',
+              fontSize: '14px',
+              color: '#F8FAFC'
+            }}
+          >
+            Annulla
+          </button>
+          <button
+            onClick={() => {
+              toast.dismiss(t.id);
+              submitBid(null, 0);
+            }}
+            style={{
+              background: 'linear-gradient(135deg, #EF4444 0%, #EA580C 100%)',
+              border: 'none',
+              borderRadius: '8px',
+              color: 'white',
+              padding: '8px 16px',
+              cursor: 'pointer',
+              fontSize: '14px',
+              fontWeight: '600'
+            }}
+          >
+            Conferma Bluff
+          </button>
+        </div>
+      </div>
+    ), {
+      id: 'bluff-confirm',
+      position: 'top-center',
+      style: {
+        background: '#141B26',
+        color: '#F8FAFC',
+        padding: '20px',
+        borderRadius: '14px',
+        boxShadow: '0 14px 34px rgba(0,0,0,0.34)',
+        border: '1px solid #243044',
+        maxWidth: '400px'
+      }
+    });
+  };
+
+  const handleCloseAuction = () => {
+    if (!currentAuction) return;
+    document.activeElement?.blur();
+
+    const confirmClose = async (toastId) => {
+      toast.dismiss(toastId);
+      const loading = toast.loading('Chiusura asta...');
+      try {
+        await axios.post(`${API_URL}/api/aste/${currentAuction.id}/chiudi`);
+        toast.dismiss(loading);
+        navigate(`/risultati-asta/${currentAuction.id}`);
+      } catch (error) {
+        toast.dismiss(loading);
+        const message = error.response?.data?.error || 'Errore nella chiusura dell\'asta';
+        toast.error(message);
+      }
+    };
+
+    toast((t) => (
+      <div
+        tabIndex={-1}
+        ref={(el) => el?.focus()}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            confirmClose(t.id);
+          } else if (e.key === 'Escape') {
+            toast.dismiss(t.id);
+          }
+        }}
+        style={{ display: 'flex', flexDirection: 'column', gap: '12px', outline: 'none' }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <Gavel size={20} color="#EF4444" />
           <strong>Chiudi Asta</strong>
         </div>
-        <div style={{ fontSize: '14px', color: '#666' }}>
-          Sei sicuro di voler chiudere l'asta per <strong>{currentAuction.calciatore_nome}</strong>?  
+        <div style={{ fontSize: '14px', color: '#94A3B8' }}>
+          Sei sicuro di voler chiudere l'asta per <strong>{currentAuction.calciatore_nome}</strong>?
           Una volta chiusa, non sarà più modificabile.
         </div>
         <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
@@ -1158,31 +1314,20 @@ const fetchCurrentAuction = useCallback(async () => {
             onClick={() => toast.dismiss(t.id)}
             style={{
               background: 'transparent',
-              border: '2px solid #ccc',
+              border: '2px solid #243044',
               borderRadius: '8px',
               padding: '8px 16px',
               cursor: 'pointer',
-              fontSize: '14px'
+              fontSize: '14px',
+              color: '#F8FAFC'
             }}
           >
             Annulla
           </button>
           <button
-            onClick={async () => {
-              toast.dismiss(t.id);
-              const loading = toast.loading('Chiusura asta...');
-              try {
-                const response = await axios.post(`${API_URL}/api/aste/${currentAuction.id}/chiudi`);
-                toast.dismiss(loading);
-                navigate(`/risultati-asta/${currentAuction.id}`);
-              } catch (error) {
-                toast.dismiss(loading);
-                const message = error.response?.data?.error || 'Errore nella chiusura dell\'asta';
-                toast.error(message);
-              }
-            }}
+            onClick={() => confirmClose(t.id)}
             style={{
-              background: '#F44336',
+              background: '#EF4444',
               border: 'none',
               borderRadius: '8px',
               color: 'white',
@@ -1197,15 +1342,16 @@ const fetchCurrentAuction = useCallback(async () => {
         </div>
       </div>
     ), {
+      id: 'close-auction-confirm',
       duration: Infinity,
       position: 'top-center',
       style: {
-        background: 'white',
-        color: '#333',
+        background: '#141B26',
+        color: '#F8FAFC',
         padding: '20px',
-        borderRadius: '12px',
-        boxShadow: '0 10px 40px rgba(0,0,0,0.3)',
-        border: '1px solid #eee',
+        borderRadius: '14px',
+        boxShadow: '0 14px 34px rgba(0,0,0,0.34)',
+        border: '1px solid #243044',
         maxWidth: '400px'
       }
     });
@@ -1216,11 +1362,11 @@ useEffect(() => {
   fetchCurrentAuction();
   
   const interval = setInterval(() => {
-    
+
     if (!isProcessingExpiration) {
       fetchCurrentAuction();
     }
-  }, 3000);
+  }, 1000);
   
   return () => clearInterval(interval);
 }, [fetchCurrentAuction, isProcessingExpiration,]);
@@ -1267,16 +1413,18 @@ useEffect(() => {
 
   // Sostituisci TUTTO il contenuto della funzione submitBid con:
 // 1. Modifica la funzione submitBid - distingui vuoto da 0:
-const submitBid = async (e) => {
-  e.preventDefault();
-  
+const submitBid = async (e, overrideAmount) => {
+  if (e?.preventDefault) e.preventDefault();
+
+  const rawAmount = overrideAmount !== undefined ? overrideAmount : bidAmount;
+
   // ✅ NUOVO: Campo vuoto = blocca, 0 esplicito = permetti bluff
-  if (bidAmount === '' || bidAmount === null || bidAmount === undefined) {
+  if (rawAmount === '' || rawAmount === null || rawAmount === undefined) {
     toast.error('Inserisci un importo (anche 0 per bluffare)');
     return;
   }
-  
-  const amount = parseInt(bidAmount);
+
+  const amount = parseInt(rawAmount);
   if (isNaN(amount) || amount < 0) {
     toast.error('Inserisci un importo valido (minimo 0 crediti)');
     return;
@@ -1394,20 +1542,24 @@ const submitBid = async (e) => {
   </Header>
 
   <AuctionCard>
+   <AuctionLayout>
+    <AuctionLeftCol>
     <PlayerSection>
       {currentAuction && utentiCrediti.length > 0 && (
         <MiniCreditsRanking>
           <MiniRankingTitle>💰 Crediti</MiniRankingTitle>
-          {utentiCrediti.slice(0, 8).map((utente) => (
-            <MiniRankingItem key={utente.id}>
-              <MiniRankingUser $isCurrentUser={utente.id === user?.id}>
-                {utente.username}
-              </MiniRankingUser>
-              <MiniRankingCredits $isCurrentUser={utente.id === user?.id}>
-                {utente.crediti_rimanenti}
-              </MiniRankingCredits>
-            </MiniRankingItem>
-          ))}
+          <MiniRankingList>
+            {utentiCrediti.map((utente) => (
+              <MiniRankingItem key={utente.id}>
+                <MiniRankingUser $isCurrentUser={utente.id === user?.id}>
+                  {utente.username}
+                </MiniRankingUser>
+                <MiniRankingCredits $isCurrentUser={utente.id === user?.id}>
+                  {utente.crediti_rimanenti}
+                </MiniRankingCredits>
+              </MiniRankingItem>
+            ))}
+          </MiniRankingList>
         </MiniCreditsRanking>
       )}
       
@@ -1435,7 +1587,9 @@ const submitBid = async (e) => {
         {timeLeft > 0 ? 'Tempo Rimanente' : 'Asta Terminata'}
       </TimerLabel>
     </TimerSection>
+    </AuctionLeftCol>
 
+    <AuctionRightCol>
         <BidSection>
           <BidHeader>
             <BidTitle>Offerte</BidTitle>
@@ -1466,7 +1620,7 @@ const submitBid = async (e) => {
                   <button
                     onClick={() => setShowAdminView(!showAdminView)}
                     style={{
-                      background: showAdminView ? '#FF9800' : '#2D5A87',
+                      background: showAdminView ? '#F59E0B' : '#3B82F6',
                       color: 'white',
                       border: 'none',
                       padding: '0.5rem 1rem',
@@ -1482,7 +1636,7 @@ const submitBid = async (e) => {
                     <button
                       onClick={handleCloseAuction}
                       style={{
-                        background: '#F44336',
+                        background: '#EF4444',
                         color: 'white',
                         border: 'none',
                         padding: '0.5rem 1rem',
@@ -1547,19 +1701,30 @@ const submitBid = async (e) => {
                 {submittingBid ? 'Invio...' : 'Offri'}
                 <Trophy size={16} />
               </BidButton>
+              <BidButton
+                type="button"
+                onClick={handleBluffClick}
+                disabled={submittingBid}
+                style={{ background: 'linear-gradient(135deg, #EF4444 0%, #EA580C 100%)' }}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                {submittingBid ? 'Invio...' : 'Bluff'}
+                <span role="img" aria-label="bluff">🎭</span>
+              </BidButton>
             </BidForm>
           )}
 
           <BidsList>
             {bids.length === 0 ? (
-              <div style={{ textAlign: 'center', color: '#B0BEC5', padding: '2rem' }}>
+              <div style={{ textAlign: 'center', color: '#94A3B8', padding: '2rem' }}>
                 Nessuna offerta ancora. Ti vuoi sbrigare Dorco Pio 💰
               </div>
             ) : (
               <>
                 {user?.is_admin && showAdminView ? (
                   <div>
-                    <h4 style={{ color: '#FFA726', marginBottom: '1rem', textAlign: 'center' }}>
+                    <h4 style={{ color: '#FBBF24', marginBottom: '1rem', textAlign: 'center' }}>
                       👑 Vista Amministratore - Partecipanti ({bids.length})
                     </h4>
                     {bids.map((bid, index) => (
@@ -1567,7 +1732,7 @@ const submitBid = async (e) => {
                         <BidUser $isWinning={false}>
                           {bid.username}
                         </BidUser>
-                        <div style={{ color: '#B0BEC5', fontSize: '0.8rem' }}>
+                        <div style={{ color: '#94A3B8', fontSize: '0.8rem' }}>
                           Ha partecipato all'asta
                         </div>
                       </BidItem>
@@ -1575,7 +1740,7 @@ const submitBid = async (e) => {
                   </div>
                 ) : (
                   <div>
-                    <div style={{ textAlign: 'center', marginBottom: '1rem', color: '#B0BEC5' }}>
+                    <div style={{ textAlign: 'center', marginBottom: '1rem', color: '#94A3B8' }}>
                       🤐 Le offerte sono segrete fino alla fine dell'asta
                     </div>
                     {bids.filter(bid => bid.utente_id === user?.id).map((bid) => (
@@ -1601,7 +1766,7 @@ const submitBid = async (e) => {
                       </BidItem>
                     ))}
                     {bids.filter(bid => bid.utente_id !== user?.id).length > 0 && (
-                      <div style={{ textAlign: 'center', color: '#B0BEC5', padding: '1rem' }}>
+                      <div style={{ textAlign: 'center', color: '#94A3B8', padding: '1rem' }}>
                         🔒 {bids.filter(bid => bid.utente_id !== user?.id).length} altre offerte nascoste
                       </div>
                     )}
@@ -1611,6 +1776,8 @@ const submitBid = async (e) => {
             )}
           </BidsList>
         </BidSection>
+    </AuctionRightCol>
+   </AuctionLayout>
       </AuctionCard>
     </AstaContainer>
   );

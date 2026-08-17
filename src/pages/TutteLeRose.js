@@ -5,6 +5,7 @@ import { Trophy, Users, Coins, Star, Eye, ChevronRight, User } from 'lucide-reac
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import API_URL from '../config/api';
+import { getUserColor } from '../utils/userColors';
 
 // Configurazione rose - requisiti per ruolo
 const REQUISITI_ROSA = {
@@ -148,10 +149,11 @@ const ContentContainer = styled.div`
 const UserCard = styled.div`
   background: ${props => props.theme.colors.surface};
   border: 1px solid ${props => props.theme.colors.border};
-  border-radius: ${props => props.theme.borderRadius};
+  border-top: 4px solid ${props => props.$accent || props.theme.colors.primary};
+  border-radius: ${props => props.theme.radius.lg};
   padding: ${props => props.theme.spacing.md};
   height: fit-content;
-  
+
   /* Mobile */
   @media (max-width: 480px) {
     padding: ${props => props.theme.spacing.sm};
@@ -659,7 +661,7 @@ const TutteLeRose = () => {
   const [loading, setLoading] = useState(true);
   const [filtriRuoli, setFiltriRuoli] = useState(() => {
   const saved = localStorage.getItem('filtriRuoliRose');
-  return saved ? JSON.parse(saved) : ['P', 'D', 'C', 'A'];
+  return saved ? JSON.parse(saved) : [];
 });
 
 
@@ -727,8 +729,9 @@ const toggleFiltroRuolo = (ruolo) => {
 };
 const resetFiltri = () => {
   const allRoles = ['P', 'D', 'C', 'A'];
-  setFiltriRuoli(allRoles);
-  localStorage.setItem('filtriRuoliRose', JSON.stringify(allRoles));
+  const newFiltri = filtriRuoli.length === allRoles.length ? [] : allRoles;
+  setFiltriRuoli(newFiltri);
+  localStorage.setItem('filtriRuoliRose', JSON.stringify(newFiltri));
 };
 
   // Funzione per raggruppare giocatori per ruolo
@@ -798,6 +801,7 @@ const getRolePercentages = (rosa = [], creditiTotali = 350) => {
   return roleCredits;
 };
   const renderUserRosa = (utente) => {
+    const accent = getUserColor(utente?.username);
     // Controlli di sicurezza per evitare errori
     const rosa = utente?.rosa || [];
     const creditiTotali = utente?.crediti_totali || 0;
@@ -808,12 +812,12 @@ const getRolePercentages = (rosa = [], creditiTotali = 350) => {
 
 
     return (
-  <UserCard key={utente.id}>
+  <UserCard key={utente.id} $accent={accent}>
         <UserHeader>
           <UserName>
-            <User size={20} />
+            <User size={20} color={accent} />
             {utente?.username || 'Utente sconosciuto'}
-            {utente?.is_admin && <span style={{ color: '#FFA726', fontSize: '0.8rem' }}>👑 ADMIN</span>}
+            {utente?.is_admin && <span style={{ color: '#FBBF24', fontSize: '0.8rem' }}>👑 ADMIN</span>}
           </UserName>
           
           <UserStats>
@@ -826,7 +830,7 @@ const getRolePercentages = (rosa = [], creditiTotali = 350) => {
               <StatLabel>Spesi</StatLabel>
             </StatItem>
             <StatItem>
-              <StatValue style={{ color: creditiRimanenti > 0 ? '#4CAF50' : '#F44336' }}>
+              <StatValue style={{ color: creditiRimanenti > 0 ? '#22C55E' : '#EF4444' }}>
                 {creditiRimanenti}
               </StatValue>
               <StatLabel>Rimanenti</StatLabel>
@@ -886,7 +890,7 @@ const getRolePercentages = (rosa = [], creditiTotali = 350) => {
                       <PlayerName>
                         {giocatore?.nome || 'N/A'}
                         {giocatore?.squadra && (
-                          <span style={{ color: '#B0BEC5', fontSize: '0.7rem', marginLeft: '4px' }}>
+                          <span style={{ color: '#94A3B8', fontSize: '0.7rem', marginLeft: '4px' }}>
                             ({giocatore.squadra.substring(0, 3).toUpperCase()})
                           </span>
                         )}
@@ -955,9 +959,9 @@ const getRolePercentages = (rosa = [], creditiTotali = 350) => {
         ) : !Array.isArray(utenti) || utenti.length === 0 ? (
           <EmptyState>
             <div style={{ textAlign: 'center' }}>
-              <Users size={48} color="#B0BEC5" />
-              <h3 style={{ color: '#666', marginTop: '1rem' }}>Nessuna rosa trovata</h3>
-              <p style={{ fontSize: '0.9rem', color: '#B0BEC5', marginTop: '0.5rem' }}>
+              <Users size={48} color="#94A3B8" />
+              <h3 style={{ color: '#94A3B8', marginTop: '1rem' }}>Nessuna rosa trovata</h3>
+              <p style={{ fontSize: '0.9rem', color: '#94A3B8', marginTop: '0.5rem' }}>
                 Controlla la console per dettagli di debug
               </p>
             </div>

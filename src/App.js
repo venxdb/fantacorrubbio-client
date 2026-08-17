@@ -17,7 +17,8 @@ import Home from './pages/Home';
 import Calciatori from './pages/Calciatori';
 import AstaLive from './pages/AstaLive';
 import RisultatiAsta from './pages/RisultatiAsta';
-import MiaRosa from './pages/MiaRosa';
+import RosaPassata from './pages/RosaPassata';
+import Preferiti from './pages/Preferiti';
 import TutteLeRose from './pages/TutteLeRose';
 import Classifica from './pages/Classifica';
 import AdminPanel from './pages/AdminPanel';
@@ -28,27 +29,54 @@ import DealerSelection from './pages/DealerSelection';
 
 const theme = {
   colors: {
-    primary: '#2D5A87',
-    secondary: '#FFA726',
-    success: '#4CAF50',
-    warning: '#FF9800',
-    error: '#F44336',
-    background: '#0F1419',
-    surface: '#1A2332',
-    surfaceHover: '#243447',
-    text: '#FFFFFF',
-    textSecondary: '#B0BEC5',
-    border: '#37474F',
-    gradient: 'linear-gradient(135deg, #2D5A87 0%, #1A4066 100%)',
-    gradientHover: 'linear-gradient(135deg, #3A6B94 0%, #1F4A73 100%)'
+    primary: '#059669',
+    primaryDark: '#047857',
+    secondary: '#FBBF24',
+    accent2: '#6366F1',
+    success: '#22C55E',
+    warning: '#F59E0B',
+    error: '#EF4444',
+    background: '#0A0E14',
+    surface: '#141B26',
+    surfaceHover: '#1C2534',
+    text: '#F8FAFC',
+    textSecondary: '#94A3B8',
+    border: '#243044',
+    gradient: 'linear-gradient(135deg, #047857 0%, #10B981 100%)',
+    gradientHover: 'linear-gradient(135deg, #059669 0%, #34D399 100%)',
+    roles: {
+      P: '#F59E0B',
+      D: '#22C55E',
+      C: '#3B82F6',
+      A: '#EF4444',
+      default: '#94A3B8'
+    },
+    podium: {
+      gold: '#FBBF24',
+      goldDark: '#D97706',
+      silver: '#CBD5E1',
+      silverDark: '#94A3B8',
+      bronze: '#F97316',
+      bronzeDark: '#C2410C'
+    }
   },
   shadows: {
-    small: '0 2px 4px rgba(0,0,0,0.1)',
-    medium: '0 4px 6px rgba(0,0,0,0.1)',
-    large: '0 10px 15px rgba(0,0,0,0.1)',
-    glow: '0 0 20px rgba(45, 90, 135, 0.3)'
+    small: '0 2px 6px rgba(0,0,0,0.28)',
+    medium: '0 8px 24px rgba(0,0,0,0.32)',
+    large: '0 20px 48px rgba(0,0,0,0.4)',
+    glow: '0 0 0 1px rgba(5, 150, 105, 0.4), 0 0 32px rgba(5, 150, 105, 0.45)'
   },
-  borderRadius: '12px',
+  borderRadius: '18px',
+  radius: {
+    sm: '10px',
+    md: '18px',
+    lg: '28px',
+    pill: '999px'
+  },
+  fonts: {
+    heading: "'Sora', -apple-system, BlinkMacSystemFont, sans-serif",
+    body: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+  },
   spacing: {
     xs: '0.25rem',
     sm: '0.5rem',
@@ -75,6 +103,7 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     height: 100%;
     font-size: 16px;
+    scrollbar-gutter: stable;
 
     @media (max-width: ${props => props.theme.breakpoints.tablet}) {
       font-size: 15px;
@@ -89,8 +118,13 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    background: ${props => props.theme.colors.background};
+    font-family: ${props => props.theme.fonts.body};
+    background:
+      radial-gradient(ellipse 900px 600px at 12% -10%, rgba(5, 150, 105, 0.16) 0%, transparent 55%),
+      radial-gradient(ellipse 700px 500px at 105% 15%, rgba(99, 102, 241, 0.14) 0%, transparent 55%),
+      radial-gradient(ellipse 800px 600px at 50% 120%, rgba(251, 191, 36, 0.07) 0%, transparent 60%),
+      ${props => props.theme.colors.background};
+    background-attachment: fixed;
     color: ${props => props.theme.colors.text};
     line-height: 1.6;
     overflow-x: hidden;
@@ -100,6 +134,12 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: ${props => props.theme.fonts.heading};
+    letter-spacing: -0.02em;
+    font-weight: 700;
   }
 
   #root {
@@ -135,7 +175,7 @@ const AppContainer = styled.div`
   display: flex;
   min-height: 100vh;
   width: 100%;
-  background: ${props => props.theme.colors.background};
+  background: transparent;
   position: relative;
 `;
 
@@ -293,7 +333,8 @@ function AppContent() {
                         <Route path="/calciatori" element={<Calciatori />} />
                         <Route path="/asta-live" element={<AstaLive />} />
                         <Route path="/risultati-asta/:id" element={<RisultatiAsta />} />
-                        <Route path="/mia-rosa" element={<MiaRosa />} />
+                        <Route path="/rosa-passata" element={<RosaPassata />} />
+                        <Route path="/preferiti" element={<Preferiti />} />
                         <Route path="/tutte-le-rose" element={<TutteLeRose />} />
                         <Route path="/classifica" element={<Classifica />} />
                         <Route path="/giocatore-random" element={<RandomPlayerWheel />} />

@@ -2,18 +2,20 @@ import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { 
-  Home, 
-  Users, 
-  Gavel, 
-  Trophy, 
-  Star, 
-  Coins, 
-  Settings,
+import {
+  LayoutDashboard,
+  Users,
+  Hammer,
+  Trophy,
+  History,
+  LayoutGrid,
+  Coins,
   ChevronLeft,
   ChevronRight,
-  Dice6,
-  Crown
+  Dices,
+  Crown,
+  Star,
+  Heart
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 
@@ -23,7 +25,9 @@ const SidebarContainer = styled(motion.aside)`
   left: 0;
   top: 0;
   height: 100vh;
-  background: ${props => props.theme.colors.surface};
+  background: rgba(20, 27, 38, 0.72);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
   border-right: 1px solid ${props => props.theme.colors.border};
   transition: width 0.3s ease;
   z-index: 200;
@@ -263,18 +267,13 @@ const NavItem = styled(NavLink)`
   }
 
   &.active {
-    color: ${props => props.theme.colors.secondary};
-    background: rgba(255, 167, 38, 0.1);
-    
-    &::before {
-      content: '';
-      position: absolute;
-      left: -${props => props.theme.spacing.sm};
-      top: 0;
-      bottom: 0;
-      width: 3px;
-      background: ${props => props.theme.colors.secondary};
-      border-radius: 0 2px 2px 0;
+    color: ${props => props.$isOpen ? '#1A1300' : props.theme.colors.text};
+    background: ${props => props.$isOpen ? 'linear-gradient(135deg, #FBBF24 0%, #F59E0B 100%)' : 'transparent'};
+    box-shadow: ${props => props.$isOpen ? '0 4px 16px rgba(251, 191, 36, 0.35)' : 'none'};
+    font-weight: 700;
+
+    svg {
+      color: ${props => props.$isOpen ? '#1A1300' : 'inherit'};
     }
   }
   
@@ -294,14 +293,25 @@ const NavIcon = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 24px;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
   flex-shrink: 0;
-  
+  border-radius: 10px;
+  background: ${props => props.$color ? `${props.$color}26` : 'transparent'};
+  color: ${props => props.$color || 'currentColor'};
+  transition: all 0.2s ease;
 
-  opacity: 1;
+  .active & {
+    background: ${props => props.$isOpen ? 'rgba(26, 19, 0, 0.15)' : 'linear-gradient(135deg, #FBBF24 0%, #F59E0B 100%)'};
+    color: #1A1300;
+    box-shadow: ${props => props.$isOpen ? 'none' : '0 3px 10px rgba(251, 191, 36, 0.45)'};
+  }
 
   @media (max-width: 768px) {
-    min-width: 28px;
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
   }
 `;
 
@@ -341,21 +351,11 @@ const AdminBadge = styled.span`
 `;
 
 const RandomBadge = styled.span`
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  font-size: 0.6rem;
-  padding: 2px 6px;
-  border-radius: 10px;
-  font-weight: 600;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
   opacity: ${props => props.$isOpen ? 1 : 0};
   transition: opacity 0.3s ease;
-  white-space: nowrap;
-  
-  @media (max-width: 768px) {
-    opacity: ${props => props.$isOpen ? 1 : 0};
-    font-size: 0.55rem;
-    padding: 1px 4px;
-  }
 `;
 
 
@@ -482,32 +482,33 @@ const Sidebar = ({ isOpen, onToggle }) => {
     navigationItems.push({
       section: 'Dashboard',
       items: [
-        { path: '/admin', icon: Settings, label: 'Pannello Admin', exact: true, admin: true }
+        { path: '/admin', icon: LayoutDashboard, label: 'Pannello Admin', exact: true, admin: true, color: '#6366F1' }
       ]
     });
-    
+
     navigationItems.push({
       section: 'Principale',
       items: [
-        { path: '/calciatori', icon: Users, label: 'Calciatori' },
-        { path: '/asta-live', icon: Gavel, label: 'Asta Live' }
+        { path: '/calciatori', icon: Users, label: 'Calciatori', color: '#3B82F6' },
+        { path: '/asta-live', icon: Hammer, label: 'Asta Live', color: '#F59E0B' }
       ]
     });
-    
+
     navigationItems.push({
       section: 'Rose',
       items: [
-        { path: '/mia-rosa', icon: Star, label: 'La Mia Rosa' },
-        { path: '/tutte-le-rose', icon: Trophy, label: 'Tutte le Rose' },
-        { path: '/classifica', icon: Coins, label: 'Crediti' }
+        { path: '/rosa-passata', icon: History, label: 'Rosa Passata', color: '#22C55E' },
+        { path: '/tutte-le-rose', icon: LayoutGrid, label: 'Tutte le Rose', color: '#EC4899' },
+        { path: '/preferiti', icon: Heart, label: 'Preferiti', color: '#F43F5E' },
+        { path: '/classifica', icon: Coins, label: 'Crediti', color: '#FBBF24' }
       ]
     });
-    
+
     navigationItems.push({
       section: 'Strumenti',
       items: [
-        { path: '/giocatore-random', icon: Dice6, label: 'Giocatore Random', random: true },
-        { path: '/dealer-selection', icon: Crown, label: 'Selezione Dealer', random: true }
+        { path: '/giocatore-random', icon: Dices, label: 'Giocatore Random', random: true, color: '#A855F7' },
+        { path: '/dealer-selection', icon: Crown, label: 'Selezione Dealer', random: true, color: '#F97316' }
       ]
     });
   } else {
@@ -515,18 +516,19 @@ const Sidebar = ({ isOpen, onToggle }) => {
     navigationItems.push({
       section: 'Principale',
       items: [
-        { path: '/', icon: Home, label: 'Dashboard', exact: true },
-        { path: '/calciatori', icon: Users, label: 'Calciatori' },
-        { path: '/asta-live', icon: Gavel, label: 'Asta Live' }
+        { path: '/', icon: LayoutDashboard, label: 'Dashboard', exact: true, color: '#6366F1' },
+        { path: '/calciatori', icon: Users, label: 'Calciatori', color: '#3B82F6' },
+        { path: '/asta-live', icon: Hammer, label: 'Asta Live', color: '#F59E0B' }
       ]
     });
-    
+
     navigationItems.push({
       section: 'Rose',
       items: [
-        { path: '/mia-rosa', icon: Star, label: 'La Mia Rosa' },
-        { path: '/tutte-le-rose', icon: Trophy, label: 'Tutte le Rose' },
-        { path: '/classifica', icon: Coins, label: 'Crediti' }
+        { path: '/rosa-passata', icon: History, label: 'Rosa Passata', color: '#22C55E' },
+        { path: '/tutte-le-rose', icon: LayoutGrid, label: 'Tutte le Rose', color: '#EC4899' },
+        { path: '/preferiti', icon: Heart, label: 'Preferiti', color: '#F43F5E' },
+        { path: '/classifica', icon: Coins, label: 'Crediti', color: '#FBBF24' }
       ]
     });
   }
@@ -587,9 +589,10 @@ const Sidebar = ({ isOpen, onToggle }) => {
                   to={item.path}
                   className={isActive ? 'active' : ''}
                   title={!isOpen ? item.label : ''}
+                  $isOpen={isOpen}
                 >
-                  <NavIcon>
-                    <IconComponent size={window.innerWidth <= 480 ? 20 : 22} />
+                  <NavIcon $color={item.color} $isOpen={isOpen}>
+                    <IconComponent size={window.innerWidth <= 480 ? 18 : 20} />
                   </NavIcon>
                   <NavText $isOpen={isOpen}>
                     {item.label}
@@ -598,7 +601,9 @@ const Sidebar = ({ isOpen, onToggle }) => {
                     <AdminBadge $isOpen={isOpen}>ADMIN</AdminBadge>
                   )}
                   {item.random && (
-                    <RandomBadge $isOpen={isOpen}>YUP</RandomBadge>
+                    <RandomBadge $isOpen={isOpen} title="Solo admin">
+                      <Star size={14} fill="#FBBF24" color="#FBBF24" />
+                    </RandomBadge>
                   )}
                 </NavItem>
               );
