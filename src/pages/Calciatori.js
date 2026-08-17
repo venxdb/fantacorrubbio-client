@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { Search, Filter, Users, X } from 'lucide-react';
+import { Filter, Users } from 'lucide-react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import API_URL from '../config/api';
@@ -737,6 +737,7 @@ const Calciatori = () => {
 
   useEffect(() => {
     fetchCalciatori();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchTerm, selectedRole, selectedTeam, disponibileFilter]);
 
   const fetchCalciatori = async () => {

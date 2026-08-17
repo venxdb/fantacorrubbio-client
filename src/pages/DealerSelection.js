@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Dice6, 
-  RotateCw, 
-  RotateCcw, 
-  Users, 
-  Crown, 
-  Shuffle, 
-  Play,
+import {
+  Dice6,
+  RotateCw,
+  RotateCcw,
+  Crown,
+  Shuffle,
   RefreshCw,
-  Zap,
-  User
+  Zap
 } from 'lucide-react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
@@ -253,32 +250,6 @@ const ActionButton = styled(motion.button)`
   }
 `;
 
-const ResultCard = styled(motion.div)`
-  background: linear-gradient(135deg, #FBBF24 0%, #D97706 100%);
-  color: white;
-  border-radius: ${props => props.theme.borderRadius};
-  padding: ${props => props.theme.spacing.xl};
-  text-align: center;
-  margin-top: ${props => props.theme.spacing.xl};
-  box-shadow: 0 0 30px rgba(251, 191, 36, 0.3);
-`;
-
-const ResultTitle = styled.h3`
-  font-size: 1.8rem;
-  font-weight: 800;
-  margin-bottom: ${props => props.theme.spacing.md};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: ${props => props.theme.spacing.sm};
-`;
-
-const ResultDetails = styled.div`
-  font-size: 1.2rem;
-  opacity: 0.9;
-  margin-bottom: ${props => props.theme.spacing.lg};
-`;
-
 const LoadingState = styled.div`
   text-align: center;
   padding: ${props => props.theme.spacing.xl};
@@ -291,7 +262,7 @@ const DealerSelection = () => {
   const [selectedDirection, setSelectedDirection] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isRandomizing, setIsRandomizing] = useState(false);
-  const [result, setResult] = useState(null);
+  const [, setResult] = useState(null);
 
   useEffect(() => {
     fetchUsers();
@@ -351,27 +322,6 @@ const DealerSelection = () => {
         }
       });
     }, 500);
-  };
-
-  const handleConfirmSelection = () => {
-    if (!selectedDealer || !selectedDirection) {
-      toast.error('Seleziona sia il dealer che la direzione!');
-      return;
-    }
-
-    setResult({
-      dealer: selectedDealer,
-      direction: selectedDirection
-    });
-
-    toast.success(`✅ Configurazione salvata!`, {
-      duration: 3000,
-      style: {
-        background: 'linear-gradient(135deg, #22C55E 0%, #16A34A 100%)',
-        color: 'white',
-        fontWeight: '600'
-      }
-    });
   };
 
   const handleReset = () => {

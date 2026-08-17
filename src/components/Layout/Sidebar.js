@@ -444,21 +444,6 @@ const UserName = styled.div`
   }
 `;
 
-const UserCredits = styled.div`
-  font-size: 0.75rem;
-  color: ${props => props.theme.colors.textSecondary};
-  white-space: nowrap;
-  
-
-  @media (max-width: 768px) {
-    font-size: 0.7rem;
-  }
-  
-  @media (max-width: 480px) {
-    font-size: 0.65rem;
-  }
-`;
-
 const Sidebar = ({ isOpen, onToggle }) => {
   const { user } = useAuth();
   const location = useLocation();
@@ -472,6 +457,7 @@ const Sidebar = ({ isOpen, onToggle }) => {
       
       return () => clearTimeout(timer);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.pathname]);
 
   // 🔥 LOGICA AGGIORNATA: Gli admin vedono il pannello admin come dashboard
@@ -532,8 +518,6 @@ const Sidebar = ({ isOpen, onToggle }) => {
       ]
     });
   }
-
-  const creditiDisponibili = user ? (user.crediti_totali - user.crediti_spesi) : 0;
 
   const handleToggle = () => {
     onToggle();

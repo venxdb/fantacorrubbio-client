@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { motion } from 'framer-motion';
-import { Trophy, Medal, Award, Crown, Target, Users, Coins } from 'lucide-react';
+import { Trophy, Medal, Crown, Target, Users, Coins } from 'lucide-react';
 import API_URL from '../config/api';
 import { getUserColor, darkenColor } from '../utils/userColors';
 
@@ -9,11 +9,6 @@ import { getUserColor, darkenColor } from '../utils/userColors';
 const spin = keyframes`
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
-`;
-
-const pulse = keyframes`
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
 `;
 
 const shine = keyframes`
@@ -463,23 +458,6 @@ const RosaSection = styled.div`
   gap: 0.5rem;
 `;
 
-const RosaHeader = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.3rem;
-`;
-
-const RosaIcon = styled(Users)`
-  width: 1rem;
-  height: 1rem;
-`;
-
-const RosaLabel = styled.span`
-  font-size: 0.875rem;
-  font-weight: 500;
-`;
-
 const RolesGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -610,16 +588,6 @@ const ShineEffect = styled.div`
   transform: translateX(-100%) skewX(-12deg);
   animation: ${shine} 2s ease-in-out infinite;
   animation-delay: ${props => props.$index * 0.5}s;
-`;
-
-const Footer = styled.div`
-  margin-top: 2rem;
-  text-align: center;
-  color: ${props => props.theme.colors.textSecondary};
-`;
-
-const FooterText = styled(motion.p)`
-  margin: 0;
 `;
 
 const Classifica = () => {

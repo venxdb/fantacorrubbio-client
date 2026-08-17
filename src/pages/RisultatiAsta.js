@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Trophy, Star, Coins, Users, ArrowLeft, Clock, Crown, AlertTriangle, CheckCircle } from 'lucide-react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
@@ -403,6 +403,7 @@ const RisultatiAsta = () => {
 
   useEffect(() => {
     fetchAuctionResults();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const fetchAuctionResults = async () => {

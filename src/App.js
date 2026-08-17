@@ -266,6 +266,7 @@ function AppContent() {
     if (window.innerWidth <= 1024 && sidebarOpen) {
       setSidebarOpen(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.pathname]);
 
   const toggleSidebar = React.useCallback((value) => {

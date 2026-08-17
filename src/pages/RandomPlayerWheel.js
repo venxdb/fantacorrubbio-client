@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Play, Pause, RotateCw, Trophy, Users, Sparkles, Crown, Dice6 } from 'lucide-react';
+import { Play, RotateCw, Sparkles, Crown, Dice6 } from 'lucide-react';
 import mascotteImg from '../assets/mascotte.png';
 
 

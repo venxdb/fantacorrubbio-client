@@ -7,16 +7,14 @@ import {
   UserPlus, 
   Trash2, 
   Edit, 
-  Shield, 
+  Shield,
   ShieldOff,
   Eye,
-  EyeOff,
   Save,
   X,
   Plus,
   AlertTriangle,
   Gavel,
-  Play,
   Pause,
   ArrowLeftRight,
   Upload // ✅ AGGIUNTO
@@ -605,6 +603,7 @@ const AdminPanel = () => {
     } else {
       setLoading(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   // ✅ AGGIUNTO: Funzioni per upload

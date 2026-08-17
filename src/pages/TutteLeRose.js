@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
-import { Trophy, Users, Coins, Star, Eye, ChevronRight, User } from 'lucide-react';
+import { Trophy, Users, User } from 'lucide-react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import API_URL from '../config/api';

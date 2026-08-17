@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { Eye, EyeOff, Trophy, User, Lock, ArrowRight } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
-import API_URL from '../config/api';
 
 const LoginContainer = styled.div`
   min-height: 100vh;

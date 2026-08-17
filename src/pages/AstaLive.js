@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { Gavel, Clock, Users, Coins, Trophy, Play, Pause, Timer, Eye, EyeOff } from 'lucide-react';
+import { Gavel, Users, Coins, Trophy, Pause, Timer, Eye, EyeOff } from 'lucide-react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useAuth } from '../contexts/AuthContext';
@@ -404,18 +404,6 @@ const BidTitle = styled.h3`
   }
 `;
 
-const BidHeaderControls = styled.div`
-  display: flex;
-  gap: ${props => props.theme.spacing.sm};
-  align-items: center;
-  flex-wrap: wrap;
-  
-  @media (max-width: 768px) {
-    justify-content: center;
-    gap: ${props => props.theme.spacing.xs};
-  }
-`;
-
 const BidStats = styled.div`
   display: flex;
   gap: ${props => props.theme.spacing.lg};
@@ -437,16 +425,6 @@ const BidStats = styled.div`
 }
   @media (max-width: 480px) {
     font-size: 0.75rem;
-  }
-`;
-
-const BidStat = styled.span`
-  display: flex;
-  align-items: center;
-  gap: ${props => props.theme.spacing.xs};
-  
-  @media (max-width: 768px) {
-    justify-content: center;
   }
 `;
 
@@ -472,37 +450,6 @@ const VisibilityToggle = styled(motion.button)`
   @media (max-width: 768px) {
     font-size: 0.75rem;
     padding: ${props => props.theme.spacing.xs};
-  }
-`;
-
-const AdminControls = styled.div`
-  display: flex;
-  gap: ${props => props.theme.spacing.xs};
-  
-  @media (max-width: 768px) {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-`;
-
-const AdminButton = styled.button`
-  background: ${props => props.$variant === 'danger' ? '#EF4444' : props.$active ? '#F59E0B' : '#3B82F6'};
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  font-size: 0.8rem;
-  cursor: pointer;
-  white-space: nowrap;
-  
-  @media (max-width: 768px) {
-    font-size: 0.7rem;
-    padding: 0.4rem 0.8rem;
-  }
-  
-  @media (max-width: 480px) {
-    font-size: 0.65rem;
-    padding: 0.3rem 0.6rem;
   }
 `;
 
@@ -718,17 +665,6 @@ const BidAmount = styled.span`
   }
 `;
 
-const BidItemRight = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  
-  @media (max-width: 768px) {
-    width: 100%;
-    justify-content: space-between;
-  }
-`;
-
 const NoAuctionState = styled.div`
   text-align: center;
   padding: ${props => props.theme.spacing.lg};
@@ -800,81 +736,6 @@ const NoAuctionText = styled.p`
   
   @media (max-width: 768px) {
     font-size: 0.9rem;
-  }
-`;
-const CreditsRanking = styled.div`
-  background: ${props => props.theme.colors.surface};
-  border: 1px solid ${props => props.theme.colors.border};
-  border-radius: 8px;
-  padding: 12px;
-  margin-bottom: 16px;
-  
-  @media (max-width: 768px) {
-    padding: 8px;
-    margin-bottom: 12px;
-  }
-  
-  @media (min-width: 481px) and (max-width: 1200px) {
-    padding: 8px;
-    margin-bottom: 8px;
-    font-size: 0.8rem;
-  }
-`;
-
-const RankingTitle = styled.h4`
-  color: ${props => props.theme.colors.text};
-  font-size: 0.9rem;
-  font-weight: 600;
-  margin-bottom: 8px;
-  text-align: center;
-  border-bottom: 1px solid ${props => props.theme.colors.border};
-  padding-bottom: 4px;
-  
-  @media (min-width: 481px) and (max-width: 1200px) {
-    font-size: 0.8rem;
-    margin-bottom: 6px;
-  }
-`;
-
-const RankingItem = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 4px 0;
-  border-bottom: 1px solid ${props => props.theme.colors.border};
-  
-  &:last-child {
-    border-bottom: none;
-  }
-  
-  @media (min-width: 481px) and (max-width: 1200px) {
-    padding: 3px 0;
-  }
-`;
-
-const RankingUser = styled.span`
-  color: ${props => props.$isCurrentUser ? props.theme.colors.secondary : props.theme.colors.text};
-  font-weight: ${props => props.$isCurrentUser ? '600' : '400'};
-  font-size: 0.8rem;
-  flex: 1;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  margin-right: 8px;
-  
-  @media (min-width: 481px) and (max-width: 1200px) {
-    font-size: 0.7rem;
-  }
-`;
-
-const RankingCredits = styled.span`
-  color: ${props => props.$isCurrentUser ? props.theme.colors.secondary : props.theme.colors.textSecondary};
-  font-weight: 600;
-  font-size: 0.8rem;
-  flex-shrink: 0;
-  
-  @media (min-width: 481px) and (max-width: 1200px) {
-    font-size: 0.7rem;
   }
 `;
 
@@ -1001,50 +862,6 @@ const MiniRankingCredits = styled.span`
     font-weight: 700 !important;
   }
 `;
-const CenteredMessage = styled.div`
-  text-align: center;
-  color: #94A3B8;
-  padding: 2rem;
-  
-  @media (max-width: 768px) {
-    padding: 1rem;
-    font-size: 0.9rem;
-  }
-`;
-
-const AdminViewTitle = styled.h4`
-  color: #FBBF24;
-  margin-bottom: 1rem;
-  text-align: center;
-  
-  @media (max-width: 768px) {
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
-  }
-`;
-
-const SecretMessage = styled.div`
-  text-align: center;
-  margin-bottom: 1rem;
-  color: #94A3B8;
-  
-  @media (max-width: 768px) {
-    font-size: 0.9rem;
-    margin-bottom: 0.5rem;
-  }
-`;
-
-const HiddenBidsCount = styled.div`
-  text-align: center;
-  color: #94A3B8;
-  padding: 1rem;
-  
-  @media (max-width: 768px) {
-    padding: 0.5rem;
-    font-size: 0.9rem;
-  }
-`;
-
 const AstaLive = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -1402,6 +1219,7 @@ useEffect(() => {
 
     return () => clearInterval(interval);
   }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
 }, [currentAuction?.id, fetchCurrentAuction, isProcessingExpiration, user?.is_admin]);
 
 // ✅ Reset processing state quando cambia asta
@@ -1451,7 +1269,7 @@ const submitBid = async (e, overrideAmount) => {
   try {
     setSubmittingBid(true);
     
-    const response = await axios.post(`${API_URL}/api/aste/${currentAuction.id}/offerta`, {
+    await axios.post(`${API_URL}/api/aste/${currentAuction.id}/offerta`, {
       importo: amount
     });
 
@@ -1525,8 +1343,6 @@ const submitBid = async (e, overrideAmount) => {
       </AstaContainer>
     );
   }
-
-  const winningBid = bids.length > 0 ? bids[0] : null;
 
   return (
    <AstaContainer>

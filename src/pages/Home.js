@@ -7,13 +7,11 @@ import {
   History,
   TrendingUp,
   Coins,
-  Target,
   ArrowRight,
   Play
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import API_URL from '../config/api';
 
 // 🆕 Container principale responsive
 const HomeContainer = styled.div`
@@ -336,83 +334,6 @@ const ActionButton = styled.div`
 
 
 // 🆕 Stats grid responsive
-const StatsGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: ${props => props.theme.spacing.lg};
-  margin-bottom: ${props => props.theme.spacing.xl};
-  
-  /* 🆕 Large desktop: 4 colonne fisse */
-  @media (min-width: ${props => props.theme.breakpoints.large}) {
-    grid-template-columns: repeat(4, 1fr);
-  }
-  
-  /* 🆕 Tablet: 2 colonne */
-  @media (max-width: ${props => props.theme.breakpoints.tablet}) {
-    grid-template-columns: repeat(2, 1fr);
-    gap: ${props => props.theme.spacing.md};
-    margin-bottom: ${props => props.theme.spacing.lg};
-  }
-  
-  /* 🆕 Mobile: 2 colonne compatte */
-  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
-    grid-template-columns: repeat(2, 1fr);
-    gap: ${props => props.theme.spacing.sm};
-    margin-bottom: ${props => props.theme.spacing.md};
-  }
-`;
-
-// 🆕 Stat card responsive
-const StatCard = styled(motion.div)`
-  background: ${props => props.theme.colors.surface};
-  border: 1px solid ${props => props.theme.colors.border};
-  border-radius: ${props => props.theme.borderRadius};
-  padding: ${props => props.theme.spacing.lg};
-  text-align: center;
-  
-  /* 🆕 Tablet: padding ridotto */
-  @media (max-width: ${props => props.theme.breakpoints.tablet}) {
-    padding: ${props => props.theme.spacing.md};
-  }
-  
-  /* 🆕 Mobile: padding minimo */
-  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
-    padding: ${props => props.theme.spacing.sm};
-  }
-`;
-
-// 🆕 Stat value responsive
-const StatValue = styled.div`
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: ${props => props.color || props.theme.colors.text};
-  margin-bottom: ${props => props.theme.spacing.xs};
-  line-height: 1;
-  
-  /* 🆕 Tablet: più piccolo */
-  @media (max-width: ${props => props.theme.breakpoints.tablet}) {
-    font-size: 2.2rem;
-  }
-  
-  /* 🆕 Mobile: molto più piccolo */
-  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
-    font-size: 1.8rem;
-  }
-`;
-
-// 🆕 Stat label responsive
-const StatLabel = styled.div`
-  color: ${props => props.theme.colors.textSecondary};
-  font-size: 0.9rem;
-  font-weight: 500;
-  line-height: 1.3;
-  
-  /* 🆕 Mobile: font più piccolo */
-  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
-    font-size: 0.8rem;
-  }
-`;
-
 // 🆕 Section title responsive
 const SectionTitle = styled.h2`
   font-size: 1.5rem;
@@ -573,15 +494,7 @@ const JoinAuctionButton = styled(motion.button)`
 const Home = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
-  const [stats] = useState({
-    totalPlayers: 538,
-    availablePlayers: 520,
-    activeAuctions: 0,
-    totalUsers: 8
-  });
   const [liveAuction] = useState(null);
-
-  const creditiDisponibili = user ? (user.crediti_totali - user.crediti_spesi) : 0;
 
   // Simula caricamento dati (sostituire con API reali)
   useEffect(() => {

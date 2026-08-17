@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ChevronLeft, ChevronRight, Bell, User, LogOut, Settings, Trophy } from 'lucide-react';
+import { ChevronRight, Bell, User, LogOut, Settings, Trophy } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
 import toast from 'react-hot-toast';
@@ -170,12 +170,6 @@ const Username = styled.span`
   font-weight: 600;
   font-size: 0.9rem;
   color: ${props => props.theme.colors.text};
-  white-space: nowrap;
-`;
-
-const Credits = styled.span`
-  font-size: 0.8rem;
-  color: ${props => props.theme.colors.textSecondary};
   white-space: nowrap;
 `;
 
