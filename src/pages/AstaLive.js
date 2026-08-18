@@ -1426,7 +1426,7 @@ const submitBid = async (e, overrideAmount) => {
    <AuctionLayout>
     <AuctionLeftCol>
     <PlayerSection>
-      {currentAuction && utentiCrediti.length > 0 && (
+      {currentAuction && utentiCrediti.length > 0 && user?.puo_offrire !== false && (
         <MiniCreditsRanking>
           <MiniRankingTitle>💰 Crediti</MiniRankingTitle>
           <MiniRankingList>
