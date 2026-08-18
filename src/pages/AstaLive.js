@@ -35,14 +35,19 @@ const AstaContainer = styled.div`
 const Header = styled.div`
   text-align: center;
   margin-bottom: ${props => props.theme.spacing.lg};
-  
+
   /* 🎯 TABLET: Header compatto */
   @media (min-width: 481px) and (max-width: 1200px) {
     margin-bottom: 8px !important;
   }
-  
+
   @media (max-width: 768px) {
     margin-bottom: ${props => props.theme.spacing.md};
+  }
+
+  /* 🎯 DESKTOP: Header compatto per evitare scroll */
+  @media (min-width: 1201px) {
+    margin-bottom: 8px !important;
   }
 `;
 
@@ -107,6 +112,12 @@ const StatusBadge = styled.div`
   margin-bottom: 8px !important;
   border-radius: 16px !important;
 }
+
+/* 🎯 DESKTOP: Badge compatto per evitare scroll */
+@media (min-width: 1201px) {
+  padding: 4px 16px !important;
+  margin-bottom: 8px !important;
+}
 `;
 
 const LiveDot = styled.div`
@@ -151,10 +162,10 @@ const AuctionCard = styled.div`
     
   }
   
-  /* 🎯 DESKTOP: Card con un po' di respiro, ma senza rischiare lo scroll */
+  /* 🎯 DESKTOP: Card compatta, senza rischiare lo scroll */
   @media (min-width: 1201px) {
-    padding: ${props => props.theme.spacing.md} !important;
-    margin-bottom: ${props => props.theme.spacing.md} !important;
+    padding: ${props => props.theme.spacing.sm} !important;
+    margin-bottom: ${props => props.theme.spacing.sm} !important;
     border-radius: ${props => props.theme.radius.md} !important;
   }
   
@@ -178,6 +189,11 @@ const AuctionLayout = styled.div`
     align-items: flex-start;
     gap: ${props => props.theme.spacing.xl};
   }
+
+  /* 🎯 DESKTOP: Gap ridotto per evitare scroll */
+  @media (min-width: 1201px) {
+    gap: ${props => props.theme.spacing.md} !important;
+  }
 `;
 
 const AuctionLeftCol = styled.div`
@@ -200,14 +216,19 @@ const PlayerSection = styled.div`
   text-align: center;
   margin-bottom: ${props => props.theme.spacing.lg};
   position: relative;
-  
+
   /* 🎯 TABLET: Sezione player compatta */
   @media (min-width: 481px) and (max-width: 1200px) {
     margin-bottom: 8px !important;
   }
-  
+
   @media (max-width: 768px) {
     margin-bottom: ${props => props.theme.spacing.md};
+  }
+
+  /* 🎯 DESKTOP: Sezione player compatta per evitare scroll */
+  @media (min-width: 1201px) {
+    margin-bottom: 8px !important;
   }
 `;
 
@@ -245,15 +266,21 @@ const PlayerDetails = styled.div`
   gap: ${props => props.theme.spacing.lg};
   margin-bottom: ${props => props.theme.spacing.md};
   flex-wrap: wrap;
-  
+
   @media (max-width: 768px) {
     gap: ${props => props.theme.spacing.md};
   }
-  
+
   @media (max-width: 480px) {
     gap: ${props => props.theme.spacing.sm};
     flex-direction: row;
     justify-content: space-around;
+  }
+
+  /* 🎯 DESKTOP: Dettagli compatti per evitare scroll */
+  @media (min-width: 1201px) {
+    margin-bottom: 4px !important;
+    gap: ${props => props.theme.spacing.md} !important;
   }
 `;
 
@@ -295,14 +322,19 @@ const DetailValue = styled.span`
 const TimerSection = styled.div`
   text-align: center;
   margin-bottom: ${props => props.theme.spacing.lg};
-  
+
   /* 🎯 TABLET: Timer compatto */
   @media (min-width: 481px) and (max-width: 1200px) {
     margin-bottom: 8px !important;
   }
-  
+
   @media (max-width: 768px) {
     margin-bottom: ${props => props.theme.spacing.md};
+  }
+
+  /* 🎯 DESKTOP: Timer compatto per evitare scroll */
+  @media (min-width: 1201px) {
+    margin-bottom: 8px !important;
   }
 `;
 
@@ -344,14 +376,19 @@ const TimerLabel = styled.div`
 
 const BidSection = styled.div`
   margin-bottom: ${props => props.theme.spacing.lg};
-  
+
   /* 🎯 TABLET: Sezione bid compatta */
   @media (min-width: 481px) and (max-width: 1200px) {
     margin-bottom: 8px !important;
   }
-  
+
   @media (max-width: 768px) {
     margin-bottom: ${props => props.theme.spacing.md};
+  }
+
+  /* 🎯 DESKTOP: Sezione bid compatta per evitare scroll */
+  @media (min-width: 1201px) {
+    margin-bottom: 8px !important;
   }
 `;
 
@@ -375,7 +412,12 @@ const BidHeader = styled.div`
     flex-direction: column;
     align-items: stretch;
     gap: ${props => props.theme.spacing.sm};
-    
+
+  }
+
+  /* 🎯 DESKTOP: Header offerte compatto per evitare scroll */
+  @media (min-width: 1201px) {
+    margin-bottom: 8px !important;
   }
 `;
 
@@ -383,7 +425,7 @@ const BidTitle = styled.h3`
   color: ${props => props.theme.colors.text};
   font-size: 1.3rem;
   font-weight: 600;
-  margin: 0 0 16px 0;
+  margin: 0 0 8px 0;
   padding-bottom: 8px;
   border-bottom: 2px solid ${props => props.theme.colors.border};
   
