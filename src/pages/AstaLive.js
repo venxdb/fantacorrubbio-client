@@ -872,22 +872,22 @@ const MiniRankingCredits = styled.span`
 const SpectatorRanking = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.45rem;
-  padding: 0.25rem 0.25rem 0.5rem;
+  gap: 0.3rem;
+  padding: 0.15rem 0.15rem 0.3rem;
 `;
 
 const SpectatorRankingTitle = styled.h3`
   text-align: center;
   color: ${props => props.theme.colors.text};
-  font-size: 1.05rem;
+  font-size: 0.9rem;
   font-weight: 700;
-  margin: 0 0 0.5rem;
+  margin: 0 0 0.3rem;
 `;
 
 const SpectatorRankingItem = styled.div`
   display: flex;
   align-items: center;
-  padding: 0.5rem 0.9rem;
+  padding: 0.3rem 0.7rem;
   background: ${props => props.$isFirst ? `${props.theme.colors.secondary}15` : props.theme.colors.surface};
   border: 1px solid ${props => props.$isFirst ? props.theme.colors.secondary : props.theme.colors.border};
   border-radius: ${props => props.theme.radius.md};
@@ -895,16 +895,16 @@ const SpectatorRankingItem = styled.div`
 
 const SpectatorRankPos = styled.span`
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 0.8rem;
   color: ${props => props.theme.colors.textSecondary};
-  width: 32px;
+  width: 28px;
   flex-shrink: 0;
 `;
 
 const SpectatorRankUser = styled.span`
   flex: 1;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.8rem;
   color: ${props => props.theme.colors.text};
   overflow: hidden;
   text-overflow: ellipsis;
@@ -913,7 +913,7 @@ const SpectatorRankUser = styled.span`
 
 const SpectatorRankCredits = styled.span`
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 0.8rem;
   color: ${props => props.theme.colors.secondary};
   flex-shrink: 0;
 `;
