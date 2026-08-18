@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Heart, Plus, Trash2, Coins, CheckCircle2, Lock, Eye, EyeOff } from 'lucide-react';
+import { Heart, Plus, Trash2, Coins, CheckCircle2, Lock, Eye, EyeOff, Hammer, Sparkles } from 'lucide-react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 import API_URL from '../config/api';
 
 const ROLE_COLORS = { P: '#F59E0B', D: '#22C55E', C: '#3B82F6', A: '#EF4444' };
@@ -42,6 +44,20 @@ const Subtitle = styled.p`
   color: ${props => props.theme.colors.textSecondary};
   font-size: 0.85rem;
   margin-top: 2px;
+`;
+
+const PremiumBadge = styled.span`
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 100%);
+  color: #1A1300;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: ${props => props.theme.radius.pill};
+  margin-left: 6px;
+  vertical-align: middle;
 `;
 
 const AddForm = styled.form`
@@ -278,6 +294,46 @@ const MaskedPrice = styled.button`
   }
 `;
 
+const HammerButton = styled.button`
+  background: rgba(251, 191, 36, 0.12);
+  border: 1px solid rgba(251, 191, 36, 0.4);
+  color: ${props => props.theme.colors.secondary};
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  border-radius: ${props => props.theme.radius.sm};
+  flex-shrink: 0;
+
+  &:hover {
+    background: rgba(251, 191, 36, 0.25);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+`;
+
+const RoleSection = styled.div`
+  border-bottom: 1px solid ${props => props.theme.colors.border};
+
+  &:last-child {
+    border-bottom: none;
+  }
+`;
+
+const RoleSectionHeader = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px ${props => props.theme.spacing.md};
+  background: ${props => props.theme.colors.background};
+  color: ${props => props.$color};
+  font-weight: 700;
+  font-size: 0.8rem;
+`;
+
 const DeleteButton = styled.button`
   background: none;
   border: none;
@@ -313,6 +369,10 @@ const SecretNote = styled.div`
 `;
 
 const Preferiti = () => {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  const isPremium = user?.username === 'venxdb';
+
   const [preferiti, setPreferiti] = useState([]);
   const [calciatori, setCalciatori] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -320,6 +380,8 @@ const Preferiti = () => {
   const [newPrezzo, setNewPrezzo] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [showPrices, setShowPrices] = useState(false);
+  const [soloNonAssegnati, setSoloNonAssegnati] = useState(false);
+  const [creandoAstaId, setCreandoAstaId] = useState(null);
   const [filtriRuoli, setFiltriRuoli] = useState(() => {
     const saved = localStorage.getItem('filtriRuoliPreferiti');
     return saved ? JSON.parse(saved) : ['P', 'D', 'C', 'A'];
@@ -414,11 +476,83 @@ const Preferiti = () => {
     }
   };
 
+  const handleCreaAsta = async (calciatoreId, nomeCalciatore) => {
+    setCreandoAstaId(calciatoreId);
+    try {
+      const durata = parseFloat(localStorage.getItem('astaDurataMinuti')) || 1;
+      await axios.post(`${API_URL}/api/aste`, { calciatore_id: calciatoreId, durata_minuti: durata });
+      toast.success(`Asta avviata per ${nomeCalciatore}!`);
+      navigate('/asta-live');
+    } catch (error) {
+      const message = error.response?.data?.error || 'Errore nella creazione dell\'asta';
+      toast.error(message);
+    } finally {
+      setCreandoAstaId(null);
+    }
+  };
+
   const calciatoriDisponibiliPerAggiunta = calciatori.filter(
     c => !preferiti.some(p => p.calciatore_id === c.id)
   );
 
-  const preferitiFiltrati = preferiti.filter(p => filtriRuoli.includes(p.ruolo));
+  const preferitiFiltrati = preferiti
+    .filter(p => filtriRuoli.includes(p.ruolo))
+    .filter(p => !(isPremium && soloNonAssegnati) || !p.assegnato)
+    .sort((a, b) => isPremium ? (b.prezzo_target - a.prezzo_target) : 0);
+
+  const renderRow = (p) => (
+    <Row
+      key={p.id}
+      $assegnato={p.assegnato}
+      initial={{ opacity: 0, height: 0 }}
+      animate={{ opacity: 1, height: 'auto' }}
+      exit={{ opacity: 0, height: 0 }}
+      transition={{ duration: 0.2 }}
+    >
+      <RoleDot $color={ROLE_COLORS[p.ruolo] || '#94A3B8'} />
+      <PlayerInfo $assegnato={p.assegnato}>
+        <PlayerName title={p.nome}>{p.nome}</PlayerName>
+        <PlayerSquadra>{p.squadra}</PlayerSquadra>
+      </PlayerInfo>
+      {p.assegnato && (
+        <AssegnatoBadge>
+          <CheckCircle2 size={12} />
+          Assegnato
+        </AssegnatoBadge>
+      )}
+      {showPrices ? (
+        <RowPriceInput
+          type="number"
+          min="0"
+          disabled={p.assegnato}
+          defaultValue={p.prezzo_target}
+          onBlur={(e) => handlePriceUpdate(p.id, e.target.value)}
+        />
+      ) : (
+        <MaskedPrice
+          type="button"
+          disabled={p.assegnato}
+          onClick={() => setShowPrices(true)}
+          title="Mostra prezzi"
+        >
+          ••
+        </MaskedPrice>
+      )}
+      <Coins size={12} color="#94A3B8" />
+      {isPremium && !p.assegnato && (
+        <HammerButton
+          onClick={() => handleCreaAsta(p.calciatore_id, p.nome)}
+          disabled={creandoAstaId === p.calciatore_id}
+          title="Avvia asta per questo giocatore"
+        >
+          <Hammer size={14} />
+        </HammerButton>
+      )}
+      <DeleteButton onClick={() => handleDelete(p.id)} title="Rimuovi">
+        <Trash2 size={14} />
+      </DeleteButton>
+    </Row>
+  );
 
   return (
     <Container>
@@ -426,6 +560,12 @@ const Preferiti = () => {
         <Title>
           <Heart size={20} />
           Preferiti
+          {isPremium && (
+            <PremiumBadge>
+              <Sparkles size={11} />
+              Premium
+            </PremiumBadge>
+          )}
         </Title>
         <Subtitle>La tua lista personale di giocatori da tenere d'occhio</Subtitle>
       </Header>
@@ -468,6 +608,14 @@ const Preferiti = () => {
             {config.icon} {config.nome}
           </FilterButton>
         ))}
+        {isPremium && (
+          <FilterButton
+            onClick={() => setSoloNonAssegnati(v => !v)}
+            $active={soloNonAssegnati}
+          >
+            🆓 Solo Non Assegnati
+          </FilterButton>
+        )}
       </FilterContainer>
 
       <ListWrapper>
@@ -488,53 +636,27 @@ const Preferiti = () => {
               ? "Nessun preferito ancora. Aggiungi un calciatore con il form qui sopra!"
               : "Nessun giocatore per i ruoli selezionati."}
           </EmptyState>
+        ) : isPremium && soloNonAssegnati ? (
+          <List>
+            {Object.entries(RUOLI).map(([ruolo, config]) => {
+              const giocatoriRuolo = preferitiFiltrati.filter(p => p.ruolo === ruolo);
+              if (giocatoriRuolo.length === 0) return null;
+              return (
+                <RoleSection key={ruolo}>
+                  <RoleSectionHeader $color={ROLE_COLORS[ruolo]}>
+                    {config.icon} {config.nome} ({giocatoriRuolo.length})
+                  </RoleSectionHeader>
+                  <AnimatePresence initial={false}>
+                    {giocatoriRuolo.map(renderRow)}
+                  </AnimatePresence>
+                </RoleSection>
+              );
+            })}
+          </List>
         ) : (
           <List>
             <AnimatePresence initial={false}>
-              {preferitiFiltrati.map(p => (
-                <Row
-                  key={p.id}
-                  $assegnato={p.assegnato}
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: 'auto' }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <RoleDot $color={ROLE_COLORS[p.ruolo] || '#94A3B8'} />
-                  <PlayerInfo $assegnato={p.assegnato}>
-                    <PlayerName title={p.nome}>{p.nome}</PlayerName>
-                    <PlayerSquadra>{p.squadra}</PlayerSquadra>
-                  </PlayerInfo>
-                  {p.assegnato && (
-                    <AssegnatoBadge>
-                      <CheckCircle2 size={12} />
-                      Assegnato
-                    </AssegnatoBadge>
-                  )}
-                  {showPrices ? (
-                    <RowPriceInput
-                      type="number"
-                      min="0"
-                      disabled={p.assegnato}
-                      defaultValue={p.prezzo_target}
-                      onBlur={(e) => handlePriceUpdate(p.id, e.target.value)}
-                    />
-                  ) : (
-                    <MaskedPrice
-                      type="button"
-                      disabled={p.assegnato}
-                      onClick={() => setShowPrices(true)}
-                      title="Mostra prezzi"
-                    >
-                      ••
-                    </MaskedPrice>
-                  )}
-                  <Coins size={12} color="#94A3B8" />
-                  <DeleteButton onClick={() => handleDelete(p.id)} title="Rimuovi">
-                    <Trash2 size={14} />
-                  </DeleteButton>
-                </Row>
-              ))}
+              {preferitiFiltrati.map(renderRow)}
             </AnimatePresence>
           </List>
         )}
