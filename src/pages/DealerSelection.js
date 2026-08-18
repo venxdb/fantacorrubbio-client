@@ -272,7 +272,8 @@ const DealerSelection = () => {
     try {
       setLoading(true);
       const response = await axios.get(`${API_URL}/api/utenti`);
-      setUsers(response.data.utenti || []);
+      const utentiPartecipanti = (response.data.utenti || []).filter(u => u.puo_offrire !== false);
+      setUsers(utentiPartecipanti);
     } catch (error) {
       console.error('Errore caricamento utenti:', error);
       toast.error('Errore nel caricamento degli utenti');

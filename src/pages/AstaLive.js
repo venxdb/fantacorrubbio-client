@@ -1482,7 +1482,13 @@ const submitBid = async (e, overrideAmount) => {
             </div>
           </BidHeader>
 
-          {isActive && (
+          {isActive && user?.puo_offrire === false && (
+            <div style={{ textAlign: 'center', color: '#94A3B8', padding: '1rem', fontSize: '0.9rem' }}>
+              👁️ Account solo visualizzazione, non puoi fare offerte
+            </div>
+          )}
+
+          {isActive && user?.puo_offrire !== false && (
             <BidForm onSubmit={submitBid}>
               <BidInputContainer>
                 <BidInput
