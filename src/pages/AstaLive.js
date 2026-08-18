@@ -1650,7 +1650,7 @@ const submitBid = async (e, overrideAmount) => {
             </BidForm>
           )}
 
-          <BidsList>
+          <BidsList style={user?.puo_offrire === false && bids.length === 0 ? { maxHeight: 'none', overflow: 'visible' } : undefined}>
             {bids.length === 0 ? (
               user?.puo_offrire === false ? (
                 <SpectatorRanking>
