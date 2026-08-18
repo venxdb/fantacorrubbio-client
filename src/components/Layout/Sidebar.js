@@ -475,7 +475,7 @@ const Sidebar = ({ isOpen, onToggle }) => {
     navigationItems.push({
       section: 'Principale',
       items: [
-        { path: '/calciatori', icon: Users, label: 'Calciatori', color: '#3B82F6' },
+        ...(user?.puo_offrire !== false ? [{ path: '/calciatori', icon: Users, label: 'Calciatori', color: '#3B82F6' }] : []),
         { path: '/asta-live', icon: Hammer, label: 'Asta Live', color: '#F59E0B' }
       ]
     });
@@ -483,9 +483,9 @@ const Sidebar = ({ isOpen, onToggle }) => {
     navigationItems.push({
       section: 'Rose',
       items: [
-        { path: '/rosa-passata', icon: History, label: 'Rosa Passata', color: '#22C55E' },
+        ...(user?.puo_offrire !== false ? [{ path: '/rosa-passata', icon: History, label: 'Rosa Passata', color: '#22C55E' }] : []),
         { path: '/tutte-le-rose', icon: LayoutGrid, label: 'Tutte le Rose', color: '#EC4899' },
-        { path: '/preferiti', icon: Heart, label: 'Preferiti', color: '#F43F5E' },
+        ...(user?.puo_offrire !== false ? [{ path: '/preferiti', icon: Heart, label: 'Preferiti', color: '#F43F5E' }] : []),
         { path: '/classifica', icon: Coins, label: 'Crediti', color: '#FBBF24' }
       ]
     });
