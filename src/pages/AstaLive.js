@@ -869,6 +869,55 @@ const MiniRankingCredits = styled.span`
     font-weight: 700 !important;
   }
 `;
+const SpectatorRanking = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding: 0.25rem 0.25rem 0.5rem;
+`;
+
+const SpectatorRankingTitle = styled.h3`
+  text-align: center;
+  color: ${props => props.theme.colors.text};
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+`;
+
+const SpectatorRankingItem = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0.9rem;
+  background: ${props => props.$isFirst ? `${props.theme.colors.secondary}15` : props.theme.colors.surface};
+  border: 1px solid ${props => props.$isFirst ? props.theme.colors.secondary : props.theme.colors.border};
+  border-radius: ${props => props.theme.radius.md};
+`;
+
+const SpectatorRankPos = styled.span`
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: ${props => props.theme.colors.textSecondary};
+  width: 32px;
+  flex-shrink: 0;
+`;
+
+const SpectatorRankUser = styled.span`
+  flex: 1;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: ${props => props.theme.colors.text};
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+
+const SpectatorRankCredits = styled.span`
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: ${props => props.theme.colors.secondary};
+  flex-shrink: 0;
+`;
+
 const AstaLive = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -932,15 +981,24 @@ const fetchUtentiCrediti = async () => {
     // Ordina per crediti disponibili (decrescente)
     const utentiOrdinati = utenti
       .filter(utente => utente.username) // Filtra utenti validi
-      .map(utente => ({
-        id: utente.id,
-        username: utente.username,
-        is_admin: utente.is_admin,
-        crediti_totali: utente.crediti_totali,
-        crediti_spesi: utente.crediti_spesi,
-        crediti_rimanenti: utente.crediti_disponibili // Usa il campo che già viene calcolato dal backend
-      }))
-      .sort((a, b) => b.crediti_rimanenti - a.crediti_rimanenti);
+      .map(utente => {
+        // Stessa formula di checkAdvancedCredits/rosa-info: riserva 1 credito per ogni
+        // giocatore obbligatorio ancora mancante (oltre al prossimo che si sta per prendere)
+        const giocatoriMancanti = 25 - parseInt(utente.calciatori_acquistati || 0);
+        const creditiRiservati = Math.max(0, giocatoriMancanti - 1);
+        const creditiUsabili = Math.max(0, utente.crediti_disponibili - creditiRiservati);
+
+        return {
+          id: utente.id,
+          username: utente.username,
+          is_admin: utente.is_admin,
+          crediti_totali: utente.crediti_totali,
+          crediti_spesi: utente.crediti_spesi,
+          crediti_rimanenti: utente.crediti_disponibili, // Usa il campo che già viene calcolato dal backend
+          crediti_usabili: creditiUsabili
+        };
+      })
+      .sort((a, b) => b.crediti_usabili - a.crediti_usabili);
     
     setUtentiCrediti(utentiOrdinati);
   } catch (error) {
@@ -1550,11 +1608,24 @@ const submitBid = async (e, overrideAmount) => {
             </BidForm>
           )}
 
-          <BidsList>
+          <BidsList style={user?.puo_offrire === false && bids.length === 0 ? { maxHeight: 'none', overflow: 'visible' } : undefined}>
             {bids.length === 0 ? (
-              <div style={{ textAlign: 'center', color: '#94A3B8', padding: '2rem' }}>
-                Nessuna offerta ancora. Ti vuoi sbrigare Dorco Pio 💰
-              </div>
+              user?.puo_offrire === false ? (
+                <SpectatorRanking>
+                  <SpectatorRankingTitle>💰 Classifica Crediti</SpectatorRankingTitle>
+                  {utentiCrediti.map((utente, idx) => (
+                    <SpectatorRankingItem key={utente.id} $isFirst={idx === 0}>
+                      <SpectatorRankPos>{['🥇', '🥈', '🥉'][idx] || `${idx + 1}°`}</SpectatorRankPos>
+                      <SpectatorRankUser>{utente.username}</SpectatorRankUser>
+                      <SpectatorRankCredits>{utente.crediti_usabili}</SpectatorRankCredits>
+                    </SpectatorRankingItem>
+                  ))}
+                </SpectatorRanking>
+              ) : user?.is_admin ? null : (
+                <div style={{ textAlign: 'center', color: '#94A3B8', padding: '2rem' }}>
+                  Nessuna offerta ancora. Ti vuoi sbrigare Dorco Pio 💰
+                </div>
+              )
             ) : (
               <>
                 {user?.is_admin && showAdminView ? (
