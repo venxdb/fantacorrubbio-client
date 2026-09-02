@@ -16,6 +16,18 @@ const RUOLI = {
   A: { nome: 'Attaccanti', icon: '🎯' },
 };
 
+const BUDGET_TOTALE = 350;
+
+const creditiToPercentuale = (crediti) => {
+  const n = parseFloat(crediti);
+  return isNaN(n) ? '' : ((n / BUDGET_TOTALE) * 100).toFixed(1);
+};
+
+const percentualeToCrediti = (percentuale) => {
+  const n = parseFloat(percentuale);
+  return isNaN(n) ? '' : Math.round((n / 100) * BUDGET_TOTALE).toString();
+};
+
 const Container = styled.div`
   padding: ${props => props.theme.spacing.sm} 0;
   max-width: 720px;
@@ -103,6 +115,39 @@ const PriceInput = styled.input`
     outline: none;
     border-color: ${props => props.theme.colors.primary};
   }
+`;
+
+const PriceGroup = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 4px;
+`;
+
+const PercentInput = styled.input`
+  width: 60px;
+  text-align: right;
+  padding: ${props => props.theme.spacing.sm};
+  background: ${props => props.theme.colors.background};
+  border: 1px solid ${props => props.theme.colors.border};
+  border-radius: ${props => props.theme.radius.sm};
+  color: ${props => props.theme.colors.textSecondary};
+  font-size: 0.8rem;
+
+  &:focus {
+    outline: none;
+    border-color: ${props => props.theme.colors.primary};
+  }
+
+  &:disabled {
+    color: ${props => props.theme.colors.textSecondary};
+    cursor: not-allowed;
+  }
+`;
+
+const RowPercentInput = styled(PercentInput)`
+  width: 50px;
+  padding: 3px 6px;
+  font-size: 0.75rem;
 `;
 
 const AddButton = styled(motion.button)`
@@ -368,6 +413,60 @@ const SecretNote = styled.div`
   margin-top: ${props => props.theme.spacing.sm};
 `;
 
+const RowPriceEditor = ({ prezzo, disabled, isPremium, showPrices, onCommit, onRevealPrices }) => {
+  const [val, setVal] = useState(prezzo);
+  const [pct, setPct] = useState(creditiToPercentuale(prezzo));
+
+  useEffect(() => {
+    setVal(prezzo);
+    setPct(creditiToPercentuale(prezzo));
+  }, [prezzo]);
+
+  if (!showPrices) {
+    return (
+      <MaskedPrice type="button" disabled={disabled} onClick={onRevealPrices} title="Mostra prezzi">
+        ••
+      </MaskedPrice>
+    );
+  }
+
+  const handleValChange = (v) => {
+    setVal(v);
+    setPct(creditiToPercentuale(v));
+  };
+
+  const handlePctChange = (v) => {
+    setPct(v);
+    setVal(percentualeToCrediti(v));
+  };
+
+  return (
+    <PriceGroup>
+      <RowPriceInput
+        type="number"
+        min="0"
+        disabled={disabled}
+        value={val}
+        onChange={(e) => handleValChange(e.target.value)}
+        onBlur={() => onCommit(val)}
+      />
+      {isPremium && (
+        <RowPercentInput
+          type="number"
+          min="0"
+          max="100"
+          step="0.1"
+          disabled={disabled}
+          value={pct}
+          onChange={(e) => handlePctChange(e.target.value)}
+          onBlur={() => onCommit(val)}
+          title="Percentuale su 350 crediti"
+        />
+      )}
+    </PriceGroup>
+  );
+};
+
 const Preferiti = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -378,6 +477,7 @@ const Preferiti = () => {
   const [loading, setLoading] = useState(true);
   const [selectedCalciatore, setSelectedCalciatore] = useState('');
   const [newPrezzo, setNewPrezzo] = useState('');
+  const [newPrezzoPct, setNewPrezzoPct] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [showPrices, setShowPrices] = useState(false);
   const [soloNonAssegnati, setSoloNonAssegnati] = useState(false);
@@ -393,6 +493,16 @@ const Preferiti = () => {
       localStorage.setItem('filtriRuoliPreferiti', JSON.stringify(newFiltri));
       return newFiltri;
     });
+  };
+
+  const handleNewPrezzoChange = (val) => {
+    setNewPrezzo(val);
+    setNewPrezzoPct(creditiToPercentuale(val));
+  };
+
+  const handleNewPrezzoPctChange = (val) => {
+    setNewPrezzoPct(val);
+    setNewPrezzo(percentualeToCrediti(val));
   };
 
   const toggleTuttiRuoli = () => {
@@ -447,6 +557,7 @@ const Preferiti = () => {
       toast.success('Aggiunto ai preferiti!');
       setSelectedCalciatore('');
       setNewPrezzo('');
+      setNewPrezzoPct('');
       fetchPreferiti();
     } catch (error) {
       const message = error.response?.data?.error || 'Errore nell\'aggiunta del preferito';
@@ -520,24 +631,14 @@ const Preferiti = () => {
           Assegnato
         </AssegnatoBadge>
       )}
-      {showPrices ? (
-        <RowPriceInput
-          type="number"
-          min="0"
-          disabled={p.assegnato}
-          defaultValue={p.prezzo_target}
-          onBlur={(e) => handlePriceUpdate(p.id, e.target.value)}
-        />
-      ) : (
-        <MaskedPrice
-          type="button"
-          disabled={p.assegnato}
-          onClick={() => setShowPrices(true)}
-          title="Mostra prezzi"
-        >
-          ••
-        </MaskedPrice>
-      )}
+      <RowPriceEditor
+        prezzo={p.prezzo_target}
+        disabled={p.assegnato}
+        isPremium={isPremium}
+        showPrices={showPrices}
+        onCommit={(v) => handlePriceUpdate(p.id, v)}
+        onRevealPrices={() => setShowPrices(true)}
+      />
       <Coins size={12} color="#94A3B8" />
       {isPremium && !p.assegnato && (
         <HammerButton
@@ -582,13 +683,26 @@ const Preferiti = () => {
             </option>
           ))}
         </PlayerSelect>
-        <PriceInput
-          type={showPrices ? 'number' : 'password'}
-          min="0"
-          placeholder="Crediti"
-          value={newPrezzo}
-          onChange={(e) => setNewPrezzo(e.target.value)}
-        />
+        <PriceGroup>
+          <PriceInput
+            type={showPrices ? 'number' : 'password'}
+            min="0"
+            placeholder="Crediti"
+            value={newPrezzo}
+            onChange={(e) => handleNewPrezzoChange(e.target.value)}
+          />
+          {isPremium && showPrices && (
+            <PercentInput
+              type="number"
+              min="0"
+              max="100"
+              step="0.1"
+              placeholder="%"
+              value={newPrezzoPct}
+              onChange={(e) => handleNewPrezzoPctChange(e.target.value)}
+            />
+          )}
+        </PriceGroup>
         <AddButton type="submit" disabled={submitting} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
           <Plus size={16} />
           Aggiungi
