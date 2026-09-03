@@ -545,7 +545,8 @@ const Home = () => {
           Benvenuto {user?.username}, ricordo che Venxdb è a quota 4🏆 Edo a quota 3🥈 e il resto è fuffa
         </WelcomeTitle>
         <WelcomeSubtitle>
-          Non preoccuparti, il savo cercherà sempre di darti una mano! Magari non mettendo la formazione contro di te
+          Non preoccuparti, il savo cercherà sempre di darti una mano!<br />
+          Magari non mettendo la formazione contro di te
         </WelcomeSubtitle>
       </WelcomeSection>
 
