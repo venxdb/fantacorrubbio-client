@@ -402,7 +402,7 @@ const Header = ({ onToggleSidebar, sidebarOpen = false }) => {
         });
 
         setTimeout(() => {
-          toast('📊 Qui potrai modificare i tuoi dati, vedere statistiche e gestire preferenze personali', {
+          toast('📊 Meglio non aprire il tuo profilo se non vuoi prendere paura!', {
             duration: 6000,
             position: 'top-center',
             style: {
