@@ -438,7 +438,7 @@ const Header = ({ onToggleSidebar, sidebarOpen = false }) => {
         });
 
         setTimeout(() => {
-          toast('🔧 Qui potrai cambiare password, gestire notifiche, tema scuro/chiaro e preferenze generali', {
+          toast('🔧 Bravo coglione, sai usare il mouse!', {
             duration: 6000,
             position: 'top-center',
             style: {
