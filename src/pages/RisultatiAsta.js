@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { Trophy, Star, Coins, Users, ArrowLeft, Clock, Crown, AlertTriangle, CheckCircle } from 'lucide-react';
+import { Trophy, Star, Coins, Users, ArrowLeft, Clock, Crown, AlertTriangle, CheckCircle, Trash2 } from 'lucide-react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import API_URL from '../config/api';
@@ -372,6 +372,27 @@ const ConfirmButton = styled(motion.button)`
   }
 `;
 
+const DeleteButton = styled(motion.button)`
+  background: linear-gradient(135deg, #EF4444 0%, #B91C1C 100%);
+  border: none;
+  border-radius: ${props => props.theme.borderRadius};
+  padding: ${props => props.theme.spacing.xs} ${props => props.theme.spacing.md};
+  color: white;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: ${props => props.theme.spacing.sm};
+  margin-top: ${props => props.theme.spacing.xs};
+  margin-left: ${props => props.theme.spacing.sm};
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+`;
+
 const ConfirmedBadge = styled.div`
   display: inline-flex;
   align-items: center;
@@ -400,6 +421,7 @@ const RisultatiAsta = () => {
   const [shuffledBids, setShuffledBids] = useState([]); // ✅ NUOVO: Array ordinato fisso per modalità manuale
   const [loading, setLoading] = useState(true);
   const [confirming, setConfirming] = useState(false);
+  const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
     fetchAuctionResults();
@@ -512,6 +534,24 @@ const RisultatiAsta = () => {
       toast.error(message);
     } finally {
       setConfirming(false);
+    }
+  };
+
+  // ✅ NUOVO: Elimina l'asta e rimette il calciatore disponibile per essere astato di nuovo
+  const deletePurchase = async () => {
+    if (!window.confirm(`Eliminare l'asta di ${auction.calciatore_nome}? Il calciatore tornerà disponibile per una nuova asta.`)) {
+      return;
+    }
+    setDeleting(true);
+    try {
+      await axios.post(`${API_URL}/api/aste/${id}/annulla`);
+      toast.success(`🗑️ Asta eliminata, ${auction.calciatore_nome} è di nuovo disponibile`);
+      navigate('/asta-live');
+    } catch (error) {
+      const message = error.response?.data?.error || 'Errore nell\'eliminazione dell\'asta';
+      toast.error(message);
+    } finally {
+      setDeleting(false);
     }
   };
 
@@ -634,15 +674,26 @@ const RisultatiAsta = () => {
                     Acquisto confermato
                   </ConfirmedBadge>
                 ) : (
-                  <ConfirmButton
-                    onClick={confirmPurchase}
-                    disabled={confirming}
-                    whileHover={{ scale: confirming ? 1 : 1.05 }}
-                    whileTap={{ scale: confirming ? 1 : 0.95 }}
-                  >
-                    <CheckCircle size={18} />
-                    {confirming ? 'Conferma in corso...' : 'Conferma Acquisto'}
-                  </ConfirmButton>
+                  <>
+                    <ConfirmButton
+                      onClick={confirmPurchase}
+                      disabled={confirming || deleting}
+                      whileHover={{ scale: confirming ? 1 : 1.05 }}
+                      whileTap={{ scale: confirming ? 1 : 0.95 }}
+                    >
+                      <CheckCircle size={18} />
+                      {confirming ? 'Conferma in corso...' : 'Conferma Acquisto'}
+                    </ConfirmButton>
+                    <DeleteButton
+                      onClick={deletePurchase}
+                      disabled={confirming || deleting}
+                      whileHover={{ scale: deleting ? 1 : 1.05 }}
+                      whileTap={{ scale: deleting ? 1 : 0.95 }}
+                    >
+                      <Trash2 size={18} />
+                      {deleting ? 'Eliminazione...' : 'Elimina'}
+                    </DeleteButton>
+                  </>
                 )
               ) : (
                 <ConfirmedBadge style={{ opacity: 0.9 }}>
