@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Trophy, Star, Coins, Users, ArrowLeft, Clock, Crown, AlertTriangle, CheckCircle, Trash2 } from 'lucide-react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
@@ -393,6 +393,92 @@ const DeleteButton = styled(motion.button)`
   }
 `;
 
+const ConfirmOverlay = styled(motion.div)`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: ${props => props.theme.spacing.md};
+`;
+
+const ConfirmBox = styled(motion.div)`
+  background: ${props => props.theme.colors.surface};
+  border: 2px solid ${props => props.theme.colors.border};
+  border-radius: ${props => props.theme.borderRadius};
+  padding: ${props => props.theme.spacing.lg};
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+`;
+
+const ConfirmIcon = styled.div`
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(239, 68, 68, 0.15);
+  color: #EF4444;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto ${props => props.theme.spacing.sm};
+`;
+
+const ConfirmTitle = styled.h3`
+  color: ${props => props.theme.colors.text};
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: ${props => props.theme.spacing.xs};
+`;
+
+const ConfirmText = styled.p`
+  color: ${props => props.theme.colors.textSecondary};
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: ${props => props.theme.spacing.md};
+`;
+
+const ConfirmActions = styled.div`
+  display: flex;
+  gap: ${props => props.theme.spacing.sm};
+  justify-content: center;
+`;
+
+const ConfirmCancelButton = styled(motion.button)`
+  background: transparent;
+  border: 2px solid ${props => props.theme.colors.border};
+  border-radius: ${props => props.theme.borderRadius};
+  padding: ${props => props.theme.spacing.xs} ${props => props.theme.spacing.md};
+  color: ${props => props.theme.colors.text};
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+`;
+
+const ConfirmDeleteButton = styled(motion.button)`
+  background: linear-gradient(135deg, #EF4444 0%, #B91C1C 100%);
+  border: none;
+  border-radius: ${props => props.theme.borderRadius};
+  padding: ${props => props.theme.spacing.xs} ${props => props.theme.spacing.md};
+  color: white;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: ${props => props.theme.spacing.sm};
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+`;
+
 const ConfirmedBadge = styled.div`
   display: inline-flex;
   align-items: center;
@@ -422,6 +508,7 @@ const RisultatiAsta = () => {
   const [loading, setLoading] = useState(true);
   const [confirming, setConfirming] = useState(false);
   const [deleting, setDeleting] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
   useEffect(() => {
     fetchAuctionResults();
@@ -538,10 +625,7 @@ const RisultatiAsta = () => {
   };
 
   // ✅ NUOVO: Elimina l'asta e rimette il calciatore disponibile per essere astato di nuovo
-  const deletePurchase = async () => {
-    if (!window.confirm(`Eliminare l'asta di ${auction.calciatore_nome}? Il calciatore tornerà disponibile per una nuova asta.`)) {
-      return;
-    }
+  const confirmDelete = async () => {
     setDeleting(true);
     try {
       await axios.post(`${API_URL}/api/aste/${id}/annulla`);
@@ -550,6 +634,7 @@ const RisultatiAsta = () => {
     } catch (error) {
       const message = error.response?.data?.error || 'Errore nell\'eliminazione dell\'asta';
       toast.error(message);
+      setShowDeleteConfirm(false);
     } finally {
       setDeleting(false);
     }
@@ -685,13 +770,13 @@ const RisultatiAsta = () => {
                       {confirming ? 'Conferma in corso...' : 'Conferma Acquisto'}
                     </ConfirmButton>
                     <DeleteButton
-                      onClick={deletePurchase}
+                      onClick={() => setShowDeleteConfirm(true)}
                       disabled={confirming || deleting}
                       whileHover={{ scale: deleting ? 1 : 1.05 }}
                       whileTap={{ scale: deleting ? 1 : 0.95 }}
                     >
                       <Trash2 size={18} />
-                      {deleting ? 'Eliminazione...' : 'Elimina'}
+                      Elimina
                     </DeleteButton>
                   </>
                 )
@@ -894,6 +979,51 @@ const RisultatiAsta = () => {
           </CardsGrid>
         </ResultsSection>
       )}
+
+      <AnimatePresence>
+        {showDeleteConfirm && (
+          <ConfirmOverlay
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => !deleting && setShowDeleteConfirm(false)}
+          >
+            <ConfirmBox
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <ConfirmIcon>
+                <Trash2 size={26} />
+              </ConfirmIcon>
+              <ConfirmTitle>Eliminare l'asta?</ConfirmTitle>
+              <ConfirmText>
+                {auction?.calciatore_nome} tornerà disponibile per una nuova asta.
+              </ConfirmText>
+              <ConfirmActions>
+                <ConfirmCancelButton
+                  onClick={() => setShowDeleteConfirm(false)}
+                  disabled={deleting}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Annulla
+                </ConfirmCancelButton>
+                <ConfirmDeleteButton
+                  onClick={confirmDelete}
+                  disabled={deleting}
+                  whileHover={{ scale: deleting ? 1 : 1.05 }}
+                  whileTap={{ scale: deleting ? 1 : 0.95 }}
+                >
+                  <Trash2 size={16} />
+                  {deleting ? 'Eliminazione...' : 'Elimina'}
+                </ConfirmDeleteButton>
+              </ConfirmActions>
+            </ConfirmBox>
+          </ConfirmOverlay>
+        )}
+      </AnimatePresence>
     </Container>
   );
 };
