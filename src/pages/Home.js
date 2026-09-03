@@ -542,10 +542,10 @@ const Home = () => {
         transition={{ duration: 0.6 }}
       >
         <WelcomeTitle>
-          Benvenuto {user?.username}, ricordo che Venxdb è a quota 4🏆, magari riesci a raggiungerlo fra qualche anno!
+          Benvenuto {user?.username}, ricordo che Venxdb è a quota 4🏆 Edo a quota 3🏆 e il resto è fuffa
         </WelcomeTitle>
         <WelcomeSubtitle>
-          Non preoccuparti comunque, cerca di fare meglio del Savo e il tuo Fantacalcio sarà salvo
+          Non preoccuparti, il savo cercherà sempre di darti una mano! Magari non mettendo la formazione contro di te
         </WelcomeSubtitle>
       </WelcomeSection>
 
