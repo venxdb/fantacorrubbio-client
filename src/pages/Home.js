@@ -95,6 +95,13 @@ const WelcomeTitle = styled.h1`
   }
 `;
 
+const UsernameHighlight = styled.span`
+  font-family: 'Cinzel', 'Sora', serif;
+  font-weight: 700;
+  color: #FBBF24;
+  text-shadow: 0 0 12px rgba(251, 191, 36, 0.35);
+`;
+
 const WelcomeSubtitle = styled.p`
   font-size: 1.05rem;
   color: ${props => props.theme.colors.textSecondary};
@@ -542,7 +549,11 @@ const Home = () => {
         transition={{ duration: 0.6 }}
       >
         <WelcomeTitle>
-          Benvenuto {user?.username}, ricordo che Venxdb è a quota 4🏆 Edo a quota 3🥈 e il resto è fuffa
+          Benvenuto{' '}
+          <UsernameHighlight>
+            {user?.username ? user.username[0].toUpperCase() + user.username.slice(1) : ''}
+          </UsernameHighlight>
+          , ricordo che Venxdb è a quota 4🏆 Edo a quota 3🥈 e il resto è fuffa
         </WelcomeTitle>
         <WelcomeSubtitle>
           Non preoccuparti, il savo cercherà sempre di darti una mano!<br />
