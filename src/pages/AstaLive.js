@@ -1546,21 +1546,23 @@ const submitBid = async (e, overrideAmount) => {
               
               {user?.is_admin && (
                 <div style={{ display: 'flex', gap: '0.5rem' }}>
-                  <button
-                    onClick={() => setShowAdminView(!showAdminView)}
-                    style={{
-                      background: showAdminView ? '#F59E0B' : '#3B82F6',
-                      color: 'white',
-                      border: 'none',
-                      padding: '0.5rem 1rem',
-                      borderRadius: '6px',
-                      fontSize: '0.8rem',
-                      cursor: 'pointer'
-                    }}
-                  >
-                    {showAdminView ? 'Nascondi' : 'Mostra'} Partecipanti
-                  </button>
-                  
+                  {user?.puo_offrire !== false && (
+                    <button
+                      onClick={() => setShowAdminView(!showAdminView)}
+                      style={{
+                        background: showAdminView ? '#F59E0B' : '#3B82F6',
+                        color: 'white',
+                        border: 'none',
+                        padding: '0.5rem 1rem',
+                        borderRadius: '6px',
+                        fontSize: '0.8rem',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      {showAdminView ? 'Nascondi' : 'Mostra'} Partecipanti
+                    </button>
+                  )}
+
                   {isActive && (
                     <button
                       onClick={handleCloseAuction}
