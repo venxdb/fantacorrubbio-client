@@ -592,11 +592,15 @@ const RisultatiAsta = () => {
 
   // ✅ NUOVA FUNZIONE: Gestisce il click su singola card
   const handleCardClick = (bidId) => {
-    if (!manualMode || flippedCards.includes(bidId)) return;
-    
+    if (!manualMode) return;
+
     setFlippedCards(prev => {
+      // Controllo "già girata?" sull'elenco più aggiornato (prev), non su quello
+      // dell'ultimo render: evita che un doppio click quasi simultaneo la conti due volte
+      if (prev.includes(bidId)) return prev;
+
       const newFlipped = [...prev, bidId];
-      
+
       // Se tutte le carte sono state girate, mostra il risultato dopo 1.5 secondi
       if (newFlipped.length === bids.length) {
         setTimeout(() => {
@@ -604,7 +608,7 @@ const RisultatiAsta = () => {
           localStorage.setItem(`astaRivelata_${id}`, 'true');
         }, 1500);
       }
-      
+
       return newFlipped;
     });
   };
