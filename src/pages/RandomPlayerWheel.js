@@ -37,6 +37,17 @@ const FaceCircle = styled.div`
   height: ${props => props.$size}px;
   top: ${props => props.$top}%;
   left: ${props => props.$left}%;
+  ${props => props.$spinning && `
+    animation: twinkle 1.4s ease-in-out infinite;
+    animation-delay: ${props.$delay}s;
+  `}
+
+  /* brightness() e' relativo: illumina ogni cerchio partendo dalla sua opacita'
+     di base senza bisogno di un keyframe diverso per ciascuno */
+  @keyframes twinkle {
+    0%, 100% { filter: brightness(1); }
+    50% { filter: brightness(2.2); }
+  }
 `;
 
 const FACE_CIRCLES = [
@@ -356,7 +367,15 @@ const RandomPlayerWheel = () => {
     <Container>
       <FaceBackground>
         {FACE_CIRCLES.map((c, i) => (
-          <FaceCircle key={i} $size={c.size} $top={c.top} $left={c.left} $opacity={c.opacity} />
+          <FaceCircle
+            key={i}
+            $size={c.size}
+            $top={c.top}
+            $left={c.left}
+            $opacity={c.opacity}
+            $spinning={isSpinning}
+            $delay={(i % 7) * 0.2}
+          />
         ))}
       </FaceBackground>
       <BackgroundDecorations />
