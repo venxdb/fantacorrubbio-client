@@ -591,6 +591,9 @@ const AdminPanel = () => {
     utente_id: '',
     prezzo: ''
   });
+  // Se valorizzato, limita il Select "Utente" ai soli id qui dentro (i pareggisti
+  // dell'asta problematica da cui si è aperta l'assegnazione manuale)
+  const [assignmentEligibleUsers, setAssignmentEligibleUsers] = useState(null);
   const [transferData, setTransferData] = useState({
     calciatore_id: '',
     nuovo_utente_id: '',
@@ -1173,10 +1176,39 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
       
       toast.success('Giocatore assegnato manualmente con successo!');
       setManualAssignment({ calciatore_id: '', utente_id: '', prezzo: '' });
+      setAssignmentEligibleUsers(null);
       fetchAllData();
     } catch (error) {
       const message = error.response?.data?.error || 'Errore nell\'assegnazione manuale';
       toast.error(message);
+    }
+  };
+
+  // Preseleziona il calciatore nel form di assegnazione manuale a partire da
+  // un'asta problematica (pareggio), limitando l'utente ai soli pareggisti e
+  // proponendo come default l'offerta massima + 1 credito (modificabile)
+  const handlePrefillAssignment = async (auction) => {
+    try {
+      const response = await axios.get(`${API_URL}/api/aste/${auction.id}`);
+      const offerte = response.data.offerte || [];
+      const massimo = Math.max(0, ...offerte.map(o => o.importo));
+      const pareggisti = offerte.filter(o => o.importo === massimo);
+
+      if (pareggisti.length === 0) {
+        toast.error('Nessuna offerta trovata per questa asta');
+        return;
+      }
+
+      setManualAssignment({
+        calciatore_id: String(auction.calciatore_id),
+        utente_id: '',
+        prezzo: String(massimo + 1)
+      });
+      setAssignmentEligibleUsers(pareggisti.map(o => o.utente_id));
+      document.getElementById('manual-assignment-form')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      toast.success(`${auction.calciatore_nome}: scegli tra i ${pareggisti.length} pareggisti e conferma il prezzo`);
+    } catch (error) {
+      toast.error('Errore nel recupero delle offerte per questa asta');
     }
   };
 
@@ -2080,15 +2112,19 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
               </SectionTitle>
             </SectionHeader>
 
-            <Form onSubmit={handleManualAssignment}>
+            <Form id="manual-assignment-form" onSubmit={handleManualAssignment}>
               <FormGroup>
                 <Label>Calciatore</Label>
                 <Select
                   value={manualAssignment.calciatore_id}
-                  onChange={(e) => setManualAssignment({
-                    ...manualAssignment,
-                    calciatore_id: e.target.value
-                  })}
+                  onChange={(e) => {
+                    setManualAssignment({
+                      ...manualAssignment,
+                      calciatore_id: e.target.value,
+                      utente_id: ''
+                    });
+                    setAssignmentEligibleUsers(null);
+                  }}
                   required
                 >
                   <option value="">Seleziona calciatore...</option>
@@ -2101,7 +2137,10 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
               </FormGroup>
 
               <FormGroup>
-                <Label>Utente</Label>
+                <Label>
+                  Utente
+                  {assignmentEligibleUsers && ' (solo i pareggisti di questa asta)'}
+                </Label>
                 <Select
                   value={manualAssignment.utente_id}
                   onChange={(e) => setManualAssignment({
@@ -2111,7 +2150,7 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
                   required
                 >
                   <option value="">Seleziona utente...</option>
-                  {users.map(user => (
+                  {(assignmentEligibleUsers ? users.filter(u => assignmentEligibleUsers.includes(u.id)) : users).map(user => (
                     <option key={user.id} value={user.id}>
                       {user.username} ({(user.crediti_totali - (user.crediti_spesi || 0))} crediti disponibili)
                     </option>
@@ -2226,16 +2265,42 @@ setCalciatoriAssegnati(calciatoriAssegnatiOrdinati);
                     </InfoItem>
                   </AuctionInfo>
 
-                  <div style={{ 
-                    background: 'rgba(245, 158, 11, 0.1)', 
-                    padding: '1rem', 
+                  <div style={{
+                    background: 'rgba(245, 158, 11, 0.1)',
+                    padding: '1rem',
                     borderRadius: '8px',
                     marginTop: '1rem',
                     color: '#F59E0B',
-                    fontSize: '0.9rem'
+                    fontSize: '0.9rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    gap: '1rem',
+                    flexWrap: 'wrap'
                   }}>
-                    💡 Questa asta potrebbe avere offerte identiche o altre problematiche. 
-                    Usa l'assegnazione manuale sopra per risolvere.
+                    <span>
+                      💡 Questa asta potrebbe avere offerte identiche o altre problematiche.
+                    </span>
+                    <button
+                      onClick={() => handlePrefillAssignment(auction)}
+                      style={{
+                        background: '#F59E0B',
+                        color: '#1A1A1A',
+                        border: 'none',
+                        padding: '0.5rem 1rem',
+                        borderRadius: '6px',
+                        fontSize: '0.85rem',
+                        fontWeight: 700,
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '6px',
+                        whiteSpace: 'nowrap'
+                      }}
+                    >
+                      <Edit size={14} />
+                      Assegna
+                    </button>
                   </div>
                 </AuctionCard>
               ))
