@@ -264,13 +264,44 @@ const ResultModal = styled(motion.div)`
 const ResultContent = styled(motion.div)`
   background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);
   border-radius: 20px;
-  padding: 3rem;
-  text-align: center;
+  padding: 2.5rem;
   color: white;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
   border: 2px solid rgba(255, 255, 255, 0.2);
-  max-width: 500px;
+  max-width: 800px;
   width: 90%;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+    padding: 2rem;
+  }
+`;
+
+const ResultTextCol = styled.div`
+  flex: 1;
+  text-align: center;
+  min-width: 0;
+`;
+
+const ResultImageCol = styled.div`
+  flex-shrink: 0;
+  width: 260px;
+  height: 260px;
+  border-radius: 16px;
+  background-image: url(${mascotteImg});
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+
+  @media (max-width: 640px) {
+    width: 100%;
+    max-width: 260px;
+    height: 200px;
+  }
 `;
 
 const WinnerName = styled.h2`
@@ -580,37 +611,41 @@ const RandomPlayerWheel = () => {
               exit={{ scale: 0.5, y: 50 }}
               transition={{ type: "spring", damping: 15 }}
             >
-              <motion.div
-                animate={{ 
-                  scale: [1, 1.1, 1],
-                  rotate: [0, 5, -5, 0]
-                }}
-                transition={{ 
-                  duration: 0.6,
-                  repeat: 2,
-                  delay: 0.2
-                }}
-              >
-                <Crown size={60} color="#FBBF24" />
-              </motion.div>
-              
-              <h1 style={{ fontSize: '1.5rem', margin: '1rem 0 0.5rem' }}>
-                🎉 VINCITORE! 🎉
-              </h1>
-              
-              <WinnerName>{winner}</WinnerName>
-              
-              <p style={{ 
-                fontSize: '1.1rem', 
-                opacity: 0.9,
-                margin: '1rem 0' 
-              }}>
-                La fortuna ha scelto! Adesso iè cassi toi! 🏆
-              </p>
-              
-              <CloseButton onClick={() => setShowResult(false)}>
-                Chiudi
-              </CloseButton>
+              <ResultTextCol>
+                <motion.div
+                  animate={{
+                    scale: [1, 1.1, 1],
+                    rotate: [0, 5, -5, 0]
+                  }}
+                  transition={{
+                    duration: 0.6,
+                    repeat: 2,
+                    delay: 0.2
+                  }}
+                >
+                  <Crown size={60} color="#FBBF24" />
+                </motion.div>
+
+                <h1 style={{ fontSize: '1.5rem', margin: '1rem 0 0.5rem' }}>
+                  🎉 VINCITORE! 🎉
+                </h1>
+
+                <WinnerName>{winner}</WinnerName>
+
+                <p style={{
+                  fontSize: '1.1rem',
+                  opacity: 0.9,
+                  margin: '1rem 0'
+                }}>
+                  La fortuna ha scelto! Adesso iè cassi toi! 🏆
+                </p>
+
+                <CloseButton onClick={() => setShowResult(false)}>
+                  Chiudi
+                </CloseButton>
+              </ResultTextCol>
+
+              <ResultImageCol />
             </ResultContent>
           </ResultModal>
         )}
