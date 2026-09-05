@@ -96,8 +96,8 @@ const WelcomeTitle = styled.h1`
 `;
 
 const UsernameHighlight = styled.span`
-  font-family: 'Cinzel', 'Sora', serif;
-  font-weight: 700;
+  font-family: 'Playfair Display', 'Sora', serif;
+  font-weight: 800;
   color: #FBBF24;
   text-shadow: 0 0 12px rgba(251, 191, 36, 0.35);
 `;
