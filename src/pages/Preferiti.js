@@ -484,7 +484,7 @@ const Preferiti = () => {
   const [creandoAstaId, setCreandoAstaId] = useState(null);
   const [filtriRuoli, setFiltriRuoli] = useState(() => {
     const saved = localStorage.getItem('filtriRuoliPreferiti');
-    return saved ? JSON.parse(saved) : ['P', 'D', 'C', 'A'];
+    return saved ? JSON.parse(saved) : [];
   });
 
   const toggleFiltroRuolo = (ruolo) => {
