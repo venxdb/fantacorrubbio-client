@@ -1652,20 +1652,20 @@ const submitBid = async (e, overrideAmount) => {
             </BidForm>
           )}
 
-          <BidsList style={user?.puo_offrire === false && bids.length === 0 ? { maxHeight: 'none', overflow: 'visible' } : undefined}>
-            {bids.length === 0 ? (
-              user?.puo_offrire === false ? (
-                <SpectatorRanking>
-                  <SpectatorRankingTitle>💰 Classifica Crediti</SpectatorRankingTitle>
-                  {utentiCrediti.map((utente, idx) => (
-                    <SpectatorRankingItem key={utente.id} $isFirst={idx === 0}>
-                      <SpectatorRankPos>{['🥇', '🥈', '🥉'][idx] || `${idx + 1}°`}</SpectatorRankPos>
-                      <SpectatorRankUser>{utente.username}</SpectatorRankUser>
-                      <SpectatorRankCredits>{utente.crediti_usabili}</SpectatorRankCredits>
-                    </SpectatorRankingItem>
-                  ))}
-                </SpectatorRanking>
-              ) : user?.is_admin ? null : (
+          <BidsList style={user?.puo_offrire === false ? { maxHeight: 'none', overflow: 'visible' } : undefined}>
+            {user?.puo_offrire === false ? (
+              <SpectatorRanking>
+                <SpectatorRankingTitle>💰 Classifica Crediti</SpectatorRankingTitle>
+                {utentiCrediti.map((utente, idx) => (
+                  <SpectatorRankingItem key={utente.id} $isFirst={idx === 0}>
+                    <SpectatorRankPos>{['🥇', '🥈', '🥉'][idx] || `${idx + 1}°`}</SpectatorRankPos>
+                    <SpectatorRankUser>{utente.username}</SpectatorRankUser>
+                    <SpectatorRankCredits>{utente.crediti_usabili}</SpectatorRankCredits>
+                  </SpectatorRankingItem>
+                ))}
+              </SpectatorRanking>
+            ) : bids.length === 0 ? (
+              user?.is_admin ? null : (
                 <div style={{ textAlign: 'center', color: '#94A3B8', padding: '2rem' }}>
                   Nessuna offerta ancora. Ti vuoi sbrigare Dorco Pio 💰
                 </div>
